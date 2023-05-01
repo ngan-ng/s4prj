@@ -1,0 +1,6 @@
+
+- smallint seq = select MAX(seq) from CKIN
+
+- seq++;
+
+
