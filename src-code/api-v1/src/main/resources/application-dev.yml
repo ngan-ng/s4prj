@@ -1,0 +1,25 @@
+
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    url: jdbc:sqlserver://localhost:1433;databaseName=s4prjDB;encrypt=true;trustServerCertificate=true;
+    password: '123456'
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+        jdbc:
+          lob:
+            non_contextual_creation: 'true'
+        format_sql: 'true'
+    hibernate:
+      ddl-auto: create
+    show-sql: 'true'
+
+security:
+  cors:
+    origin: http://localhost:3000
+
+springdoc:
+  show-login-endpoint: true
