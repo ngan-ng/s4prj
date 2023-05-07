@@ -1,16 +1,18 @@
 package com.aptech.apiv1.model;
 
+import com.aptech.apiv1.enums.IataCode;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.UniqueConstraint;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
-import org.hibernate.annotations.NaturalId;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.UUID;
+import java.util.List;
 @Entity
 @Data
+@Accessors(chain = true)
 public class Airport implements Serializable {
     @Id
     @Column(name = "iata_code", columnDefinition = "varchar(3)")
@@ -19,4 +21,5 @@ public class Airport implements Serializable {
     private String name;
     @Column(name = "city", columnDefinition = "varchar(50)")
     private String city;
+
 }
