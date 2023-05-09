@@ -1,4 +1,4 @@
-package com.aptech.apiv1.utils.enums;
+package com.aptech.apiv1.utils.strings;
 
 import com.aptech.apiv1.enums.IataCode;
 

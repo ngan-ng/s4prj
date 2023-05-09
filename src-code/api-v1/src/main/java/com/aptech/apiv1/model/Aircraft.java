@@ -15,7 +15,7 @@ public class Aircraft implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NaturalId(mutable = true)
+    @NaturalId
     private String reg;
     private String config;
     private String type;
