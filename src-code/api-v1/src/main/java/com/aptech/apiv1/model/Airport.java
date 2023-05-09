@@ -19,7 +19,7 @@ public class Airport implements Serializable {
     private String iata_code;
     @Column(name = "name", columnDefinition = "varchar(50)")
     private String name;
-    @Column(name = "city", columnDefinition = "varchar(50)")
-    private String city;
+    @Column(name = "location", columnDefinition = "varchar(50)")
+    private String location;
 
 }
