@@ -9,7 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import static com.aptech.apiv1.utils.enums.IataCodeUtils.*;
+import static com.aptech.apiv1.utils.strings.IataCodeUtils.*;
 
 @SpringBootApplication
 public class ApiV1Application {
