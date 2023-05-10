@@ -13,9 +13,5 @@ import java.util.List;
 @Setter
 public class GroupBooking implements Serializable {
     @Valid
-    List<Booking> bookings;
-
-    public GroupBooking() {
-        this.bookings = new ArrayList<>();
-    }
+    List<Booking> bookings = new ArrayList<>();
 }

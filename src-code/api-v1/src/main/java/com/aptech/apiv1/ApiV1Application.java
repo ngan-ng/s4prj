@@ -55,4 +55,3 @@ public class ApiV1Application {
 		}
 	} // .end of initialize();
 }
-
