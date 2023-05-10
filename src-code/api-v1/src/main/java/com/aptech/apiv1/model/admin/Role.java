@@ -1,4 +1,4 @@
-package com.aptech.apiv1.model.Admin;
+package com.aptech.apiv1.model.admin;
 
 import java.io.Serializable;
 import java.util.ArrayList;

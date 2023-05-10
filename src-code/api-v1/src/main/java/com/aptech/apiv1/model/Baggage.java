@@ -1,7 +1,11 @@
 package com.aptech.apiv1.model;
 
 import com.aptech.apiv1.enums.BagStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,16 +17,20 @@ public class Baggage implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column(name = "tag_no")
-    private UUID tagNo;
-    @Column(name = "status")
-    private BagStatus status;
-    @Column(name = "piece", columnDefinition = "tinyint")
-    private byte piece;
-    @Column(name = "weigth",columnDefinition = "tinyint")
+    @Column(name = "tag_no", columnDefinition = "varchar(12)", nullable = false)
+    private String tagNo;
+    @Column(name = "status", nullable = false)
+    private BagStatus status = BagStatus.CHECKED;
+    @Column(name = "piece", columnDefinition = "tinyint", nullable = false)
+    @Positive(message = "Cannot be less than zero")
+    private byte piece = 1;
+    @Column(name = "weigth",columnDefinition = "tinyint", nullable = false)
+    @Max(value = 32, message = "One baggage cannot exceed 32 kgs")
+    @Positive(message = "Cannot be less than zero")
     private byte weight;
-    @Column(name = "barcode")
+    @Column(name = "barcode", nullable = false)
     private String barcode;
-
-//    private Booking booking;
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "bookingId", nullable = false)
+    private Booking booking;
 }

@@ -22,8 +22,6 @@ public class Booking implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "pnr", nullable = false)
-//    @NotNull(message = "Pnr is required")
-//    = generatePnrUtils()
     private String pnr;
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @JoinColumn(name = "flightId", nullable = false)
@@ -48,7 +46,6 @@ public class Booking implements Serializable {
     private Infant infant;
     @Column(name = "gender", columnDefinition = "varchar(3)", nullable = false)
     private String gender = Gender.ADL.toString();
-
     private String mobile;
     @Email(message = "Invalid email format")
     private String email;
@@ -60,4 +57,6 @@ public class Booking implements Serializable {
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Payment> payments = new ArrayList<>();
+    @OneToMany(mappedBy = "booking",fetch = FetchType.EAGER)
+    private List<Baggage> baggages = new ArrayList<>();
 }
