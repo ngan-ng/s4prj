@@ -2,7 +2,6 @@ package com.aptech.apiv1.dto;
 
 import com.aptech.apiv1.model.Booking;
 import jakarta.validation.Valid;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

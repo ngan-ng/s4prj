@@ -2,6 +2,7 @@ package com.aptech.apiv1.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class Infant implements Serializable {
     @Column(name = "lastName", columnDefinition = "varchar(50)")
     private String lastName;
     @Column(name = "dob", columnDefinition = "Date")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dob;
 
     @OneToOne(mappedBy = "infant")

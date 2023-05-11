@@ -1,4 +1,4 @@
-package com.aptech.apiv1.utils.strings;
+package com.aptech.apiv1.utils.business;
 
 import java.util.UUID;
 
