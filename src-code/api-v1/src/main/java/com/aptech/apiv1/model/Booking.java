@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Accessors(chain = true)
 //@Table(uniqueConstraints = {
 //        @UniqueConstraint(name = "Unique_bookingSeq_flight", columnNames = {"flightId", "seq"})
 //})
@@ -23,7 +25,7 @@ public class Booking implements Serializable {
     private long id;
     @Column(name = "pnr", nullable = false)
     private String pnr;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "flightId", nullable = false)
     private Flight flight;
     @Column(name = "bookDate", columnDefinition = "Date", nullable = false)
@@ -58,5 +60,6 @@ public class Booking implements Serializable {
     @JsonManagedReference
     private List<Payment> payments = new ArrayList<>();
     @OneToMany(mappedBy = "booking",fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Baggage> baggages = new ArrayList<>();
 }

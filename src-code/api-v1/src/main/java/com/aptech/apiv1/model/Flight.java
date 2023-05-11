@@ -20,6 +20,7 @@ public class Flight implements Serializable {
     @Column(name = "flightNumber")
     private int flightNumber;
     @Column(name = "date")
+    @Temporal(TemporalType.DATE)
     private Date date;
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "origin", referencedColumnName = "iata_code", nullable = false)

@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.util.Date;
+
 import static com.aptech.apiv1.utils.business.IataCodeUtils.*;
 
 @SpringBootApplication
@@ -16,7 +18,7 @@ public class ApiV1Application {
 
 	public static void main(String[] args) {
 		var context = SpringApplication.run(ApiV1Application.class, args);
-		initialize(context);
+//		initialize(context);
 
 	}
 //	@Bean
@@ -42,6 +44,7 @@ public class ApiV1Application {
 		for(int i =120; i<=124; i+=2){
 			Flight flight = new Flight()
 					.setFlightNumber(i)
+					.setDate(new Date())
 					.setOrigin(origin)
 					.setDestination(destination);
 			flightRepository.save(flight);
@@ -49,6 +52,7 @@ public class ApiV1Application {
 		for(int i =121; i<=125; i+=2){
 			Flight flight = new Flight()
 					.setFlightNumber(i)
+					.setDate(new Date())
 					.setOrigin(destination)
 					.setDestination(origin);
 			flightRepository.save(flight);
