@@ -28,4 +28,6 @@ public class Flight implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "destination", referencedColumnName = "iata_code", nullable = false)
     private Airport destination;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Aircraft aircraft;
 }
