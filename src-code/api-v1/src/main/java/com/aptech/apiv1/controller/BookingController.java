@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,27 +23,24 @@ public class BookingController {
     public BookingController(BookingService bookingService) {
         this.bookingService = bookingService;
     }
-
+    @GetMapping("/{pnr}")
+    public ResponseEntity<?> getBookingsByPnr(@PathVariable String pnr){
+        try{
+            return ResponseEntity.ok().body(bookingService.findBookingByPnr(pnr));
+        }catch (Exception ex){
+            return ResponseEntity.notFound().build();
+        }
+    }
     @PostMapping("/create")
     public ResponseEntity<?> createBookings(@RequestBody @Valid GroupBooking groupBooking, BindingResult bindingResult){
         try{
-            String pnr = generatePnr();
-            for (Booking booking : groupBooking.getBookings()) {
-                List<String> errors = checkValidBooking(booking, bindingResult);
-                if(errors != null){
-                    return ResponseEntity.badRequest().body(errors);
-                }
-                booking.setPnr(pnr);
+            if(bindingResult.hasErrors()){
+                return ResponseEntity.badRequest().body(bindingResult.getAllErrors().stream()
+                        .map(er -> String.format("Error: %s. ", er.getDefaultMessage())).toList());
             }
             return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.createBookings(groupBooking.getBookings()));
         }catch (Exception ex){
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
-    }
-    List<String> checkValidBooking(@Valid Booking booking, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            return bindingResult.getAllErrors().stream().map(er -> String.format("Error: %s. ", er.getDefaultMessage())).toList();
-        }
-        return null;
     }
 }

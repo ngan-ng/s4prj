@@ -40,7 +40,8 @@
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
-			<scope>runtime</scope>
+            <version>12.2.0.jre11</version>
+            <scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -57,7 +58,17 @@
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
 			<version>2.1.0</version>
 		</dependency>
-
+		<!-- QR generator libs -->
+		<dependency>
+			<groupId>com.github.hiwepy</groupId>
+			<artifactId>zxing-spring-boot-starter</artifactId>
+			<version>2.0.0.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.5.0</version>
+		</dependency>
 		<!-- Security -->
 <!--		<dependency>-->
 <!--			<groupId>org.springframework.boot</groupId>-->

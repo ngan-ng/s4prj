@@ -13,8 +13,18 @@ import java.util.List;
 @Service
 public class BookingServiceImpl implements BookingService {
 
+    private final BookingRepository bookingRepository;
+
     @Autowired
-    private BookingRepository bookingRepository;
+    public BookingServiceImpl(BookingRepository bookingRepository) {
+        this.bookingRepository = bookingRepository;
+    }
+
+    @Override
+    public List<Booking> findBookingByPnr(String pnr) {
+        return bookingRepository.findBookingByPnr(pnr);
+    }
+
     @Override
     public Booking createBooking(Booking booking) {
 
@@ -24,7 +34,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Iterable<Booking> createBookings(List<Booking> bookings) {
         String pnr = PnrGenerator.generatePnr();
-        bookings.forEach(b->b.setPnr(pnr));
+        bookings.forEach(b -> b.setPnr(pnr));
         return bookingRepository.saveAll(bookings);
     }
 }
