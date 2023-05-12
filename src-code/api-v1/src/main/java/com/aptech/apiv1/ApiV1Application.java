@@ -24,7 +24,7 @@ public class ApiV1Application {
 
 	public static void main(String[] args) {
 		var context = SpringApplication.run(ApiV1Application.class, args);
-		initialize(context);
+//		initialize(context);
 
 	}
 //	@Bean
@@ -48,6 +48,7 @@ public class ApiV1Application {
 				.setLocation(getLocation(IataCode.HAN));
 		airportRepository.save(origin);
 		airportRepository.save(destination);
+		List<Seat> seatList = new ArrayList<>();
 		for(int i =120; i<=124; i+=2){
 			Flight flight = new Flight()
 					.setFlightNumber(i)
@@ -56,7 +57,7 @@ public class ApiV1Application {
 					.setDestination(destination);
 			flight = flightRepository.save(flight);
 			List<Seat> seatmap = CreateSeatsOnFlight.createSeatsA320(flight);
-			seatRepository.saveAll(seatmap);
+			seatList.addAll(seatmap);
 		}
 		for(int i =121; i<=125; i+=2){
 			Flight flight = new Flight()
@@ -66,8 +67,9 @@ public class ApiV1Application {
 					.setDestination(origin);
 			flight = flightRepository.save(flight);
 			List<Seat> seatmap = CreateSeatsOnFlight.createSeatsA320(flight);
-			seatRepository.saveAll(seatmap);
+			seatList.addAll(seatmap);
 		}
+		seatRepository.saveAll(seatList);
 	} // .end of initialize();
 
 }
