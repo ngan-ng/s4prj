@@ -25,7 +25,7 @@ public class Booking implements Serializable {
     private long id;
     @Column(name = "pnr", nullable = false)
     private String pnr;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "flightId", nullable = false)
     private Flight flight;
     @Column(name = "bookDate", columnDefinition = "Date", nullable = false)

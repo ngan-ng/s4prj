@@ -1,0 +1,3 @@
+- Entity Seat:
+  + JsonIgnore Flight: can read, but NOT create and Booking: can read only null value.
+  + if remove JsonIgnore at Flight: can read and create but READ too many records.

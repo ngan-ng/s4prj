@@ -21,6 +21,14 @@ public class SeatController {
         this.seatService = seatService;
     }
 
+    @GetMapping("/getAllByFlight/{flightId}")
+    public ResponseEntity<?> getSeatsByFlight(@PathVariable long flightId){
+        try{
+            return ResponseEntity.ok(seatService.getSeatsByFlight(flightId));
+        }catch (Exception ex){
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
     @PostMapping(path = {"/handle"})
     public ResponseEntity<?> handleSeat(@RequestBody SelectSeatDto selectSeatDto){
         try{
@@ -30,4 +38,5 @@ public class SeatController {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
     }
+
 }
