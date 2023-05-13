@@ -33,14 +33,14 @@ public class BaggageServiceImpl implements BaggageService {
                     .setBooking(new Booking().setId(dto.getBookingId()))
                     .setTagNo(BagTagGenerator.getBagTagNo(dto.getDest()))
                     .setPiece(dto.getPiece()).setWeight(dto.getWeight());
-            try {
-                bag.setBarcode(BagTagGenerator.genQRBagTag(bag));
+//            try {
+//                bag.setBarcode(BagTagGenerator.genQRBagTag(bag));
                 baggages.add(bag);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (WriterException e) {
-                throw new RuntimeException(e);
-            }
+//            } catch (IOException e) {
+//                throw new RuntimeException(e);
+//            } catch (WriterException e) {
+//                throw new RuntimeException(e);
+//            }
         });
         return baggageRepository.saveAll(baggages);
     }
