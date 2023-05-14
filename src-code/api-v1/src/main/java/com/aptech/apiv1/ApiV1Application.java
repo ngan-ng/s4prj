@@ -9,9 +9,12 @@ import com.aptech.apiv1.repository.AirportRepository;
 import com.aptech.apiv1.repository.FlightRepository;
 import com.aptech.apiv1.repository.SeatRepository;
 import com.aptech.apiv1.utils.others.CreateSeatsOnFlight;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.NamingConventions;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,7 +24,14 @@ import static com.aptech.apiv1.utils.business.IataCodeUtils.*;
 
 @SpringBootApplication
 public class ApiV1Application {
-
+	@Bean
+	public ModelMapper modelMapper() {
+		ModelMapper modelMapper = new ModelMapper();
+		modelMapper.getConfiguration().setFieldMatchingEnabled(true)
+				.setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE)
+				.setSourceNamingConvention(NamingConventions.JAVABEANS_MUTATOR);
+		return modelMapper;
+	}
 	public static void main(String[] args) {
 		var context = SpringApplication.run(ApiV1Application.class, args);
 //		initialize(context);

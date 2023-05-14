@@ -27,10 +27,11 @@ public class CreateSeatsOnFlight {
             for (int j = colStart; j <= colEnd; j++) {
                 String r = i<10?"0"+i:String.valueOf(i);
 
-                Seat seat = new Seat().setSeatNumber(r+(char)j).setFlight(flight)
+                Seat seat = new Seat().setSeatNumber(r+(char)j)
+                        .setType(seatType.toString())
                         .setPrice(SeatUtils.getPrice(seatType))
-                        .setDescription(SeatUtils.getDescription(seatType))
-                        .setType(seatType.toString());
+                        .setDescription(SeatUtils.getDescription(seatType));
+                seat.setFlight(flight);
                 seatmap.add(seat);
             }
         }

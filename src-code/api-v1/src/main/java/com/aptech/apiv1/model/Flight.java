@@ -33,4 +33,5 @@ public class Flight implements Serializable {
     private Airport destination;
     @ManyToOne(fetch = FetchType.EAGER)
     private Aircraft aircraft;
+
 }
