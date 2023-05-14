@@ -1,11 +1,23 @@
 package com.aptech.apiv1.model;
 
+
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+//@NamedNativeQuery(name = "ChessPlayer.findPlayerNameDtoById_Named",
+//        query = "SELECT s.id as id, s.seat_number as seatNumber, FROM Seat s WHERE flightId = :flightId",
+//        resultSetMapping = "Mapping.SeatDto")
+//@SqlResultSetMapping(name = "Mapping.SeatDto",
+//        classes = @ConstructorResult(targetClass = SeatDto.class,
+//                columns = {@ColumnResult(name = "id"),
+//                        @ColumnResult(name = "seatNumber"),
+//                        @ColumnResult(name = "type"),
+//                        @ColumnResult(name = "description"),
+//                        @ColumnResult(name = "price"),
+//                        @ColumnResult(name = "booking")
+//        }))
 @Entity
 @Data
 //@Builder
