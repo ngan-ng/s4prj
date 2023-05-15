@@ -1,0 +1,209 @@
+<mxfile host="Electron" modified="2023-05-15T05:38:25.503Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.8 Chrome/112.0.5615.165 Electron/24.2.0 Safari/537.36" etag="iVuBDoizDXPxynPmG2vr" version="21.2.8" type="device">
+  <diagram name="Page-1" id="VxqEKcWssq_XyiCzB9bS">
+    <mxGraphModel dx="857" dy="690" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" background="none" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-1" value="UI" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="388" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="7Op2JaMXb7pChXdJnSNb-1" vertex="1">
+          <mxGeometry x="45" y="60" width="10" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-3" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;11. BagDrop input form&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="7Op2JaMXb7pChXdJnSNb-1" edge="1">
+          <mxGeometry x="-1" y="-14" relative="1" as="geometry">
+            <mxPoint x="59" y="234" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="89" y="234" />
+              <mxPoint x="89" y="271" />
+            </Array>
+            <mxPoint x="67" y="271" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-46" value="&amp;nbsp;10. Bag Allowance&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.039;exitY=0.728;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.011;entryY=0.725;entryDx=0;entryDy=0;entryPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="7Op2JaMXb7pChXdJnSNb-1" edge="1">
+          <mxGeometry x="-0.0009" relative="1" as="geometry">
+            <mxPoint x="224.4999999999999" y="214.66000000000008" as="sourcePoint" />
+            <mxPoint x="54.999999999999886" y="214" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-42" value="&amp;nbsp;7. getBagAllowance()" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0.03;entryY=0.451;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="54.999999999999886" y="174.22000000000003" as="sourcePoint" />
+            <mxPoint x="225.18999999999994" y="174.22000000000003" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dzuRFS8hlLqgJuvJY9Dt-4" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;13. Validate Bag Allowance&amp;nbsp;&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" edge="1" parent="7Op2JaMXb7pChXdJnSNb-1">
+          <mxGeometry x="-1" y="-14" relative="1" as="geometry">
+            <mxPoint x="55" y="285" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="85" y="285" />
+              <mxPoint x="85" y="322" />
+            </Array>
+            <mxPoint x="63" y="322" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-4" value="Controller" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="568" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-5" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="7Op2JaMXb7pChXdJnSNb-4" vertex="1">
+          <mxGeometry x="45" y="60" width="10" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="dzuRFS8hlLqgJuvJY9Dt-1" value="&amp;nbsp;8. getBagAllowance()" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="7Op2JaMXb7pChXdJnSNb-4">
+          <mxGeometry x="-0.0308" y="-1" relative="1" as="geometry">
+            <mxPoint x="54.999999999999886" y="174.22000000000003" as="sourcePoint" />
+            <mxPoint x="211" y="174" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-39" value="&amp;nbsp;16. addBag()&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-4" edge="1">
+          <mxGeometry x="-0.0308" y="-1" relative="1" as="geometry">
+            <mxPoint x="54.999999999999886" y="338.22" as="sourcePoint" />
+            <mxPoint x="211" y="338" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-6" value="DB" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="741" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-7" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="7Op2JaMXb7pChXdJnSNb-6" vertex="1">
+          <mxGeometry x="45" y="60" width="10" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="vvcB78ZaGYWaYG9tcJMQ-3" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;17.&amp;nbsp;&lt;/font&gt;Validate Bag Allowance&amp;nbsp;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="7Op2JaMXb7pChXdJnSNb-6" edge="1">
+          <mxGeometry x="-1" y="-17" relative="1" as="geometry">
+            <mxPoint x="56" y="338" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="86" y="338" />
+              <mxPoint x="86" y="375" />
+            </Array>
+            <mxPoint x="64" y="375" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vvcB78ZaGYWaYG9tcJMQ-2" value="&amp;nbsp;19. Success or Failed" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.039;exitY=0.728;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.011;entryY=0.725;entryDx=0;entryDy=0;entryPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="7Op2JaMXb7pChXdJnSNb-6" edge="1">
+          <mxGeometry x="-0.0009" relative="1" as="geometry">
+            <mxPoint x="-128.09000000000015" y="378.6600000000001" as="sourcePoint" />
+            <mxPoint x="-297.5900000000001" y="378" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vvcB78ZaGYWaYG9tcJMQ-1" value="&lt;font face=&quot;Verdana&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp;18. Success or Failed&lt;/span&gt;&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.041;exitY=0.723;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=default;fontSize=11;entryX=0.7;entryY=0.348;entryDx=0;entryDy=0;entryPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-6" edge="1">
+          <mxGeometry x="-0.0085" relative="1" as="geometry">
+            <mxPoint x="44.999999999999886" y="378.05999999999995" as="sourcePoint" />
+            <mxPoint x="-118.59000000000003" y="378.1199999999999" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="57.40999999999997" y="378" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-8" value="Passenger" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="209" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-9" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="7Op2JaMXb7pChXdJnSNb-8" vertex="1">
+          <mxGeometry x="45" y="60" width="10" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-37" value="&amp;nbsp;12. Input peice/weight&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;entryX=0;entryY=0.452;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.944;exitY=0.453;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-8" edge="1">
+          <mxGeometry x="-0.0027" relative="1" as="geometry">
+            <mxPoint x="55.00000000000006" y="286.71999999999997" as="sourcePoint" />
+            <mxPoint x="224.56" y="286.50000000000006" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-10" value="&amp;nbsp;3. Select List of booking&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0;entryY=0.077;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" target="7Op2JaMXb7pChXdJnSNb-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="623" y="120" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="700" y="120" />
+              <mxPoint x="620" y="60" />
+            </Array>
+            <mxPoint x="780" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-11" value="1. Input PNR" style="html=1;verticalAlign=middle;endArrow=block;entryX=0;entryY=0.452;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.944;exitY=0.453;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry x="-0.0027" relative="1" as="geometry">
+            <mxPoint x="263.44000000000005" y="119.65999999999997" as="sourcePoint" />
+            <mxPoint x="433" y="119.44000000000005" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-12" value="&amp;nbsp;2. getBookingByPnr()&amp;nbsp;" style="verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0.03;entryY=0.451;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;labelBorderColor=none;fontColor=default;html=1;spacingTop=0;spacingLeft=0;horizontal=1;" parent="1" edge="1">
+          <mxGeometry x="0.021" relative="1" as="geometry">
+            <mxPoint x="443.1099999999999" y="120.22000000000003" as="sourcePoint" />
+            <mxPoint x="613.3" y="120.22000000000003" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-13" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;5. View List of booking&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.039;exitY=0.728;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.011;entryY=0.725;entryDx=0;entryDy=0;entryPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="1" edge="1">
+          <mxGeometry x="-0.0009" relative="1" as="geometry">
+            <mxPoint x="612.6099999999999" y="160.16000000000008" as="sourcePoint" />
+            <mxPoint x="443.1099999999999" y="159.5" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-14" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;4. List booking by PNR&amp;nbsp;&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.041;exitY=0.723;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="1" edge="1">
+          <mxGeometry x="-0.0042" relative="1" as="geometry">
+            <mxPoint x="777.5899999999999" y="160.05999999999995" as="sourcePoint" />
+            <mxPoint x="623" y="160" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="775" y="160" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-29" value="6. Select pax for bagdrop&lt;br&gt;(only checked-in)" style="html=1;verticalAlign=middle;endArrow=block;entryX=0;entryY=0.452;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.944;exitY=0.453;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry x="0.0013" relative="1" as="geometry">
+            <mxPoint x="263.00000000000006" y="198.21999999999997" as="sourcePoint" />
+            <mxPoint x="432.56" y="198.00000000000006" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dzuRFS8hlLqgJuvJY9Dt-2" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;9. Bag Allowance&amp;nbsp;&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.041;exitY=0.723;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=default;fontSize=11;" edge="1" parent="1">
+          <mxGeometry x="-0.0042" relative="1" as="geometry">
+            <mxPoint x="782.5899999999999" y="239.05999999999995" as="sourcePoint" />
+            <mxPoint x="628" y="239" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="780" y="239" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-40" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;20. Print Bag Tag&amp;nbsp;&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="1" edge="1">
+          <mxGeometry x="1" y="-19" relative="1" as="geometry">
+            <mxPoint x="444" y="423" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="474" y="423" />
+              <mxPoint x="474" y="460" />
+            </Array>
+            <mxPoint x="452" y="460" as="targetPoint" />
+            <mxPoint x="-8" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-38" value="&amp;nbsp;15. addBag()&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0.03;entryY=0.451;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="442.8099999999999" y="364.22" as="sourcePoint" />
+            <mxPoint x="613" y="364.22" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dzuRFS8hlLqgJuvJY9Dt-5" value="&amp;nbsp;14. Confirm regulations&lt;br&gt;&amp;nbsp;&amp;amp; check-bag&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;entryX=0;entryY=0.452;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.944;exitY=0.453;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1">
+          <mxGeometry x="-0.0027" relative="1" as="geometry">
+            <mxPoint x="264.00000000000006" y="363.71999999999997" as="sourcePoint" />
+            <mxPoint x="433.56" y="363.50000000000006" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
