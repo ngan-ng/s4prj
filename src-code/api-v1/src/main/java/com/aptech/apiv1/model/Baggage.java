@@ -32,8 +32,7 @@ public class Baggage implements Serializable {
     private byte weight;
     @Column(name = "barcode", nullable = false)
     private String barcode;
-    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.DETACH})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.DETACH})
     @JoinColumn(name = "bookingId", nullable = false)
-    @JsonBackReference
     private Booking booking;
 }

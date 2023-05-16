@@ -22,7 +22,6 @@ public class Member implements Serializable {
     private String mobile;
     @Email
     private String email;
-    @OneToMany(mappedBy = "member", fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Booking> bookings = new ArrayList<>();
 }

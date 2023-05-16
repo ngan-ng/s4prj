@@ -17,8 +17,7 @@ public class Payment implements Serializable {
     private double airportFee;
     private double tax;
     private String status;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "booking_id")
-    @JsonBackReference
     private Booking booking;
 }

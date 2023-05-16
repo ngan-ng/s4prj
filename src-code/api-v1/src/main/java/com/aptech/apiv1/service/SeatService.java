@@ -1,13 +1,12 @@
 package com.aptech.apiv1.service;
 
-import com.aptech.apiv1.dto.SeatDto;
+import com.aptech.apiv1.dto.LoadSeatDto;
 import com.aptech.apiv1.dto.SelectSeatDto;
-import com.aptech.apiv1.model.Seat;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
 public interface SeatService {
     HttpStatus handleSeat(SelectSeatDto seat);
-    List<SeatDto> getSeatsByFlight(long flightId);
+    List<LoadSeatDto> getSeatsByFlight(long flightId);
 }

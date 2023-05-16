@@ -1,14 +1,13 @@
 package com.aptech.apiv1.service.impl;
 
-import com.aptech.apiv1.dto.SeatDto;
+import com.aptech.apiv1.dto.LoadSeatDto;
 import com.aptech.apiv1.dto.SelectSeatDto;
 import com.aptech.apiv1.model.Booking;
-import com.aptech.apiv1.model.Flight;
 import com.aptech.apiv1.model.Seat;
-import com.aptech.apiv1.repository.FlightRepository;
 import com.aptech.apiv1.repository.SeatRepository;
 import com.aptech.apiv1.service.SeatService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,13 +18,9 @@ import java.util.Optional;
 @Service
 public class SeatServiceImpl implements SeatService {
     private final SeatRepository seatRepository;
-    private final FlightRepository flightRepository;
-    private final ModelMapper modelMapper;
     @Autowired
-    public SeatServiceImpl(SeatRepository seatRepository,FlightRepository flightRepository, ModelMapper modelMapper) {
+    public SeatServiceImpl(SeatRepository seatRepository) {
         this.seatRepository = seatRepository;
-        this.modelMapper = modelMapper;
-        this.flightRepository = flightRepository;
     }
 
     @Override
@@ -65,9 +60,14 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public List<SeatDto> getSeatsByFlight(long flightId) {
+    public List<LoadSeatDto> getSeatsByFlight(long flightId) {
         List<Seat> seats = seatRepository.findSeatsByFlightId(flightId);
-        return seats.stream().map(s -> modelMapper.map(s, SeatDto.class)).toList();
+//        return seats.stream().map(s -> modelMapper.map(s, SeatDto.class)).toList();
+
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        mapper.typeMap(Seat.class, LoadSeatDto.class).addMappings(m -> m.map(src -> src.getBooking().getId(), LoadSeatDto::setBooking));
+        return seats.stream().map((seat -> mapper.map(seat, LoadSeatDto.class))).toList();
     }
 
 }
