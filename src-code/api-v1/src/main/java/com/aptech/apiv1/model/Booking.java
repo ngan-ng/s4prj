@@ -2,6 +2,7 @@ package com.aptech.apiv1.model;
 
 import com.aptech.apiv1.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -32,8 +33,6 @@ public class Booking implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date bookDate = new Date();
     @Column(name = "seq", updatable = false)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "flightSEQ_generator")
-//    @SequenceGenerator(name = "flightSEQ_generator", sequenceName = "flight_seq")
     private int seq = 0;
     @Column(name = "title", columnDefinition = "varchar(20)", nullable = false)
     private String title = "Mr.";
@@ -53,13 +52,11 @@ public class Booking implements Serializable {
     private String email;
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "memberId")
-    @JsonBackReference
     private Member member;
 
     @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
     private List<Payment> payments = new ArrayList<>();
-    @OneToMany(mappedBy = "booking",fetch = FetchType.EAGER)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "booking",fetch = FetchType.LAZY)
     private List<Baggage> baggages = new ArrayList<>();
+
 }
