@@ -96,7 +96,7 @@ public class ApiV1Application {
         int durationSgnDad = 80;
         for (int i = 620; i <= 625; i++) {
             int stdHr = std.getHour();
-            boolean goldenTime = (stdHr > 5 && stdHr <13) || (stdHr > 16 && stdHr < 20);
+            boolean goldenTime = (stdHr > 5 && stdHr < 9) || (stdHr > 16 && stdHr < 20);
             double basePrice = 68;
             Flight flight = new Flight().setFlightNumber(i)
                     .setSTD(std)
