@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/SeatDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/enums/FlightStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diagram/Sequence_Self-Checkin_Pax.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/diagram/Sequence_Self-Checkin_Pax.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/AccessTokenDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/admin/AccessTokenDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/AdminDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/admin/AdminDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/admin/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/RoleDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/admin/RoleDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/TokenRefreshDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/admin/TokenRefreshDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Flight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Seat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/SeatRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/SeatRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/AdminServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/SeatServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/SeatServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/JwtUtils.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2PxTHRro9iTqocqtWgpxdQLB0XD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "C:/Myself/FPT-Aptech Course/Semester_4/Spring/self/gs-consuming-rest",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="" />
+      <created>1684397646096</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1684397646096</updated>
+      <workItem from="1684397647045" duration="6000" />
+    </task>
+    <servers />
+  </component>
+</project>

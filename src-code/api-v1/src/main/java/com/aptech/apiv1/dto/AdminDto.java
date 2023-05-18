@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 
-import com.aptech.apiv1.model.admin.Role;
 import jakarta.validation.constraints.Email;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

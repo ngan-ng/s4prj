@@ -6,12 +6,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.NaturalId;
 
 import java.io.Serializable;
 
 @Entity
 @Data
+@Accessors(chain = true)
 public class Aircraft implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

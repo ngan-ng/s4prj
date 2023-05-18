@@ -28,7 +28,7 @@ public class CreateSeatsOnFlight {
                 String r = i<10?"0"+i:String.valueOf(i);
 
                 Seat seat = new Seat().setSeatNumber(r+(char)j)
-                        .setType(seatType.toString())
+                        .setSeatType(seatType.toString())
                         .setPrice(SeatUtils.getPrice(seatType))
                         .setDescription(SeatUtils.getDescription(seatType));
                 seat.setFlight(flight);

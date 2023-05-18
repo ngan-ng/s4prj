@@ -22,13 +22,13 @@ public class Seat implements Serializable {
     private long id;
     @Column(name = "seatNumber", columnDefinition = "varchar(3)")
     private String seatNumber;
-    private String type;
+    private String seatType; // STANDARD, EXIT, HOTSEAT
+    private String classType = "Y"; // F: First, C: Business, Y: Economy
     @Column(name = "description", columnDefinition = "varchar(MAX)")
     private String description;
     private double price = 0.0;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flightId", referencedColumnName = "id", nullable = false)
-    @JsonBackReference
     private Flight flight;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookingId")

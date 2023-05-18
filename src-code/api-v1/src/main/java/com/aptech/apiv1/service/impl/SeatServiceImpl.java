@@ -61,13 +61,14 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public List<LoadSeatDto> getSeatsByFlight(long flightId) {
-        List<Seat> seats = seatRepository.findSeatsByFlightId(flightId);
-//        return seats.stream().map(s -> modelMapper.map(s, SeatDto.class)).toList();
+//        return seatRepository.findSeatsByFlightId(flightId);
 
-        ModelMapper mapper = new ModelMapper();
-        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-        mapper.typeMap(Seat.class, LoadSeatDto.class).addMappings(m -> m.map(src -> src.getBooking().getId(), LoadSeatDto::setBooking));
-        return seats.stream().map((seat -> mapper.map(seat, LoadSeatDto.class))).toList();
+        List<Seat> seats = seatRepository.findSeatsByFlightId(flightId);
+        ModelMapper modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+        modelMapper.typeMap(Seat.class, LoadSeatDto.class).addMappings(mapper ->
+                        mapper.map(src -> src.getBooking().getId(), LoadSeatDto::setBooking));
+        return seats.stream().map((seat -> modelMapper.map(seat, LoadSeatDto.class))).toList();
     }
 
 }

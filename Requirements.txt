@@ -1,0 +1,18 @@
+
+- Functional requirement:
+  1. User should be able to search flights based on origin + arrival destination + date of travel
+  2. User should able to login to app
+  3. Select the flight based on time/preference
+  4. Enter personal details
+  5. Make payment in your app
+  6. Confirmation mail/notification
+
+- Non-functional requirement:
+  1. Scalable
+  2. Reliable
+  3. Modular
+
+- Actors:
+  1. Admin (who use application)
+  2. Passengers (users)
+  3. Airline authority (Operators)
