@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +51,9 @@ public class Flight implements Serializable {
     private String flightStatus = FlightStatus.ONTIME.toString();
     @ManyToOne(fetch = FetchType.LAZY)
     private Aircraft aircraft;
+    @Column(name = "basePrice", nullable = false)
+    @PositiveOrZero(message = "Price cannot be negative")
+    private double basePrice = 0;
     @OneToMany(mappedBy = "flight")
     @JsonIgnore
     private List<Booking> bookings = new ArrayList<>();

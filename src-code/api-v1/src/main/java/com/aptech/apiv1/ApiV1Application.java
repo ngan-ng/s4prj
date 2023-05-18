@@ -70,13 +70,17 @@ public class ApiV1Application {
         int durationSgnHan = 130;
         int durationTurnAround = 60;
         for (int i = 120; i <= 125; i++) {
+            int stdHr = std.getHour();
+            boolean goldenTime = (stdHr > 5 && stdHr <13) || (stdHr > 16 && stdHr < 20);
+            double basePrice = 128;
             Flight flight = new Flight().setFlightNumber(i)
                     .setSTD(std)
                     .setDuration(durationSgnHan)
                     .setOrigin(i % 2 == 0 ? origin : destination)
                     .setDestination(i % 2 == 0 ? destination : origin)
                     .setFlightStatus(FlightStatus.ONTIME.toString())
-                    .setAircraft(ac1);
+                    .setAircraft(ac1)
+                    .setBasePrice(goldenTime?basePrice+15:basePrice);
             flight = flightRepository.save(flight);
             List<Seat> seatmap = CreateSeatsOnFlight.createSeatsA320(flight);
             seatList.addAll(seatmap);
@@ -91,13 +95,19 @@ public class ApiV1Application {
         airportRepository.save(destination);
         int durationSgnDad = 80;
         for (int i = 620; i <= 625; i++) {
+            int stdHr = std.getHour();
+            boolean goldenTime = (stdHr > 5 && stdHr <13) || (stdHr > 16 && stdHr < 20);
+            double basePrice = 68;
             Flight flight = new Flight().setFlightNumber(i)
                     .setSTD(std)
                     .setDuration(durationSgnDad)
                     .setOrigin(i % 2 == 0 ? origin : destination)
                     .setDestination(i % 2 == 0 ? destination : origin)
                     .setFlightStatus(FlightStatus.ONTIME.toString())
-                    .setAircraft(ac2);
+                    .setAircraft(ac2)
+                    .setBasePrice(goldenTime?basePrice+15:basePrice);
+
+
             flight = flightRepository.save(flight);
             List<Seat> seatmap = CreateSeatsOnFlight.createSeatsA320(flight);
             seatList.addAll(seatmap);
