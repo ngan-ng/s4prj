@@ -1,5 +1,6 @@
 package com.aptech.apiv1.model;
 
+import com.aptech.apiv1.enums.BookingStatus;
 import com.aptech.apiv1.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -10,6 +11,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,9 +31,12 @@ public class Booking implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "flightId", nullable = false)
     private Flight flight;
-    @Column(name = "bookDate", columnDefinition = "Date", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date bookDate = new Date();
+    @Column(name = "bookDate", columnDefinition = "datetime", nullable = false)
+    private LocalDateTime bookDate = LocalDateTime.now();
+    @Column(name = "dob", columnDefinition = "datetime")
+    private LocalDateTime dob;
+    @Column(name = "status")
+    private String status = String.valueOf(BookingStatus.UNPAID);
     @Column(name = "seq", updatable = false)
     private int seq = 0;
     @Column(name = "title", columnDefinition = "varchar(20)", nullable = false)
@@ -47,15 +52,14 @@ public class Booking implements Serializable {
     private Infant infant;
     @Column(name = "gender", columnDefinition = "varchar(3)", nullable = false)
     private String gender = Gender.ADL.toString();
+    @Column(name = "bagAllowance")
+    private int bagAllowance = 0;
     private String mobile;
     @Email(message = "Invalid email format")
     private String email;
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "memberId")
     private Member member;
-
-    @OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Payment> payments = new ArrayList<>();
     @OneToMany(mappedBy = "booking",fetch = FetchType.LAZY)
     private List<Baggage> baggages = new ArrayList<>();
 

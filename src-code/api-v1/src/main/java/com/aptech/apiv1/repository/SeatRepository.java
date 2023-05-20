@@ -1,9 +1,7 @@
 package com.aptech.apiv1.repository;
 
-import com.aptech.apiv1.dto.SeatDto;
 import com.aptech.apiv1.model.Seat;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 

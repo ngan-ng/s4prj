@@ -1,6 +1,7 @@
 package com.aptech.apiv1.model;
 
 
+import com.aptech.apiv1.enums.SeatStatus;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -22,6 +23,7 @@ public class Seat implements Serializable {
     private long id;
     @Column(name = "seatNumber", columnDefinition = "varchar(3)")
     private String seatNumber;
+    private String status = String.valueOf(SeatStatus.AVAILABLE);
     private String seatType; // STANDARD, EXIT, HOTSEAT
     private String classType = "Y"; // F: First, C: Business, Y: Economy
     @Column(name = "description", columnDefinition = "varchar(MAX)")

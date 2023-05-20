@@ -26,3 +26,8 @@ security:
 
 springdoc:
   show-login-endpoint: true
+
+paypal:
+  client-id: "AZtv8J9ajlDoiZflPaFVEwy_ComBYd78xBkYib65BrXSb6PoA4_w6q5MgPSuvmYF_9KyIPibTGYnRP8t"
+  secret-key: "EKQMOr-drhyOL8gQq_a77qsT-bEWoSPfRF-DoQAcE-AyV8DDGfln-5XcyiQDqb33waMgmHBWit29hsHk"
+  mode: "sandbox"

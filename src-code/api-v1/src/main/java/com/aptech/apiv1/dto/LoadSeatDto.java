@@ -11,7 +11,8 @@ import java.io.Serializable;
 public class LoadSeatDto implements Serializable {
     private long id;
     private String seatNumber;
-    private String type;
+    private String seatType;
+    private String classType;
     private String description;
     private double price;
     private long booking;

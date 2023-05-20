@@ -13,11 +13,11 @@ public class Payment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private PaymentMethod paymentMethod;
-    private double singlePrice;
-    private double airportFee;
-    private double tax;
+    private double price;
+    private String category;
     private String status;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "booking_id")
-    private Booking booking;
+    private long bookingId;
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+//    @JoinColumn(name = "booking_id")
+//    private Booking booking;
 }

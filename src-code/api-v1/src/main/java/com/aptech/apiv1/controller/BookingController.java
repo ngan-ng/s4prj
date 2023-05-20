@@ -10,11 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.aptech.apiv1.utils.business.PnrGenerator.generatePnr;
-
 @RestController
 @RequestMapping(path = "/api-v1/guest/booking")
 public class BookingController {

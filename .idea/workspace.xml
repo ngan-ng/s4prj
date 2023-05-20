@@ -2,24 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/SeatDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/enums/FlightStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diagram/Sequence_Self-Checkin_Pax.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/diagram/Sequence_Self-Checkin_Pax.drawio" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/AccessTokenDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/admin/AccessTokenDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/AdminDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/admin/AdminDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/admin/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/RoleDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/admin/RoleDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/TokenRefreshDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/admin/TokenRefreshDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Seat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Seat.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/PaymentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/BagTagResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/BoardingPassResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/BookingPaymentDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/GroupBookingPaymentDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/PayPalExecuteDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/enums/BagAllowance.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/enums/PromotionType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/PromotionsPolicy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/PromotionPolicyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/PaymentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/PromotionsPolicyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/PaymentServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/PromotionsPolicyServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/business/TaxUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/business/TransactionUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diagram/db-mono.drawio" beforeDir="false" afterPath="$PROJECT_DIR$/diagram/db-mono.drawio" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/LoadSeatDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/LoadSeatDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/SeatRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/SeatRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/AdminServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/SeatServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/SeatServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/BaggageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/BaggageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/BookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/BookingServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/business/BagTagGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/business/BagUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/business/PnrGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/business/PnrGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,16 +45,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "last_opened_file_path": "C:/Myself/FPT-Aptech Course/Semester_4/Spring/self/gs-consuming-rest",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Myself/FPT-Aptech Course/Semester_4/Spring/self/gs-consuming-rest&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -53,6 +64,7 @@
       <option name="presentableId" value="Default" />
       <updated>1684397646096</updated>
       <workItem from="1684397647045" duration="6000" />
+      <workItem from="1684595905044" duration="16000" />
     </task>
     <servers />
   </component>

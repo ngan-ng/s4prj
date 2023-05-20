@@ -2,6 +2,7 @@ package com.aptech.apiv1.service.impl;
 
 import com.aptech.apiv1.dto.GroupBooking;
 import com.aptech.apiv1.model.Booking;
+import com.aptech.apiv1.model.Member;
 import com.aptech.apiv1.repository.BookingRepository;
 import com.aptech.apiv1.service.BookingService;
 import com.aptech.apiv1.utils.business.PnrGenerator;
@@ -33,8 +34,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Iterable<Booking> createBookings(List<Booking> bookings) {
-        String pnr = PnrGenerator.generatePnr();
-        bookings.forEach(b -> b.setPnr(pnr));
+        PnrGenerator.generateAndSetPnr(bookings);
         return bookingRepository.saveAll(bookings);
     }
 }
