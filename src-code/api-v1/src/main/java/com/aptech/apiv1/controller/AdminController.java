@@ -27,9 +27,12 @@ public class AdminController {
     JwtUtils jwtUtils;
 
     @PostMapping("/signup")
-    public ResponseEntity<AdminDto> signup(@RequestBody AdminDto adminDto) {
-        return ResponseEntity.ok(adminService.signup(adminDto));
-
+    public ResponseEntity<?> signup(@RequestBody AdminDto adminDto) {
+        try{
+            return ResponseEntity.ok(adminService.signup(adminDto));
+        }catch (Exception ex){
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
     }
 
     @PostMapping("/login")
@@ -45,10 +48,8 @@ public class AdminController {
 
         return refreshTokenService.findByToken(requestRefreshToken)
                 .map(refreshTokenService::verifyExpiration)
-                .map(RefreshToken::getAdmin)
-                .map(user -> {
-                    return ResponseEntity.ok(jwtUtils.generateTokenFromEmail(user.getEmail()));
-                })
+                .map(RefreshToken::getUser)
+                .map(user -> ResponseEntity.ok(jwtUtils.generateTokenFromEmail(user.getEmail())))
                 .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,
                         "Refresh token is not in database!"));
     }

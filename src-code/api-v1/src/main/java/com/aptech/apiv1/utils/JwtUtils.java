@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.aptech.apiv1.dto.AccessTokenDto;
-import com.aptech.apiv1.model.admin.Admin;
+import com.aptech.apiv1.model.admin.User;
 import com.aptech.apiv1.repository.AdminRepository;
 import com.aptech.apiv1.service.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,10 +52,10 @@ public class JwtUtils {
 
     public AccessTokenDto generateTokenFromEmail(String email) {
 
-        Admin admin = adminRepository.findByEmail(email).get();
+        User user = adminRepository.findByEmail(email).get();
         Claims claims = Jwts.claims().setSubject(email);
         List<String> roles = new ArrayList<>();
-        admin.getRoles().stream().forEach(authority -> roles.add(authority.getRole().toString()));
+        user.getRoles().stream().forEach(authority -> roles.add(authority.getRole().toString()));
         claims.put("roles", roles);
         String token = Jwts.builder().setClaims(claims)
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME))

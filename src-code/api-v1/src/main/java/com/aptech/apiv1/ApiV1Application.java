@@ -124,12 +124,11 @@ public class ApiV1Application {
 
         // Role
         RoleRepository roleRepository = context.getBean(RoleRepository.class);
-        Role adminRole = roleRepository.findByRole(AdminRole.ADMIN);
-        if (adminRole == null) {
-            adminRole = new Role();
-            adminRole.setRole(AdminRole.ADMIN);
-            roleRepository.save(adminRole);
-        }
+        List<Role> roles = new ArrayList<>();
+        roles.add(new Role().setRole(AdminRole.ADMIN));
+        roles.add(new Role().setRole(AdminRole.GENERAL_ADMIN));
+        roles.add(new Role().setRole(AdminRole.MEMBER));
+        roleRepository.saveAll(roles);
     } // .end of initialize();
 
 }

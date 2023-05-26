@@ -2,8 +2,8 @@ package com.aptech.apiv1.service.impl;
 
 import com.aptech.apiv1.enums.PromotionType;
 import com.aptech.apiv1.model.Booking;
-import com.aptech.apiv1.model.Member;
 import com.aptech.apiv1.model.PromotionsPolicy;
+import com.aptech.apiv1.model.admin.User;
 import com.aptech.apiv1.repository.PromotionPolicyRepository;
 import com.aptech.apiv1.service.PromotionsPolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class PromotionsPolicyServiceImpl implements PromotionsPolicyService {
         for (PromotionsPolicy p : promotions){
             switch (PromotionType.valueOf(p.getPromotionType())){
                 case POINTS -> {
-                    Member member = booking.getMember();
+                    User member = booking.getMember();
                     if(member != null){
                         long currentPoints = member.getPoints();
                         if(currentPoints >= p.getPointCondition()){

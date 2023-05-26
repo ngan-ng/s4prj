@@ -32,7 +32,7 @@ public class CustomAdminDetailService implements UserDetailsService {
         adminRoles.forEach((role) -> {
             roles.add(new SimpleGrantedAuthority(role.getRole()));
         });
-        return new ArrayList<GrantedAuthority>(roles);
+        return new ArrayList<>(roles);
     }
 
     private UserDetails buildAdminForAuthentication(AdminDto admin, List<GrantedAuthority> authorities) {

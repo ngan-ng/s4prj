@@ -3,15 +3,13 @@ package com.aptech.apiv1.dto;
 import com.aptech.apiv1.enums.Gender;
 import com.aptech.apiv1.model.Flight;
 import com.aptech.apiv1.model.Infant;
-import com.aptech.apiv1.model.Member;
+import com.aptech.apiv1.model.admin.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -36,5 +34,5 @@ public class BookingPaymentDto {
     private String mobile;
     @Email(message = "Invalid email format")
     private String email;
-    private Member member;
+    private User member;
 }

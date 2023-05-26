@@ -1,6 +1,6 @@
 package com.aptech.apiv1.model;
 
-import com.aptech.apiv1.model.admin.Admin;
+import com.aptech.apiv1.model.admin.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +25,5 @@ public class RefreshToken {
     private Instant expiryDate;
     @ManyToOne
     @JoinColumn(name = "admin_id", referencedColumnName = "id")
-    private Admin admin;
+    private User user;
 }

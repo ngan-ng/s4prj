@@ -32,7 +32,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Override
     public RefreshToken createRefreshToken(String email) {
         RefreshToken refreshToken = new RefreshToken();
-        refreshToken.setAdmin(adminRepository.findByEmail(email).get());
+        refreshToken.setUser(adminRepository.findByEmail(email).get());
         refreshToken.setExpiryDate(Instant.now().plusMillis(REFRESH_TOKEN_EXPIRATION_TIME));
         refreshToken.setToken(UUID.randomUUID().toString());
         refreshToken = refreshTokenRepository.save(refreshToken);
