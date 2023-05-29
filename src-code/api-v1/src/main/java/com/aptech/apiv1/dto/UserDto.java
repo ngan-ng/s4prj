@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @NoArgsConstructor
 @ToString
-public class AdminDto implements Serializable {
+public class UserDto implements Serializable {
     @Email
     private String email;
     private String password;

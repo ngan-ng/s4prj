@@ -1,4 +1,4 @@
-package com.aptech.apiv1.model.admin;
+package com.aptech.apiv1.model.user;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,7 +7,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,10 +22,10 @@ public class Role implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JsonBackReference
-    private List<Admin> admins = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
-    private AdminRole role;
+    private UserRole role;
 }

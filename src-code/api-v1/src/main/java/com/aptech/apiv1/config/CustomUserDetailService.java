@@ -1,8 +1,8 @@
 package com.aptech.apiv1.config;
 
-import com.aptech.apiv1.dto.AdminDto;
+import com.aptech.apiv1.dto.UserDto;
 import com.aptech.apiv1.dto.RoleDto;
-import com.aptech.apiv1.service.AdminService;
+import com.aptech.apiv1.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,29 +14,29 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class CustomAdminDetailService implements UserDetailsService {
+public class CustomUserDetailService implements UserDetailsService {
     @Autowired
-    private AdminService adminService;
+    private UserService userService;
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        AdminDto adminDto = adminService.findAdminByEmail(email);
-        if (adminDto != null) {
-            List<GrantedAuthority> authorities = getAdminAuthority(adminDto.getRoles());
-            return buildAdminForAuthentication(adminDto, authorities);
+        UserDto userDto = userService.findUserByEmail(email);
+        if (userDto != null) {
+            List<GrantedAuthority> authorities = getUserAuthority(userDto.getRoles());
+            return buildUserForAuthentication(userDto, authorities);
         } else {
             throw new UsernameNotFoundException("user with email " + email + " does not exist.");
         }
     }
-    private List<GrantedAuthority> getAdminAuthority(Collection<RoleDto> adminRoles) {
+    private List<GrantedAuthority> getUserAuthority(Collection<RoleDto> userRoles) {
         Set<GrantedAuthority> roles = new HashSet<>();
-        adminRoles.forEach((role) -> {
+        userRoles.forEach((role) -> {
             roles.add(new SimpleGrantedAuthority(role.getRole()));
         });
-        return new ArrayList<GrantedAuthority>(roles);
+        return new ArrayList<>(roles);
     }
 
-    private UserDetails buildAdminForAuthentication(AdminDto admin, List<GrantedAuthority> authorities) {
-        return new org.springframework.security.core.userdetails.User(admin.getEmail(), admin.getPassword(), authorities);
+    private UserDetails buildUserForAuthentication(UserDto user, List<GrantedAuthority> authorities) {
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 
 }

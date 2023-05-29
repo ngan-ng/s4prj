@@ -29,7 +29,7 @@ public class SecurityConfiguration {
     JwtUtils jwtUtils;
 
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth, CustomAdminDetailService customUserDetailsService,
+    public void configureGlobal(AuthenticationManagerBuilder auth, CustomUserDetailService customUserDetailsService,
                                 PasswordEncoder passwordEncoder) throws Exception {
         auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder);
     }
@@ -40,9 +40,9 @@ public class SecurityConfiguration {
             "/swagger-resources/**",
             "/swagger-ui/**",
             "/swagger-ui.html",
-            "/api-v1/admin/login",
-            "/api-v1/admin/signup",
-            "/api-v1/admin/refreshtoken",
+            "/api-v1/user/login",
+            "/api-v1/user/signup",
+            "/api-v1/user/refreshtoken",
             "/api-v1/guest/**"
             //"/**"
 

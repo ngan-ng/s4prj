@@ -25,13 +25,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
         this.authenticationManager = authenticationManager;
         this.jwtUtils = jwtUtils;
-        this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/api-v1/admin/login", "POST"));
+        this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/api-v1/user/login", "POST"));
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
         try {
-
             LoginRequest user = new ObjectMapper().readValue(req.getInputStream(), LoginRequest.class);
             return authenticationManager.authenticate((new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>())));
 
