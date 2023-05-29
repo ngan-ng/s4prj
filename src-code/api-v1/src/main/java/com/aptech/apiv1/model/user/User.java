@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.aptech.apiv1.model.Booking;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
@@ -31,7 +32,7 @@ public class User implements Serializable {
     @JoinTable(name = "user_role",
         joinColumns = { @JoinColumn(name = "user_id") },
         inverseJoinColumns = { @JoinColumn(name = "role_id") })
-    @JsonManagedReference
+//    @JsonManagedReference
     private List<Role> roles = new ArrayList<>();
 
     ///////////////////////////////////
@@ -42,6 +43,8 @@ public class User implements Serializable {
     private LocalDateTime dob;
     private long points;
     private String mobile;
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "member")
+    @JsonIgnore
+    @JsonManagedReference
     private List<Booking> bookings = new ArrayList<>();
 }

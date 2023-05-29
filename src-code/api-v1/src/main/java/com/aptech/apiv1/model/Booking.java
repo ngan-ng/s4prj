@@ -3,6 +3,7 @@ package com.aptech.apiv1.model;
 import com.aptech.apiv1.enums.BookingStatus;
 import com.aptech.apiv1.enums.Gender;
 import com.aptech.apiv1.model.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -56,6 +57,7 @@ public class Booking implements Serializable {
     private String email;
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "memberId")
+    @JsonBackReference
     private User member;
     @OneToMany(mappedBy = "booking",fetch = FetchType.LAZY)
     private List<Baggage> baggages = new ArrayList<>();

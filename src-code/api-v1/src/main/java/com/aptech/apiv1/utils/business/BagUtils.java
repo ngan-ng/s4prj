@@ -19,16 +19,16 @@ public class BagUtils {
         double rateVndToUsd = 0.000043 ;
         switch (type){
             case _20 -> {
-                price = 180000 * 0.000043;
+                price = 180000 * rateVndToUsd;
             }
             case _30 -> {
-                price = 270000 * 0.000043;
+                price = 270000 * rateVndToUsd;
             }
             case _40 -> {
-                price = 360000 * 0.000043;
+                price = 360000 * rateVndToUsd;
             }
             case _50 -> {
-                price = 450000 * 0.000043;
+                price = 450000 * rateVndToUsd;
             }
         }
         return price;

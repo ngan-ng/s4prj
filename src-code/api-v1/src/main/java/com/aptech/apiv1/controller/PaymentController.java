@@ -3,6 +3,7 @@ package com.aptech.apiv1.controller;
 import com.aptech.apiv1.dto.GroupBooking;
 import com.aptech.apiv1.dto.GroupBookingPaymentDto;
 import com.aptech.apiv1.dto.PayPalExecuteDto;
+import com.aptech.apiv1.dto.ReviewPaypalResponseDto;
 import com.aptech.apiv1.service.impl.PaymentServiceImpl;
 import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Payment;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api-v1/guest/payment")
@@ -43,8 +46,9 @@ public class PaymentController {
             Payment payment = paymentService.getPaymentDetails(paymentId);
             PayerInfo payerInfo = payment.getPayer().getPayerInfo();
             Transaction transaction = payment.getTransactions().get(0);
+            List<ReviewPaypalResponseDto> responseDtos= paymentService.reviewPaypal(payment.getTransactions());
 
-            return ResponseEntity.ok("OK");
+            return ResponseEntity.ok(responseDtos);
         } catch (Exception ppEx) {
             return ResponseEntity.badRequest().body(ppEx.getMessage());
         }
