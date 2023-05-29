@@ -5,40 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/About.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/Admin.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/MyAccount.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/footer/footer.component.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/navigation/navigation.component.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/navigation/navigation.styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.component.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.component.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/admin/admin.action.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/admin/admin.reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/admin/admin.saga.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/admin/admin.selector.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/admin/admin.types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/member/member.action.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/member/member.reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/member/member.saga.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/member/member.selector.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/member/member.types.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/utils/firebase/firebase.utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/utils/reducer.utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/api/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/api/client.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/root-reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/store/root-reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/root-saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/store/root-saga.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/ui/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,29 +45,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;NganBranch&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/Code/sem-4/Project/src/s4prj/src-code/ui/src/page/component&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;0283fd2aec49fb0567bce964c2e58809&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\DELL\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\231.8770.65\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "NganBranch",
+    "last_opened_file_path": "E:/Code/sem-4/Project/src/s4prj/src-code/ui/src/page/component",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "show.migrate.to.gradle.popup": "false",
+    "spring.configuration.checksum": "0283fd2aec49fb0567bce964c2e58809",
+    "ts.external.directory.path": "C:\\Users\\DELL\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\231.8770.65\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\component" />
@@ -112,14 +82,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ApiV1Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-v1" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.aptech.apiv1.ApiV1Application" />
@@ -144,6 +106,7 @@
       <workItem from="1684925174747" duration="1831000" />
       <workItem from="1684985690012" duration="26457000" />
       <workItem from="1685067382726" duration="5584000" />
+      <workItem from="1685266502959" duration="75000" />
     </task>
     <servers />
   </component>
