@@ -1,23 +1,24 @@
-import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {selectCurrentMember} from "../../store/member/member.selector";
-import {useEffect} from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import { useEffect } from "react";
+import { Fragment } from "react";
 
 const MyAccount = () => {
-    const navigate = useNavigate();
-    const currentMember = useSelector(selectCurrentMember);
+  const navigate = useNavigate();
+  const currentUser = useSelector(selectCurrentUser);
 
-    useEffect(() => {
-        if (currentMember == null) {
-            navigate("/sign-in");
-        }
-    }, [currentMember]);
+  useEffect(() => {
+    if (currentUser == null) {
+      navigate("/auth");
+    }
+  }, [currentUser]);
 
-    return (
-        <>
-            <div>My Account Page</div>
-        </>
-    );
+  return (
+    <Fragment>
+      <div>My Account Page</div>
+    </Fragment>
+  );
 };
 
 export default MyAccount;

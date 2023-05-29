@@ -22,7 +22,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     public JwtAuthorizationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
-
     }
 
     @Override
@@ -60,7 +59,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             if (user != null) {
                 return new UsernamePasswordAuthenticationToken(user, null, list);
             }
-
         }
         return null;
     }

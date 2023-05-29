@@ -1,10 +1,10 @@
 package com.aptech.apiv1.controller;
 
-import com.aptech.apiv1.dto.AdminDto;
+import com.aptech.apiv1.dto.UserDto;
 import com.aptech.apiv1.dto.LoginRequest;
 import com.aptech.apiv1.dto.TokenRefreshDto;
 import com.aptech.apiv1.exception.TokenRefreshException;
-import com.aptech.apiv1.service.AdminService;
+import com.aptech.apiv1.service.UserService;
 import com.aptech.apiv1.service.RefreshTokenService;
 import com.aptech.apiv1.utils.JwtUtils;
 import com.aptech.apiv1.model.RefreshToken;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api-v1/admin")
-public class AdminController {
+@RequestMapping("/api-v1/user")
+public class UserController {
     @Autowired
-    AdminService adminService;
+    UserService userService;
 
     @Autowired
     RefreshTokenService refreshTokenService;
@@ -27,9 +27,9 @@ public class AdminController {
     JwtUtils jwtUtils;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody AdminDto adminDto) {
+    public ResponseEntity<?> signup(@RequestBody UserDto userDto) {
         try{
-            return ResponseEntity.ok(adminService.signup(adminDto));
+            return ResponseEntity.ok(userService.signup(userDto));
         }catch (Exception ex){
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
@@ -55,8 +55,8 @@ public class AdminController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<?> getAdmin() {
-        return ResponseEntity.ok(adminService.getAllAdmin());
+    public ResponseEntity<?> getUser() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
 }

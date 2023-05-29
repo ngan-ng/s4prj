@@ -1,118 +1,110 @@
-import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import {
-    Button,
-    Grid,
-    TextField,
-    Typography
-} from "@mui/material";
-
+import { Button, Grid, TextField, Typography } from "@mui/material";
 
 import "./sign-in.styles.css";
-import {emailSignInStart, googleSignInStart} from "../../../store/member/member.action";
-import {useNavigate} from "react-router-dom";
-import {selectCurrentMember} from "../../../store/member/member.selector";
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../../store/user/user.action";
+import { useNavigate } from "react-router-dom";
+import { selectCurrentUser } from "../../../store/user/user.selector";
 
 const defaultFormFields = {
-    email: "",
-    password: "",
+  email: "",
+  password: "",
 };
 
 const SignIn = () => {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [formFields, setFormFields] = useState(defaultFormFields);
-    const {email, password} = formFields;
-    const currentMember = useSelector(selectCurrentMember);
+  const dispatch = useDispatch();
+  const [formFields, setFormFields] = useState(defaultFormFields);
+  const { email, password } = formFields;
+  const navigate = useNavigate();
+  const currentUser = useSelector(selectCurrentUser);
 
-    useEffect(() => {
-        if (currentMember) {
-            navigate("/my-account");
-        }
-    }, [currentMember]);
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/my-account");
+    }
+  }, [currentUser]);
 
-    const resetFormFields = () => {
-        setFormFields(defaultFormFields);
-    };
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields);
+  };
 
-    const signInWithGoogle = async () => {
-        dispatch(googleSignInStart());
-    };
+  const signInWithGoogle = async () => {
+    dispatch(googleSignInStart());
+  };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-        try {
-            dispatch(emailSignInStart(email, password));
-            resetFormFields();
-            navigate("/my-account");
+    try {
+      dispatch(emailSignInStart(email, password));
+      resetFormFields();
+    } catch (error) {
+      if (error.code === "auth/user-not-found") {
+        alert("Cannot found this email.");
+      } else {
+        console.log("User sign in failed", error);
+      }
+    }
+  };
 
-        } catch (error) {
-            if (error.code === "auth/user-not-found") {
-                alert("Cannot found this email.");
-            } else {
-                console.log("member sign in failed", error);
-            }
-        }
-    };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
-    const handleChange = (event) => {
-        const {name, value} = event.target;
+    // spread in object and modify one by one value of object
+    setFormFields({ ...formFields, [name]: value });
+  };
 
-        // spread in object and modify one by one value of object
-        setFormFields({...formFields, [name]: value});
-    };
+  return (
+    <div className="card-sign-in">
+      <h2>Already have an account?</h2>
 
-    return (
-        <div className="container">
-            <div className="card">
-                <Grid container spacing={3}>
-                    <Grid item md={12} xs={12}>
-                        <Typography align="center" variant="h4">Sign In</Typography>
-                    </Grid>
-                    <Grid item md={12} xs={12}>
-                        <TextField
-                            label="Email"
-                            name="email"
-                            fullWidth
-                            size="small"
-                            onChange={handleChange}
-                            value={email}
-                        />
-                    </Grid>
-                    <Grid item md={12} xs={12}>
-                        <TextField
-                            label="Password"
-                            name="password"
-                            fullWidth
-                            size="small"
-                            type="password"
-                            required
-                            onChange={handleChange}
-                            value={password}
-                        />
-                    </Grid>
-                    <Grid item md={12} xs={12}>
-                        <Button
-                            variant="contained"
-                            type="submit"
-                            onClick={handleSubmit}
-                        >
-                            Sign In
-                        </Button>
-                        <Button
-                            variant="contained"
-                            type="button"
-                            onClick={signInWithGoogle}
-                        >
-                            Sign In With Google
-                        </Button>
-                    </Grid>
-                </Grid>
-            </div>
-        </div>
-    );
+      <Grid container spacing={3}>
+        <Grid item md={12} xs={12}>
+          <Typography align="left" variant="h4">
+            Sign In
+          </Typography>
+        </Grid>
+
+        <Grid item md={12} xs={12}>
+          <TextField
+            label="Email"
+            name="email"
+            type="email"
+            fullWidth
+            size="small"
+            required
+            onChange={handleChange}
+            value={email}
+          />
+        </Grid>
+        <Grid item md={12} xs={12}>
+          <TextField
+            label="Password"
+            name="password"
+            fullWidth
+            size="small"
+            type="password"
+            required
+            onChange={handleChange}
+            value={password}
+          />
+        </Grid>
+        <Grid item md={12} xs={12}>
+          <Button variant="contained" onClick={handleSubmit}>
+            Sign In
+          </Button>
+          <Button variant="contained" type="button" onClick={signInWithGoogle}>
+            Sign In With Google
+          </Button>
+        </Grid>
+      </Grid>
+    </div>
+  );
 };
 
 export default SignIn;

@@ -2,7 +2,7 @@ package com.aptech.apiv1.service.impl;
 
 
 import com.aptech.apiv1.model.RefreshToken;
-import com.aptech.apiv1.repository.AdminRepository;
+import com.aptech.apiv1.repository.UserRepository;
 import com.aptech.apiv1.repository.RefreshTokenRepository;
 import com.aptech.apiv1.service.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     private RefreshTokenRepository refreshTokenRepository;
 
     @Autowired
-    AdminRepository adminRepository;
+    UserRepository userRepository;
 
     @Override
     public Optional<RefreshToken> findByToken(String token) {
@@ -32,7 +32,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Override
     public RefreshToken createRefreshToken(String email) {
         RefreshToken refreshToken = new RefreshToken();
-        refreshToken.setUser(adminRepository.findByEmail(email).get());
+        refreshToken.setUser(userRepository.findByEmail(email).get());
         refreshToken.setExpiryDate(Instant.now().plusMillis(REFRESH_TOKEN_EXPIRATION_TIME));
         refreshToken.setToken(UUID.randomUUID().toString());
         refreshToken = refreshTokenRepository.save(refreshToken);

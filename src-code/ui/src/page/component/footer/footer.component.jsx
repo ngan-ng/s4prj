@@ -1,12 +1,11 @@
 import {Fragment} from "react";
-import {Outlet} from "react-router-dom";
+
+import "./footer.styles.css"
 
 const FooterComponent = () => {
     return (
         <Fragment>
-
-            <div>footer</div>
-
+            <footer className="footer">footer</footer>
         </Fragment>
     );
 };

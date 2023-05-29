@@ -2,7 +2,7 @@ package com.aptech.apiv1.model;
 
 import com.aptech.apiv1.enums.BookingStatus;
 import com.aptech.apiv1.enums.Gender;
-import com.aptech.apiv1.model.admin.User;
+import com.aptech.apiv1.model.user.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;

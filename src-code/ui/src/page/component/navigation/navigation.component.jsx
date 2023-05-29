@@ -1,18 +1,20 @@
 import {Link} from "react-router-dom";
+import { Fragment } from "react"; 
 
 import "./navigation.styles.css";
 import {useDispatch, useSelector} from "react-redux";
-import {selectCurrentMember} from "../../../store/member/member.selector";
-import {signOutStart} from "../../../store/member/member.action";
+import { selectCurrentUser } from "../../../store/user/user.selector";
+import { signOutStart } from "../../../store/user/user.action";
 
 const Navigation = () => {
     const dispatch = useDispatch();
-    const currentMember = useSelector(selectCurrentMember);
-    const signOutMember = () => dispatch(signOutStart());
-    console.log("currentMember", currentMember);
+    const currentUser = useSelector(selectCurrentUser);
+  
+    const signOutUser = () => dispatch(signOutStart());
+    console.log("currentUser", currentUser);
 
     return (
-        <>
+        <Fragment>
             <div className="navigation">
                 <Link className="logo" to="/">
                     <div>logo</div>
@@ -20,20 +22,19 @@ const Navigation = () => {
                 <div className="nav-links">
                     <Link className="nav-link" to="/about-us">About Us</Link>
 
-                    {currentMember ? (
-                        <>
-                            <Link className="nav-link" to="/sign-in" onClick={signOutMember}>Sign Out</Link>
+                    {currentUser ? (
+                        <Fragment>
+                            <Link className="nav-link" onClick={signOutUser}>Sign Out</Link>
                             <Link className="nav-link" to="/my-account">My Account</Link>
-                        </>
+                        </Fragment>
                     ) : (
-                        <>
-                            <Link className="nav-link" to="/sign-up">Sign Up</Link>
-                            <Link className="nav-link" to="/sign-in">Sign In</Link>
-                        </>
+                        <Fragment>
+                            <Link className="nav-link" to="/auth">Sign In</Link>
+                        </Fragment>
                     )}
                 </div>
             </div>
-        </>
+        </Fragment>
     );
 };
 
