@@ -1,4 +1,4 @@
-package com.aptech.apiv1.model.admin;
+package com.aptech.apiv1.model.user;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,5 +27,5 @@ public class Role implements Serializable {
     private List<User> users = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
-    private AdminRole role;
+    private UserRole role;
 }

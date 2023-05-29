@@ -3,7 +3,7 @@ package com.aptech.apiv1.dto;
 import com.aptech.apiv1.enums.Gender;
 import com.aptech.apiv1.model.Flight;
 import com.aptech.apiv1.model.Infant;
-import com.aptech.apiv1.model.admin.User;
+import com.aptech.apiv1.model.user.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

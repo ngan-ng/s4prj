@@ -1,0 +1,427 @@
+Index: src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aptech.apiv1.config;\r\n\r\nimport com.aptech.apiv1.dto.LoginRequest;\r\nimport com.aptech.apiv1.utils.JwtUtils;\r\nimport com.fasterxml.jackson.databind.ObjectMapper;\r\nimport jakarta.servlet.FilterChain;\r\nimport jakarta.servlet.http.HttpServletRequest;\r\nimport jakarta.servlet.http.HttpServletResponse;\r\nimport org.springframework.security.authentication.AuthenticationManager;\r\nimport org.springframework.security.authentication.UsernamePasswordAuthenticationToken;\r\nimport org.springframework.security.core.Authentication;\r\nimport org.springframework.security.core.AuthenticationException;\r\nimport org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;\r\nimport org.springframework.security.web.util.matcher.AntPathRequestMatcher;\r\n\r\nimport java.io.IOException;\r\nimport java.util.ArrayList;\r\n\r\npublic class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {\r\n\r\n    private final AuthenticationManager authenticationManager;\r\n\r\n    private JwtUtils jwtUtils;\r\n\r\n    public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtils jwtUtils) {\r\n        this.authenticationManager = authenticationManager;\r\n        this.jwtUtils = jwtUtils;\r\n        this.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher(\"/api-v1/admin/login\", \"POST\"));\r\n    }\r\n\r\n    @Override\r\n    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {\r\n        try {\r\n\r\n            LoginRequest user = new ObjectMapper().readValue(req.getInputStream(), LoginRequest.class);\r\n            return authenticationManager.authenticate((new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>())));\r\n\r\n        } catch (Exception e) {\r\n            throw new RuntimeException(e.getMessage());\r\n        }\r\n\r\n    }\r\n\r\n    @Override\r\n    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication auth) throws IOException {\r\n\r\n        if (auth.getPrincipal() != null) {\r\n            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) auth.getPrincipal();\r\n            String login = user.getUsername();\r\n            if (login != null && login.length() > 0) {\r\n\r\n                String accessTokenJson = new ObjectMapper().writeValueAsString(jwtUtils.generateToken(auth));\r\n                res.setContentType(\"application/json\");\r\n                res.getWriter().write(accessTokenJson);\r\n\r\n            }\r\n        }\r\n    }\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java b/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java
+--- a/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java	(revision 73fc56e979ac74be976ea50a8423bd15af907887)
++++ b/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java	(date 1684925332744)
+@@ -31,7 +31,6 @@
+     @Override
+     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
+         try {
+-
+             LoginRequest user = new ObjectMapper().readValue(req.getInputStream(), LoginRequest.class);
+             return authenticationManager.authenticate((new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>())));
+ 
+Index: src-code/ui/src/store/admin/admin.action.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src-code/ui/src/store/admin/admin.action.js b/src-code/ui/src/store/admin/admin.action.js
+new file mode 100644
+--- /dev/null	(date 1684987139052)
++++ b/src-code/ui/src/store/admin/admin.action.js	(date 1684987139052)
+@@ -0,0 +1,40 @@
++import { ADMIN_ACTION_TYPES } from "./admin.types";
++import { createAction } from "../../utils/reducer.utils";
++
++// admin can be null or auth object
++export const setCurrentAdmin = (admin) =>
++    createAction(ADMIN_ACTION_TYPES.SET_CURRENT_ADMIN, admin);
++
++export const checkAdminSession = () =>
++    createAction(ADMIN_ACTION_TYPES.CHECK_ADMIN_SESSION);
++
++
++export const emailSignInStart = (username, password) =>
++    createAction(ADMIN_ACTION_TYPES.EMAIL_SIGN_IN_START, { username, password });
++
++export const signInSuccess = (admin) =>
++    createAction(ADMIN_ACTION_TYPES.SIGN_IN_SUCCESS, admin);
++
++export const signInFailed = (error) =>
++    createAction(ADMIN_ACTION_TYPES.SIGN_IN_FAILED, error);
++
++export const signUpStart = (username, password) =>
++    createAction(ADMIN_ACTION_TYPES.SIGN_UP_START, {
++        username,
++        password,
++    });
++
++export const signUpSuccess = (admin, additionalDetails) =>
++    createAction(ADMIN_ACTION_TYPES.SIGN_UP_SUCCESS, { admin, additionalDetails });
++
++export const signUpFailed = (error) =>
++    createAction(ADMIN_ACTION_TYPES.SIGN_UP_FAILED, error);
++
++export const signOutStart = () =>
++    createAction(ADMIN_ACTION_TYPES.SIGN_OUT_START);
++
++export const signOutSuccess = () =>
++    createAction(ADMIN_ACTION_TYPES.SIGN_OUT_SUCCESS);
++
++export const signOutFailed = (error) =>
++    createAction(ADMIN_ACTION_TYPES.SIGN_OUT_FAILED, error);
+Index: src-code/ui/src/store/admin/admin.selector.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src-code/ui/src/store/admin/admin.selector.js b/src-code/ui/src/store/admin/admin.selector.js
+new file mode 100644
+--- /dev/null	(date 1684987138978)
++++ b/src-code/ui/src/store/admin/admin.selector.js	(date 1684987138978)
+@@ -0,0 +1,1 @@
++export const selectCurrentAdmin = (state) => state.admin.currentAdmin;
+Index: src-code/ui/src/store/admin/admin.saga.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src-code/ui/src/store/admin/admin.saga.js b/src-code/ui/src/store/admin/admin.saga.js
+new file mode 100644
+--- /dev/null	(date 1685071550586)
++++ b/src-code/ui/src/store/admin/admin.saga.js	(date 1685071550586)
+@@ -0,0 +1,64 @@
++import { takeLatest, put, all, call } from "redux-saga/effects";
++import client from '../../api/client'
++import {ADMIN_ACTION_TYPES} from "./admin.types";
++import {signInFailed, signInSuccess, signOutFailed, signOutSuccess, signUpFailed, signUpSuccess} from "./admin.action";
++
++const callAPILogin = async (payload) => {
++    console.log(payload);
++    try {
++        console.log("api call")
++        const res = await client({
++            method: "POST",
++            url: "/api-v1/admin/login",
++            data: payload
++        });
++        console.log(res);
++        return res;
++    } catch (error) {
++        throw new Error(error.message);
++    }
++};
++
++// receive the whole action, the action have the payload, on the payload is email and password
++export function* signInWithEmail({ payload: { username, password } }) {
++    console.log("hey");
++    try {
++        const res = yield call(callAPILogin, { username, password });
++        console.log("res: ", res);
++
++        localStorage.setItem("token", res.data.token);
++        localStorage.setItem("refreshToken", res.data.refreshToken);
++        yield put(signInSuccess(res.data));
++    } catch (error) {
++        yield put(signInFailed(error));
++    }
++}
++
++// export function* signOut() {
++//     try {
++//         yield put(signOutSuccess());
++//     } catch (error) {
++//         yield put(signOutFailed(error));
++//     }
++// }
++
++
++export function* onEmailSignInStart() {
++    yield takeLatest(ADMIN_ACTION_TYPES.EMAIL_SIGN_IN_START, signInWithEmail);
++}
++
++// export function* onSignOutStart() {
++//     yield takeLatest(ADMIN_ACTION_TYPES.SIGN_OUT_START, signOut);
++// }
++
++export function* adminSagas() {
++    yield all([
++        //call(onCheckAdminSession),
++        //call(onEmailSignInStart),
++        //call(onSignUpStart),
++        //call(onSignUpSuccess),
++        //call(onSignOutStart),
++    ]);
++}
++
++
+Index: src-code/ui/src/store/admin/admin.reducer.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src-code/ui/src/store/admin/admin.reducer.js b/src-code/ui/src/store/admin/admin.reducer.js
+new file mode 100644
+--- /dev/null	(date 1685071550610)
++++ b/src-code/ui/src/store/admin/admin.reducer.js	(date 1685071550610)
+@@ -0,0 +1,38 @@
++import {ADMIN_ACTION_TYPES} from "./admin.types";
++
++const ADMIN_INITIAL_STATE = {
++    currentAdmin: {
++        token: "",
++        requestToken: "",
++        userName: "",
++        roles: [],
++    },
++    isLoading: false,
++    error: null,
++};
++
++export const adminReducer = (state = ADMIN_INITIAL_STATE, action) => {
++    const { type, payload } = action;
++
++    switch (type) {
++        case ADMIN_ACTION_TYPES.SIGN_IN_SUCCESS:
++            return {
++                ...state,
++                currentAdmin: payload,
++            };
++        case ADMIN_ACTION_TYPES.SIGN_OUT_SUCCESS:
++            return {
++                ...state,
++                currentMember: null,
++            };
++        case ADMIN_ACTION_TYPES.SIGN_OUT_FAILED:
++        case ADMIN_ACTION_TYPES.SIGN_IN_FAILED:
++        case ADMIN_ACTION_TYPES.SIGN_UP_FAILED:
++            return {
++                ...state,
++                error: payload,
++            };
++        default:
++            return state;
++    }
++};
+Index: src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.aptech.apiv1;\r\n\r\nimport com.aptech.apiv1.enums.ACType;\r\nimport com.aptech.apiv1.enums.FlightStatus;\r\nimport com.aptech.apiv1.enums.IataCode;\r\nimport com.aptech.apiv1.enums.PromotionType;\r\nimport com.aptech.apiv1.model.*;\r\nimport com.aptech.apiv1.model.admin.AdminRole;\r\nimport com.aptech.apiv1.model.admin.Role;\r\nimport com.aptech.apiv1.repository.*;\r\nimport com.aptech.apiv1.utils.others.CreateSeatsOnFlight;\r\nimport io.swagger.v3.oas.annotations.OpenAPIDefinition;\r\nimport io.swagger.v3.oas.annotations.info.Info;\r\nimport io.swagger.v3.oas.annotations.security.SecurityRequirement;\r\nimport org.springframework.boot.SpringApplication;\r\nimport org.springframework.boot.autoconfigure.SpringBootApplication;\r\nimport org.springframework.context.ConfigurableApplicationContext;\r\nimport org.springframework.context.annotation.Bean;\r\n\r\nimport java.time.LocalDate;\r\nimport java.time.LocalDateTime;\r\nimport java.time.LocalTime;\r\nimport java.util.*;\r\n\r\nimport static com.aptech.apiv1.utils.business.IataCodeUtils.*;\r\n\r\n@SpringBootApplication\r\n@OpenAPIDefinition(info = @Info(title = \"springdoc-openapi\", version = \"1.0.0\"), security = {\r\n        @SecurityRequirement(name = \"bearer-key\")})\r\npublic class ApiV1Application {\r\n\r\n    public static void main(String[] args) {\r\n        var context = SpringApplication.run(ApiV1Application.class, args);\r\n        initialize(context);\r\n        addPromotions(context);\r\n    }\r\n    static void addPromotions(ConfigurableApplicationContext context){\r\n        PromotionPolicyRepository policyRepository = context.getBean((PromotionPolicyRepository.class));\r\n        int year = 2023, month = 5, day = 18;\r\n        PromotionsPolicy promotionsPolicy = new PromotionsPolicy()\r\n                .setPromotionCode(\"PT1399\")\r\n                .setDescription(\"Promotion by points of member!\")\r\n                .setDateStart(LocalDateTime.of(year,month,day,0,0,0))\r\n                .setDateEnd(LocalDateTime.of( LocalDate.of(year, month+1,day), LocalTime.now()))\r\n                .setPromotionType(PromotionType.POINTS.toString())\r\n                .setApplyRate(0.05)\r\n                .setCreatedBy(1);\r\n        policyRepository.save(promotionsPolicy);\r\n    }\r\n\r\n    static void initialize(ConfigurableApplicationContext context) {\r\n        AirportRepository airportRepository = context.getBean(AirportRepository.class);\r\n        FlightRepository flightRepository = context.getBean(FlightRepository.class);\r\n        SeatRepository seatRepository = context.getBean(SeatRepository.class);\r\n        AircraftRepository acRepository = context.getBean(AircraftRepository.class);\r\n        Aircraft ac1 = new Aircraft().setType(ACType.A320.toString())\r\n                .setReg(\"VNA-688\").setConfig(\"Y180\");\r\n        Aircraft ac2 = new Aircraft().setType(ACType.A320.toString())\r\n                .setReg(\"VNA-689\").setConfig(\"Y180\");\r\n        acRepository.save(ac1);\r\n        acRepository.save(ac2);\r\n        Airport origin = new Airport()\r\n                .setIata_code(IataCode.SGN.toString())\r\n                .setName(getAirport(IataCode.SGN))\r\n                .setLocation(getLocation(IataCode.SGN));\r\n        Airport destination = new Airport()\r\n                .setIata_code(IataCode.HAN.toString())\r\n                .setName(getAirport(IataCode.HAN))\r\n                .setLocation(getLocation(IataCode.HAN));\r\n        airportRepository.save(origin);\r\n        airportRepository.save(destination);\r\n        List<Seat> seatList = new ArrayList<>();\r\n\r\n        // To HA NOI\r\n        // First flight to HAN is at 05:10 AM\r\n        LocalDateTime std = LocalDateTime.of(2023, 7, new Date().getDate(), 5, 10, 0);\r\n        int durationSgnHan = 130;\r\n        int durationTurnAround = 60;\r\n        for (int i = 120; i <= 125; i++) {\r\n            int stdHr = std.getHour();\r\n            boolean goldenTime = (stdHr > 5 && stdHr < 9) || (stdHr > 16 && stdHr < 20);\r\n            double basePrice = 128;\r\n            Flight flight = new Flight().setFlightNumber(i)\r\n                    .setSTD(std)\r\n                    .setDuration(durationSgnHan)\r\n                    .setOrigin(i % 2 == 0 ? origin : destination)\r\n                    .setDestination(i % 2 == 0 ? destination : origin)\r\n                    .setFlightStatus(FlightStatus.ONTIME.toString())\r\n                    .setAircraft(ac1)\r\n                    .setBasePrice(goldenTime?basePrice+15:basePrice);\r\n            flight = flightRepository.save(flight);\r\n            List<Seat> seatmap = CreateSeatsOnFlight.createSeatsA320(flight);\r\n            seatList.addAll(seatmap);\r\n            std = std.plusMinutes(durationSgnHan + durationTurnAround); // 130 min duration + 60 min turn-around\r\n        }\r\n        // To DA NANG\r\n        // First flight to DAD is at 06:20 AM\r\n        std = LocalDateTime.of(2023, 7, new Date().getDate(), 6, 20, 0);\r\n        destination.setIata_code(IataCode.DAD.toString())\r\n                .setName(getAirport(IataCode.DAD))\r\n                .setLocation(getLocation(IataCode.DAD));\r\n        airportRepository.save(destination);\r\n        int durationSgnDad = 80;\r\n        for (int i = 620; i <= 625; i++) {\r\n            int stdHr = std.getHour();\r\n            boolean goldenTime = (stdHr > 5 && stdHr < 9) || (stdHr > 16 && stdHr < 20);\r\n            double basePrice = 68;\r\n            Flight flight = new Flight().setFlightNumber(i)\r\n                    .setSTD(std)\r\n                    .setDuration(durationSgnDad)\r\n                    .setOrigin(i % 2 == 0 ? origin : destination)\r\n                    .setDestination(i % 2 == 0 ? destination : origin)\r\n                    .setFlightStatus(FlightStatus.ONTIME.toString())\r\n                    .setAircraft(ac2)\r\n                    .setBasePrice(goldenTime?basePrice+15:basePrice);\r\n\r\n\r\n            flight = flightRepository.save(flight);\r\n            List<Seat> seatmap = CreateSeatsOnFlight.createSeatsA320(flight);\r\n            seatList.addAll(seatmap);\r\n            std = std.plusMinutes(durationSgnDad + durationTurnAround); // 130 min duration + 60 min turn-around\r\n        }\r\n        seatRepository.saveAll(seatList);\r\n\r\n        // Role\r\n        RoleRepository roleRepository = context.getBean(RoleRepository.class);\r\n        Role adminRole = roleRepository.findByRole(AdminRole.ADMIN);\r\n        if (adminRole == null) {\r\n            adminRole = new Role();\r\n            adminRole.setRole(AdminRole.ADMIN);\r\n            roleRepository.save(adminRole);\r\n        }\r\n    } // .end of initialize();\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java b/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java
+--- a/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java	(revision 73fc56e979ac74be976ea50a8423bd15af907887)
++++ b/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java	(date 1684858979692)
+@@ -31,8 +31,8 @@
+ 
+     public static void main(String[] args) {
+         var context = SpringApplication.run(ApiV1Application.class, args);
+-        initialize(context);
+-        addPromotions(context);
++        //initialize(context);
++        //addPromotions(context);
+     }
+     static void addPromotions(ConfigurableApplicationContext context){
+         PromotionPolicyRepository policyRepository = context.getBean((PromotionPolicyRepository.class));
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"99220fa4-1b4d-411b-b035-a96bcf77680a\" name=\"Changes\" comment=\"\">\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/page/component/About.jsx\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/page/component/Admin.jsx\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/page/component/MyAccount.jsx\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/page/component/footer/footer.component.jsx\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/page/component/navigation/navigation.component.jsx\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/page/component/navigation/navigation.styles.css\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.component.jsx\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.styles.css\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.component.jsx\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.styles.css\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/admin/admin.action.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/admin/admin.reducer.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/admin/admin.saga.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/admin/admin.selector.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/admin/admin.types.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/member/member.action.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/member/member.reducer.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/member/member.saga.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/member/member.selector.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/member/member.types.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/utils/firebase/firebase.utils.js\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/src-code/ui/src/utils/reducer.utils.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/ui/package.json\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/ui/package.json\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/ui/src/App.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/ui/src/App.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/ui/src/api/client.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/ui/src/api/client.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/ui/src/index.css\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/ui/src/index.css\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/ui/src/index.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/ui/src/index.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/ui/src/store/root-reducer.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/root-reducer.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/ui/src/store/root-saga.js\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/ui/src/store/root-saga.js\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src-code/ui/yarn.lock\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src-code/ui/yarn.lock\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"CSS File\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"useMavenConfig\" value=\"true\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2PxTHRro9iTqocqtWgpxdQLB0XD\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,\r\n    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,\r\n    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,\r\n    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,\r\n    &quot;git-widget-placeholder&quot;: &quot;NganBranch&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;E:/Code/sem-4/Project/src/s4prj/src-code/ui/src/page/component&quot;,\r\n    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,\r\n    &quot;spring.configuration.checksum&quot;: &quot;0283fd2aec49fb0567bce964c2e58809&quot;,\r\n    &quot;ts.external.directory.path&quot;: &quot;C:\\\\Users\\\\DELL\\\\AppData\\\\Local\\\\JetBrains\\\\Toolbox\\\\apps\\\\IDEA-U\\\\ch-0\\\\231.8770.65\\\\plugins\\\\javascript-impl\\\\jsLanguageServicesImpl\\\\external&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"E:\\Code\\sem-4\\Project\\src\\s4prj\\src-code\\ui\\src\\page\\component\" />\r\n      <recent name=\"E:\\Code\\sem-4\\Project\\src\\s4prj\\src-code\\ui\\src\\page\\component\\sign-in\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"E:\\Code\\sem-4\\Project\\src\\s4prj\\src-code\\ui\\src\\page\\component\\admin\" />\r\n      <recent name=\"E:\\Code\\sem-4\\Project\\src\\s4prj\\src-code\\ui\\src\\page\\component\" />\r\n      <recent name=\"E:\\Code\\sem-4\\Project\\src\\s4prj\\src-code\\ui\\src\\page\\component\\footer\" />\r\n      <recent name=\"E:\\Code\\sem-4\\Project\\src\\s4prj\\src-code\\ui\\src\\page\\component\\navigation\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration default=\"true\" type=\"ArquillianTestNG\" factoryName=\"\" nameIsGenerated=\"true\">\r\n      <option name=\"TEST_OBJECT\" value=\"CLASS\" />\r\n      <properties />\r\n      <listeners />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ApiV1Application\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"api-v1\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.aptech.apiv1.ApiV1Application\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"99220fa4-1b4d-411b-b035-a96bcf77680a\" name=\"Changes\" comment=\"\" />\r\n      <created>1684397646096</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1684397646096</updated>\r\n      <workItem from=\"1684397647045\" duration=\"6000\" />\r\n      <workItem from=\"1684595905044\" duration=\"16000\" />\r\n      <workItem from=\"1684745283347\" duration=\"3128000\" />\r\n      <workItem from=\"1684807608965\" duration=\"23980000\" />\r\n      <workItem from=\"1684895478821\" duration=\"18024000\" />\r\n      <workItem from=\"1684925174747\" duration=\"1831000\" />\r\n      <workItem from=\"1684985690012\" duration=\"26457000\" />\r\n      <workItem from=\"1685067382726\" duration=\"5584000\" />\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"NganBranch\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java</url>\r\n          <line>32</line>\r\n          <option name=\"timeStamp\" value=\"23\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\r\n          <url>file://$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java</url>\r\n          <line>21</line>\r\n          <option name=\"timeStamp\" value=\"24\" />\r\n        </line-breakpoint>\r\n        <line-breakpoint enabled=\"true\" type=\"java-method\">\r\n          <url>file://$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/AdminController.java</url>\r\n          <line>42</line>\r\n          <properties class=\"com.aptech.apiv1.controller.AdminController\" method=\"refreshtoken\">\r\n            <option name=\"EMULATED\" value=\"true\" />\r\n            <option name=\"WATCH_EXIT\" value=\"false\" />\r\n          </properties>\r\n          <option name=\"timeStamp\" value=\"16\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n    <pin-to-top-manager>\r\n      <pinned-members>\r\n        <PinnedItemInfo parentTag=\"org.apache.catalina.connector.RequestFacade\" memberName=\"request\" />\r\n      </pinned-members>\r\n    </pin-to-top-manager>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 73fc56e979ac74be976ea50a8423bd15af907887)
++++ b/.idea/workspace.xml	(date 1685087058959)
+@@ -4,42 +4,18 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="">
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/About.jsx" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/Admin.jsx" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/MyAccount.jsx" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/footer/footer.component.jsx" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/navigation/navigation.component.jsx" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/navigation/navigation.styles.css" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.component.jsx" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.styles.css" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.component.jsx" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.styles.css" afterDir="false" />
++    <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="added firebase for sign-in, sign-up member">
+       <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/admin/admin.action.js" afterDir="false" />
+       <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/admin/admin.reducer.js" afterDir="false" />
+       <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/admin/admin.saga.js" afterDir="false" />
+       <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/admin/admin.selector.js" afterDir="false" />
+       <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/admin/admin.types.js" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/member/member.action.js" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/member/member.reducer.js" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/member/member.saga.js" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/member/member.selector.js" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/store/member/member.types.js" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/utils/firebase/firebase.utils.js" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/utils/reducer.utils.js" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src-code/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/package.json" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/App.js" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src-code/ui/src/api/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/api/client.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/index.css" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/index.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/root-reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/store/root-reducer.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/root-saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/store/root-saga.js" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src-code/ui/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/yarn.lock" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.component.jsx" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -143,8 +119,16 @@
+       <workItem from="1684895478821" duration="18024000" />
+       <workItem from="1684925174747" duration="1831000" />
+       <workItem from="1684985690012" duration="26457000" />
+-      <workItem from="1685067382726" duration="5584000" />
++      <workItem from="1685067382726" duration="11262000" />
++    </task>
++    <task id="LOCAL-00001" summary="added firebase for sign-in, sign-up member">
++      <created>1685073169102</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1685073169102</updated>
+     </task>
++    <option name="localTasksCounter" value="2" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -173,30 +157,11 @@
+       </map>
+     </option>
+   </component>
++  <component name="VcsManagerConfiguration">
++    <MESSAGE value="added firebase for sign-in, sign-up member" />
++    <option name="LAST_COMMIT_MESSAGE" value="added firebase for sign-in, sign-up member" />
++  </component>
+   <component name="XDebuggerManager">
+-    <breakpoint-manager>
+-      <breakpoints>
+-        <line-breakpoint enabled="true" type="java-line">
+-          <url>file://$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java</url>
+-          <line>32</line>
+-          <option name="timeStamp" value="23" />
+-        </line-breakpoint>
+-        <line-breakpoint enabled="true" type="java-line">
+-          <url>file://$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java</url>
+-          <line>21</line>
+-          <option name="timeStamp" value="24" />
+-        </line-breakpoint>
+-        <line-breakpoint enabled="true" type="java-method">
+-          <url>file://$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/AdminController.java</url>
+-          <line>42</line>
+-          <properties class="com.aptech.apiv1.controller.AdminController" method="refreshtoken">
+-            <option name="EMULATED" value="true" />
+-            <option name="WATCH_EXIT" value="false" />
+-          </properties>
+-          <option name="timeStamp" value="16" />
+-        </line-breakpoint>
+-      </breakpoints>
+-    </breakpoint-manager>
+     <pin-to-top-manager>
+       <pinned-members>
+         <PinnedItemInfo parentTag="org.apache.catalina.connector.RequestFacade" memberName="request" />
+Index: src-code/ui/src/store/admin/admin.types.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src-code/ui/src/store/admin/admin.types.js b/src-code/ui/src/store/admin/admin.types.js
+new file mode 100644
+--- /dev/null	(date 1684987139045)
++++ b/src-code/ui/src/store/admin/admin.types.js	(date 1684987139045)
+@@ -0,0 +1,13 @@
++export const ADMIN_ACTION_TYPES = {
++    SET_CURRENT_ADMIN: "admin/SET_CURRENT_ADMIN",
++    CHECK_ADMIN_SESSION: "admin/CHECK_ADMIN_SESSION",
++    EMAIL_SIGN_IN_START: "admin/EMAIL_SIGN_IN_START",
++    SIGN_IN_SUCCESS: "admin/SIGN_IN_SUCCESS",
++    SIGN_IN_FAILED: "admin/SIGN_IN_FAILED",
++    SIGN_UP_START: "admin/SIGN_UP_START",
++    SIGN_UP_SUCCESS: "admin/SIGN_UP_SUCCESS",
++    SIGN_UP_FAILED: "admin/SIGN_UP_FAILED",
++    SIGN_OUT_START: "admin/SIGN_OUT_START",
++    SIGN_OUT_SUCCESS: "admin/SIGN_OUT_SUCCESS",
++    SIGN_OUT_FAILED: "admin/SIGN_OUT_FAILED",
++};
+Index: src-code/ui/src/page/component/sign-up/sign-up.component.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, {useState} from \"react\";\r\nimport {\r\n    Button,\r\n    Grid,\r\n    TextField,\r\n    Typography\r\n} from \"@mui/material\";\r\n\r\nimport \"./sign-up.styles.css\";\r\nimport {useDispatch} from \"react-redux\";\r\nimport {signUpStart} from \"../../../store/member/member.action\";\r\nimport { useNavigate } from \"react-router-dom\";\r\n\r\n\r\nconst defaultFormFields = {\r\n    email: \"\",\r\n    password: \"\",\r\n    confirmPassword: \"\",\r\n    displayName: \"\",\r\n    firstName: \"\",\r\n    lastName: \"\",\r\n    mobile: \"\",\r\n}\r\n\r\nconst SignUp = () => {\r\n    const navigate = useNavigate();\r\n    const [formFields, setFormFields] = useState(defaultFormFields);\r\n    const { firstName, lastName,displayName, mobile, email, password, confirmPassword } = formFields;\r\n    const dispatch = useDispatch();\r\n\r\n    const resetFormFields = () => {\r\n        setFormFields(defaultFormFields);\r\n    };\r\n\r\n    const handleSubmit = async (event) => {\r\n        event.preventDefault();\r\n\r\n        if (password !== confirmPassword) {\r\n            alert(\"Password and Confirm Password not match!\");\r\n            return;\r\n        }\r\n\r\n        try {\r\n            dispatch(signUpStart(email, password, firstName,displayName, lastName, mobile));\r\n            resetFormFields();\r\n            navigate(\"/sign-in\");\r\n\r\n        } catch (error) {\r\n            if (error.code === \"auth/email-already-in-use\") {\r\n                alert(\"This email already in use\");\r\n            } else {\r\n                console.log(\"Cannot create member\", error);\r\n            }\r\n        }\r\n    };\r\n\r\n    const handleChange = (event) => {\r\n        const { name, value } = event.target;\r\n\r\n        // spread in object and modify one by one value of object\r\n        setFormFields({ ...formFields, [name]: value });\r\n    };\r\n\r\n    return (\r\n        <div className=\"container\">\r\n            <div className=\"card\">\r\n                <Grid container spacing={3}>\r\n                    <Grid item md={12} xs={12}>\r\n                        <Typography align=\"center\" variant=\"h4\">Sign Up</Typography>\r\n                    </Grid>\r\n                    <Grid item md={12} xs={12}>\r\n                        <TextField\r\n                            name=\"email\"\r\n                            fullWidth\r\n                            size=\"small\"\r\n                            label=\"Email\"\r\n                            onChange={handleChange}\r\n                        />\r\n                    </Grid>\r\n                    <Grid item md={12} xs={12}>\r\n                        <TextField\r\n                            name=\"password\"\r\n                            type=\"password\"\r\n                            fullWidth\r\n                            size=\"small\"\r\n                            label=\"Password\"\r\n                            onChange={handleChange}\r\n                        />\r\n                    </Grid>\r\n                    <Grid item md={12} xs={12}>\r\n                        <TextField\r\n                            name=\"confirmPassword\"\r\n                            type=\"password\"\r\n                            fullWidth\r\n                            size=\"small\"\r\n                            label=\"Confirm Password\"\r\n                            onChange={handleChange}\r\n                        />\r\n                    </Grid>\r\n                    <Grid item md={12} xs={12}>\r\n                        <TextField\r\n                            name=\"displayName\"\r\n                            fullWidth\r\n                            size=\"small\"\r\n                            label=\"Display Name\"\r\n                            onChange={handleChange}\r\n                        />\r\n                    </Grid>\r\n                    <Grid item md={12} xs={12}>\r\n                        <TextField\r\n                            name=\"firstName\"\r\n                            fullWidth\r\n                            size=\"small\"\r\n                            label=\"First Name\"\r\n                            onChange={handleChange}\r\n                        />\r\n                    </Grid>\r\n                    <Grid item md={12} xs={12}>\r\n                        <TextField\r\n                            name=\"lastName\"\r\n                            fullWidth\r\n                            size=\"small\"\r\n                            label=\"Last Name\"\r\n                            onChange={handleChange}\r\n                        />\r\n                    </Grid>\r\n                    <Grid item md={12} xs={12}>\r\n                        <TextField\r\n                            name=\"mobile\"\r\n                            type=\"number\"\r\n                            fullWidth\r\n                            size=\"small\"\r\n                            label=\"Mobile\"\r\n                            onChange={handleChange}\r\n                        />\r\n                    </Grid>\r\n                    <Grid item md={12} xs={12}>\r\n                        <Button\r\n                            variant=\"contained\"\r\n                            onClick={handleSubmit}\r\n                        >\r\n                            Sign Up\r\n                        </Button>\r\n                    </Grid>\r\n                </Grid>\r\n            </div>\r\n        </div>\r\n    );\r\n};\r\n\r\nexport default SignUp;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src-code/ui/src/page/component/sign-up/sign-up.component.jsx b/src-code/ui/src/page/component/sign-up/sign-up.component.jsx
+--- a/src-code/ui/src/page/component/sign-up/sign-up.component.jsx	(revision 73fc56e979ac74be976ea50a8423bd15af907887)
++++ b/src-code/ui/src/page/component/sign-up/sign-up.component.jsx	(date 1685074313249)
+@@ -16,16 +16,16 @@
+     email: "",
+     password: "",
+     confirmPassword: "",
+-    displayName: "",
+     firstName: "",
+     lastName: "",
++    displayName: "",
+     mobile: "",
+ }
+ 
+ const SignUp = () => {
+     const navigate = useNavigate();
+     const [formFields, setFormFields] = useState(defaultFormFields);
+-    const { firstName, lastName,displayName, mobile, email, password, confirmPassword } = formFields;
++    const { firstName, lastName, displayName, mobile, email, password, confirmPassword } = formFields;
+     const dispatch = useDispatch();
+ 
+     const resetFormFields = () => {
+@@ -41,7 +41,7 @@
+         }
+ 
+         try {
+-            dispatch(signUpStart(email, password, firstName,displayName, lastName, mobile));
++            dispatch(signUpStart(email, password, firstName, lastName, displayName, mobile));
+             resetFormFields();
+             navigate("/sign-in");
+ 
+Index: src-code/api-v1/src/main/resources/application-dev.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nspring:\r\n  datasource:\r\n    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver\r\n    username: sa\r\n    url: jdbc:sqlserver://localhost:1433;databaseName=s4prjDB;encrypt=true;trustServerCertificate=true;\r\n    password: '123456'\r\n  jpa:\r\n    properties:\r\n      hibernate:\r\n        dialect: org.hibernate.dialect.SQLServerDialect\r\n        jdbc:\r\n          lob:\r\n            non_contextual_creation: 'true'\r\n        format_sql: 'true'\r\n    hibernate:\r\n      ddl-auto: create\r\n    show-sql: 'true'\r\n  jackson:\r\n    serialization:\r\n      FAIL_ON_EMPTY_BEANS: false\r\n\r\nsecurity:\r\n  cors:\r\n    origin: http://localhost:3000\r\n\r\nspringdoc:\r\n  show-login-endpoint: true\r\n\r\npaypal:\r\n  client-id: \"AZtv8J9ajlDoiZflPaFVEwy_ComBYd78xBkYib65BrXSb6PoA4_w6q5MgPSuvmYF_9KyIPibTGYnRP8t\"\r\n  secret-key: \"EKQMOr-drhyOL8gQq_a77qsT-bEWoSPfRF-DoQAcE-AyV8DDGfln-5XcyiQDqb33waMgmHBWit29hsHk\"\r\n  mode: \"sandbox\"\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src-code/api-v1/src/main/resources/application-dev.yml b/src-code/api-v1/src/main/resources/application-dev.yml
+--- a/src-code/api-v1/src/main/resources/application-dev.yml	(revision 73fc56e979ac74be976ea50a8423bd15af907887)
++++ b/src-code/api-v1/src/main/resources/application-dev.yml	(date 1684853723775)
+@@ -14,7 +14,7 @@
+             non_contextual_creation: 'true'
+         format_sql: 'true'
+     hibernate:
+-      ddl-auto: create
++      ddl-auto: update
+     show-sql: 'true'
+   jackson:
+     serialization:
+Index: src-code/ui/src/api/client.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import axios from 'axios'\r\n\r\nconst instance = axios.create({\r\n    baseURL: \"http://localhost:8080\",\r\n});\r\n\r\nexport default instance;
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src-code/ui/src/api/client.js b/src-code/ui/src/api/client.js
+--- a/src-code/ui/src/api/client.js	(revision 73fc56e979ac74be976ea50a8423bd15af907887)
++++ b/src-code/ui/src/api/client.js	(date 1685068339334)
+@@ -4,4 +4,4 @@
+     baseURL: "http://localhost:8080",
+ });
+ 
+-export default instance;
+\ No newline at end of file
++export default instance;

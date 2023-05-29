@@ -1,14 +1,14 @@
 package com.aptech.apiv1.service.impl;
 
-import com.aptech.apiv1.dto.AdminDto;
+import com.aptech.apiv1.dto.UserDto;
 import com.aptech.apiv1.dto.LoginRequest;
 import com.aptech.apiv1.dto.RoleDto;
-import com.aptech.apiv1.model.admin.User;
-import com.aptech.apiv1.model.admin.AdminRole;
-import com.aptech.apiv1.model.admin.Role;
-import com.aptech.apiv1.repository.AdminRepository;
+import com.aptech.apiv1.model.user.User;
+import com.aptech.apiv1.model.user.UserRole;
+import com.aptech.apiv1.model.user.Role;
+import com.aptech.apiv1.repository.UserRepository;
 import com.aptech.apiv1.repository.RoleRepository;
-import com.aptech.apiv1.service.AdminService;
+import com.aptech.apiv1.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,10 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AdminServiceImpl implements AdminService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    AdminRepository adminRepository;
+    UserRepository userRepository;
 
     @Autowired
     RoleRepository roleRepository;
@@ -34,40 +34,40 @@ public class AdminServiceImpl implements AdminService {
     private ModelMapper modelMapper;
 
     @Override
-    public AdminDto signup(AdminDto adminDto) throws Exception {
-        Optional<User> admin = adminRepository.findByEmail(adminDto.getEmail());
+    public UserDto signup(UserDto userDto) throws Exception {
+        Optional<User> admin = userRepository.findByEmail(userDto.getEmail());
         if (admin.isEmpty()) {
 
             List<Role> roles = new ArrayList<>();
-            AdminRole adminRole = AdminRole.valueOf(adminDto.getRoles().get(0).getRole());
-            Role role = roleRepository.findByRole(adminRole);
+            UserRole userRole = UserRole.valueOf(userDto.getRoles().get(0).getRole());
+            Role role = roleRepository.findByRole(userRole);
             roles.add(role);
             User newUser = new User()
-                    .setEmail(adminDto.getEmail())
-                    .setPassword(passwordEncoder.encode(adminDto.getPassword()))
+                    .setEmail(userDto.getEmail())
+                    .setPassword(passwordEncoder.encode(userDto.getPassword()))
                     .setRoles(roles);
 
-            adminRepository.save(newUser);
-            adminDto.setPassword("");
+            userRepository.save(newUser);
+            userDto.setPassword("");
         }else{
             throw new Exception("Account existed!");
         }
-        return adminDto;
+        return userDto;
     }
 
     @Override
-    public AdminDto findAdminByEmail(String email) {
-        Optional<User> admin = Optional.ofNullable(adminRepository.findByEmail(email).get());
+    public UserDto findUserByEmail(String email) {
+        Optional<User> admin = Optional.ofNullable(userRepository.findByEmail(email).get());
         if (admin.isPresent()) {
-            return modelMapper.map((admin.get()), AdminDto.class);
+            return modelMapper.map((admin.get()), UserDto.class);
         }
         return null;
     }
 
     @Override
-    public AdminDto login(LoginRequest loginRequest) {
-        User user = adminRepository.findByEmail(loginRequest.getUsername()).get();
-        AdminDto adminDto = new AdminDto();
+    public UserDto login(LoginRequest loginRequest) {
+        User user = userRepository.findByEmail(loginRequest.getUsername()).get();
+        UserDto userDto = new UserDto();
         if(user != null){
             Boolean checkPass = passwordEncoder.matches(loginRequest.getPassword(), user.getPassword());
             if(checkPass) {
@@ -76,17 +76,17 @@ public class AdminServiceImpl implements AdminService {
                     RoleDto roleDto = new RoleDto().setRole(role.getRole().toString());
                     roles.add(roleDto);
                 });
-                adminDto.setEmail(user.getEmail())
+                userDto.setEmail(user.getEmail())
                         .setRoles(roles);
 
-                return adminDto;
+                return userDto;
             }
         }
-        return adminDto;
+        return userDto;
     }
 
     @Override
-    public List<User> getAllAdmin() {
-        return (List<User>) adminRepository.findAll();
+    public List<User> getAllUsers() {
+        return (List<User>) userRepository.findAll();
     }
 }

@@ -1,4 +1,4 @@
-package com.aptech.apiv1.model.admin;
+package com.aptech.apiv1.model.user;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -28,8 +28,8 @@ public class User implements Serializable {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "admin_role",
-        joinColumns = { @JoinColumn(name = "admin_id") }, 
+    @JoinTable(name = "user_role",
+        joinColumns = { @JoinColumn(name = "user_id") },
         inverseJoinColumns = { @JoinColumn(name = "role_id") })
     @JsonManagedReference
     private List<Role> roles = new ArrayList<>();

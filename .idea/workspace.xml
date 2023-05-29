@@ -4,11 +4,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/ui/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/yarn.lock" afterDir="false" />
+=======
+    <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="added firebase for sign-in, sign-up member">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomUserDetailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthorizationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthorizationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/AdminDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/BookingPaymentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/BookingPaymentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/RefreshToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/RefreshToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/admin/AdminRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/user/UserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/admin/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/user/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/admin/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/AdminRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/PromotionsPolicyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/PromotionsPolicyServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/RefreshTokenServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/RefreshTokenServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/api/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/api/client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/Admin.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/MyAccount.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/MyAccount.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/footer/footer.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/footer/footer.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/navigation/navigation.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/navigation/navigation.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/member/member.action.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/member/member.reducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/member/member.saga.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/member/member.selector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/member/member.types.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/root-reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/store/root-reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/root-saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/store/root-saga.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/utils/firebase/firebase.utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/utils/firebase/firebase.utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/utils/reducer.utils.js" beforeDir="false" />
+>>>>>>> 900a2526048ff49c48db6ff945e499fcf443ceb5
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,9 +108,14 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "yarn",
+<<<<<<< HEAD
     "show.migrate.to.gradle.popup": "false",
     "spring.configuration.checksum": "0283fd2aec49fb0567bce964c2e58809",
     "ts.external.directory.path": "C:\\Users\\DELL\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\231.8770.65\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+=======
+    "spring.configuration.checksum": "0283fd2aec49fb0567bce964c2e58809",
+    "ts.external.directory.path": "C:\\Users\\DELL\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\231.9011.34\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
+>>>>>>> 900a2526048ff49c48db6ff945e499fcf443ceb5
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -105,9 +155,25 @@
       <workItem from="1684895478821" duration="18024000" />
       <workItem from="1684925174747" duration="1831000" />
       <workItem from="1684985690012" duration="26457000" />
+<<<<<<< HEAD
       <workItem from="1685067382726" duration="5584000" />
       <workItem from="1685266502959" duration="75000" />
+=======
+      <workItem from="1685067382726" duration="12811000" />
+      <workItem from="1685093628903" duration="16000" />
+      <workItem from="1685098391248" duration="871000" />
+      <workItem from="1685254138289" duration="1546000" />
+      <workItem from="1685266581786" duration="3776000" />
+>>>>>>> 900a2526048ff49c48db6ff945e499fcf443ceb5
     </task>
+    <task id="LOCAL-00001" summary="added firebase for sign-in, sign-up member">
+      <created>1685073169102</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1685073169102</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,7 +190,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="NganBranch" />
+                        <option value="origin/NganBranch" />
                       </list>
                     </value>
                   </entry>
@@ -136,30 +202,11 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added firebase for sign-in, sign-up member" />
+    <option name="LAST_COMMIT_MESSAGE" value="added firebase for sign-in, sign-up member" />
+  </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java</url>
-          <line>32</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/AdminController.java</url>
-          <line>42</line>
-          <properties class="com.aptech.apiv1.controller.AdminController" method="refreshtoken">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.apache.catalina.connector.RequestFacade" memberName="request" />

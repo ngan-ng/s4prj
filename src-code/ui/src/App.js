@@ -5,12 +5,12 @@ import Navigation from "./page/component/navigation/navigation.component";
 import Footer from "./page/component/footer/footer.component";
 import About from "./page/component/About";
 import Admin from "./page/component/Admin";
-import SignUp from "./page/component/sign-up/sign-up.component";
-import SignIn from "./page/component/sign-in/sign-in.component";
-import {checkMemberSession} from "./store/member/member.action";
-import {useEffect} from "react";
+
+import {Fragment, useEffect} from "react";
 import {useDispatch} from "react-redux";
 import MyAccount from "./page/component/MyAccount";
+import Authentication from './page/component/authentication/authentication.component';
+import { checkUserSession } from "./store/user/user.action";
 
 // const router = createBrowserRouter([
 //   {
@@ -25,13 +25,14 @@ import MyAccount from "./page/component/MyAccount";
 //     </div>
 //   );
 // }
+
 function MemberLayout() {
     return (
-        <>
+        <Fragment>
             <Navigation />
             <Outlet />
             <Footer />
-        </>
+        </Fragment>
     )
 }
 
@@ -43,18 +44,18 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(checkMemberSession());
-    }, []);
+        dispatch(checkUserSession());
+      }, []);
 
     return (
         <Routes>
             <Route path="/" element={<MemberLayout/>}>
                 <Route index element={<Home/>}/>
                 <Route path="about-us" element={<About />} />
-                <Route path="sign-up" element={<SignUp />} />
-                <Route path="sign-in" element={<SignIn />} />
+                <Route path="auth" element={<Authentication />} />
                 <Route path="my-account" element={<MyAccount />} />
             </Route>
+
             <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<Admin/>}/>
             </Route>

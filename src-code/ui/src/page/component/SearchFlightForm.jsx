@@ -16,7 +16,11 @@ const SearchFlightForm = () => {
   const dispatch = useDispatch();
   const airports = useSelector(selectAirports);
   useEffect(() => {
-    dispatch(fetchAirportStart());
+    if(!airports.airports){
+      console.log("AIRPORT EMPTY");
+      dispatch(fetchAirportStart());
+    }
+
   }, [dispatch]);
 
   const [origin, setOrigin] = useState("");

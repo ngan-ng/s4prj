@@ -1,10 +1,11 @@
+import { Fragment } from "react";
 
 const Admin = () => {
-    return (
-        <>
-            <div>Admin Page</div>
-        </>
-    );
+  return (
+    <Fragment>
+      <div>Admin Page</div>
+    </Fragment>
+  );
 };
 
 export default Admin;

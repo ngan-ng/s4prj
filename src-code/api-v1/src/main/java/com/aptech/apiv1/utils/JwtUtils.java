@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.aptech.apiv1.dto.AccessTokenDto;
-import com.aptech.apiv1.model.admin.User;
-import com.aptech.apiv1.repository.AdminRepository;
+import com.aptech.apiv1.model.user.User;
+import com.aptech.apiv1.repository.UserRepository;
 import com.aptech.apiv1.service.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -27,7 +27,7 @@ public class JwtUtils {
     private RefreshTokenService refreshTokenService;
 
     @Autowired
-    private AdminRepository adminRepository;
+    private UserRepository userRepository;
 
     public AccessTokenDto generateToken(Authentication auth) {
 
@@ -52,7 +52,7 @@ public class JwtUtils {
 
     public AccessTokenDto generateTokenFromEmail(String email) {
 
-        User user = adminRepository.findByEmail(email).get();
+        User user = userRepository.findByEmail(email).get();
         Claims claims = Jwts.claims().setSubject(email);
         List<String> roles = new ArrayList<>();
         user.getRoles().stream().forEach(authority -> roles.add(authority.getRole().toString()));

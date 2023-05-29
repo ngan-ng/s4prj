@@ -5,8 +5,8 @@ import com.aptech.apiv1.enums.FlightStatus;
 import com.aptech.apiv1.enums.IataCode;
 import com.aptech.apiv1.enums.PromotionType;
 import com.aptech.apiv1.model.*;
-import com.aptech.apiv1.model.admin.AdminRole;
-import com.aptech.apiv1.model.admin.Role;
+import com.aptech.apiv1.model.user.UserRole;
+import com.aptech.apiv1.model.user.Role;
 import com.aptech.apiv1.repository.*;
 import com.aptech.apiv1.utils.others.CreateSeatsOnFlight;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -15,7 +15,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -125,9 +124,9 @@ public class ApiV1Application {
         // Role
         RoleRepository roleRepository = context.getBean(RoleRepository.class);
         List<Role> roles = new ArrayList<>();
-        roles.add(new Role().setRole(AdminRole.ADMIN));
-        roles.add(new Role().setRole(AdminRole.GENERAL_ADMIN));
-        roles.add(new Role().setRole(AdminRole.MEMBER));
+        roles.add(new Role().setRole(UserRole.ADMIN));
+        roles.add(new Role().setRole(UserRole.GENERAL_ADMIN));
+        roles.add(new Role().setRole(UserRole.MEMBER));
         roleRepository.saveAll(roles);
     } // .end of initialize();
 
