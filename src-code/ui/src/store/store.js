@@ -9,7 +9,7 @@ import { applyMiddleware, compose, createStore } from 'redux';
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ['airports']
+    whitelist: ['airports', 'flights']
 }
 
 const persistenceReducer = persistReducer(persistConfig, rootReducer);
