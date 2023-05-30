@@ -2,7 +2,9 @@ package com.aptech.apiv1.service.impl;
 
 import com.aptech.apiv1.dto.BookingPaymentDto;
 import com.aptech.apiv1.dto.GroupBookingPaymentDto;
-import com.aptech.apiv1.dto.ReviewPaypalResponseDto;
+import com.aptech.apiv1.dto.paypal.ReviewPaypalResponseDto;
+import com.aptech.apiv1.dto.paypal.SinglePaypalReviewDto;
+import com.aptech.apiv1.enums.PaymentStatus;
 import com.aptech.apiv1.model.Booking;
 import com.aptech.apiv1.repository.BookingRepository;
 import com.aptech.apiv1.repository.PaymentRepository;
@@ -17,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.aptech.apiv1.utils.business.PaymentUtils.getTransactionInformation;
 
@@ -34,6 +35,8 @@ public class PaymentServiceImpl implements PaymentService {
     String SECRET_KEY;
     @Value("${paypal.mode}")
     String MODE;
+    @Value("${security.cors.origin}")
+    String contextPath;
 
     @Autowired
     public PaymentServiceImpl(PaymentRepository paymentRepository, BookingRepository bookingRepository) {
@@ -52,62 +55,54 @@ public class PaymentServiceImpl implements PaymentService {
 
         APIContext apiContext = new APIContext(CLIENT_ID, SECRET_KEY, MODE);
         Payment approvedPayment = requestPayment.create(apiContext);
-        String approvalUrl = getApprovalLink(approvedPayment);
-        if (approvalUrl == null) {
-            return null;
-        }
-
-//        /// Save payment into DB under status APPROVED
-//        List<com.aptech.apiv1.model.Payment> payments = PaymentUtils.transactionToPayments(approvedPayment.getTransactions());
-//        paymentRepository.saveAll(payments);
-
-        System.out.println(approvedPayment);
-        List<Transaction> transactionList = approvedPayment.getTransactions();
-        System.out.println(transactionList);
-//        List<Links> links = approvedPayment.getLinks();
-//        Optional<Links> link = links.stream().filter(l -> l.getRel().equalsIgnoreCase("approval_url")).findFirst();
-//        return link.map(Links::getHref).orElse(null);
-
-        return approvalUrl;
+        /// get and return approval_url
+        Links links = approvedPayment.getLinks().stream()
+                .filter(l -> l.getRel().equalsIgnoreCase("approval_url"))
+                .findFirst().orElseThrow(null);
+        return links.getHref();
     }
 
-    private String getApprovalLink(Payment approvedPayment) {
-        List<Links> links = approvedPayment.getLinks();
-        String approvalLink = null;
-        for (Links link : links) {
-            if (link.getRel().equalsIgnoreCase("approval_url")) {
-                approvalLink = link.getHref();
-            }
-        }
-        return approvalLink;
-    }
+    public ReviewPaypalResponseDto reviewPaypal(String paymentId) throws PayPalRESTException {
+        Payment payment = getPaymentDetails(paymentId);
+        Transaction transaction = payment.getTransactions().get(0);
+        List<com.aptech.apiv1.model.Payment> payments = PaymentUtils.transactionToPayments(transaction, PaymentStatus.APPROVED);
 
-    public List<ReviewPaypalResponseDto> reviewPaypal(List<Transaction> transactions) {
-        List<ReviewPaypalResponseDto> responseDtos = new ArrayList<>();
-        long bookingId = Long.parseLong(transactions.get(0).getItemList().getItems().get(0).getName());
+        long bookingId = Long.parseLong(transaction.getItemList().getItems().get(0).getName());
         String pnr = bookingRepository.findById(bookingId).get().getPnr();
         List<Booking> bookings = bookingRepository.findBookingByPnr(pnr);
 
-        List<com.aptech.apiv1.model.Payment> payments = PaymentUtils.transactionToPayments(transactions);
-        bookings.forEach(b -> {
-            String fullName = b.getFirstName() + " " + b.getLastName();
-            ReviewPaypalResponseDto review = new ReviewPaypalResponseDto();
-            review.setFullName(fullName);
-            review.setPayments(payments.stream().filter(p -> p.getBookingId() == b.getId()).toList());
-        });
+        Payer payer = payment.getPayer();
+        PayerInfo payerInfo = payer.getPayerInfo();
+
+        ReviewPaypalResponseDto responseDtos = new ReviewPaypalResponseDto()
+                .setPaymentMethod(payer.getPaymentMethod())
+                .setStatus(payer.getStatus())
+                .setAmount(transaction.getAmount())
+                .setPayerEmail(payerInfo.getEmail())
+                .setPayerFullName(payerInfo.getFirstName() + " " + payerInfo.getLastName())
+                .setReviewDtos(bookings.stream().map(b ->
+                                new SinglePaypalReviewDto()
+                                        .setBooking(b)
+                                        .setPayments(payments.stream().filter(p ->
+                                                p.getBookingId() == b.getId()).toList()))
+                        .toList());
         /// Save payment into DB under status APPROVED
-        paymentRepository.saveAll(payments);
+//        paymentRepository.saveAll(payments);
         return responseDtos;
     }
 
-    public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException {
+    public List<com.aptech.apiv1.model.Payment> executePayment(String paymentId, String payerId) throws PayPalRESTException {
+        Payment payment = getPaymentDetails(paymentId);
+        Transaction transaction = payment.getTransactions().get(0);
+        List<com.aptech.apiv1.model.Payment> payments = PaymentUtils.transactionToPayments(transaction, PaymentStatus.COMPLETED);
+
         APIContext apiContext = new APIContext(CLIENT_ID, SECRET_KEY, MODE);
         PaymentExecution paymentExecution = new PaymentExecution().setPayerId(payerId);
-
-        List<Transactions> transactionList = paymentExecution.getTransactions();
-        System.out.println(transactionList);
-        Payment payment = new Payment().setId(paymentId);
-        return payment.execute(apiContext, paymentExecution);
+        Payment executePayment = new Payment().setId(paymentId).execute(apiContext, paymentExecution);
+        if(executePayment != null){
+            return paymentRepository.saveAll(payments);
+        }
+        return null;
     }
 
     public Payment getPaymentDetails(String paymentId) throws PayPalRESTException {
@@ -116,9 +111,10 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     private RedirectUrls getRedirectUrls() {
+
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://localhost:3000/canceled-paypal");
-        redirectUrls.setReturnUrl("http://localhost:3000/review-paypal");
+        redirectUrls.setCancelUrl(contextPath + "/canceled-paypal");
+        redirectUrls.setReturnUrl(contextPath + "/review-paypal");
         return redirectUrls;
     }
 

@@ -17,6 +17,7 @@ public class TaxUtils {
                 tax = 100000*rateVndToUsd;
             }
         }
-        return tax;
+//        return tax;
+        return 0;
     }
 }

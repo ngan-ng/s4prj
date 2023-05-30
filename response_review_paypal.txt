@@ -1,0 +1,110 @@
+Payment: 
+Payer:
+{
+  "payment_method": "paypal",
+  "status": "VERIFIED",
+  "payer_info": {
+    "email": "flight@personal.example.com",
+    "first_name": "Matthew",
+    "last_name": "Nguyen",
+    "payer_id": "PAKGWZ8CNTPT2",
+    "country_code": "US",
+    "shipping_address": {
+      "recipient_name": "Matthew Nguyen",
+      "line1": "1 Main St",
+      "city": "San Jose",
+      "country_code": "US",
+      "postal_code": "95131",
+      "state": "CA"
+    }
+  }
+}
+
+
+Transaction: 
+
+{
+  "related_resources": [],
+  "amount": {
+    "currency": "USD",
+    "total": "28.42",
+    "details": {
+      "subtotal": "25.84",
+      "shipping": "0.00",
+      "tax": "2.58"
+    }
+  },
+  "payee": {
+    "email": "flight@business.example.com",
+    "merchant_id": "AMMK5KL9M6W9C"
+  },
+  "description": "",
+  "item_list": {
+    "items": [
+      {
+        "name": "1",
+        "description": "TICKET",
+        "quantity": "1",
+        "price": "0.01",
+        "currency": "USD"
+      },
+      {
+        "name": "1",
+        "description": "AIRPORT_TAX",
+        "quantity": "1",
+        "price": "5.16",
+        "currency": "USD"
+      },
+      {
+        "name": "1",
+        "description": "BAG_ALLOWANCE",
+        "quantity": "1",
+        "price": "7.74",
+        "currency": "USD"
+      },
+      {
+        "name": "1",
+        "description": "SEAT-01C",
+        "quantity": "1",
+        "price": "0.01",
+        "currency": "USD"
+      },
+      {
+        "name": "2",
+        "description": "TICKET",
+        "quantity": "1",
+        "price": "0.01",
+        "currency": "USD"
+      },
+      {
+        "name": "2",
+        "description": "AIRPORT_TAX",
+        "quantity": "1",
+        "price": "5.16",
+        "currency": "USD"
+      },
+      {
+        "name": "2",
+        "description": "BAG_ALLOWANCE",
+        "quantity": "1",
+        "price": "7.74",
+        "currency": "USD"
+      },
+      {
+        "name": "2",
+        "description": "SEAT-01D",
+        "quantity": "1",
+        "price": "0.01",
+        "currency": "USD"
+      }
+    ],
+    "shipping_address": {
+      "recipient_name": "Matthew Nguyen",
+      "line1": "1 Main St",
+      "city": "San Jose",
+      "country_code": "US",
+      "postal_code": "95131",
+      "state": "CA"
+    }
+  }
+}

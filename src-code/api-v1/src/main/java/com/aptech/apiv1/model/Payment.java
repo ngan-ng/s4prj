@@ -1,13 +1,14 @@
 package com.aptech.apiv1.model;
 
-import com.aptech.apiv1.enums.PaymentMethod;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+
 @Entity
 @Data
+@Accessors(chain = true)
 public class Payment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
