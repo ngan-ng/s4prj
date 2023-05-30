@@ -12,7 +12,7 @@ public class Payment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private PaymentMethod paymentMethod;
+    private String paymentMethod;
     private double price;
     private String category;
     private String status;

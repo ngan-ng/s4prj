@@ -9,7 +9,22 @@ import com.paypal.api.payments.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionUtils {
+public class PaymentUtils {
+    public static List<com.aptech.apiv1.model.Payment> transactionToPayments(List<Transaction> transactions){
+        List<com.aptech.apiv1.model.Payment> payments = new ArrayList<>();
+        transactions.forEach(t->{
+            t.getItemList().getItems().forEach(item -> {
+                com.aptech.apiv1.model.Payment payment = new com.aptech.apiv1.model.Payment();
+                payment.setPaymentMethod(PaymentMethod.PAYPAL.toString());
+                payment.setStatus(String.valueOf(PaymentStatus.APPROVED));
+                payment.setPrice(Double.parseDouble(item.getPrice()));
+                payment.setCategory(item.getDescription());
+                payment.setBookingId(Long.parseLong(item.getName()));
+                payments.add(payment);
+            });
+        });
+        return payments;
+    }
     public static List<Transaction> getTransactionInformation(GroupBookingPaymentDto groupBooking) {
         List<Transaction> transactionList = new ArrayList<>();
         Details details = new Details();
@@ -27,6 +42,7 @@ public class TransactionUtils {
             Gender gender = Gender.valueOf(b.getGender());
             BagAllowance bagAllowance = BagUtils.fromInt(b.getBagAllowance());
             String bookingId = String.valueOf(b.getId());
+
             for (int i = 0; i < 4; i++) {
                 // Each booking got 4 item payment
                 Item item = new Item().setCurrency("USD");
@@ -37,6 +53,14 @@ public class TransactionUtils {
                                 .setDescription(PaymentCategory.TICKET.toString())
                                 .setQuantity("1");
                         totalAmount += ticketPrice;
+                        if(b.getInfant() != null){
+                            double infantPrice = 5; // Infant fee: $5 USD
+                            item.setPrice(String.format("%.2f", infantPrice))
+                                    .setName(bookingId)
+                                    .setDescription(PaymentCategory.INFANT_FEE.toString())
+                                    .setQuantity("1");
+                            totalAmount += infantPrice;
+                        }
                     }
                     case 1 -> {
                         double airportTax = TaxUtils.getAirportTax(gender);

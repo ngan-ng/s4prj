@@ -20,6 +20,6 @@ public class Infant implements Serializable {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dob;
 
-    @OneToOne(mappedBy = "infant")
+    @OneToOne(mappedBy = "infant",fetch = FetchType.LAZY)
     private Booking booking;
 }
