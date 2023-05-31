@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
     <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/yarn.lock" afterDir="false" />
-=======
-    <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="added firebase for sign-in, sign-up member">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomUserDetailService.java" afterDir="false" />
@@ -33,6 +26,8 @@
       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/PromotionsPolicyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/PromotionsPolicyServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/RefreshTokenServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/RefreshTokenServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/ui/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/ui/src/api/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/api/client.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/ui/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/index.js" afterDir="false" />
@@ -53,7 +48,7 @@
       <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/root-saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/store/root-saga.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/ui/src/utils/firebase/firebase.utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/utils/firebase/firebase.utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/ui/src/utils/reducer.utils.js" beforeDir="false" />
->>>>>>> 900a2526048ff49c48db6ff945e499fcf443ceb5
+      <change beforePath="$PROJECT_DIR$/src-code/ui/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,35 +85,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "NganBranch",
-    "last_opened_file_path": "E:/Code/sem-4/Project/src/s4prj/src-code/ui/src/page/component",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-<<<<<<< HEAD
-    "show.migrate.to.gradle.popup": "false",
-    "spring.configuration.checksum": "0283fd2aec49fb0567bce964c2e58809",
-    "ts.external.directory.path": "C:\\Users\\DELL\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\231.8770.65\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-=======
-    "spring.configuration.checksum": "0283fd2aec49fb0567bce964c2e58809",
-    "ts.external.directory.path": "C:\\Users\\DELL\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\231.9011.34\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
->>>>>>> 900a2526048ff49c48db6ff945e499fcf443ceb5
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;NganBranch&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Code/sem-4/Project/src/s4prj/src-code/ui/src/page/component&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0283fd2aec49fb0567bce964c2e58809&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\DELL\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\231.8770.65\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+
+    &quot;spring.configuration.checksum&quot;: &quot;0283fd2aec49fb0567bce964c2e58809&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\DELL\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\231.9011.34\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\component" />
@@ -155,16 +150,13 @@
       <workItem from="1684895478821" duration="18024000" />
       <workItem from="1684925174747" duration="1831000" />
       <workItem from="1684985690012" duration="26457000" />
-<<<<<<< HEAD
       <workItem from="1685067382726" duration="5584000" />
       <workItem from="1685266502959" duration="75000" />
-=======
       <workItem from="1685067382726" duration="12811000" />
       <workItem from="1685093628903" duration="16000" />
       <workItem from="1685098391248" duration="871000" />
       <workItem from="1685254138289" duration="1546000" />
       <workItem from="1685266581786" duration="3776000" />
->>>>>>> 900a2526048ff49c48db6ff945e499fcf443ceb5
     </task>
     <task id="LOCAL-00001" summary="added firebase for sign-in, sign-up member">
       <created>1685073169102</created>

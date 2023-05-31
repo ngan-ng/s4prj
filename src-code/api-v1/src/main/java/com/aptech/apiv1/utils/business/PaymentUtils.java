@@ -10,21 +10,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentUtils {
-    public static List<com.aptech.apiv1.model.Payment> transactionToPayments(List<Transaction> transactions){
-        List<com.aptech.apiv1.model.Payment> payments = new ArrayList<>();
-        transactions.forEach(t->{
-            t.getItemList().getItems().forEach(item -> {
-                com.aptech.apiv1.model.Payment payment = new com.aptech.apiv1.model.Payment();
-                payment.setPaymentMethod(PaymentMethod.PAYPAL.toString());
-                payment.setStatus(String.valueOf(PaymentStatus.APPROVED));
-                payment.setPrice(Double.parseDouble(item.getPrice()));
-                payment.setCategory(item.getDescription());
-                payment.setBookingId(Long.parseLong(item.getName()));
-                payments.add(payment);
-            });
-        });
-        return payments;
+    /**
+     * transform ItemList of Transaction into List of Payment model
+     * Mapping structure:
+     * Item.name = Payment.bookingId
+     * Item.description = Payment.category
+     * Item.price = Payment.price
+     * Item.status = Payment.status
+     *
+     * @param transaction
+     * @param status
+     * @return
+     */
+    public static List<com.aptech.apiv1.model.Payment> transactionToPayments(Transaction transaction, PaymentStatus status) {
+        return transaction.getItemList().getItems().stream()
+                .map(item -> new com.aptech.apiv1.model.Payment()
+                .setPaymentMethod(PaymentMethod.PAYPAL.toString())
+                .setStatus(String.valueOf(status))
+                .setPrice(Double.parseDouble(item.getPrice()))
+                .setCategory(item.getDescription())
+                .setBookingId(Long.parseLong(item.getName()))).toList();
     }
+
     public static List<Transaction> getTransactionInformation(GroupBookingPaymentDto groupBooking) {
         List<Transaction> transactionList = new ArrayList<>();
         Details details = new Details();
@@ -53,7 +60,7 @@ public class PaymentUtils {
                                 .setDescription(PaymentCategory.TICKET.toString())
                                 .setQuantity("1");
                         totalAmount += ticketPrice;
-                        if(b.getInfant() != null){
+                        if (b.getInfant() != null) {
                             double infantPrice = 5; // Infant fee: $5 USD
                             item.setPrice(String.format("%.2f", infantPrice))
                                     .setName(bookingId)
@@ -82,7 +89,7 @@ public class PaymentUtils {
                         double seatPrice = b.getLoadSeatDto().getPrice();
                         item.setPrice(String.format("%.2f", seatPrice))
                                 .setName(bookingId)
-                                .setDescription(PaymentCategory.SEAT+"-"+ b.getLoadSeatDto().getSeatNumber())
+                                .setDescription(PaymentCategory.SEAT + "-" + b.getLoadSeatDto().getSeatNumber())
                                 .setQuantity("1");
                         totalAmount += seatPrice;
                     }

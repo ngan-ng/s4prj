@@ -1,4 +1,4 @@
-package com.aptech.apiv1.dto;
+package com.aptech.apiv1.dto.paypal;
 
 import lombok.Data;
 

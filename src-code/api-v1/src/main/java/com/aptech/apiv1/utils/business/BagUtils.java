@@ -15,9 +15,12 @@ import java.nio.file.Path;
 
 public class BagUtils {
     public static double getCheckedBaggageChargePurchaseOnline(BagAllowance type){
-        double price=0;
+        double price;
         double rateVndToUsd = 0.000043 ;
         switch (type){
+            case _0 -> {
+                price = 0;
+            }
             case _20 -> {
                 price = 180000 * rateVndToUsd;
             }
@@ -30,8 +33,9 @@ public class BagUtils {
             case _50 -> {
                 price = 450000 * rateVndToUsd;
             }
+            default -> price = 0;
         }
-        return price;
+        return 0;
     }
     public static BagAllowance fromInt(int bagAllowance){
         switch (bagAllowance){
