@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import React from "react";
-import SearchFlightForm from "./component/SearchFlightForm";
+import SearchFlightForm from "./components/SearchFlightForm";
 
 const Home = () => {
   return (

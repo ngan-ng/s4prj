@@ -1,15 +1,15 @@
 import './App.css';
 import {RouterProvider, createBrowserRouter, Routes, Route, Outlet} from 'react-router-dom';
 import Home from './page/Home';
-import Navigation from "./page/component/navigation/navigation.component";
-import Footer from "./page/component/footer/footer.component";
-import About from "./page/component/About";
-import Admin from "./page/component/Admin";
+import Navigation from "./page/components/navigation/navigation.component";
+import Footer from "./page/components/footer/footer.component";
+import About from "./page/components/About";
+import Admin from "./page/components/Admin";
 
 import {Fragment, useEffect} from "react";
 import {useDispatch} from "react-redux";
-import MyAccount from "./page/component/MyAccount";
-import Authentication from './page/component/authentication/authentication.component';
+import MyAccount from "./page/components/MyAccount";
+import Authentication from './page/components/authentication/authentication.component';
 import { checkUserSession } from "./store/user/user.action";
 
 // const router = createBrowserRouter([
