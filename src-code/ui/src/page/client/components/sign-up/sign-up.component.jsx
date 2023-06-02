@@ -1,25 +1,23 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
+import React, { useState, useEffect } from "react";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 
-import "./sign-in.styles.css";
-import {
-  googleSignInStart,
-  emailSignInStart,
-} from "../../../store/user/user.action";
+import "./sign-up.styles.css";
+import { useDispatch, useSelector } from "react-redux";
+import { signUpStart } from "../../../../store/user/user.action";
 import { useNavigate } from "react-router-dom";
-import { selectCurrentUser } from "../../../store/user/user.selector";
+import { selectCurrentUser } from "../../../../store/user/user.selector";
 
 const defaultFormFields = {
   email: "",
   password: "",
+  confirmPassword: "",
+  displayName: "",
 };
 
-const SignIn = () => {
-  const dispatch = useDispatch();
+const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { email, password } = formFields;
+  const { displayName, email, password, confirmPassword } = formFields;
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
 
@@ -33,21 +31,22 @@ const SignIn = () => {
     setFormFields(defaultFormFields);
   };
 
-  const signInWithGoogle = async () => {
-    dispatch(googleSignInStart());
-  };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (password !== confirmPassword) {
+      alert("Password and Confirm Password not match!");
+      return;
+    }
+
     try {
-      dispatch(emailSignInStart(email, password));
+      dispatch(signUpStart(email, password, displayName));
       resetFormFields();
     } catch (error) {
-      if (error.code === "auth/user-not-found") {
-        alert("Cannot found this email.");
+      if (error.code === "auth/email-already-in-use") {
+        alert("This email already in use");
       } else {
-        console.log("User sign in failed", error);
+        console.log("Cannot create member", error);
       }
     }
   };
@@ -60,46 +59,62 @@ const SignIn = () => {
   };
 
   return (
-    <div className="card-sign-in">
-      <h2>Already have an account?</h2>
-
+    <div className="card-sign-up">
+      <h2>Don't have an account?</h2>
       <Grid container spacing={3}>
         <Grid item md={12} xs={12}>
           <Typography align="left" variant="h4">
-            Sign In
+            Sign Up
           </Typography>
         </Grid>
 
         <Grid item md={12} xs={12}>
           <TextField
-            label="Email"
-            name="email"
-            type="email"
+            name="displayName"
+            type="text"
             fullWidth
             size="small"
-            required
+            label="Display Name"
+            value={displayName}
             onChange={handleChange}
-            value={email}
           />
         </Grid>
         <Grid item md={12} xs={12}>
           <TextField
-            label="Password"
-            name="password"
+            name="email"
+            type="email"
             fullWidth
             size="small"
-            type="password"
-            required
+            label="Email"
+            value={email}
             onChange={handleChange}
+          />
+        </Grid>
+        <Grid item md={12} xs={12}>
+          <TextField
+            name="password"
+            type="password"
+            fullWidth
+            size="small"
+            label="Password"
             value={password}
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item md={12} xs={12}>
+          <TextField
+            name="confirmPassword"
+            type="password"
+            fullWidth
+            size="small"
+            label="Confirm Password"
+            value={confirmPassword}
+            onChange={handleChange}
           />
         </Grid>
         <Grid item md={12} xs={12}>
           <Button variant="contained" onClick={handleSubmit}>
-            Sign In
-          </Button>
-          <Button variant="contained" type="button" onClick={signInWithGoogle}>
-            Sign In With Google
+            Sign Up
           </Button>
         </Grid>
       </Grid>
@@ -107,4 +122,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
