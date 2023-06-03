@@ -3,8 +3,8 @@ import { Fragment } from "react";
 
 import "./navigation.styles.css";
 import {useDispatch, useSelector} from "react-redux";
-import { selectCurrentUser } from "../../../store/user/user.selector";
-import { signOutStart } from "../../../store/user/user.action";
+import { selectCurrentUser } from "../../../../store/user/user.selector";
+import { signOutStart } from "../../../../store/user/user.action";
 
 const Navigation = () => {
     const dispatch = useDispatch();

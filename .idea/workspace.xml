@@ -4,48 +4,122 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="added firebase for sign-in, sign-up member">
+    <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="commit changes from main">
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-dark-rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-dark-rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-dark.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-dark.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-dark-rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-dark-rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-dark.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-dark.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/icons-rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/icons-rtl.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/icons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/icons.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/icons.min.css.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/dripicons-v2.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/dripicons-v2.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/dripicons-v2.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/dripicons-v2.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-brands-400.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-brands-400.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-brands-400.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-brands-400.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-brands-400.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-regular-400.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-regular-400.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-regular-400.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-regular-400.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-regular-400.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-solid-900.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-solid-900.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-solid-900.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-solid-900.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-solid-900.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-bold.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-bold.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-light.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-light.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-medium.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-medium.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-regular.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/materialdesignicons-webfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/materialdesignicons-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/materialdesignicons-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/materialdesignicons-webfont.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.symbol.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/js/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-grid.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-grid.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-reboot.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-utilities.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap.rtl.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/js/bootstrap.esm.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/js/bootstrap.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/jquery/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/jquery/jquery.slim.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/metismenu/cjs/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/metismenu/metisMenu.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/metismenu/metisMenu.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/metismenu/modules/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/node-waves/waves.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/node-waves/waves.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/simplebar/simplebar.esm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/simplebar/simplebar.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/simplebar/simplebar.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/src/hooks/useCurrentPath.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/src/hooks/useScript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/src/hooks/useStyle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/Dashboard.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/components/layout/footer-admin.component.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/components/layout/header-admin.component.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/components/layout/main-content-admin.component.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/components/layout/sidebar-admin.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_26_2023_3_10_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_26_2023_3_10_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomAdminDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/CustomUserDetailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthorizationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/JwtAuthorizationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/config/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/AdminDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/BookingPaymentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/dto/BookingPaymentDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/RefreshToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/RefreshToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/admin/AdminRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/user/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/admin/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/user/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/admin/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/model/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/AdminRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/repository/RoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/AdminServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/PromotionsPolicyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/PromotionsPolicyServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/RefreshTokenServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/service/impl/RefreshTokenServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/JwtUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/utils/JwtUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src-code/ui/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/api/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/api/client.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/Admin.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/MyAccount.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/MyAccount.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/footer/footer.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/footer/footer.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/navigation/navigation.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/navigation/navigation.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-in/sign-in.styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/component/sign-up/sign-up.styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/member/member.action.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/member/member.reducer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/member/member.saga.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/member/member.selector.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/member/member.types.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/root-reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/store/root-reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/store/root-saga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/store/root-saga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/utils/firebase/firebase.utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/utils/firebase/firebase.utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/utils/reducer.utils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/About.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/About.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/Booking.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/DateForTrip.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/DateForTrip.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/MyAccount.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/MyAccount.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/authentication/authentication.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/authentication/authentication.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/authentication/authentication.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/authentication/authentication.styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/footer/footer.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/footer/footer.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/footer/footer.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/footer/footer.styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/navigation/navigation.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/navigation/navigation.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/navigation/navigation.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/navigation/navigation.styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/search-flights-form/SearchFlightForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/search-flights-form/SearchFlightForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/sign-in/sign-in.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/sign-in/sign-in.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/sign-in/sign-in.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/sign-in/sign-in.styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/sign-up/sign-up.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/sign-up/sign-up.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/sign-up/sign-up.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/sign-up/sign-up.styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,13 +167,15 @@
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "NganBranch",
-    "last_opened_file_path": "E:/Code/sem-4/Project/src/s4prj/src-code/ui/src/page/component",
+    "last_opened_file_path": "E:/Code/sem-4/Project/src/s4prj/src-code/ui/public/assets",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "inlay.hints",
+    "show.migrate.to.gradle.popup": "false",
     "spring.configuration.checksum": "0283fd2aec49fb0567bce964c2e58809",
     "ts.external.directory.path": "C:\\Users\\DELL\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\231.9011.34\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
     "vue.rearranger.settings.migration": "true"
@@ -107,14 +183,18 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\public\assets" />
+      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\public" />
+      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\public\assets\js" />
       <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\component" />
       <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\component\sign-in" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\component\admin" />
-      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\component" />
-      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\component\footer" />
-      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\component\navigation" />
+      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\admin\components\layout" />
+      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\admin" />
+      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\admin\components" />
+      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\client" />
+      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\public" />
     </key>
   </component>
   <component name="RunManager">
@@ -149,11 +229,16 @@
       <workItem from="1684895478821" duration="18024000" />
       <workItem from="1684925174747" duration="1831000" />
       <workItem from="1684985690012" duration="26457000" />
+      <workItem from="1685067382726" duration="5584000" />
+      <workItem from="1685266502959" duration="75000" />
       <workItem from="1685067382726" duration="12811000" />
       <workItem from="1685093628903" duration="16000" />
       <workItem from="1685098391248" duration="871000" />
       <workItem from="1685254138289" duration="1546000" />
       <workItem from="1685266581786" duration="3776000" />
+      <workItem from="1685536960867" duration="2609000" />
+      <workItem from="1685628505394" duration="9526000" />
+      <workItem from="1685763538809" duration="11497000" />
     </task>
     <task id="LOCAL-00001" summary="added firebase for sign-in, sign-up member">
       <created>1685073169102</created>
@@ -162,7 +247,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685073169102</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="commit changes from main">
+      <created>1685505215517</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685505215517</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,7 +285,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added firebase for sign-in, sign-up member" />
-    <option name="LAST_COMMIT_MESSAGE" value="added firebase for sign-in, sign-up member" />
+    <MESSAGE value="commit changes from main" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit changes from main" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectCurrentUser } from "../../../store/user/user.selector";
 import { useEffect } from "react";
 import { Fragment } from "react";
 
