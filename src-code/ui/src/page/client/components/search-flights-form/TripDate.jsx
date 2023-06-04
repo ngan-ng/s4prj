@@ -16,7 +16,7 @@ const TripDate = ({ searchDto, onChange, validation }) => {
           sx={{ display: "flex" }}
           components={["DatePicker", "DatePicker"]}
         >
-          <Grid item sm={6} xs={12}>
+          <Grid item md={6} xs={12}>
             <DatePicker
               value={searchDto.departDate}
               onChange={(value) => {
@@ -31,7 +31,7 @@ const TripDate = ({ searchDto, onChange, validation }) => {
               sx={{ width: "100%" }}
             />
           </Grid>
-          <Grid item sm={6} xs={12}>
+          <Grid item md={6} xs={12}>
             <DatePicker
               disabled={isOneWay}
               value={isOneWay ? null : searchDto.returnDate}

@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 import createSagaMiddleware from '@redux-saga/core';
 import { applyMiddleware, compose, createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 
 const persistConfig = {
     key: 'root',
@@ -18,17 +19,20 @@ const middleware = [
     process.env.NODE_ENV !== 'production' && logger,
     sagaMiddleware
 ].filter(Boolean);
-const composeEnhancer = (process.env.NODE_ENV !== 'production'
-    && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-const composeEnhancers = composeEnhancer(applyMiddleware(...middleware));
+// const composeEnhancer = (process.env.NODE_ENV !== 'production'
+//     && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
-export const store = createStore(
-    persistenceReducer,
-    undefined,
-    composeEnhancers
+// const composeEnhancers = composeEnhancer(applyMiddleware(...middleware));
+
+export const store = configureStore(
+    {
+        reducer: persistenceReducer,
+        middleware: middleware,
+        // enhancers: composeEnhancers
+    }
 );
-
 sagaMiddleware.run(rootSaga);
+
 
 export const persistor = persistStore(store);

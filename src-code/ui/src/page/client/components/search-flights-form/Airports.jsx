@@ -28,7 +28,7 @@ export const Airports = ({
   return (
     <Fragment>
       <Grid container direction={"row"} spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <FormControl fullWidth>
             <InputLabel id="airport-select-origin-label">Origin</InputLabel>
             <Select
@@ -50,7 +50,7 @@ export const Airports = ({
                   .filter((item) => item.iata_code !== destination)
                   .map((item) => (
                     <MenuItem key={item.iata_code} value={`${item.iata_code}`}>
-                      {item.location} - {item.name}
+                      {item.location} - {item.name} ({item.iata_code})
                     </MenuItem>
                   ))
               ) : (
@@ -66,7 +66,7 @@ export const Airports = ({
             )}
           </FormControl>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12} md={6}>
           <FormControl fullWidth>
             <InputLabel id="airport-select-destination-label">
               Destination
@@ -91,7 +91,7 @@ export const Airports = ({
                   .filter((item) => item.iata_code !== origin)
                   ?.map((item) => (
                     <MenuItem key={item.iata_code} value={`${item.iata_code}`}>
-                      {item.location} - {item.name}
+                      {item.location} - {item.name} ({item.iata_code})
                     </MenuItem>
                   ))
               ) : (

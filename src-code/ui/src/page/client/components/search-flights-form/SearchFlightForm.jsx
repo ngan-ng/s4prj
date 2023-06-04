@@ -5,6 +5,7 @@ import {
   Paper,
   Radio,
   RadioGroup,
+  Typography,
 } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import { Airports } from "./Airports";
@@ -12,6 +13,7 @@ import TripDate from "./TripDate";
 import validate from "validate.js";
 import { Search } from "@mui/icons-material";
 import dayjs from "dayjs";
+import PaxQty from "./PaxQty";
 
 const SearchFlightForm = () => {
   const today = dayjs();
@@ -23,6 +25,7 @@ const SearchFlightForm = () => {
     returnDate: today,
     tripType: "roundtrip",
   });
+  var isOneway = searchDto.tripType === "oneway";
   // Validation
   const [validation, setValidation] = useState({
     touched: {},
@@ -40,6 +43,7 @@ const SearchFlightForm = () => {
         ...prev,
         [type]: e,
       }));
+
     } else {
       fieldName = e.target.name;
       setSearchDto((prev) => ({
@@ -61,7 +65,7 @@ const SearchFlightForm = () => {
     origin: {
       presence: {
         allowEmpty: false,
-        message: "^Departure airport is required!", // ^: return exactly what inside "message"
+        message: "^Origin airport is required!", // ^: return exactly what inside "message"
       },
     },
     destination: {
@@ -100,7 +104,6 @@ const SearchFlightForm = () => {
   };
 
   useEffect(() => {
-    let isOneway = searchDto.tripType === "oneway";
     const valid = setTimeout(() => {
       const errorsSchema = validate(searchDto, schema);
       let errors = { ...errorsSchema };
@@ -125,7 +128,7 @@ const SearchFlightForm = () => {
         }
         isValid = true;
       }
-      console.log(isValid);
+
       setValidation((prev) => ({
         ...prev,
         isValid: isValid,
@@ -141,6 +144,7 @@ const SearchFlightForm = () => {
   const handleSubmit = () => {
     console.log(validation);
     let temp = { ...searchDto };
+
     temp.departDate = searchDto.departDate.format("YYYY-MM-DD");
     if (temp.tripType === "oneway") {
       delete temp.returnDate;
@@ -152,10 +156,10 @@ const SearchFlightForm = () => {
 
   return (
     <Fragment>
-      <Paper elevation={5} sx={{ opacity: 0.96, p: 3 }}>
+      <Paper elevation={5} sx={{ opacity: 0.96, p: 3, width: "80%" }}>
         {/* Row 1: Select destinations for traveling */}
         <Grid container spacing={2}>
-          <Grid item xs={9}>
+          <Grid item xs={12} sm={9}>
             <Airports
               origin={searchDto.origin}
               destination={searchDto.destination}
@@ -164,44 +168,58 @@ const SearchFlightForm = () => {
               validation={validation}
             />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={12} sm={3}>
             <RadioGroup
               row
+              sx={{ display: "flex", justifyContent: "right" }}
               aria-labelledby="ticket-type-label"
               name="tripType"
               defaultValue="roundtrip"
               onChange={handleChange}
-              alignitems="center"
-              justify="flex-end"
             >
               <FormControlLabel
                 value="roundtrip"
                 control={<Radio color="secondary" />}
-                label="Roundtrip"
+                label={
+                  <Typography color={isOneway ? "" : "secondary"}>
+                    Roundtrip
+                  </Typography>
+                }
                 labelPlacement="top"
+                color="secondary"
+                sx={{ display: "flex", justifyContent: "center" }}
               />
 
               <FormControlLabel
                 value="oneway"
                 control={<Radio color="secondary" />}
-                label="Oneway"
+                label={
+                  <Typography color={isOneway ? "secondary" : ""}>
+                    Oneway
+                  </Typography>
+                }
                 labelPlacement="top"
+                sx={{ display: "flex", justifyContent: "center" }}
               />
             </RadioGroup>
           </Grid>
           {/* Row 2: Select date for traveling */}
-          <Grid item xs={9}>
+          <Grid item xs={12} sm={9}>
             <TripDate
               searchDto={searchDto}
               onChange={handleChange}
               validation={validation}
             />
           </Grid>
-          <Grid item xs={3}>
-            <Grid container>
+          <Grid item xs={12} sm={3}>
+            <Grid container sx={{ display: "flex", justifyContent: "right" }}>
               <Button
                 color="secondary"
-                sx={{ maxHeight: "80%", p: 2, width: "100%" }}
+                sx={{
+                  maxHeight: "80%",
+                  p: 2,
+                  width: "90%",
+                }}
                 variant="contained"
                 size="large"
                 onClick={handleSubmit}
@@ -213,8 +231,8 @@ const SearchFlightForm = () => {
             </Grid>
           </Grid>
           {/* Row 3: Select number of passengers for traveling */}
-          <Grid item xs={8}></Grid>
-          <Grid item xs={4}></Grid>
+
+          <PaxQty />
         </Grid>
       </Paper>
     </Fragment>
