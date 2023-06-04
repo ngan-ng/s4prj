@@ -1,33 +1,34 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectAirports } from "../../../store/airport/airport.selector";
-import { fetchAirportStart } from "../../../store/airport/airport.action";
+import { selectAirports } from "../../../../store/airport/airport.selector";
+import { fetchAirportStart } from "../../../../store/airport/airport.action";
 import {
-  Button,
   FormControl,
+  FormHelperText,
   Grid,
   InputLabel,
   MenuItem,
   Select,
 } from "@mui/material";
-import { FlightLand, FlightTakeoff, Search } from "@mui/icons-material";
+import { FlightLand, FlightTakeoff } from "@mui/icons-material";
 
 export const Airports = ({
   origin,
   destination,
   airportChange,
-  handleSubmit
+  onHasError,
+  validation,
 }) => {
   const dispatch = useDispatch();
-  const airports = useSelector(selectAirports);
+  const airports = useSelector(selectAirports) ?? null;
   useEffect(() => {
     dispatch(fetchAirportStart());
   }, [dispatch]);
 
   return (
     <Fragment>
-      <Grid container spacing={2}>
-        <Grid item sm={4} xs={12}>
+      <Grid container direction={"row"} spacing={2}>
+        <Grid item xs={6}>
           <FormControl fullWidth>
             <InputLabel id="airport-select-origin-label">Origin</InputLabel>
             <Select
@@ -37,15 +38,15 @@ export const Airports = ({
               label="Origin"
               name="origin"
               onChange={airportChange}
+              required={true}
+              error={onHasError("origin")}
               IconComponent={() => (
                 <FlightTakeoff sx={{ m: 1.5 }} color="secondary" />
               )}
             >
-              <MenuItem key={0} value={""}>
-                None
-              </MenuItem>
-              {airports.data ? (
-                airports.data
+              <MenuItem value={""}>None</MenuItem>
+              {airports?.data ? (
+                airports?.data
                   .filter((item) => item.iata_code !== destination)
                   .map((item) => (
                     <MenuItem key={item.iata_code} value={`${item.iata_code}`}>
@@ -58,9 +59,14 @@ export const Airports = ({
                 </MenuItem>
               )}
             </Select>
+            {onHasError("origin") && (
+              <FormHelperText style={{ color: "red" }}>
+                {validation.errors.origin}
+              </FormHelperText>
+            )}
           </FormControl>
         </Grid>
-        <Grid item sm={4} xs={12}>
+        <Grid item xs={6}>
           <FormControl fullWidth>
             <InputLabel id="airport-select-destination-label">
               Destination
@@ -72,6 +78,7 @@ export const Airports = ({
               label="Destination"
               name="destination"
               onChange={airportChange}
+              error={onHasError("destination") ? true : false}
               IconComponent={() => (
                 <FlightLand sx={{ m: 1.5 }} color="secondary" />
               )}
@@ -79,7 +86,7 @@ export const Airports = ({
               <MenuItem key={0} value={""}>
                 None
               </MenuItem>
-              {airports ? (
+              {airports != null ? (
                 airports.data
                   .filter((item) => item.iata_code !== origin)
                   ?.map((item) => (
@@ -93,19 +100,12 @@ export const Airports = ({
                 </MenuItem>
               )}
             </Select>
+            {onHasError("destination") && (
+              <FormHelperText style={{ color: "red" }}>
+                {validation.errors.destination}
+              </FormHelperText>
+            )}
           </FormControl>
-        </Grid>
-        <Grid item sm={4} xs={6} textAlign={"end"} sx={{ p: 0 }}>
-          <Button
-            color="secondary"
-            sx={{ height: "100%", width: "80%" }}
-            variant="contained"
-            size="large"
-            onClick={handleSubmit}
-            endIcon={<Search />}
-          >
-            Search
-          </Button>
         </Grid>
       </Grid>
     </Fragment>
