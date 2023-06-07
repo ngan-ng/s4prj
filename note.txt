@@ -1,14 +1,12 @@
 		
 
-- UML
+- Architectual and Design of prject
 
 - Use case
 
-- Sequences
+- Sequences Diagram
 
 - ERD
 
-- Activity
-
-- Class
+- Class Diagram
 
