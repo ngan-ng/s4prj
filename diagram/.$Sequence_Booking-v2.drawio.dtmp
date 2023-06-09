@@ -1,0 +1,337 @@
+<mxfile host="Electron" modified="2023-06-09T08:52:32.921Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.8 Chrome/112.0.5615.165 Electron/24.2.0 Safari/537.36" etag="8zeMFxe5lhcBaz_mzSk3" version="21.2.8" type="device">
+  <diagram name="Page-1" id="VxqEKcWssq_XyiCzB9bS">
+    <mxGraphModel dx="1418" dy="828" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" background="none" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-1" value="UI" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="388" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="7Op2JaMXb7pChXdJnSNb-1" vertex="1">
+          <mxGeometry x="45" y="60" width="10" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-3" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;11. Passenger&#39;s info form&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="7Op2JaMXb7pChXdJnSNb-1" edge="1">
+          <mxGeometry x="0.1236" y="-113" relative="1" as="geometry">
+            <mxPoint x="43" y="162" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="13" y="162" />
+              <mxPoint x="13" y="199" />
+            </Array>
+            <mxPoint x="35" y="199" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-38" value="&amp;nbsp;19. selectSeat()" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0.03;entryY=0.451;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="54.999999999999886" y="309.78000000000003" as="sourcePoint" />
+            <mxPoint x="225.18999999999994" y="309.78000000000003" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-46" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;17. Success or failed&amp;nbsp;&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.039;exitY=0.728;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.011;entryY=0.725;entryDx=0;entryDy=0;entryPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="7Op2JaMXb7pChXdJnSNb-1" edge="1">
+          <mxGeometry x="-0.0009" relative="1" as="geometry">
+            <mxPoint x="224.4999999999999" y="273.6600000000001" as="sourcePoint" />
+            <mxPoint x="54.999999999999886" y="273" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-35" value="12. Fill &amp;amp; Submit" style="html=1;verticalAlign=middle;endArrow=block;entryX=0;entryY=0.452;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.944;exitY=0.453;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-1" edge="1">
+          <mxGeometry x="-0.0027" relative="1" as="geometry">
+            <mxPoint x="-124.55999999999995" y="239.21999999999997" as="sourcePoint" />
+            <mxPoint x="45" y="239.00000000000006" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_dpJ-08PZt-rfk6sdK-W-10" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;18. View select seat&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="7Op2JaMXb7pChXdJnSNb-1" edge="1">
+          <mxGeometry x="0.1236" y="-90" relative="1" as="geometry">
+            <mxPoint x="42" y="261" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="12" y="261" />
+              <mxPoint x="12" y="298" />
+            </Array>
+            <mxPoint x="34" y="298" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vvcB78ZaGYWaYG9tcJMQ-2" value="&amp;nbsp;23. Seat updated or failed" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.039;exitY=0.728;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.011;entryY=0.725;entryDx=0;entryDy=0;entryPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="7Op2JaMXb7pChXdJnSNb-1" edge="1">
+          <mxGeometry x="-0.0009" relative="1" as="geometry">
+            <mxPoint x="224.4999999999999" y="342.6600000000001" as="sourcePoint" />
+            <mxPoint x="54.999999999999886" y="342" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_dpJ-08PZt-rfk6sdK-W-13" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;30. Ticket Booking View&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="7Op2JaMXb7pChXdJnSNb-1" edge="1">
+          <mxGeometry x="0.1011" y="-123" relative="1" as="geometry">
+            <mxPoint x="45" y="433" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="15" y="433" />
+              <mxPoint x="15" y="470" />
+            </Array>
+            <mxPoint x="37" y="470" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-40" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;24. Confirm Payment&amp;nbsp;&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="7Op2JaMXb7pChXdJnSNb-1" edge="1">
+          <mxGeometry x="1" y="-19" relative="1" as="geometry">
+            <mxPoint x="55" y="355" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="85" y="355" />
+              <mxPoint x="85" y="392" />
+            </Array>
+            <mxPoint x="63" y="392" as="targetPoint" />
+            <mxPoint x="-8" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-4" value="Controller" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="568" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-5" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="7Op2JaMXb7pChXdJnSNb-4" vertex="1">
+          <mxGeometry x="45" y="60" width="10" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-43" value="15. Insert data&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-4" edge="1">
+          <mxGeometry x="-0.0308" y="-1" relative="1" as="geometry">
+            <mxPoint x="57.999999999999886" y="238.22000000000003" as="sourcePoint" />
+            <mxPoint x="213" y="238" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vvcB78ZaGYWaYG9tcJMQ-1" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 10px;&quot;&gt;&amp;nbsp;22. Seat updated or failed&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.041;exitY=0.723;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=default;fontSize=11;entryX=0.9;entryY=0.805;entryDx=0;entryDy=0;entryPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-4" edge="1">
+          <mxGeometry x="-0.0085" relative="1" as="geometry">
+            <mxPoint x="215.58999999999992" y="342.41999999999996" as="sourcePoint" />
+            <mxPoint x="55" y="342.00000000000006" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="228" y="342.36" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_dpJ-08PZt-rfk6sdK-W-4" value="&amp;nbsp;25. Checkout payment" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0.03;entryY=0.451;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-4" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-124.00000000000011" y="402" as="sourcePoint" />
+            <mxPoint x="46.189999999999884" y="402" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_dpJ-08PZt-rfk6sdK-W-5" value="&amp;nbsp;26. Checkout payment&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-4" edge="1">
+          <mxGeometry x="-0.0308" y="-1" relative="1" as="geometry">
+            <mxPoint x="63.189999999999884" y="402.22" as="sourcePoint" />
+            <mxPoint x="218.19" y="402" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_dpJ-08PZt-rfk6sdK-W-7" value="&amp;nbsp; 14. createBooking()&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0.03;entryY=0.451;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-4" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-125.19000000000011" y="240.22000000000003" as="sourcePoint" />
+            <mxPoint x="44.999999999999886" y="240.22000000000003" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-39" value="&amp;nbsp;20. handleSeat()&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-4" edge="1">
+          <mxGeometry x="-0.0308" y="-1" relative="1" as="geometry">
+            <mxPoint x="60.999999999999886" y="310.28000000000003" as="sourcePoint" />
+            <mxPoint x="216" y="310.06" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_dpJ-08PZt-rfk6sdK-W-11" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;16. Success or failed&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.041;exitY=0.723;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="7Op2JaMXb7pChXdJnSNb-4" edge="1">
+          <mxGeometry x="-0.0042" relative="1" as="geometry">
+            <mxPoint x="214.58999999999992" y="432.05999999999995" as="sourcePoint" />
+            <mxPoint x="60" y="432" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="212" y="432" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_dpJ-08PZt-rfk6sdK-W-12" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;17. Success or failed&amp;nbsp;&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.039;exitY=0.728;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.011;entryY=0.725;entryDx=0;entryDy=0;entryPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="7Op2JaMXb7pChXdJnSNb-4" edge="1">
+          <mxGeometry x="-0.0009" relative="1" as="geometry">
+            <mxPoint x="43.499999999999886" y="432.6600000000001" as="sourcePoint" />
+            <mxPoint x="-126.00000000000011" y="432" as="targetPoint" />
+            <mxPoint as="offset" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-45" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;24. sendEmailTicket()&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="7Op2JaMXb7pChXdJnSNb-4" edge="1">
+          <mxGeometry x="-1" y="-17" relative="1" as="geometry">
+            <mxPoint x="55" y="447" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="85" y="447" />
+              <mxPoint x="85" y="484" />
+            </Array>
+            <mxPoint x="63" y="484" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-6" value="DB" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="741" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-7" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="7Op2JaMXb7pChXdJnSNb-6" vertex="1">
+          <mxGeometry x="45" y="60" width="10" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="vvcB78ZaGYWaYG9tcJMQ-3" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;21. Validation&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="7Op2JaMXb7pChXdJnSNb-6" edge="1">
+          <mxGeometry x="-1" y="-17" relative="1" as="geometry">
+            <mxPoint x="55" y="301" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="85" y="301" />
+              <mxPoint x="85" y="338" />
+            </Array>
+            <mxPoint x="63" y="338" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_dpJ-08PZt-rfk6sdK-W-6" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;27. Validation&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="7Op2JaMXb7pChXdJnSNb-6" edge="1">
+          <mxGeometry x="-1" y="-17" relative="1" as="geometry">
+            <mxPoint x="56.19" y="392" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="86.19" y="392" />
+              <mxPoint x="86.19" y="429" />
+            </Array>
+            <mxPoint x="64.19" y="429" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-33" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;9. Flight selected&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.041;exitY=0.723;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="7Op2JaMXb7pChXdJnSNb-6" edge="1">
+          <mxGeometry x="-0.0042" relative="1" as="geometry">
+            <mxPoint x="40.999999999999886" y="185.05999999999995" as="sourcePoint" />
+            <mxPoint x="-113.59000000000003" y="185" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="38.40999999999997" y="185" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_dpJ-08PZt-rfk6sdK-W-9" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;16. Validation&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="7Op2JaMXb7pChXdJnSNb-6" edge="1">
+          <mxGeometry x="-1" y="-17" relative="1" as="geometry">
+            <mxPoint x="56" y="229" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="86" y="229" />
+              <mxPoint x="86" y="266" />
+            </Array>
+            <mxPoint x="64" y="266" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-44" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;16. Success or failed&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.041;exitY=0.723;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="7Op2JaMXb7pChXdJnSNb-6" edge="1">
+          <mxGeometry x="-0.0042" relative="1" as="geometry">
+            <mxPoint x="40.58999999999992" y="273.05999999999995" as="sourcePoint" />
+            <mxPoint x="-114" y="273" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="38" y="273" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-8" value="Passenger" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="209" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-9" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="7Op2JaMXb7pChXdJnSNb-8" vertex="1">
+          <mxGeometry x="45" y="60" width="10" height="440" as="geometry" />
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-41" value="&amp;nbsp;18. Select seat&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;" parent="7Op2JaMXb7pChXdJnSNb-8" edge="1">
+          <mxGeometry x="-0.0027" relative="1" as="geometry">
+            <mxPoint x="55" y="310" as="sourcePoint" />
+            <mxPoint x="221" y="310" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_dpJ-08PZt-rfk6sdK-W-2" value="&amp;nbsp;23. Checkout Payment&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;entryX=0;entryY=0.452;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.944;exitY=0.453;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-8" edge="1">
+          <mxGeometry x="-0.0027" relative="1" as="geometry">
+            <mxPoint x="55.00000000000006" y="372.21999999999997" as="sourcePoint" />
+            <mxPoint x="224.56" y="372.00000000000006" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-29" value="6. Select flight" style="html=1;verticalAlign=middle;endArrow=block;entryX=0;entryY=0.452;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.944;exitY=0.453;exitDx=0;exitDy=0;exitPerimeter=0;" parent="7Op2JaMXb7pChXdJnSNb-8" edge="1">
+          <mxGeometry x="0.0013" relative="1" as="geometry">
+            <mxPoint x="55.00000000000006" y="133.21999999999997" as="sourcePoint" />
+            <mxPoint x="224.56" y="133.00000000000006" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-10" value="3. Select List of flight" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="623" y="109" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="700" y="109" />
+              <mxPoint x="620" y="49" />
+            </Array>
+            <mxPoint x="778" y="109" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-11" value="1. Input info" style="html=1;verticalAlign=middle;endArrow=block;entryX=0;entryY=0.452;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.944;exitY=0.453;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry x="-0.0027" relative="1" as="geometry">
+            <mxPoint x="263.44000000000005" y="109.65999999999997" as="sourcePoint" />
+            <mxPoint x="433" y="109.44000000000005" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-12" value="2. getFlightAvai()" style="verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0.03;entryY=0.451;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;labelBorderColor=none;fontColor=default;html=1;spacingTop=0;spacingLeft=0;horizontal=1;" parent="1" edge="1">
+          <mxGeometry x="0.021" relative="1" as="geometry">
+            <mxPoint x="443.1099999999999" y="109.22000000000003" as="sourcePoint" />
+            <mxPoint x="613.3" y="109.22000000000003" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-13" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;5. View List of flight&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.039;exitY=0.728;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.011;entryY=0.725;entryDx=0;entryDy=0;entryPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="1" edge="1">
+          <mxGeometry x="-0.0009" relative="1" as="geometry">
+            <mxPoint x="612.6099999999999" y="144.16000000000008" as="sourcePoint" />
+            <mxPoint x="443.1099999999999" y="143.5" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-14" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;4. List flight available&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.041;exitY=0.723;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="1" edge="1">
+          <mxGeometry x="-0.0042" relative="1" as="geometry">
+            <mxPoint x="777.5899999999999" y="144.05999999999995" as="sourcePoint" />
+            <mxPoint x="623" y="144" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="775" y="144" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-30" value="7. getFlightSelected()" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0.03;entryY=0.451;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="442.9999999999999" y="176.22000000000003" as="sourcePoint" />
+            <mxPoint x="613.1899999999999" y="176.22000000000003" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-31" value="8. getFlightSelected()" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;exitX=1;exitY=0.514;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.2;entryY=0.514;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="623" y="176.33999999999992" as="sourcePoint" />
+            <mxPoint x="780" y="176.33999999999992" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="7Op2JaMXb7pChXdJnSNb-34" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;10. View Flight details&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.039;exitY=0.728;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.011;entryY=0.725;entryDx=0;entryDy=0;entryPerimeter=0;labelBackgroundColor=default;fontSize=11;" parent="1" edge="1">
+          <mxGeometry x="-0.0009" relative="1" as="geometry">
+            <mxPoint x="612.6099999999999" y="210.16000000000008" as="sourcePoint" />
+            <mxPoint x="443.1099999999999" y="209.5" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="_dpJ-08PZt-rfk6sdK-W-1" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;13. Validation&lt;/font&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" parent="1" edge="1">
+          <mxGeometry x="-1" y="-10" relative="1" as="geometry">
+            <mxPoint x="447" y="225" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="447" y="225" />
+              <mxPoint x="477" y="225" />
+              <mxPoint x="477" y="254" />
+            </Array>
+            <mxPoint x="455" y="254" as="targetPoint" />
+            <mxPoint x="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

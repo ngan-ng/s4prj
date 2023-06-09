@@ -24,19 +24,18 @@ public class Payment implements Serializable {
 }
 
 
-PaymentDetail
-  id;
-  paymentMethod: paypal, cash
-  payerAccount: 6688
-  payerFullName: NguyenToan
-  payerAddress: 6666
-  payerPhone: 6666
-  Date today;
-
- ui
--> button payment -> (authorize payment) popup paypal account(username, password) input
-
--> 
+//PaymentDetail
+//  id;
+//  payerAccount: email
+//  payerFullName: NguyenToan
+//  payerAddress: 6666
+//  payerPhone: 6666
+//  Date today;
+//
+// ui
+//-> button payment -> (authorize payment) popup paypal account(username, password) input
+//
+//->
 
 
 

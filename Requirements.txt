@@ -16,3 +16,8 @@
   1. Admin (who use application)
   2. Passengers (users)
   3. Airline authority (Operators)
+
+- Viết 1 service @Schedule @Queue 
+
+- 12Jun: Review 2
+- 19Jun: Review 3

@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-security</artifactId>
-			<version>1.6.13</version>
+			<version>1.6.15</version>
 		</dependency>
 		<!-- QR generator libs -->
 		<dependency>

@@ -1,15 +1,8 @@
-import { takeLatest, put, all, call } from "redux-saga/effects";
+import { takeLatest, put, all, call } from 'redux-saga/effects';
 
-import { USER_ACTION_TYPES } from "./user.types";
+import { USER_ACTION_TYPES } from './user.types';
 
-import {
-  signInSuccess,
-  signInFailed,
-  signUpSuccess,
-  signUpFailed,
-  signOutSuccess,
-  signOutFailed,
-} from "./user.action";
+import { signInSuccess, signInFailed, signUpSuccess, signUpFailed, signOutSuccess, signOutFailed } from './user.action';
 
 import {
   getCurrentUser,
@@ -17,16 +10,12 @@ import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
   createAuthUserWithEmailAndPassword,
-  signOutUser,
-} from "../../utils/firebase/firebase.utils";
+  signOutUser
+} from '../../utils/firebase/firebase.utils';
 
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
   try {
-    const userSnapshot = yield call(
-      createUserDocumentFromAuth,
-      userAuth,
-      additionalDetails
-    );
+    const userSnapshot = yield call(createUserDocumentFromAuth, userAuth, additionalDetails);
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
     yield put(signInFailed(error));
@@ -44,11 +33,7 @@ export function* signInWithGoogle() {
 
 export function* signInWithEmail({ payload: { email, password } }) {
   try {
-    const { user } = yield call(
-      signInAuthUserWithEmailAndPassword,
-      email,
-      password
-    );
+    const { user } = yield call(signInAuthUserWithEmailAndPassword, email, password);
     yield call(getSnapshotFromUserAuth, user);
   } catch (error) {
     yield put(signInFailed(error));
@@ -67,11 +52,7 @@ export function* isUserAuthenticated() {
 
 export function* signUp({ payload: { email, password, displayName } }) {
   try {
-    const { user } = yield call(
-      createAuthUserWithEmailAndPassword,
-      email,
-      password
-    );
+    const { user } = yield call(createAuthUserWithEmailAndPassword, email, password);
     yield put(signUpSuccess(user, { displayName }));
   } catch (error) {
     yield put(signUpFailed(error));
@@ -122,6 +103,6 @@ export function* userSagas() {
     call(onEmailSignInStart),
     call(onSignUpStart),
     call(onSignUpSuccess),
-    call(onSignOutStart),
+    call(onSignOutStart)
   ]);
 }

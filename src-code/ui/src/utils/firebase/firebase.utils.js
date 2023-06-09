@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 
 import {
   getAuth,
@@ -7,49 +7,38 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
+  onAuthStateChanged
+} from 'firebase/auth';
 
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-} from "firebase/firestore";
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAC_qLHOs6Vl1TiKieFfuGQGS5sRAA1gRc",
-    authDomain: "s4prj-db.firebaseapp.com",
-    projectId: "s4prj-db",
-    storageBucket: "s4prj-db.appspot.com",
-    messagingSenderId: "1035142858301",
-    appId: "1:1035142858301:web:722b0d7938b5a108d54c54"
-  };
-
-const firebaseApp = initializeApp(firebaseConfig);
-
-const googleProvider = new GoogleAuthProvider(); 
+  apiKey: 'AIzaSyAC_qLHOs6Vl1TiKieFfuGQGS5sRAA1gRc',
+  authDomain: 's4prj-db.firebaseapp.com',
+  projectId: 's4prj-db',
+  storageBucket: 's4prj-db.appspot.com',
+  messagingSenderId: '1035142858301',
+  appId: '1:1035142858301:web:722b0d7938b5a108d54c54'
+};
+initializeApp(firebaseConfig);
+const googleProvider = new GoogleAuthProvider();
 
 googleProvider.setCustomParameters({
-  prompt: "select_account",
+  prompt: 'select_account'
 });
 
 export const auth = getAuth();
 
-export const signInWithGooglePopup = () =>
-  signInWithPopup(auth, googleProvider);
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (
-  userAuth,
-  additionalInformation = {}
-) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
   if (!userAuth) {
     return;
   }
 
-  const userDocRef = doc(db, "users", userAuth.uid);
+  const userDocRef = doc(db, 'users', userAuth.uid);
 
   const userSnapshot = await getDoc(userDocRef);
 
@@ -62,11 +51,10 @@ export const createUserDocumentFromAuth = async (
         displayName,
         email,
         createdAt,
-        ...additionalInformation,
+        ...additionalInformation
       });
-      
     } catch (error) {
-      console.log("Cannot create user", error.message);
+      console.log('Cannot create user', error.message);
     }
   }
 
@@ -82,7 +70,7 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-  if (!email || !password){
+  if (!email || !password) {
     return;
   }
 
