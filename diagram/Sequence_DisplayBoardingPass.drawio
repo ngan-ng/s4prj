@@ -1,0 +1,97 @@
+<mxfile host="Electron" modified="2023-06-11T08:17:42.988Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.8 Chrome/112.0.5615.165 Electron/24.2.0 Safari/537.36" etag="ItcLTbrw70nk-D0adRMi" version="21.2.8" type="device">
+  <diagram name="Page-1" id="5S-eEedVzDfpcZMJ_uvx">
+    <mxGraphModel dx="1195" dy="703" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="e8z-HoSejarNDCepBSpH-1" value="UI" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="388" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-2" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="e8z-HoSejarNDCepBSpH-1">
+          <mxGeometry x="45" y="60" width="10" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-8" value="&amp;nbsp;1. Input PNR&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;entryX=0;entryY=0.452;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.944;exitY=0.453;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="e8z-HoSejarNDCepBSpH-1">
+          <mxGeometry x="-0.0027" relative="1" as="geometry">
+            <mxPoint x="-124.55999999999995" y="93.21999999999997" as="sourcePoint" />
+            <mxPoint x="45" y="93.00000000000006" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-33" value="&lt;font face=&quot;Verdana&quot;&gt;&amp;nbsp;6. Display print bp button&lt;br&gt;&lt;/font&gt;&amp;nbsp;with checked in booking" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;verticalAlign=middle;" edge="1" parent="e8z-HoSejarNDCepBSpH-1">
+          <mxGeometry x="-1" y="-22" relative="1" as="geometry">
+            <mxPoint x="62" y="157" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="92" y="157" />
+              <mxPoint x="92" y="194" />
+            </Array>
+            <mxPoint x="70" y="194" as="targetPoint" />
+            <mxPoint x="-10" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-10" value="Controller" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="568" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-11" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="e8z-HoSejarNDCepBSpH-10">
+          <mxGeometry x="45" y="60" width="10" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-16" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;4. List of booking by PNR&amp;nbsp;&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.041;exitY=0.723;exitDx=0;exitDy=0;exitPerimeter=0;labelBackgroundColor=default;fontSize=11;" edge="1" parent="e8z-HoSejarNDCepBSpH-10">
+          <mxGeometry x="-0.0042" relative="1" as="geometry">
+            <mxPoint x="225.23999999999992" y="133.55999999999995" as="sourcePoint" />
+            <mxPoint x="55.65" y="133.5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="261.65" y="133.5" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-17" value="&lt;font face=&quot;Verdana&quot; style=&quot;font-size: 11px;&quot;&gt;&amp;nbsp;5. View List of booking&amp;nbsp;&lt;/font&gt;" style="html=1;verticalAlign=middle;endArrow=open;dashed=1;endSize=8;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;exitX=-0.039;exitY=0.728;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1.011;entryY=0.725;entryDx=0;entryDy=0;entryPerimeter=0;labelBackgroundColor=default;fontSize=11;" edge="1" parent="e8z-HoSejarNDCepBSpH-10">
+          <mxGeometry x="-0.0009" relative="1" as="geometry">
+            <mxPoint x="44.25999999999988" y="133.66000000000008" as="sourcePoint" />
+            <mxPoint x="-125.24000000000012" y="133" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-19" value="DB" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="749" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-20" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="e8z-HoSejarNDCepBSpH-19">
+          <mxGeometry x="45" y="60" width="10" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-23" value="Passenger" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;collapsible=0;recursiveResize=0;outlineConnect=0;rounded=1;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="209" y="26" width="100" height="534" as="geometry" />
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-24" value="" style="html=1;points=[];perimeter=orthogonalPerimeter;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="e8z-HoSejarNDCepBSpH-23">
+          <mxGeometry x="45" y="60" width="10" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-30" value="&amp;nbsp;7. Print boarding pass&amp;nbsp;&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;entryX=0;entryY=0.452;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.944;exitY=0.453;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="e8z-HoSejarNDCepBSpH-23">
+          <mxGeometry x="-0.0027" relative="1" as="geometry">
+            <mxPoint x="55.00000000000006" y="214.21999999999997" as="sourcePoint" />
+            <mxPoint x="224.56" y="214.00000000000006" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-28" value="&amp;nbsp;3. Select List of booking&amp;nbsp;" style="html=1;verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0.067;entryY=0.039;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1">
+          <mxGeometry x="-0.0699" relative="1" as="geometry">
+            <mxPoint x="627" y="119" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="696" y="119" />
+              <mxPoint x="616" y="59" />
+            </Array>
+            <mxPoint x="794.6700000000003" y="119.15999999999997" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8z-HoSejarNDCepBSpH-29" value="&amp;nbsp;2. getBookingByPnr()&amp;nbsp;" style="verticalAlign=middle;endArrow=block;labelBackgroundColor=default;fontFamily=Verdana;fontSize=11;edgeStyle=elbowEdgeStyle;elbow=vertical;entryX=0.03;entryY=0.451;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1.011;exitY=0.451;exitDx=0;exitDy=0;exitPerimeter=0;labelBorderColor=none;fontColor=default;html=1;spacingTop=0;spacingLeft=0;horizontal=1;" edge="1" parent="1">
+          <mxGeometry x="0.021" relative="1" as="geometry">
+            <mxPoint x="443.1099999999999" y="119.22000000000003" as="sourcePoint" />
+            <mxPoint x="613.3" y="119.22000000000003" as="targetPoint" />
+            <Array as="points" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
