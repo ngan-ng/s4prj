@@ -1,13 +1,19 @@
-import { Box, CssBaseline, Toolbar } from '@mui/material';
+import { AppBar, Box, Container, CssBaseline, Toolbar } from '@mui/material';
 import Header from './Header';
+import { Outlet } from 'react-router-dom';
 
 const MainLayout = () => {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box>
       <CssBaseline />
-      <Toolbar>
-        <Header />
-      </Toolbar>
+      <AppBar position="static" elevation={5} sx={{ display: 'block', py: 2 }}>
+        <Container>
+          <Toolbar>
+            <Header />
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Outlet />
     </Box>
   );
 };

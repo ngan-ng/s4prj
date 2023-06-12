@@ -1,11 +1,12 @@
 import { Button, FormControlLabel, Grid, Paper, Radio, RadioGroup, Typography } from '@mui/material';
-import { Fragment, useEffect, useState } from 'react';
-import { Airports } from './Airports';
+import { useEffect, useState } from 'react';
 import TripDate from './TripDate';
 import validate from 'validate.js';
 import { Search } from '@mui/icons-material';
 import dayjs from 'dayjs';
-import PaxQty from './PaxQty';
+// import PaxQty from './PaxQty';
+import Airports from './Airports';
+import { Fragment } from 'react';
 
 const SearchFlightForm = () => {
   const today = dayjs();
@@ -17,7 +18,7 @@ const SearchFlightForm = () => {
     returnDate: today,
     tripType: 'roundtrip'
   });
-  var isOneway = searchDto.tripType === 'oneway';
+  let isOneway = searchDto.tripType === 'oneway';
   // Validation
   const [validation, setValidation] = useState({
     touched: {},
@@ -52,7 +53,8 @@ const SearchFlightForm = () => {
     }));
   };
   // Validation schema
-  var schema = {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const schema = {
     origin: {
       presence: {
         allowEmpty: false,
@@ -108,7 +110,7 @@ const SearchFlightForm = () => {
       }
       let isValid;
 
-      for (var key of Object.keys(errors)) {
+      for (let key of Object.keys(errors)) {
         if (errors[key] !== '') {
           isValid = false;
           break;
@@ -126,7 +128,7 @@ const SearchFlightForm = () => {
     return () => {
       clearTimeout(valid);
     };
-  }, [searchDto]);
+  }, [isOneway, schema, searchDto, today]);
 
   const handleSubmit = () => {
     console.log(validation);
@@ -143,7 +145,11 @@ const SearchFlightForm = () => {
 
   return (
     <Fragment>
-      <Paper elevation={5} sx={{ opacity: 0.96, p: 3, width: '80%' }}>
+      <Paper
+        elevation={5}
+        sx={{ display: 'block', alignItems: 'center', opacity: 0.96, p: 3, width: '80%', mt: 5 }}
+        style={{ margin: '0 auto', marginTop: 50 }}
+      >
         {/* Row 1: Select destinations for traveling */}
         <Grid container spacing={2}>
           <Grid item xs={12} sm={9}>
@@ -207,7 +213,7 @@ const SearchFlightForm = () => {
           </Grid>
           {/* Row 3: Select number of passengers for traveling */}
 
-          <PaxQty />
+          {/* <PaxQty /> */}
         </Grid>
       </Paper>
     </Fragment>

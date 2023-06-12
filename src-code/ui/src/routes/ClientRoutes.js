@@ -2,11 +2,11 @@
 
 // project imports
 import MainLayout from 'layout/client/MainLayout';
-import HomePage from '../views/client/home';
+import HomePage from 'views/client/home/index';
 // import Loadable from 'ui-component/Loadable';
 
 // dashboard routing
-// const DashboardDefault = Loadable(lazy(() => import('views/admin/dashboard/Default')));
+// const HomePage = Loadable(lazy(() => import('views/client/home')));
 
 // utilities routing
 // const UtilsTypography = Loadable(lazy(() => import('views/admin/utilities/Typography')));
@@ -25,18 +25,18 @@ const ClientRoutes = {
   element: <MainLayout />,
   children: [
     {
-      path: 'home',
+      path: '',
       element: <HomePage />
+    },
+    {
+      path: 'home',
+      children: [
+        {
+          path: '',
+          element: <HomePage />
+        }
+      ]
     }
-    //     {
-    //         path: 'dashboard',
-    //         children: [
-    //             {
-    //                 path: 'default',
-    //                 element: <DashboardDefault />
-    //             }
-    //         ]
-    //     },
     //     {
     //         path: 'utils',
     //         children: [

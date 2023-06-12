@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Grid } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -20,7 +21,7 @@ const TripDate = ({ searchDto, onChange, validation }) => {
               minDate={today}
               maxDate={today.add(6, 'month')}
               slotProps={{
-                textField: { helperText: validation.errors.departDate }
+                textField: { helperText: validation?.errors.departDate }
               }}
               label="Departure date"
               sx={{ width: '100%' }}
@@ -37,7 +38,7 @@ const TripDate = ({ searchDto, onChange, validation }) => {
               minDate={searchDto.departDate}
               maxDate={today.add(6, 'month')}
               slotProps={{
-                textField: { helperText: validation.errors.returnDate }
+                textField: { helperText: validation?.errors.returnDate }
               }}
               label="Return date"
               sx={{ width: '100%' }}

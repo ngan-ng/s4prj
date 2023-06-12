@@ -1,7 +1,7 @@
 import rootReducer from './root-reducer';
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
-import { persistReducer } from 'redux-persist';
+import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from '@redux-saga/core';
 import { rootSaga } from './root-saga';
@@ -28,3 +28,4 @@ export const store = configureStore({
   // enhancers: composeEnhancers
 });
 sagaMiddleware.run(rootSaga);
+export const persistor = persistStore(store);
