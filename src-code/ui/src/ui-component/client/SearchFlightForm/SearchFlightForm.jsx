@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 // import PaxQty from './PaxQty';
 import Airports from './Airports';
 import { Fragment } from 'react';
+// import PaxQty from './PaxQty';
 
 const SearchFlightForm = () => {
   const today = dayjs();

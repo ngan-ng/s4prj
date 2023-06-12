@@ -1,11 +1,12 @@
 import { Typography } from '@mui/material';
 import { Fragment } from 'react';
-const Header = () => {
+
+const Footer = () => {
   return (
     <Fragment>
-      <Typography>Header here</Typography>
+      <Typography>Footer here</Typography>
     </Fragment>
   );
 };
 
-export default Header;
+export default Footer;
