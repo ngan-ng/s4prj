@@ -8,10 +8,13 @@ import { FlightLand, FlightTakeoff } from '@mui/icons-material';
 
 const Airports = ({ origin, destination, airportChange, onHasError, validation }) => {
   const dispatch = useDispatch();
-  const airports = useSelector(selectAirports);
+  const airports = useSelector(selectAirports) ?? {};
+  const isAirportsEmpty = Object.keys(airports).length === 0;
   useEffect(() => {
-    dispatch(fetchAirportStart());
-  }, [dispatch]);
+    if (isAirportsEmpty) {
+      dispatch(fetchAirportStart());
+    }
+  }, [dispatch, isAirportsEmpty]);
 
   return (
     <Fragment>
@@ -31,9 +34,9 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
               IconComponent={() => <FlightTakeoff sx={{ m: 1.5 }} color="secondary" />}
             >
               <MenuItem value={''}>None</MenuItem>
-              {airports?.data ? (
-                airports?.data
-                  //   .filter((item) => item.iata_code !== destination)
+              {!isAirportsEmpty ? (
+                airports
+                  .filter((item) => item.iata_code !== destination)
                   .map((item) => (
                     <MenuItem key={item.iata_code} value={`${item.iata_code}`}>
                       {item.location} - {item.name} ({item.iata_code})
@@ -64,9 +67,9 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
               <MenuItem key={0} value={''}>
                 None
               </MenuItem>
-              {airports != null ? (
-                airports.data
-                  //   .filter((item) => item.iata_code !== origin)
+              {!isAirportsEmpty ? (
+                airports
+                  .filter((item) => item.iata_code !== origin)
                   ?.map((item) => (
                     <MenuItem key={item.iata_code} value={`${item.iata_code}`}>
                       {item.location} - {item.name} ({item.iata_code})

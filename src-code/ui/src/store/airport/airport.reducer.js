@@ -10,7 +10,7 @@ export const airportReducer = (state = AIRPORT_INITIAL_STATE, action = {}) => {
     case action_types.FETCH_AIRPORT_SUCCESS:
       return {
         ...state,
-        airports: payload
+        airports: payload.data
       };
     case action_types.FETCH_AIRPORT_FAILED:
       return {
