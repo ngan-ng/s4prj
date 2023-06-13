@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -21,6 +22,7 @@ public class Payment implements Serializable {
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 //    @JoinColumn(name = "booking_id")
 //    private Booking booking;
+    private LocalDateTime date;
 }
 
 

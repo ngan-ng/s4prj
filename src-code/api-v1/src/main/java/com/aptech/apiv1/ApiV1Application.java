@@ -33,14 +33,15 @@ public class ApiV1Application {
 //        initialize(context);
 //        addPromotions(context);
     }
-    static void addPromotions(ConfigurableApplicationContext context){
+
+    static void addPromotions(ConfigurableApplicationContext context) {
         PromotionPolicyRepository policyRepository = context.getBean((PromotionPolicyRepository.class));
-        int year = 2023, month = 5, day = 18;
+        int year = 2023, month = 6, day = 18;
         PromotionsPolicy promotionsPolicy = new PromotionsPolicy()
                 .setPromotionCode("PT1399")
                 .setDescription("Promotion by points of member!")
-                .setDateStart(LocalDateTime.of(year,month,day,0,0,0))
-                .setDateEnd(LocalDateTime.of( LocalDate.of(year, month+1,day), LocalTime.now()))
+                .setDateStart(LocalDateTime.of(year, month, day, 0, 0, 0))
+                .setDateEnd(LocalDateTime.of(LocalDate.of(year, month + 1, day), LocalTime.now()))
                 .setPromotionType(PromotionType.POINTS.toString())
                 .setApplyRate(0.05)
                 .setCreatedBy(1);
@@ -70,55 +71,63 @@ public class ApiV1Application {
         airportRepository.save(destination);
         List<Seat> seatList = new ArrayList<>();
 
+        int durationTurnAround = 60;
+        LocalDateTime std;
         // To HA NOI
         // First flight to HAN is at 05:10 AM
-        LocalDateTime std = LocalDateTime.of(2023, 7, new Date().getDate(), 5, 10, 0);
-        int durationSgnHan = 130;
-        int durationTurnAround = 60;
-        for (int i = 120; i <= 125; i++) {
-            int stdHr = std.getHour();
-            boolean goldenTime = (stdHr > 5 && stdHr < 9) || (stdHr > 16 && stdHr < 20);
-            double basePrice = 128;
-            Flight flight = new Flight().setFlightNumber(i)
-                    .setSTD(std)
-                    .setDuration(durationSgnHan)
-                    .setOrigin(i % 2 == 0 ? origin : destination)
-                    .setDestination(i % 2 == 0 ? destination : origin)
-                    .setFlightStatus(FlightStatus.ONTIME.toString())
-                    .setAircraft(ac1)
-                    .setBasePrice(goldenTime?basePrice+15:basePrice);
-            flight = flightRepository.save(flight);
-            List<Seat> seatmap = CreateSeatsOnFlight.createSeatsA320(flight);
-            seatList.addAll(seatmap);
-            std = std.plusMinutes(durationSgnHan + durationTurnAround); // 130 min duration + 60 min turn-around
+        for (int k = 0; k < 3; k += 2) {
+            std = LocalDateTime.of(2023, 7, new Date().getDate(), 5, 10, 0);
+            std = std.plusDays(k);
+            int durationSgnHan = 130;
+            for (int i = 120; i <= 125; i++) {
+                int stdHr = std.getHour();
+                boolean goldenTime = (stdHr > 5 && stdHr < 9) || (stdHr > 16 && stdHr < 20);
+                double basePrice = 128;
+                Flight flight = new Flight().setFlightNumber(i)
+                        .setSTD(std)
+                        .setDuration(durationSgnHan)
+                        .setOrigin(i % 2 == 0 ? origin : destination)
+                        .setDestination(i % 2 == 0 ? destination : origin)
+                        .setFlightStatus(FlightStatus.ONTIME.toString())
+                        .setAircraft(ac1)
+                        .setBasePrice(goldenTime ? basePrice + 15 : basePrice);
+                flight = flightRepository.save(flight);
+                List<Seat> seatmap = CreateSeatsOnFlight.createSeatsA320(flight);
+                seatList.addAll(seatmap);
+                std = std.plusMinutes(durationSgnHan + durationTurnAround); // 130 min duration + 60 min turn-around
+            }
         }
         // To DA NANG
         // First flight to DAD is at 06:20 AM
-        std = LocalDateTime.of(2023, 7, new Date().getDate(), 6, 20, 0);
-        destination.setIata_code(IataCode.DAD.toString())
-                .setName(getAirport(IataCode.DAD))
-                .setLocation(getLocation(IataCode.DAD));
-        airportRepository.save(destination);
-        int durationSgnDad = 80;
-        for (int i = 620; i <= 625; i++) {
-            int stdHr = std.getHour();
-            boolean goldenTime = (stdHr > 5 && stdHr < 9) || (stdHr > 16 && stdHr < 20);
-            double basePrice = 68;
-            Flight flight = new Flight().setFlightNumber(i)
-                    .setSTD(std)
-                    .setDuration(durationSgnDad)
-                    .setOrigin(i % 2 == 0 ? origin : destination)
-                    .setDestination(i % 2 == 0 ? destination : origin)
-                    .setFlightStatus(FlightStatus.ONTIME.toString())
-                    .setAircraft(ac2)
-                    .setBasePrice(goldenTime?basePrice+15:basePrice);
+        for (int k = 0; k < 3; k += 2) {
+            std = LocalDateTime.of(2023, 7, new Date().getDate(), 6, 20, 0);
+            std = std.plusDays(k);
+            destination.setIata_code(IataCode.DAD.toString())
+                    .setName(getAirport(IataCode.DAD))
+                    .setLocation(getLocation(IataCode.DAD));
+            airportRepository.save(destination);
+            int durationSgnDad = 80;
+            for (int i = 620; i <= 625; i++) {
+                int stdHr = std.getHour();
+                boolean goldenTime = (stdHr > 5 && stdHr < 9) || (stdHr > 16 && stdHr < 20);
+                double basePrice = 68;
+                Flight flight = new Flight().setFlightNumber(i)
+                        .setSTD(std)
+                        .setDuration(durationSgnDad)
+                        .setOrigin(i % 2 == 0 ? origin : destination)
+                        .setDestination(i % 2 == 0 ? destination : origin)
+                        .setFlightStatus(FlightStatus.ONTIME.toString())
+                        .setAircraft(ac2)
+                        .setBasePrice(goldenTime ? basePrice + 15 : basePrice);
 
 
-            flight = flightRepository.save(flight);
-            List<Seat> seatmap = CreateSeatsOnFlight.createSeatsA320(flight);
-            seatList.addAll(seatmap);
-            std = std.plusMinutes(durationSgnDad + durationTurnAround); // 130 min duration + 60 min turn-around
+                flight = flightRepository.save(flight);
+                List<Seat> seatmap = CreateSeatsOnFlight.createSeatsA320(flight);
+                seatList.addAll(seatmap);
+                std = std.plusMinutes(durationSgnDad + durationTurnAround); // 130 min duration + 60 min turn-around
+            }
         }
+
         seatRepository.saveAll(seatList);
 
         // Role

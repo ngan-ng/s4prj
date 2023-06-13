@@ -32,6 +32,8 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
               required={true}
               error={onHasError('origin')}
               IconComponent={() => <FlightTakeoff sx={{ m: 1.5 }} color="secondary" />}
+              variant="outlined"
+              color="secondary"
             >
               <MenuItem value={''}>None</MenuItem>
               {!isAirportsEmpty ? (
@@ -63,6 +65,8 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
               onChange={airportChange}
               error={onHasError('destination') ? true : false}
               IconComponent={() => <FlightLand sx={{ m: 1.5 }} color="secondary" />}
+              variant="outlined"
+              color="secondary"
             >
               <MenuItem key={0} value={''}>
                 None
