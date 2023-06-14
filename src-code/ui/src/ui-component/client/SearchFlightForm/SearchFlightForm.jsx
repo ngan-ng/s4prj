@@ -146,17 +146,26 @@ const SearchFlightForm = () => {
   };
 
   const maxPax = 6;
-  const [totalPax, setTotalPax] = useState({ adl: 1, chd: 0, inf: 0 });
+  const [paxQty, setPaxQty] = useState({ adl: 1, chd: 0, inf: 0 });
+  const [paxQtyErr, setPaxQtyErr] = useState({ adl: '', chd: '', inf: '' });
   const handlePaxQty = (e) => {
     const regex = /^[0-9]+$/;
     let val = parseInt(e.target.value, 10);
     if (val >= 0 && regex.test(val)) {
-      setTotalPax((prev) => ({
+      setPaxQty((prev) => ({
         ...prev,
         [e.target.name]: val
       }));
+      setPaxQtyErr((prev) => ({
+        ...prev,
+        [e.target.name]: ''
+      }));
     } else {
-      alert('invalid value');
+      setPaxQtyErr((prev) => ({
+        ...prev,
+        [e.target.name]: 'invalid number'
+      }));
+      e.preventDefault();
     }
   };
 
@@ -229,7 +238,7 @@ const SearchFlightForm = () => {
             </Grid>
           </Grid>
           {/* Row 3: Select number of passengers for traveling */}
-          {validation.isValid && <PaxQty maxPax={maxPax} totalPax={totalPax} onPaxChange={handlePaxQty} />}
+          {validation.isValid && <PaxQty maxPax={maxPax} paxQty={paxQty} onPaxChange={handlePaxQty} paxQtyErr={paxQtyErr} />}
         </Grid>
       </Paper>
     </Fragment>

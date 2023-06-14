@@ -14,7 +14,7 @@ function BaByIcon(props) {
   );
 }
 
-const PaxQty = ({ maxPax, totalPax, onPaxChange }) => {
+const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => {
   return (
     <Fragment>
       <Grid item xs={12}>
@@ -25,8 +25,8 @@ const PaxQty = ({ maxPax, totalPax, onPaxChange }) => {
           type="number"
           label="Adult"
           name="adl"
-          inputProps={{ min: 1, max: maxPax - totalPax.chd, step: 1 }}
-          value={totalPax.adl}
+          inputProps={{ min: 1, max: maxPax - paxQty.chd, step: 1 }}
+          value={paxQty.adl}
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
@@ -35,6 +35,7 @@ const PaxQty = ({ maxPax, totalPax, onPaxChange }) => {
             )
           }}
           onChangeCapture={onPaxChange}
+          helperText={paxQtyErr.adl}
           fullWidth
           sx={{ display: { sm: 'block' } }}
           variant="outlined"
@@ -46,8 +47,8 @@ const PaxQty = ({ maxPax, totalPax, onPaxChange }) => {
           type="number"
           label="Children"
           name="chd"
-          inputProps={{ min: 0, max: maxPax - totalPax.adl, step: 1 }}
-          value={totalPax.chd}
+          inputProps={{ min: 0, max: maxPax - paxQty.adl, step: 1 }}
+          value={paxQty.chd}
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
@@ -56,6 +57,7 @@ const PaxQty = ({ maxPax, totalPax, onPaxChange }) => {
             )
           }}
           onChangeCapture={onPaxChange}
+          helperText={paxQtyErr.chd}
           fullWidth
           variant="outlined"
           color="secondary"
@@ -67,8 +69,8 @@ const PaxQty = ({ maxPax, totalPax, onPaxChange }) => {
           type="number"
           label="Infant"
           name="inf"
-          inputProps={{ min: 0, max: totalPax.adl, step: 1 }}
-          value={totalPax.inf}
+          inputProps={{ min: 0, max: paxQty.adl, step: 1 }}
+          value={paxQty.inf}
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
@@ -77,6 +79,7 @@ const PaxQty = ({ maxPax, totalPax, onPaxChange }) => {
             )
           }}
           onChangeCapture={onPaxChange}
+          helperText={paxQtyErr.inf}
           fullWidth
           variant="outlined"
           color="secondary"

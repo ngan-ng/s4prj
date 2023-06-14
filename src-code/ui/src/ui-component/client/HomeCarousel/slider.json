@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "image": "../../../assets/images/carousel/slide-1.png",
+        "title": "Title 1",
+        "url": ""
+    },
+    {
+        "id": 2,
+        "image": "../../../assets/images/carousel/slide-2.jpg",
+        "title": "Title 2",
+        "url": ""
+    },
+    {
+        "id":3,
+        "image": "../../../assets/images/carousel/slide-3.jpg",
+        "title": "Title 3",
+        "url": ""
+    },
+    {
+        "id": 4,
+        "image": "../../../assets/images/carousel/slide-4.png",
+        "title": "Title 4",
+        "url": ""
+    }
+]
