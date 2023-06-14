@@ -10,6 +10,7 @@ import com.aptech.apiv1.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -34,27 +35,24 @@ public class FlightServiceImpl implements FlightService {
             throw new Exception("Not Found");
         }
         SearchResponseDto responseDto = new SearchResponseDto();
-        LocalDateTime today = LocalDateTime.now();
-        LocalDateTime departDate = searchDto.getDepartDate();
-        LocalDateTime returnDate = searchDto.getReturnDate();
+        LocalDateTime departDate = searchDto.getDepartDate().atTime(0, 0);
+        LocalDateTime returnDate = searchDto.getReturnDate().atTime(0, 0);
 
-        LocalDateTime startDate = departDate.isBefore(today) ? today : departDate;
         List<Flight> outboundFlights = flightRepository
                 .findAllByOriginAndDestinationAndSTDBetween(
                         origin.get(),
                         destination.get(),
-                        startDate.minusDays(1),
-                        startDate.plusDays(4));
+                        departDate,
+                        departDate.plusDays(1));
         responseDto.setOutboundFlights(outboundFlights);
 
         if (searchDto.getTripType().equalsIgnoreCase("roundtrip")) {
-            startDate = returnDate.isBefore(today) ? today : returnDate;
             List<Flight> inboundFlights = flightRepository
                     .findAllByOriginAndDestinationAndSTDBetween(
                             destination.get(),
                             origin.get(),
-                            startDate.minusDays(1),
-                            startDate.plusDays(4));
+                            returnDate,
+                            returnDate.plusDays(1));
             responseDto.setInboundFlights(inboundFlights);
         }
         return responseDto;

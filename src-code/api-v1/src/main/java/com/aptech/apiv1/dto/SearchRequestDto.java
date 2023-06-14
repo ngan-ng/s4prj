@@ -4,14 +4,14 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @Accessors(chain = true)
 public class SearchRequestDto implements Serializable {
     private String origin;
     private String destination;
-    private LocalDateTime departDate;
-    private LocalDateTime returnDate;
+    private LocalDate departDate;
+    private LocalDate returnDate;
     private String tripType;
 }

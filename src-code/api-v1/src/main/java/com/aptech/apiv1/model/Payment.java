@@ -19,25 +19,12 @@ public class Payment implements Serializable {
     private String category;
     private String status;
     private long bookingId;
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    @JoinColumn(name = "booking_id")
-//    private Booking booking;
-    private LocalDateTime date;
+    private LocalDateTime createdAt;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(referencedColumnName = "id", name = "payerDetailsId")
+    private PayerDetails payerDetailsId;
+
 }
-
-
-//PaymentDetail
-//  id;
-//  payerAccount: email
-//  payerFullName: NguyenToan
-//  payerAddress: 6666
-//  payerPhone: 6666
-//  Date today;
-//
-// ui
-//-> button payment -> (authorize payment) popup paypal account(username, password) input
-//
-//->
 
 
 
