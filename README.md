@@ -12,7 +12,7 @@ Project title: Unknown
 
              Nguyen Toan (ToanNTS2109005@fpt.edu.vn) Student1328430
 
-             Nguyen Ngoc Kim Ngan (...@fpt.edu.vn) Student1317115
+             Nguyen Ngoc Kim Ngan (Ngannkts2106023@fpt.edu.vn) Student1317115
              
              Trinh Gia Bao (...@fpt.edu.vn) Student1275081
              

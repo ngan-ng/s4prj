@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 // import PaxQty from './PaxQty';
 import Airports from './Airports';
 import { Fragment } from 'react';
+import PaxQty from './PaxQty';
 // import PaxQty from './PaxQty';
 
 const SearchFlightForm = () => {
@@ -144,6 +145,30 @@ const SearchFlightForm = () => {
     console.log(temp);
   };
 
+  const maxPax = 6;
+  const [paxQty, setPaxQty] = useState({ adl: 1, chd: 0, inf: 0 });
+  const [paxQtyErr, setPaxQtyErr] = useState({ adl: '', chd: '', inf: '' });
+  const handlePaxQty = (e) => {
+    const regex = /^[0-9]+$/;
+    let val = parseInt(e.target.value, 10);
+    if (val >= 0 && regex.test(val)) {
+      setPaxQty((prev) => ({
+        ...prev,
+        [e.target.name]: val
+      }));
+      setPaxQtyErr((prev) => ({
+        ...prev,
+        [e.target.name]: ''
+      }));
+    } else {
+      setPaxQtyErr((prev) => ({
+        ...prev,
+        [e.target.name]: 'invalid number'
+      }));
+      e.preventDefault();
+    }
+  };
+
   return (
     <Fragment>
       <Paper
@@ -200,7 +225,7 @@ const SearchFlightForm = () => {
                 sx={{
                   maxHeight: '80%',
                   p: 2,
-                  width: '90%'
+                  width: { xs: '100%', sm: '90%' }
                 }}
                 variant="contained"
                 size="large"
@@ -213,8 +238,7 @@ const SearchFlightForm = () => {
             </Grid>
           </Grid>
           {/* Row 3: Select number of passengers for traveling */}
-
-          {/* <PaxQty /> */}
+          {validation.isValid && <PaxQty maxPax={maxPax} paxQty={paxQty} onPaxChange={handlePaxQty} paxQtyErr={paxQtyErr} />}
         </Grid>
       </Paper>
     </Fragment>

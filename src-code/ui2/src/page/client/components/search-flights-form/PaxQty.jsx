@@ -2,7 +2,6 @@ import {
   FormControl,
   FormHelperText,
   Grid,
-  Icon,
   InputAdornment,
   InputLabel,
   MenuItem,
@@ -11,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Fragment, useState } from "react";
-import { AccessAlarm, Person, Person2, Person3, Person4 } from "@mui/icons-material";
+import {Person2, Person4 } from "@mui/icons-material";
 const PaxQty = () => {
   const maxPax = 9;
   const [paxQty, setPaxQty] = useState({ adl: 1, chd: 0, inf: 0 });
