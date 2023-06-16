@@ -12,6 +12,26 @@ import { store } from 'store/store';
 // style + assets
 import 'assets/scss/style.scss';
 import config from './config';
+import { PublicClientApplication } from '@azure/msal-browser';
+import { msalConfig } from 'azure/authConfig';
+import { MsalProvider } from '@azure/msal-react';
+
+export const msalInstance = new PublicClientApplication(msalConfig);
+
+if (!msalInstance.getActiveAccount() && msalInstance.getAllAccounts().length > 0) {
+  // Account selection logic is app dependent. Adjust as needed for different use cases.
+  msalInstance.setActiveAccount(msalInstance.getAllAccounts()[0]);
+}
+
+// Optional - This will update account state if a user signs in from another tab or window
+msalInstance.enableAccountStorageEvents();
+
+msalInstance.addEventCallback((e) => {
+  if (e.eventType === 'msal:loginSuccess' && e.payload.account) {
+    const account = e.payload.account;
+    msalInstance.setActiveAccount(account);
+  }
+});
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 
@@ -19,9 +39,11 @@ const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 root.render(
   <Provider store={store}>
-    <BrowserRouter basename={config.basename}>
-      <App />
-    </BrowserRouter>
+    <MsalProvider instance={msalInstance}>
+      <BrowserRouter basename={config.basename}>
+        <App pca={msalInstance} />
+      </BrowserRouter>
+    </MsalProvider>
   </Provider>
 );
 

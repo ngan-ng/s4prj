@@ -1,9 +1,18 @@
-import { Typography } from '@mui/material';
+import { Button, Card, Stack, Typography } from '@mui/material';
 import { Fragment } from 'react';
-const Header = () => {
+
+// eslint-disable-next-line react/prop-types
+const Header = ({ onLogin, onLogout, name }) => {
   return (
     <Fragment>
       <Typography>Header here</Typography>
+      <Stack spacing={2} sx={{ ml: 'auto' }} direction={'row'}>
+        <Card>Item 1</Card>
+        <Card>Item 1</Card>
+        <Card>
+          {name ? <Button onClick={() => onLogout('popup')}>Logout</Button> : <Button onClick={() => onLogin('popup')}>Login</Button>}
+        </Card>
+      </Stack>
     </Fragment>
   );
 };

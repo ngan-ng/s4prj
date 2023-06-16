@@ -1,5 +1,23 @@
-
+# https://<your-tenant-initial-domain-name>.b2clogin.com/<your-tenant-initial-domain-name>.onmicrosoft.com/
 spring:
+  cloud:
+    azure:
+      active-directory:
+        b2c:
+          enabled: true
+          profile:
+            tenant-id: 0ad81327-6a42-41fa-b79d-bb6aea2c17d9
+          credential:
+            client-id: 6b7b341f-d133-47e3-97dc-9628969358e4
+            client-secret: 'OUl8Q~pagrSbEFo2kRRTB~mMnQU-PllqnliticjN'
+          base-uri: https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/
+          login-flow: sign-up-or-sign-in
+          logout-success-url: http://locahost:3000
+          user-flows:
+            sign-up-or-sign-in: B2C_1_signin_or_signup
+            profile-edit: #optional
+            password-reset: #optional
+          user-name-attribute-name:
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: sa
