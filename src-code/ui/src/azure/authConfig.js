@@ -5,7 +5,7 @@
 
 import { LogLevel } from '@azure/msal-browser';
 import { b2cPolicies } from './policies';
-import { apiConfig } from './apiConfig';
+import apiConfig from './apiConfig';
 
 // Browser check variables
 // If you support IE, our recommendation is that you sign-in using Redirect APIs
@@ -25,13 +25,15 @@ const isFirefox = firefox > 0; // Only needed if you need to support the redirec
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md
  */
 
-export const msalConfig = {
+const msalConfig = {
   auth: {
     clientId: '83c799f9-dfff-4e4d-9c7f-ee758c3a9496',
     authority: b2cPolicies.authorities.signUpSignIn.authority,
     knownAuthorities: [b2cPolicies.authorityDomain],
-    redirectUri: 'http://localhost:3000/',
-    postLogoutRedirectUri: 'http://localhost:3000/'
+    redirectUri: '/',
+    postLogoutRedirectUri: '/',
+    navigateToLoginRequestUrl: true,
+    clientCapabilities: ['CP1']
   },
   cache: {
     cacheLocation: 'sessionStorage', // This configures where your cache will be stored
@@ -73,7 +75,7 @@ export const msalConfig = {
  * https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
-  scopes: [...apiConfig.b2cScopes]
+  scopes: ['openid', ...apiConfig.b2cScopes]
 };
 
 export const tokenRequest = {
@@ -88,3 +90,12 @@ export const tokenRequest = {
 export const graphConfig = {
   graphMeEndpoint: 'https://graph.microsoft.com/v1.0/me'
 };
+
+export const protectedResources = {
+  todoListApi: {
+    endpoint: 'http://localhost:8080/api-v1/guest/airport',
+    scopes: [apiConfig.b2cScopes]
+  }
+};
+
+export default msalConfig;

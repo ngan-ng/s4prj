@@ -5,51 +5,21 @@ import { Outlet } from 'react-router-dom';
 import Footer from './Footer';
 import logo from 'assets/images/logo/logo.png';
 import { useMsal } from '@azure/msal-react';
-import { useEffect, useState } from 'react';
-import { signIn } from 'azure/authPopup';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from 'azure/authConfig';
+import { signOutStart, signinStart } from 'store/user/user.action';
+import { selectCurrentUser } from 'store/user/user.selector';
 
 const MainLayout = () => {
   const dispatch = useDispatch();
+  const user = useSelector(selectCurrentUser);
   const { instance, accounts } = useMsal();
-  const [name, setName] = useState(null);
 
-  useEffect(() => {
-    if (accounts.length > 0) {
-      setName(accounts[0].name);
-    } else {
-      setName(null);
-    }
-  }, [accounts]);
-  const handleLogout = (logoutType = 'popup') => {
-    signOutStart();
-    if (logoutType === 'popup') {
-      instance
-        .logoutPopup()
-        .then((res) => signOutSuccess())
-        .catch((error) => console.log(error));
-    } else if (logoutType === 'redirect') {
-      instance
-        .logoutRedirect()
-        .then((res) => signOutSuccess())
-        .catch((error) => console.log(error));
-    }
+  const handleLogout = () => {
+    dispatch(signOutStart());
   };
-  const handleLogin = (loginType) => {
-    // signInStart();
-    signIn();
-    if (loginType === 'popup') {
-      instance
-        .loginPopup(loginRequest)
-        .then((res) => signInSuccess(res))
-        .catch((err) => console.log(err));
-    } else if (loginType === 'redirect') {
-      instance
-        .loginRedirect(loginRequest)
-        .then((res) => signInSuccess(res))
-        .catch((err) => console.log(err));
-    }
+  const handleLogin = () => {
+    dispatch(signinStart());
   };
 
   return (
@@ -61,7 +31,7 @@ const MainLayout = () => {
           <IconButton edge="start" color="inherit" sx={{ ml: 0, p: 0, my: 0, mr: 2 }}>
             <Avatar variant="square" src={logo} sizes="large" sx={{ height: '60px', width: '60px', backgroundColor: 'transparent' }} />
           </IconButton>
-          <Header onLogin={handleLogin} onLogout={handleLogout} name={name} />
+          <Header onLogin={handleLogin} onLogout={handleLogout} email={user ? user.idTokenClaims.emails[0] : null} />
         </Toolbar>
       </AppBar>
       {/* Main body */}

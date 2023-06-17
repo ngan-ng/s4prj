@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder;
-import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -23,14 +21,13 @@ import java.util.Arrays;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
-public class SecurityConfiguration extends SecurityConfigurerAdapter {
+public class SecurityConfiguration {
 
     @Autowired
     JwtUtils jwtUtils;
-    @Autowired
-    private AbstractConfiguredSecurityBuilder configurer;
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth, CustomUserDetailService customUserDetailsService,
                                 PasswordEncoder passwordEncoder) throws Exception {
@@ -70,8 +67,7 @@ public class SecurityConfiguration extends SecurityConfigurerAdapter {
                                         .authenticationEntryPoint(
                                                 (req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED)))
                                 .addFilter(new JwtAuthenticationFilter(authenticationManager, jwtUtils))
-                                .addFilter(new JwtAuthorizationFilter(authenticationManager))
-                                .apply(configurer);
+                                .addFilter(new JwtAuthorizationFilter(authenticationManager));
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

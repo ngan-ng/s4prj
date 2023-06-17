@@ -12,9 +12,9 @@ import { store } from 'store/store';
 // style + assets
 import 'assets/scss/style.scss';
 import config from './config';
-import { PublicClientApplication } from '@azure/msal-browser';
-import { msalConfig } from 'azure/authConfig';
+import { EventType, PublicClientApplication } from '@azure/msal-browser';
 import { MsalProvider } from '@azure/msal-react';
+import msalConfig from 'azure/authConfig';
 
 export const msalInstance = new PublicClientApplication(msalConfig);
 
@@ -27,7 +27,7 @@ if (!msalInstance.getActiveAccount() && msalInstance.getAllAccounts().length > 0
 msalInstance.enableAccountStorageEvents();
 
 msalInstance.addEventCallback((e) => {
-  if (e.eventType === 'msal:loginSuccess' && e.payload.account) {
+  if (e.eventType === EventType.LOGIN_SUCCESS && e.payload.account) {
     const account = e.payload.account;
     msalInstance.setActiveAccount(account);
   }

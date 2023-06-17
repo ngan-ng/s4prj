@@ -1,5 +1,8 @@
 // The current application coordinates were pre-registered in a B2C tenant.
-export const apiConfig = {
-  b2cScopes: ['https://s4prj.onmicrosoft.com/api/policy.read'],
+const apiConfig = {
+  b2cScopes: ['https://s4prj.onmicrosoft.com/api/Read.Guest'],
   webApi: 'https://s4prj.onmicrosoft.com/api'
+  // webApi: 'http://localhost:8080/api-v1/guest/airport/getAll'
 };
+
+export default apiConfig;

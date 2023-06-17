@@ -1,6 +1,10 @@
 import { msalInstance } from 'index';
-import instance from './axios';
+import axios from 'axios';
 import { loginRequest } from 'azure/authConfig';
+
+const instance = axios.create({
+  baseURL: process.env.REACT_APP_API_URL_UAT
+});
 
 const getAccessToken = async () => {
   const account = msalInstance.getAllAccounts()[0];
@@ -49,3 +53,5 @@ instance.interceptors.response.use(null, function (error) {
   }
   return Promise.reject(error);
 });
+
+export default instance;

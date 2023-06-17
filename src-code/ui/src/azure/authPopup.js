@@ -1,7 +1,7 @@
 import { InteractionRequiredAuthError, PublicClientApplication } from '@azure/msal-browser';
 import { b2cPolicies } from './policies';
-import { apiConfig } from './apiConfig';
-const { msalConfig, loginRequest, tokenRequest } = require('./authConfig');
+import msalConfig, { loginRequest, tokenRequest } from './authConfig';
+import apiConfig from './apiConfig';
 
 const myMSALObj = new PublicClientApplication(msalConfig);
 
@@ -23,6 +23,8 @@ export function selectAccount() {
      * sure we are selecting the account with homeAccountId that contains the sign-up/sign-in user-flow,
      * as this is the default flow the user initially signed-in with.
      */
+    console.log('Current Accounts: ');
+    console.log(currentAccounts);
     const accounts = currentAccounts.filter(
       (acc) =>
         acc.homeAccountId.toLowerCase().includes(b2cPolicies.names.signUpSignIn.toLowerCase()) &&
@@ -55,6 +57,7 @@ export function handleResponse(response) {
    */
 
   if (response !== null) {
+    // console.log('Setting account in handleResponse ... ' + response);
     setAccount(response.account);
   } else {
     selectAccount();
@@ -70,6 +73,7 @@ export function signIn() {
   return myMSALObj
     .loginPopup(loginRequest)
     .then((response) => {
+      console.log('Inside mySSALObj ... ' + response);
       handleResponse(response);
       return response;
     })

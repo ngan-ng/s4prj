@@ -106,7 +106,6 @@
 			<artifactId>spring-cloud-azure-starter-active-directory-b2c</artifactId>
 			<version>5.2.0</version>
 		</dependency>
-
 		<!-- Testing dependencies -->
 <!--		<dependency>-->
 <!--			<groupId>org.junit.jupiter</groupId>-->

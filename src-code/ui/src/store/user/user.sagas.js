@@ -6,7 +6,7 @@ import userActionTypes from './user.types';
 export function* login() {
   try {
     const res = yield call(signIn);
-
+    console.log('Saga Login: ... ' + res);
     yield put(signinSuccess(res));
   } catch (error) {
     yield put(signinFailure(error));
@@ -22,7 +22,7 @@ export function* logOut() {
   }
 }
 
-export function* onLoginStart() {
+export function* onSignInStart() {
   yield takeLatest(userActionTypes.EMAIL_SIGN_IN_START, login);
 }
 export function* onSignOutStart() {
@@ -30,29 +30,5 @@ export function* onSignOutStart() {
 }
 
 export function* userSagas() {
-  yield all([]);
+  yield all([call(onSignInStart), call(onSignOutStart)]);
 }
-
-// import api, { saveTokenToLocalStorage } from 'apis/phl';
-
-// export const loginWithEmail = async (login) => {
-//   return await api.post('Auth/Login', login);
-// };
-
-// export const getProject = async () => {
-//   return await api.get('Projects');
-// };
-// export function* login({ payload: login }) {
-//   try {
-//     const res = yield call(loginWithEmail, {
-//       email: login.userId,
-//       password: login.password,
-//     });
-//     saveTokenToLocalStorage(res.data.token, res.data.refreshToken);
-
-//     yield put(signinSuccess(res.data));
-//   } catch (error) {
-//     yield put(signinFailure(error));
-//     console.log(error);
-//   }
-// }
