@@ -73,7 +73,7 @@ export function signIn() {
   return myMSALObj
     .loginPopup(loginRequest)
     .then((response) => {
-      console.log('Inside mySSALObj ... ' + response);
+      console.log('Inside mySSALObj ... ' + response.account.username);
       handleResponse(response);
       return response;
     })

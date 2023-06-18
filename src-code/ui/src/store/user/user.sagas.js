@@ -6,8 +6,8 @@ import userActionTypes from './user.types';
 export function* login() {
   try {
     const res = yield call(signIn);
-    console.log('Saga Login: ... ' + res);
-    yield put(signinSuccess(res));
+    // console.log('Saga Login: ... ' + res.account.idTokenClaims.emails[0]);
+    yield put(signinSuccess(res.account.idTokenClaims.emails[0]));
   } catch (error) {
     yield put(signinFailure(error));
   }

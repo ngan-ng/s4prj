@@ -32,8 +32,7 @@ const msalConfig = {
     knownAuthorities: [b2cPolicies.authorityDomain],
     redirectUri: '/',
     postLogoutRedirectUri: '/',
-    navigateToLoginRequestUrl: true,
-    clientCapabilities: ['CP1']
+    navigateToLoginRequestUrl: true
   },
   cache: {
     cacheLocation: 'sessionStorage', // This configures where your cache will be stored
@@ -87,13 +86,13 @@ export const tokenRequest = {
 //  * Add here the scopes to request when obtaining an access token for MS Graph API. For more information, see:
 //  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
 //  */
-export const graphConfig = {
-  graphMeEndpoint: 'https://graph.microsoft.com/v1.0/me'
-};
+// export const graphConfig = {
+//   graphMeEndpoint: 'https://graph.microsoft.com/v1.0/me'
+// };
 
 export const protectedResources = {
   todoListApi: {
-    endpoint: 'http://localhost:8080/api-v1/guest/airport',
+    endpoint: 'http://localhost:8080/api-v1/guest/airport/getAll',
     scopes: [apiConfig.b2cScopes]
   }
 };

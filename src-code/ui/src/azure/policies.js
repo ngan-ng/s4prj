@@ -5,20 +5,20 @@
  */
 export const b2cPolicies = {
   names: {
-    signUpSignIn: 'B2C_1_signin_or_signup'
+    signUpSignIn: 'B2C_1_signin_or_signup',
     // forgotPassword: 'B2C_1_reset_v3',
-    // editProfile: 'B2C_1_edit_profile_v2',
+    editProfile: 'B2C_1_editprofile1'
   },
   authorities: {
     signUpSignIn: {
       authority: 'https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/B2C_1_signin_or_signup'
-    }
+    },
     // forgotPassword: {
     //     authority: 'https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/B2C_1_reset_v3',
     // },
-    // editProfile: {
-    //     authority: 'https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/b2c_1_edit_profile_v2',
-    // },
+    editProfile: {
+      authority: 'https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/B2C_1_editprofile1'
+    }
   },
   authorityDomain: 's4prj.b2clogin.com'
 };

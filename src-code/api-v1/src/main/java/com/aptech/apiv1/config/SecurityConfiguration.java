@@ -43,7 +43,8 @@ public class SecurityConfiguration {
             "/api-v1/user/login",
             "/api-v1/user/signup",
             "/api-v1/user/refreshtoken",
-            "/api-v1/guest/**"
+            "/api-v1/guest/**",
+            "/write"
             //"/**"
 
     };

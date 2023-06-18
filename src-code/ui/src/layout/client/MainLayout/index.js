@@ -31,7 +31,7 @@ const MainLayout = () => {
           <IconButton edge="start" color="inherit" sx={{ ml: 0, p: 0, my: 0, mr: 2 }}>
             <Avatar variant="square" src={logo} sizes="large" sx={{ height: '60px', width: '60px', backgroundColor: 'transparent' }} />
           </IconButton>
-          <Header onLogin={handleLogin} onLogout={handleLogout} email={user ? user.idTokenClaims.emails[0] : null} />
+          <Header onLogin={handleLogin} onLogout={handleLogout} email={user ? user : null} />
         </Toolbar>
       </AppBar>
       {/* Main body */}

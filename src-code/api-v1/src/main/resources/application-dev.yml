@@ -3,18 +3,14 @@ spring:
   cloud:
     azure:
       active-directory:
-        enabled: true
-        credential:
-          client-id: 4360624f-9953-4af2-bd13-509c1b75fb12
-        app-id-uri: https://s4prj.onmicrosoft.com/api
         b2c:
           enabled: true
           profile:
             tenant-id: 0ad81327-6a42-41fa-b79d-bb6aea2c17d9
           credential:
             client-id: 4360624f-9953-4af2-bd13-509c1b75fb12
-          app-id-uri: https://s4prj.onmicrosoft.com/api
-          base-uri: https://s4prj.b2clogin.com
+#          app-id-uri: https://s4prj.onmicrosoft.com/4360624f-9953-4af2-bd13-509c1b75fb12
+          base-uri: https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/
           user-flows:
             sign-up-or-sign-in: B2C_1_signin_or_signup
   datasource:
