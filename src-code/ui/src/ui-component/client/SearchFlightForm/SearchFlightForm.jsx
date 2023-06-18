@@ -10,7 +10,7 @@ import { Fragment } from 'react';
 import PaxQty from './PaxQty';
 // import PaxQty from './PaxQty';
 
-const SearchFlightForm = () => {
+const SearchFlightForm = ({ backgroundOpacity }) => {
   const today = dayjs();
   // Search Details Information
   const [searchDto, setSearchDto] = useState({
@@ -97,7 +97,7 @@ const SearchFlightForm = () => {
   };
 
   useEffect(() => {
-    const valid = setTimeout(() => {
+    const timeout = setTimeout(() => {
       const errorsSchema = validate(searchDto, schema);
       let errors = { ...errorsSchema };
 
@@ -128,7 +128,7 @@ const SearchFlightForm = () => {
     }, 200);
 
     return () => {
-      clearTimeout(valid);
+      clearTimeout(timeout);
     };
   }, [isOneway, schema, searchDto, today]);
 
@@ -172,9 +172,16 @@ const SearchFlightForm = () => {
   return (
     <Fragment>
       <Paper
-        elevation={5}
-        sx={{ display: 'block', alignItems: 'center', opacity: 0.96, p: 3, width: '80%', mt: 5 }}
-        style={{ margin: '0 auto', marginTop: 50 }}
+        variant="string"
+        sx={{
+          m: '0 auto',
+          borderTopLeftRadius: 0,
+          borderTopRightRadius: 0,
+          borderBottomLeftRadius: 15,
+          borderBottomRightRadius: 15,
+          backgroundColor: `${backgroundOpacity}`,
+          p: 3
+        }}
       >
         {/* Row 1: Select destinations for traveling */}
         <Grid container spacing={2}>

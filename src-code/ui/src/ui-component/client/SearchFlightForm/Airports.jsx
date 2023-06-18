@@ -11,9 +11,14 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
   const airports = useSelector(selectAirports) ?? {};
   const isAirportsEmpty = Object.keys(airports).length === 0;
   useEffect(() => {
-    if (isAirportsEmpty) {
-      dispatch(fetchAirportStart());
-    }
+    const timeout = setTimeout(() => {
+      if (isAirportsEmpty) {
+        dispatch(fetchAirportStart());
+      }
+    }, 200);
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [dispatch, isAirportsEmpty]);
 
   return (

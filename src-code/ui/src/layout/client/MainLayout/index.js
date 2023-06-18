@@ -8,12 +8,17 @@ import { useMsal } from '@azure/msal-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from 'azure/authConfig';
 import { signOutStart, signinStart } from 'store/user/user.action';
-import { selectCurrentUser } from 'store/user/user.selector';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 const MainLayout = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectCurrentUser);
   const { instance, accounts } = useMsal();
+  const [user, setUser] = useState(accounts[0]?.idTokenClaims.emails[0] ?? null);
+
+  useEffect(() => {
+    setUser(accounts[0]?.idTokenClaims.emails[0] ?? null);
+  }, [accounts]);
 
   const handleLogout = () => {
     dispatch(signOutStart());
@@ -37,7 +42,7 @@ const MainLayout = () => {
       {/* Main body */}
       <Outlet />
       {/* Footer */}
-      <AppBar color="secondary" position="fixed" elevation={3} sx={{ opacity: 0.93, top: 'auto', bottom: 0, mt: 3 }}>
+      <AppBar color="secondary" position="static" elevation={3} sx={{ opacity: 0.93, top: 'auto', bottom: 0, mt: 3 }}>
         <Container>
           <Toolbar>
             <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>

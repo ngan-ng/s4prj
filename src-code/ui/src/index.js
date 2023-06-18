@@ -37,15 +37,19 @@ msalInstance.addEventCallback((e) => {
 
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(
-  <Provider store={store}>
-    <MsalProvider instance={msalInstance}>
-      <BrowserRouter basename={config.basename}>
-        <App pca={msalInstance} />
-      </BrowserRouter>
-    </MsalProvider>
-  </Provider>
-);
+if (window.location.hash !== '') {
+  console.log('hash found' + window.location.hash);
+} else {
+  root.render(
+    <Provider store={store}>
+      <MsalProvider instance={msalInstance}>
+        <BrowserRouter basename={config.basename}>
+          <App pca={msalInstance} />
+        </BrowserRouter>
+      </MsalProvider>
+    </Provider>
+  );
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

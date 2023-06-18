@@ -15,14 +15,14 @@ export class CustomNavigationClient extends NavigationClient {
    * @param url
    * @param options
    */
-  async navigateInternal(url, options) {
-    const relativePath = url.replace(window.location.origin, '');
-    if (options.noHistory) {
-      this.history.replace(relativePath);
-    } else {
-      this.history.push(relativePath);
-    }
+  // async navigateInternal(url, options) {
+  //   const relativePath = url.replace(window.location.origin, '');
+  //   if (options.noHistory) {
+  //     this.history.replace(relativePath);
+  //   } else {
+  //     this.history.push(relativePath);
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
 }

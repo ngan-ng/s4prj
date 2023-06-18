@@ -4,7 +4,7 @@ import slider from './slider.json';
 
 const HomeCarousel = () => {
   return (
-    <Carousel sx={{ m: 0, p: 0, width: '100%' }}>
+    <Carousel>
       {slider.map((item) => (
         <Item sx={{ m: 0, p: 0, width: '100%' }} key={item.id} item={item} />
       ))}
