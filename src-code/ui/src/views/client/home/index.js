@@ -32,7 +32,7 @@ const HomePage = () => {
             left: 0,
             right: 0,
             m: '0 auto',
-            px: 0,
+            p: 1,
             width: '60%'
           }}
         >
@@ -47,7 +47,6 @@ const HomePage = () => {
               onChange={handleChange}
               indicatorColor="secondary"
               textColor="inherit"
-              justifyContent="space-between"
               aria-label="home tabs"
               variant="fullWidth"
             >
@@ -88,7 +87,7 @@ function HomeTabPanel(props) {
     >
       {value === index && (
         <Box>
-          <Typography>{children}</Typography>
+          <Typography component={'div'}>{children}</Typography>
         </Box>
       )}
     </div>

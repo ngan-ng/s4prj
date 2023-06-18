@@ -184,8 +184,8 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
         }}
       >
         {/* Row 1: Select destinations for traveling */}
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={9}>
+        <Grid container spacing={1}>
+          <Grid item xs={12} sm={8}>
             <Airports
               origin={searchDto.origin}
               destination={searchDto.destination}
@@ -194,7 +194,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
               validation={validation}
             />
           </Grid>
-          <Grid item xs={12} sm={3}>
+          <Grid item xs={12} sm={4}>
             <RadioGroup
               row
               sx={{ display: 'flex', justifyContent: 'right' }}
@@ -209,7 +209,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
                 label={<Typography color={isOneway ? '' : 'secondary'}>Roundtrip</Typography>}
                 labelPlacement="top"
                 color="secondary"
-                sx={{ display: 'flex', justifyContent: 'center' }}
+                sx={{ pr: 1 }}
               />
 
               <FormControlLabel
@@ -217,21 +217,21 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
                 control={<Radio color="secondary" />}
                 label={<Typography color={isOneway ? 'secondary' : ''}>Oneway</Typography>}
                 labelPlacement="top"
-                sx={{ display: 'flex', justifyContent: 'center' }}
+                sx={{ pr: 1 }}
               />
             </RadioGroup>
           </Grid>
           {/* Row 2: Select date for traveling */}
-          <Grid item xs={12} sm={9}>
+          <Grid item xs={12} sm={8}>
             <TripDate searchDto={searchDto} onChange={handleChange} validation={validation} />
           </Grid>
-          <Grid item xs={12} sm={3}>
-            <Grid container sx={{ display: 'flex', justifyContent: 'right' }}>
+          <Grid item xs={12} sm={4}>
+            <Grid container sx={{ display: 'flex', justifyContent: 'right', alignItems: 'center' }}>
               <Button
                 color="secondary"
                 sx={{
                   maxHeight: '80%',
-                  p: 2,
+                  pt: 2,
                   width: { xs: '100%', sm: '90%' }
                 }}
                 variant="contained"
