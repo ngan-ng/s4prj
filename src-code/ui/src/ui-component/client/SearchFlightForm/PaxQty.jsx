@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Grid, InputAdornment, SvgIcon, TextField, Typography } from '@mui/material';
+import { Grid, InputAdornment, SvgIcon, TextField } from '@mui/material';
 import { Fragment } from 'react';
 import { Accessibility, Person } from '@mui/icons-material';
 
@@ -14,13 +14,10 @@ function BaByIcon(props) {
   );
 }
 
-const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => {
-  return (
-    <Fragment>
-      <Grid item xs={12}>
-        <Typography>Passenger</Typography>
-      </Grid>
-      <Grid item sm={3}>
+const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => (
+  <Fragment>
+    <Grid container spacing={2}>
+      <Grid item sm={4}>
         <TextField
           type="number"
           label="Adult"
@@ -28,6 +25,7 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => {
           inputProps={{ min: 1, max: maxPax - paxQty.chd, step: 1 }}
           value={paxQty.adl}
           InputProps={{
+            style: { textAlign: 'end' },
             endAdornment: (
               <InputAdornment position="start">
                 <Person color="secondary" />
@@ -37,12 +35,12 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => {
           onChangeCapture={onPaxChange}
           helperText={paxQtyErr.adl}
           fullWidth
-          sx={{ display: { sm: 'block' } }}
-          variant="outlined"
+          sx={{ backgroundColor: 'white', display: { sm: 'block' } }}
+          variant="filled"
           color="secondary"
         />
       </Grid>
-      <Grid item sm={3}>
+      <Grid item sm={4}>
         <TextField
           type="number"
           label="Children"
@@ -59,12 +57,12 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => {
           onChangeCapture={onPaxChange}
           helperText={paxQtyErr.chd}
           fullWidth
-          variant="outlined"
+          variant="filled"
           color="secondary"
-          sx={{ display: { sm: 'block' } }}
+          sx={{ backgroundColor: 'white', display: { sm: 'block' } }}
         />
       </Grid>
-      <Grid item sm={3}>
+      <Grid item sm={4}>
         <TextField
           type="number"
           label="Infant"
@@ -81,13 +79,13 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => {
           onChangeCapture={onPaxChange}
           helperText={paxQtyErr.inf}
           fullWidth
-          variant="outlined"
+          variant="filled"
           color="secondary"
-          sx={{ display: { sm: 'block' } }}
+          sx={{ backgroundColor: 'white', display: { sm: 'block' } }}
         />
       </Grid>
-    </Fragment>
-  );
-};
+    </Grid>
+  </Fragment>
+);
 
 export default PaxQty;

@@ -1,4 +1,4 @@
-import { Paper, Button } from '@mui/material';
+import { Paper, Link, Button } from '@mui/material';
 
 const SlideItem = ({ item }) => {
   return (
@@ -15,15 +15,11 @@ const SlideItem = ({ item }) => {
         }}
       >
         <h2 style={{ my: 0, mr: 2, p: 0 }}>{item.title}</h2>
-        <Button
-          sx={{ ml: 2, p: 0 }}
-          className="CheckButton"
-          onClick={() => {
-            // Navigate to item.url
-          }}
-        >
-          Check it out!
-        </Button>
+        <Link href={item.url} target="_blank" variant="button" sx={{ ml: 2, p: 0 }} className="CheckButton">
+          <Button color="secondary" variant="outlined" sx={{ p: 2 }}>
+            Check it out!
+          </Button>
+        </Link>
       </Paper>
     </Paper>
   );

@@ -1,4 +1,4 @@
-import { Button, FormControlLabel, Grid, Paper, Radio, RadioGroup, Typography } from '@mui/material';
+import { Button, FormControlLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import TripDate from './TripDate';
 import validate from 'validate.js';
@@ -149,24 +149,37 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
   const [paxQty, setPaxQty] = useState({ adl: 1, chd: 0, inf: 0 });
   const [paxQtyErr, setPaxQtyErr] = useState({ adl: '', chd: '', inf: '' });
   const handlePaxQty = (e) => {
-    const regex = /^[0-9]+$/;
+    const fieldName = e.target.name;
     let val = parseInt(e.target.value, 10);
-    if (val >= 0 && regex.test(val)) {
-      setPaxQty((prev) => ({
-        ...prev,
-        [e.target.name]: val
-      }));
+    let currentQty = paxQty.adl + paxQty.chd;
+    // const regex = /^[0-9]+$/;
+    // if (!regex.test(val)) {
+    //   setPaxQtyErr((prev) => ({
+    //     ...prev,
+    //     fieldName: 'Please input a number'
+    //   }));
+    //   e.preventDefault();
+    // }
+
+    val = val > 0 ? val : fieldName === 'adl' ? 1 : 0;
+
+    if (val + currentQty > maxPax) {
       setPaxQtyErr((prev) => ({
         ...prev,
-        [e.target.name]: ''
-      }));
-    } else {
-      setPaxQtyErr((prev) => ({
-        ...prev,
-        [e.target.name]: 'invalid number'
+        [fieldName]: `Max: 6 passengers per booking. Only ${maxPax - currentQty} ${fieldName} left`
       }));
       e.preventDefault();
+      return;
     }
+
+    setPaxQty((prev) => ({
+      ...prev,
+      [e.target.name]: val
+    }));
+    setPaxQtyErr((prev) => ({
+      ...prev,
+      [fieldName]: ''
+    }));
   };
 
   return (
@@ -174,17 +187,17 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
       <Paper
         variant="string"
         sx={{
+          p: 3,
           m: '0 auto',
           borderTopLeftRadius: 0,
           borderTopRightRadius: 0,
           borderBottomLeftRadius: 15,
           borderBottomRightRadius: 15,
-          backgroundColor: `${backgroundOpacity}`,
-          p: 3
+          backgroundColor: `${backgroundOpacity}`
         }}
       >
         {/* Row 1: Select destinations for traveling */}
-        <Grid container spacing={1}>
+        <Grid container spacing={2}>
           <Grid item xs={12} sm={8}>
             <Airports
               origin={searchDto.origin}
@@ -194,14 +207,15 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
               validation={validation}
             />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: 'flex-end'}}>
             <RadioGroup
               row
-              sx={{ display: 'flex', justifyContent: 'right' }}
+              sx={{ display: 'flex', justifyContent: 'center' }}
               aria-labelledby="ticket-type-label"
               name="tripType"
               defaultValue="roundtrip"
               onChange={handleChange}
+              spacing={1}
             >
               <FormControlLabel
                 value="roundtrip"
@@ -209,15 +223,12 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
                 label={<Typography color={isOneway ? '' : 'secondary'}>Roundtrip</Typography>}
                 labelPlacement="top"
                 color="secondary"
-                sx={{ pr: 1 }}
               />
-
               <FormControlLabel
                 value="oneway"
                 control={<Radio color="secondary" />}
                 label={<Typography color={isOneway ? 'secondary' : ''}>Oneway</Typography>}
                 labelPlacement="top"
-                sx={{ pr: 1 }}
               />
             </RadioGroup>
           </Grid>
@@ -230,8 +241,8 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
               <Button
                 color="secondary"
                 sx={{
-                  maxHeight: '80%',
-                  pt: 2,
+                  py: 1.5,
+                  alignContent: 'stretch',
                   width: { xs: '100%', sm: '90%' }
                 }}
                 variant="contained"
@@ -245,7 +256,37 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
             </Grid>
           </Grid>
           {/* Row 3: Select number of passengers for traveling */}
-          {validation.isValid && <PaxQty maxPax={maxPax} paxQty={paxQty} onPaxChange={handlePaxQty} paxQtyErr={paxQtyErr} />}
+          {validation.isValid && (
+            <>
+              <Grid item xs={12} md={8} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                <PaxQty maxPax={maxPax} paxQty={paxQty} onPaxChange={handlePaxQty} paxQtyErr={paxQtyErr} />
+              </Grid>
+              <Grid item xs={12} md={4}>
+                <Grid container sx={{ display: 'flex', justifyContent: 'right', alignItems: 'center' }}>
+                  <TextField
+                    variant="filled"
+                    label={
+                      <Typography color="white" fontSize={18} fontWeight="bold">
+                        Total
+                      </Typography>
+                    }
+                    aria-readonly
+                    value={paxQty.adl + paxQty.chd + paxQty.inf + ' Passengers'}
+                    inputProps={{
+                      style: {
+                        textAlign: 'end',
+                        color: 'white',
+                        backgroundColor: 'indigo',
+                        opacity: 0.8,
+                        borderRadius: 5
+                      }
+                    }}
+                    sx={{ width: { xs: '100%', md: '90%' } }}
+                  />
+                </Grid>
+              </Grid>
+            </>
+          )}
         </Grid>
       </Paper>
     </Fragment>

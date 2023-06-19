@@ -21,10 +21,10 @@ const TripDate = ({ searchDto, onChange, validation }) => {
               minDate={today}
               maxDate={today.add(6, 'month')}
               slotProps={{
-                textField: { helperText: validation?.errors.departDate }
+                textField: { variant: 'filled', helperText: validation?.errors.departDate }
               }}
               label="Departure date"
-              sx={{ width: '100%' }}
+              sx={{ width: '100%', backgroundColor: 'white' }}
             />
           </Grid>
           <Grid item md={6} xs={12}>
@@ -38,10 +38,10 @@ const TripDate = ({ searchDto, onChange, validation }) => {
               minDate={searchDto.departDate}
               maxDate={today.add(6, 'month')}
               slotProps={{
-                textField: { helperText: validation?.errors.returnDate }
+                textField: { variant: 'filled', helperText: validation?.errors.returnDate }
               }}
               label="Return date"
-              sx={{ width: '100%' }}
+              sx={{ width: '100%', backgroundColor: 'white' }}
             />
           </Grid>
         </Grid>
