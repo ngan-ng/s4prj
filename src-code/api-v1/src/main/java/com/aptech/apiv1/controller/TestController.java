@@ -12,4 +12,8 @@ public class TestController {
     public String write(){
         return "WRITE OKE MEAN NOT OKE";
     }
+    @GetMapping(path = "/allow")
+    public String test(){
+        return "WRITE OKE MEAN NOT OKE";
+    }
 }

@@ -1,17 +1,14 @@
 package com.aptech.apiv1.config;
 
-import com.aptech.apiv1.utils.JwtUtils;
+import com.azure.spring.cloud.autoconfigure.implementation.aad.security.AadJwtGrantedAuthoritiesConverter;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -23,17 +20,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfiguration {
-
-    @Autowired
-    JwtUtils jwtUtils;
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth, CustomUserDetailService customUserDetailsService,
-                                PasswordEncoder passwordEncoder) throws Exception {
-        auth.userDetailsService(customUserDetailsService).passwordEncoder(passwordEncoder);
-    }
-
     public static final String[] ENDPOINTS_WHITELIST = {
 
             "/v3/api-docs/**",
@@ -44,19 +32,21 @@ public class SecurityConfiguration {
             "/api-v1/user/signup",
             "/api-v1/user/refreshtoken",
             "/api-v1/guest/**",
-            "/write"
+            "/write/allow"
             //"/**"
-
     };
+//    public final AadB2cOidcLoginConfigurer configurer;
+//
+//
+//    public SecurityConfiguration(AadB2cOidcLoginConfigurer configurer) {
+//        this.configurer = configurer;
+//    }
 
     @Bean
-    AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authenticationManager)
+    public SecurityFilterChain filterChain(HttpSecurity http)
             throws Exception {
+        JwtAuthenticationConverter authenticationConverter = new JwtAuthenticationConverter();
+        authenticationConverter.setJwtGrantedAuthoritiesConverter(new AadJwtGrantedAuthoritiesConverter());
         http
                 // by default uses a Bean by the name of corsConfigurationSource
                 .cors(withDefaults()).csrf(csrf -> csrf.disable())
@@ -65,10 +55,11 @@ public class SecurityConfiguration {
                         authorize
                                 .requestMatchers(ENDPOINTS_WHITELIST).permitAll()
                                 .anyRequest().authenticated().and().exceptionHandling(handling -> handling
-                                        .authenticationEntryPoint(
-                                                (req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED)))
-                                .addFilter(new JwtAuthenticationFilter(authenticationManager, jwtUtils))
-                                .addFilter(new JwtAuthorizationFilter(authenticationManager));
+                                .authenticationEntryPoint(
+                                        (req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED)))
+                                .oauth2ResourceServer()
+                                .jwt()
+                                .jwtAuthenticationConverter(authenticationConverter);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

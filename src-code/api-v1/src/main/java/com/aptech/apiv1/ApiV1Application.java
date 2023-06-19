@@ -5,8 +5,8 @@ import com.aptech.apiv1.enums.FlightStatus;
 import com.aptech.apiv1.enums.IataCode;
 import com.aptech.apiv1.enums.PromotionType;
 import com.aptech.apiv1.model.*;
-import com.aptech.apiv1.model.user.UserRole;
 import com.aptech.apiv1.model.user.Role;
+import com.aptech.apiv1.model.user.UserRole;
 import com.aptech.apiv1.repository.*;
 import com.aptech.apiv1.utils.others.CreateSeatsOnFlight;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -19,10 +19,14 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-import static com.aptech.apiv1.utils.business.IataCodeUtils.*;
+import static com.aptech.apiv1.utils.business.IataCodeUtils.getAirport;
+import static com.aptech.apiv1.utils.business.IataCodeUtils.getLocation;
 
+//@ComponentScan(basePackageClasses = SecurityConfiguration.class)
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "springdoc-openapi", version = "1.0.0"), security = {
         @SecurityRequirement(name = "bearer-key")})
