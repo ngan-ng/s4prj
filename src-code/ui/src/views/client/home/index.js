@@ -7,7 +7,6 @@ const HomePage = () => {
     <Container maxWidth={false} disableGutters>
       {/* Group 1: Banner and Search Flight Form */}
       <Group1 />
-
       {/* Group 2: News */}
       <News />
     </Container>

@@ -10,15 +10,26 @@ import { loginRequest } from 'azure/authConfig';
 import { signOutStart, signinStart } from 'store/user/user.action';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
+nimport axios from 'api/callApiWithAzureAuth';
 const MainLayout = () => {
   const dispatch = useDispatch();
   const { instance, accounts } = useMsal();
   const [user, setUser] = useState(accounts[0]?.idTokenClaims.emails[0] ?? null);
-
+  const write = async () => {
+    const resp = await axios
+      .get('/write')
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    return resp;
+  };
   useEffect(() => {
-    setUser(accounts[0]?.idTokenClaims.emails[0] ?? null);
+    const timeout = setTimeout(() => {
+      setUser(accounts[0]?.idTokenClaims.emails[0] ?? null);
+      return () => clearTimeout(timeout);
+    });
+    write();
   }, [accounts]);
 
   const handleLogout = () => {
@@ -35,9 +46,7 @@ const MainLayout = () => {
       <AppBar color="secondary" position="static" elevation={3} sx={{ opacity: 0.93, display: 'block', px: 1 }}>
         <Toolbar>
           <IconButton edge="start" color="inherit" sx={{ ml: 0, p: 0, my: 0, mr: 2 }}>
-            <Link to="/">
-              <Avatar variant="square" src={logo} sizes="large" sx={{ height: '60px', width: '60px', backgroundColor: 'transparent' }} />
-            </Link>
+            <Avatar variant="square" src={logo} sizes="large" sx={{ height: '60px', width: '60px', backgroundColor: 'transparent' }} />
           </IconButton>
           <Header onLogin={handleLogin} onLogout={handleLogout} email={user ? user : null} />
         </Toolbar>

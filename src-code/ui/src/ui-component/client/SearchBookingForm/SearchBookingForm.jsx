@@ -9,11 +9,10 @@ const SearchBookingForm = ({ backgroundOpacity }) => {
     if (e.target.value.length > 6) {
       setErr('Invalid PNR');
       e.preventDefault();
+    } else {
+      setPnr(e.target.value);
+      setErr('');
     }
-    setPnr((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
   };
   return (
     <Fragment>
@@ -30,14 +29,23 @@ const SearchBookingForm = ({ backgroundOpacity }) => {
         }}
       >
         <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Grid item xs={3} md={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
             <Typography>Enter your PNR:</Typography>
           </Grid>
-          <Grid item xs={5} sx={{mx: 2}}>
-            <TextField fullWidth name="pnr" value={pnr} onChange={handleChange} helperText={err} color="secondary" />
+          <Grid item xs={6} md={5} sx={{ mx: 2 }}>
+            <TextField
+              variant="filled"
+              fullWidth
+              name="pnr"
+              value={pnr}
+              onChange={handleChange}
+              helperText={err}
+              color="secondary"
+              sx={{ backgroundColor: 'whitesmoke' }}
+            />
           </Grid>
-          <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Button fullWidth color="secondary" variant="contained" sx={{ height: 'stretch'}}>
+          <Grid item xs={12} md={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Button fullWidth color="secondary" variant="contained" sx={{ height: 'stretch' }}>
               Search
             </Button>
           </Grid>
