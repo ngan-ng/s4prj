@@ -1,8 +1,10 @@
 import { Button, Grid, Paper, TextField, Typography } from '@mui/material';
 import { useState } from 'react';
 import { Fragment } from 'react';
+import { useNavigate } from 'react-router';
 
 const SearchBookingForm = ({ backgroundOpacity }) => {
+  const navigate = useNavigate();
   const [pnr, setPnr] = useState('');
   const [err, setErr] = useState('');
   const handleChange = (e) => {
@@ -14,6 +16,10 @@ const SearchBookingForm = ({ backgroundOpacity }) => {
       setErr('');
     }
   };
+  const handleManageBooking = async () => {
+    navigate('/manage-booking');
+  };
+
   return (
     <Fragment>
       <Paper
@@ -45,7 +51,7 @@ const SearchBookingForm = ({ backgroundOpacity }) => {
             />
           </Grid>
           <Grid item xs={12} md={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Button fullWidth color="secondary" variant="contained" sx={{ height: 'stretch' }}>
+            <Button onClick={handleManageBooking} fullWidth color="secondary" variant="contained" sx={{ height: 'stretch' }}>
               Search
             </Button>
           </Grid>
