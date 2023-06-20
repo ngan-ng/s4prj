@@ -83,12 +83,11 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, isQtyValid }) => (
       </Grid>
       {!isQtyValid && (
         <Grid item xs={12}>
-          <Typography fontWeight="bold" variant="body1" color="deeppink">
-            Maximum 06 passengers of adults and children per booking
+          <Typography variant="body1" color="#d50000">
+            Maximum <b style={{ fontSize: 18 }}>06</b> passengers of adults and children per booking
           </Typography>
-          <Typography fontWeight="bold" variant="body2" color="deeppink">
-            {' '}
-            Maximum 01 infant per accompanying adult
+          <Typography variant="body2" color="#d50000">
+            Maximum <b style={{ fontSize: 18 }}>01</b> infant per accompanying adult
           </Typography>
         </Grid>
       )}

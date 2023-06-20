@@ -4,12 +4,12 @@ import TripDate from './TripDate';
 import validate from 'validate.js';
 import { Search } from '@mui/icons-material';
 import dayjs from 'dayjs';
-// import PaxQty from './PaxQty';
 import Airports from './Airports';
 import { Fragment } from 'react';
 import PaxQty from './PaxQty';
-// import PaxQty from './PaxQty';
+import axiosCall from 'api/callAxios';
 
+// eslint-disable-next-line react/prop-types
 const SearchFlightForm = ({ backgroundOpacity }) => {
   const today = dayjs();
   // Search Details Information
@@ -132,19 +132,6 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
     };
   }, [isOneway, schema, searchDto, today]);
 
-  const handleSubmit = () => {
-    console.log(validation);
-    let temp = { ...searchDto };
-
-    temp.departDate = searchDto.departDate.format('YYYY-MM-DD');
-    if (temp.tripType === 'oneway') {
-      delete temp.returnDate;
-    } else {
-      temp.returnDate = searchDto.returnDate.format('YYYY-MM-DD');
-    }
-    console.log(temp);
-  };
-
   const maxPax = 6;
   const [paxQty, setPaxQty] = useState({ adl: 1, chd: 0, inf: 0 });
   const [isQtyValid, setIsQtyValid] = useState(true);
@@ -157,6 +144,12 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
     switch (fieldName) {
       case 'adl':
         val = val !== 0 ? val : 1;
+        if (val < paxQty.inf) {
+          setPaxQty((prev) => ({
+            ...prev,
+            inf: val
+          }));
+        }
         validMaxPax = val + paxQty.chd <= maxPax;
         break;
       case 'chd':
@@ -178,9 +171,31 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
     } else {
       // Error cases
       setIsQtyValid(false);
-      // e.preventDefault();
+      e.preventDefault();
     }
   };
+
+  const handleSubmit = async () => {
+    console.log(validation);
+    let temp = { ...searchDto };
+
+    temp.departDate = searchDto.departDate.set('hour', 0).set('minute', 0).format('YYYY-MM-DDTHH:mm');
+    if (temp.tripType === 'oneway') {
+      delete temp.returnDate;
+    } else {
+      temp.returnDate = searchDto.returnDate.set('hour', 0).set('minute', 0).format('YYYY-MM-DDTHH:mm');
+    }
+    console.log(temp);
+    await axiosCall
+      .post('/api-v1/guest/flight/search', temp)
+      .then((resp) => {
+        console.log(resp.data);
+      })
+      .catch((errSubmit) => {
+        console.log(errSubmit);
+      });
+  };
+  const total = Object.values(paxQty).reduce((a, b) => a + b);
 
   return (
     <Fragment>
@@ -272,7 +287,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
                       </Typography>
                     }
                     aria-readonly
-                    value={paxQty.adl + paxQty.chd + paxQty.inf + ' Passengers'}
+                    value={`${total < 10 ? '0' + total : total} Passengers`}
                     inputProps={{
                       style: {
                         textAlign: 'end',
