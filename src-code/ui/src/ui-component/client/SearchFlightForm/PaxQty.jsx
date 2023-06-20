@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Grid, InputAdornment, SvgIcon, TextField } from '@mui/material';
+import { Grid, InputAdornment, SvgIcon, TextField, Typography } from '@mui/material';
 import { Fragment } from 'react';
 import { Accessibility, Person } from '@mui/icons-material';
 
@@ -14,7 +14,7 @@ function BaByIcon(props) {
   );
 }
 
-const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => (
+const PaxQty = ({ maxPax, paxQty, onPaxChange, isQtyValid }) => (
   <Fragment>
     <Grid container spacing={2}>
       <Grid item sm={4}>
@@ -33,7 +33,6 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => (
             )
           }}
           onChangeCapture={onPaxChange}
-          helperText={paxQtyErr.adl}
           fullWidth
           sx={{ backgroundColor: 'white', display: { sm: 'block' } }}
           variant="filled"
@@ -55,7 +54,6 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => (
             )
           }}
           onChangeCapture={onPaxChange}
-          helperText={paxQtyErr.chd}
           fullWidth
           variant="filled"
           color="secondary"
@@ -77,13 +75,23 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => (
             )
           }}
           onChangeCapture={onPaxChange}
-          helperText={paxQtyErr.inf}
           fullWidth
           variant="filled"
           color="secondary"
           sx={{ backgroundColor: 'white', display: { sm: 'block' } }}
         />
       </Grid>
+      {!isQtyValid && (
+        <Grid item xs={12}>
+          <Typography fontWeight="bold" variant="body1" color="deeppink">
+            Maximum 06 passengers of adults and children per booking
+          </Typography>
+          <Typography fontWeight="bold" variant="body2" color="deeppink">
+            {' '}
+            Maximum 01 infant per accompanying adult
+          </Typography>
+        </Grid>
+      )}
     </Grid>
   </Fragment>
 );

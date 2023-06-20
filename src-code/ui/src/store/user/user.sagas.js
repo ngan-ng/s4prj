@@ -7,7 +7,7 @@ export function* login() {
   try {
     const res = yield call(signIn);
     // console.log('Saga Login: ... ' + res.account.idTokenClaims.emails[0]);
-    yield put(signinSuccess(res.account.idTokenClaims.emails[0]));
+    yield put(signinSuccess(res));
   } catch (error) {
     yield put(signinFailure(error));
   }

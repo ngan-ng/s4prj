@@ -10,14 +10,26 @@ import { loginRequest } from 'azure/authConfig';
 import { signOutStart, signinStart } from 'store/user/user.action';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import axios from 'api/callApiWithAzureAuth';
 const MainLayout = () => {
   const dispatch = useDispatch();
   const { instance, accounts } = useMsal();
   const [user, setUser] = useState(accounts[0]?.idTokenClaims.emails[0] ?? null);
-
+  const write = async () => {
+    const resp = await axios
+      .get('/write')
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    return resp;
+  };
   useEffect(() => {
-    setUser(accounts[0]?.idTokenClaims.emails[0] ?? null);
+    const timeout = setTimeout(() => {
+      setUser(accounts[0]?.idTokenClaims.emails[0] ?? null);
+      return () => clearTimeout(timeout);
+    });
+    write();
   }, [accounts]);
 
   const handleLogout = () => {

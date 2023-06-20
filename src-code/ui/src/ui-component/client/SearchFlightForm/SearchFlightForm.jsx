@@ -147,39 +147,39 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
 
   const maxPax = 6;
   const [paxQty, setPaxQty] = useState({ adl: 1, chd: 0, inf: 0 });
-  const [paxQtyErr, setPaxQtyErr] = useState({ adl: '', chd: '', inf: '' });
+  const [isQtyValid, setIsQtyValid] = useState(true);
   const handlePaxQty = (e) => {
     const fieldName = e.target.name;
     let val = parseInt(e.target.value, 10);
-    let currentQty = paxQty.adl + paxQty.chd;
-    // const regex = /^[0-9]+$/;
-    // if (!regex.test(val)) {
-    //   setPaxQtyErr((prev) => ({
-    //     ...prev,
-    //     fieldName: 'Please input a number'
-    //   }));
-    //   e.preventDefault();
-    // }
-
-    val = val > 0 ? val : fieldName === 'adl' ? 1 : 0;
-
-    if (val + currentQty > maxPax) {
-      setPaxQtyErr((prev) => ({
-        ...prev,
-        [fieldName]: `Max: 6 passengers per booking. Only ${maxPax - currentQty} ${fieldName} left`
-      }));
-      e.preventDefault();
-      return;
+    let validMaxPax = true;
+    let validInf = true;
+    val = val > 0 ? val : 0;
+    switch (fieldName) {
+      case 'adl':
+        val = val !== 0 ? val : 1;
+        validMaxPax = val + paxQty.chd <= maxPax;
+        break;
+      case 'chd':
+        validMaxPax = val + paxQty.adl <= maxPax;
+        break;
+      case 'inf':
+        validInf = val <= paxQty.adl;
+        val = val > paxQty.adl ? paxQty.adl : val;
+        validMaxPax = paxQty.adl + paxQty.chd <= maxPax;
+        break;
     }
-
-    setPaxQty((prev) => ({
-      ...prev,
-      [e.target.name]: val
-    }));
-    setPaxQtyErr((prev) => ({
-      ...prev,
-      [fieldName]: ''
-    }));
+    if (validMaxPax && validInf) {
+      // Valid cases
+      setPaxQty((prev) => ({
+        ...prev,
+        [fieldName]: val
+      }));
+      setIsQtyValid(true);
+    } else {
+      // Error cases
+      setIsQtyValid(false);
+      // e.preventDefault();
+    }
   };
 
   return (
@@ -207,7 +207,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
               validation={validation}
             />
           </Grid>
-          <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: 'flex-end'}}>
+          <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <RadioGroup
               row
               sx={{ display: 'flex', justifyContent: 'center' }}
@@ -259,8 +259,9 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
           {validation.isValid && (
             <>
               <Grid item xs={12} md={8} sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                <PaxQty maxPax={maxPax} paxQty={paxQty} onPaxChange={handlePaxQty} paxQtyErr={paxQtyErr} />
+                <PaxQty maxPax={maxPax} paxQty={paxQty} onPaxChange={handlePaxQty} isQtyValid={isQtyValid} />
               </Grid>
+              {/* Total passengers Sum-up */}
               <Grid item xs={12} md={4}>
                 <Grid container sx={{ display: 'flex', justifyContent: 'right', alignItems: 'center' }}>
                   <TextField
