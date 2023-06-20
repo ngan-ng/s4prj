@@ -1,13 +1,15 @@
-import { Button, FormControlLabel, Grid, Paper, Radio, RadioGroup, TextField, Typography } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import TripDate from './TripDate';
 import validate from 'validate.js';
-import { Search } from '@mui/icons-material';
 import dayjs from 'dayjs';
 import Airports from './Airports';
 import { Fragment } from 'react';
 import PaxQty from './PaxQty';
 import axiosCall from 'api/callAxios';
+import SubmitButton from './SubmitButton';
+import TotalPax from './TotalPax';
+import TripTypeButton from './TripTypeButton';
 
 // eslint-disable-next-line react/prop-types
 const SearchFlightForm = ({ backgroundOpacity }) => {
@@ -190,6 +192,8 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
       .post('/api-v1/guest/flight/search', temp)
       .then((resp) => {
         console.log(resp.data);
+        localStorage.setItem('paxQty', JSON.stringify(paxQty));
+        console.log(JSON.parse(localStorage.getItem('paxQty')));
       })
       .catch((errSubmit) => {
         console.log(errSubmit);
@@ -223,52 +227,14 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
             />
           </Grid>
           <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <RadioGroup
-              row
-              sx={{ display: 'flex', justifyContent: 'center' }}
-              aria-labelledby="ticket-type-label"
-              name="tripType"
-              defaultValue="roundtrip"
-              onChange={handleChange}
-              spacing={1}
-            >
-              <FormControlLabel
-                value="roundtrip"
-                control={<Radio color="secondary" />}
-                label={<Typography color={isOneway ? '' : 'secondary'}>Roundtrip</Typography>}
-                labelPlacement="top"
-                color="secondary"
-              />
-              <FormControlLabel
-                value="oneway"
-                control={<Radio color="secondary" />}
-                label={<Typography color={isOneway ? 'secondary' : ''}>Oneway</Typography>}
-                labelPlacement="top"
-              />
-            </RadioGroup>
+            <TripTypeButton isOneway={isOneway} onTypeChange={handleChange} />
           </Grid>
           {/* Row 2: Select date for traveling */}
           <Grid item xs={12} sm={8}>
             <TripDate searchDto={searchDto} onChange={handleChange} validation={validation} />
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Grid container sx={{ display: 'flex', justifyContent: 'right', alignItems: 'center' }}>
-              <Button
-                color="secondary"
-                sx={{
-                  py: 1.5,
-                  alignContent: 'stretch',
-                  width: { xs: '100%', sm: '90%' }
-                }}
-                variant="contained"
-                size="large"
-                onClick={handleSubmit}
-                endIcon={<Search />}
-                disabled={!validation.isValid}
-              >
-                Search
-              </Button>
-            </Grid>
+            <SubmitButton validation={validation} onSubmit={handleSubmit} />
           </Grid>
           {/* Row 3: Select number of passengers for traveling */}
           {validation.isValid && (
@@ -278,28 +244,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
               </Grid>
               {/* Total passengers Sum-up */}
               <Grid item xs={12} md={4}>
-                <Grid container sx={{ display: 'flex', justifyContent: 'right', alignItems: 'center' }}>
-                  <TextField
-                    variant="filled"
-                    label={
-                      <Typography color="white" fontSize={18} fontWeight="bold">
-                        Total
-                      </Typography>
-                    }
-                    aria-readonly
-                    value={`${total < 10 ? '0' + total : total} Passengers`}
-                    inputProps={{
-                      style: {
-                        textAlign: 'end',
-                        color: 'white',
-                        backgroundColor: 'indigo',
-                        opacity: 0.8,
-                        borderRadius: 5
-                      }
-                    }}
-                    sx={{ width: { xs: '100%', md: '90%' } }}
-                  />
-                </Grid>
+                <TotalPax total={total} />
               </Grid>
             </>
           )}

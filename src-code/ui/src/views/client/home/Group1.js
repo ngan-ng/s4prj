@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchFlightForm from 'ui-component/client/SearchFlightForm/SearchFlightForm.jsx';
+import SearchFlightForm from 'ui-component/client/SearchFlightForm';
 import HomeCarousel from 'ui-component/client/HomeCarousel';
 import SwipeableViews from 'react-swipeable-views';
 import AirplaneTicketTwoToneIcon from '@mui/icons-material/AirplaneTicketTwoTone';
