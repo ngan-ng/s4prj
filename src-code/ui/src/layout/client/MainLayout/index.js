@@ -10,6 +10,7 @@ import { loginRequest } from 'azure/authConfig';
 import { signOutStart, signinStart } from 'store/user/user.action';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const MainLayout = () => {
   const dispatch = useDispatch();
@@ -34,7 +35,9 @@ const MainLayout = () => {
       <AppBar color="secondary" position="static" elevation={3} sx={{ opacity: 0.93, display: 'block', px: 1 }}>
         <Toolbar>
           <IconButton edge="start" color="inherit" sx={{ ml: 0, p: 0, my: 0, mr: 2 }}>
-            <Avatar variant="square" src={logo} sizes="large" sx={{ height: '60px', width: '60px', backgroundColor: 'transparent' }} />
+            <Link to="/">
+              <Avatar variant="square" src={logo} sizes="large" sx={{ height: '60px', width: '60px', backgroundColor: 'transparent' }} />
+            </Link>
           </IconButton>
           <Header onLogin={handleLogin} onLogout={handleLogout} email={user ? user : null} />
         </Toolbar>

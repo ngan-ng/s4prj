@@ -21,13 +21,13 @@ const HomePage = () => {
   return (
     <Container maxWidth={false} disableGutters>
       <Typography variant="body1" component="div" sx={{ position: 'relative', mx: 0, px: 0, width: '100%', height: 800 }}>
-        <Box sx={{ position: 'absolute', zIndex: 'modal', top: 0, mx: 0, px: 0, width: '100%' }}>
+        <Box sx={{ position: 'absolute', zIndex: '99', top: 0, mx: 0, px: 0, width: '100%' }}>
           <HomeCarousel />
         </Box>
         <Box
           sx={{
             position: 'absolute',
-            zIndex: 'tooltip',
+            zIndex: '100',
             top: 30,
             left: 0,
             right: 0,

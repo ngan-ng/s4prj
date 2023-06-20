@@ -3,6 +3,7 @@
 // project imports
 import MainLayout from 'layout/client/MainLayout';
 import HomePage from 'views/client/home/index';
+import Booking from "../views/client/booking";
 // import Loadable from 'ui-component/Loadable';
 
 // dashboard routing
@@ -34,6 +35,15 @@ const ClientRoutes = {
         {
           path: '',
           element: <HomePage />
+        }
+      ]
+    },
+    {
+      path: 'booking',
+      children: [
+        {
+          path: '',
+          element: <Booking />
         }
       ]
     }

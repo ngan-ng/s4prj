@@ -8,9 +8,12 @@ import dayjs from 'dayjs';
 import Airports from './Airports';
 import { Fragment } from 'react';
 import PaxQty from './PaxQty';
+import {useDispatch} from "react-redux";
+import {sendSearchDtoStart} from "../../../store/flight/flight.action";
 // import PaxQty from './PaxQty';
 
 const SearchFlightForm = ({ backgroundOpacity }) => {
+  const dispatch = useDispatch();
   const today = dayjs();
   // Search Details Information
   const [searchDto, setSearchDto] = useState({
@@ -142,6 +145,8 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
     } else {
       temp.returnDate = searchDto.returnDate.format('YYYY-MM-DD');
     }
+
+    dispatch(sendSearchDtoStart(temp));
     console.log(temp);
   };
 
