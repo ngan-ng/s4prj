@@ -147,7 +147,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
     }
 
     dispatch(sendSearchDtoStart(temp));
-    console.log(temp);
+    console.log("temp:", temp);
   };
 
   const maxPax = 6;
