@@ -1,8 +1,8 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import AIRPORT_ACTION_TYPES from './airport.type';
 import { fetchAirportFailed, fetchAirportSuccess } from './airport.action';
-// import axiosCall from 'api/axios';
-import instance from 'api/callApiWithAzureAuth';
+import instance from 'api/axios';
+// import instance from 'api/callApiWithAzureAuth';
 
 const getAirports = async () => {
   const resp = await instance.get('/api-v1/guest/airport/getAll');
