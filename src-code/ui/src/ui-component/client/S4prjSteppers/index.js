@@ -4,13 +4,9 @@ import Stack from '@mui/material/Stack';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
-import SettingsIcon from '@mui/icons-material/Settings';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
-import { Box, Button, Typography } from '@mui/material';
-import { useState } from 'react';
-import { IconTicket } from '@tabler/icons';
+import { Box, Button, StepIcon, Typography } from '@mui/material';
+import StepperType from './stepper.type';
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -18,24 +14,27 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   },
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage: 'linear-gradient( 95deg,rgb(147,133,216) 00%,rgb(147,133,216) 50%,rgb(138,35,135) 100%)'
+      backgroundImage: 'linear-gradient( 95deg,rgb(147,133,216) 10%,rgb(172,160,224) 50%,rgb(138,35,135) 90%)',
+      transition: theme.transitions.create(['backgroundImage', 'transform'], {
+        duration: theme.transitions.duration.standard
+      })
     }
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage: 'linear-gradient( 95deg,rgb(147,133,216) 0%,rgb(147,133,216) 50%,rgb(138,35,135) 100%)'
+      backgroundImage: 'linear-gradient( 95deg,rgb(147,133,216) 10%,rgb(172,160,224)  50%,rgb(138,35,135) 90%)'
     }
   },
   [`& .${stepConnectorClasses.line}`]: {
     height: 2,
     border: 0,
-    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
-    borderRadius: 1
+    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[600] : '#eaeaf0',
+    borderRadius: 5
   }
 }));
 
 const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+  backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccd',
   zIndex: 1,
   color: '#fff',
   width: 35,
@@ -52,17 +51,11 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
     backgroundImage: 'linear-gradient( 136deg, rgb(205,112,218) 10%, rgb(114,74,186) 68%, rgb(96,47,146) 100%)'
   })
 }));
-// eslint-disable-next-line no-unused-vars
+
 function BookingSteppers(props) {
   const { active, completed, className } = props;
 
-  const icons = {
-    1: <IconTicket fontSize="small" />,
-    2: <GroupAddIcon fontSize="small" />,
-    3: <VideoLabelIcon fontSize="small" />,
-    4: <VideoLabelIcon fontSize="small" />,
-    5: <VideoLabelIcon fontSize="small" />
-  };
+  const icons = StepperType.BOOKING.icons;
 
   return (
     <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
@@ -74,13 +67,7 @@ function BookingSteppers(props) {
 function ManageBookingStepIcon(props) {
   const { active, completed, className } = props;
 
-  const icons = {
-    1: <SettingsIcon fontSize="small" />,
-    2: <GroupAddIcon fontSize="small" />,
-    3: <VideoLabelIcon fontSize="small" />,
-    4: <VideoLabelIcon fontSize="small" />,
-    5: <VideoLabelIcon fontSize="small" />
-  };
+  const icons = StepperType.MANAGE_BOOKING.icons;
 
   return (
     <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
@@ -89,33 +76,26 @@ function ManageBookingStepIcon(props) {
   );
 }
 
-const S4prjSteppers = ({ pageType, onFinished }) => {
-
+const S4prjSteppers = ({ activeStep, handleNext, handleBack, stepperName, onFinished }) => {
   let steps = [];
- console.log(pageType);
-  switch (pageType) {
-    case 'booking':
-      steps = ['Select Flight', 'Passenger on Flight', 'Seat Assignment', 'Important Notices', 'Payment'];
+  let stepIconComponents = StepIcon;
+  switch (stepperName) {
+    case StepperType.BOOKING.name:
+      steps = StepperType.BOOKING.steppers;
+      stepIconComponents = BookingSteppers;
       break;
-    case 'manage-booking':
-      steps = ['Select Flight', 'Passenger on Flight', 'Seat Assignment', 'Important Notices', 'Boarding Pass'];
+    case StepperType.MANAGE_BOOKING.name:
+      steps = StepperType.MANAGE_BOOKING.steppers;
+      stepIconComponents = ManageBookingStepIcon;
+      break;
   }
-  const [activeStep, setActiveStep] = useState(0);
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
   return (
     <Stack sx={{ width: '100%' }} spacing={4}>
       <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
         {steps.map((label) => (
           <Step key={label}>
-            <StepLabel StepIconComponent={ManageBookingStepIcon}>{label}</StepLabel>
+            <StepLabel StepIconComponent={stepIconComponents}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
