@@ -2,12 +2,11 @@ import React from 'react';
 import SearchFlightForm from 'ui-component/client/SearchFlightForm';
 import HomeCarousel from 'ui-component/client/HomeCarousel';
 import SwipeableViews from 'react-swipeable-views';
-import AirplaneTicketTwoToneIcon from '@mui/icons-material/AirplaneTicketTwoTone';
-import { CalendarMonthTwoTone, ShareLocationTwoTone } from '@mui/icons-material';
+import { ShareLocationTwoTone } from '@mui/icons-material';
 import { Box, Paper, Tab, Tabs, Typography } from '@mui/material';
-import SearchBookingForm from 'ui-component/client/SearchBookingForm/SearchBookingForm';
+import SearchBookingForm from 'ui-component/client/SearchBookingForm';
 import TracingFlight from 'ui-component/client/TracingFlight/TracingFlight';
-
+import { BookingHomeIcon, ManageBookingIcon } from 'ui-component/icons/SharedIconComponents';
 const Group1 = () => {
   const backgroundOpacity = 'rgba(255,255,255,0.6)';
   const [value, setValue] = React.useState(0);
@@ -72,9 +71,9 @@ const Group1 = () => {
               aria-label="home tabs"
               variant="fullWidth"
             >
-              <Tab label="Booking" icon={<CalendarMonthTwoTone fontSize="large" />} />
-              <Tab label="Manage Your Booking" icon={<AirplaneTicketTwoToneIcon fontSize="large" />} />
-              <Tab label="Tracing Flights" icon={<ShareLocationTwoTone fontSize="large" />} />
+              <Tab sx={{ px: 0 }} label="Booking" icon={<BookingHomeIcon sx={{ fontSize: 29 }} />} />
+              <Tab sx={{ px: 0 }} label="Manage Booking" icon={<ManageBookingIcon fontSize="large" />} />
+              <Tab sx={{ mx: 0 }} label="Tracing Flights" icon={<ShareLocationTwoTone fontSize="large" />} />
             </Tabs>
           </Paper>
           <SwipeableViews axis={'x'} index={value} onChangeIndex={handleChangeIndex}>

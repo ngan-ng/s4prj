@@ -5,8 +5,6 @@ const Booking = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
-
-
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 

@@ -192,6 +192,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
       .post('/api-v1/guest/flight/search', temp)
       .then((resp) => {
         console.log(resp.data);
+        localStorage.removeItem('paxQty');
         localStorage.setItem('paxQty', JSON.stringify(paxQty));
         console.log(JSON.parse(localStorage.getItem('paxQty')));
       })

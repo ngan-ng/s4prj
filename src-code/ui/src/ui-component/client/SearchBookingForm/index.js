@@ -1,23 +1,31 @@
 import { Button, Grid, Paper, TextField, Typography } from '@mui/material';
-import { useState } from 'react';
-import { Fragment } from 'react';
+import { useState, Fragment } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { fetchBookingByPnrStart } from 'store/booking/booking.action';
 
 const SearchBookingForm = ({ backgroundOpacity }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [pnr, setPnr] = useState('');
   const [err, setErr] = useState('');
   const handleChange = (e) => {
     if (e.target.value.length > 6) {
-      setErr('Invalid PNR');
+      setErr('PNR is valid that contains 6 alphabetic letters and number');
       e.preventDefault();
     } else {
       setPnr(e.target.value);
       setErr('');
     }
   };
-  const handleManageBooking = async () => {
-    navigate('/manage-booking');
+  const handleManageBooking = async (e) => {
+    try {
+      dispatch(fetchBookingByPnrStart(pnr));
+      navigate('/manage-booking');
+    } catch (error) {
+      console.log(error);
+      e.preventDefault();
+    }
   };
 
   return (
@@ -34,28 +42,28 @@ const SearchBookingForm = ({ backgroundOpacity }) => {
           backgroundColor: `${backgroundOpacity}`
         }}
       >
-        <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Grid item xs={3} md={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'end' }}>
-            <Typography>Enter your PNR:</Typography>
-          </Grid>
-          <Grid item xs={6} md={5} sx={{ mx: 2 }}>
+        <Grid container spacing={2} sx={{ display: 'flex', justifyContent: 'space-around' }}>
+          <Grid item xs={8} md={8}>
             <TextField
               variant="filled"
               fullWidth
               name="pnr"
+              label="Your Booking PNR"
               value={pnr}
               onChange={handleChange}
-              helperText={err}
               color="secondary"
               sx={{ backgroundColor: 'whitesmoke' }}
             />
           </Grid>
-          <Grid item xs={12} md={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Grid item xs={3} md={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Button onClick={handleManageBooking} fullWidth color="secondary" variant="contained" sx={{ height: 'stretch' }}>
               Search
             </Button>
           </Grid>
         </Grid>
+        <Typography xs={12} sx={{ pt: 1, mx: 2 }} variant="body1" color="#d50000">
+          {err}
+        </Typography>
       </Paper>
     </Fragment>
   );
