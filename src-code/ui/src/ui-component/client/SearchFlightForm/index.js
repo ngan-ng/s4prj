@@ -10,9 +10,14 @@ import axiosCall from 'api/callAxios';
 import SubmitButton from './SubmitButton';
 import TotalPax from './TotalPax';
 import TripTypeButton from './TripTypeButton';
+import { useDispatch } from "react-redux";
+import { sendSearchDtoStart } from "../../../store/flight/flight.action";
+import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 const SearchFlightForm = ({ backgroundOpacity }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const today = dayjs();
   // Search Details Information
   const [searchDto, setSearchDto] = useState({
@@ -188,16 +193,20 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
       temp.returnDate = searchDto.returnDate.set('hour', 0).set('minute', 0).format('YYYY-MM-DDTHH:mm');
     }
     console.log(temp);
-    await axiosCall
-      .post('/api-v1/guest/flight/search', temp)
-      .then((resp) => {
-        console.log(resp.data);
-        localStorage.setItem('paxQty', JSON.stringify(paxQty));
-        console.log(JSON.parse(localStorage.getItem('paxQty')));
-      })
-      .catch((errSubmit) => {
-        console.log(errSubmit);
-      });
+    // await axiosCall
+    //   .post('/api-v1/guest/flight/search', temp)
+    //   .then((resp) => {
+    //     console.log(resp.data);
+    //     localStorage.setItem('paxQty', JSON.stringify(paxQty));
+    //     console.log(JSON.parse(localStorage.getItem('paxQty')));
+    //   })
+    //   .catch((errSubmit) => {
+    //     console.log(errSubmit);
+    //   });
+
+    dispatch(sendSearchDtoStart(temp));
+    navigate("/booking");
+
   };
   const total = Object.values(paxQty).reduce((a, b) => a + b);
 

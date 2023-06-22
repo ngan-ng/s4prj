@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { AppBar, Avatar, Box, Container, CssBaseline, IconButton, Toolbar } from '@mui/material';
 import Header from './Header';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import Footer from './Footer';
 import logo from 'assets/images/logo/logo.png';
 import { useMsal } from '@azure/msal-react';
@@ -10,7 +10,7 @@ import { loginRequest } from 'azure/authConfig';
 import { signOutStart, signinStart } from 'store/user/user.action';
 import { useState } from 'react';
 import { useEffect } from 'react';
-nimport axios from 'api/callApiWithAzureAuth';
+import axios from 'api/callApiWithAzureAuth';
 const MainLayout = () => {
   const dispatch = useDispatch();
   const { instance, accounts } = useMsal();
@@ -46,7 +46,9 @@ const MainLayout = () => {
       <AppBar color="secondary" position="static" elevation={3} sx={{ opacity: 0.93, display: 'block', px: 1 }}>
         <Toolbar>
           <IconButton edge="start" color="inherit" sx={{ ml: 0, p: 0, my: 0, mr: 2 }}>
-            <Avatar variant="square" src={logo} sizes="large" sx={{ height: '60px', width: '60px', backgroundColor: 'transparent' }} />
+            <Link to="/">
+              <Avatar variant="square" src={logo} sizes="large" sx={{ height: '60px', width: '60px', backgroundColor: 'transparent' }} />
+            </Link>
           </IconButton>
           <Header onLogin={handleLogin} onLogout={handleLogout} email={user ? user : null} />
         </Toolbar>

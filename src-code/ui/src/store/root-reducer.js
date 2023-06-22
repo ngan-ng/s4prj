@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import customizationReducer from './customizationReducer';
 import { airportReducer } from './airport/airport.reducer';
 import userReducer from './user/user.reducer';
-import {flightReducer} from "./flight/flight.reducer";
+import { flightReducer } from "./flight/flight.reducer";
 
 // ==============================|| COMBINE REDUCER ||============================== //
 

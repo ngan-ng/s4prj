@@ -2,10 +2,12 @@ import * as React from 'react';
 import BookingDetails from "../BookingDetails";
 import {CardContent, Box, Grid, Typography, Card} from "@mui/material";
 import CustomPagination from "./CustomPagination";
-
-
+import { useSelector } from "react-redux";
+import { selectFlights } from "../../../../store/flight/flight.selector";
 
 const Content = () => {
+    const flights = useSelector(selectFlights);
+    console.log("selectFlights", flights);
     return (
         <>
         <CustomPagination />

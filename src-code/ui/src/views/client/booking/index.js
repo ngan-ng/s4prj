@@ -5,7 +5,7 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Content from "../../../ui-component/client/Booking/SelectFlight/Content";
+import Content from "../../../ui-component/client/Booking/SelectFlight";
 import Passengers from "../../../ui-component/client/Booking/Passengers";
 
 const steps = ['Select Flight', 'Passengers', 'Seat Assignment', 'Important Notices', 'Payment'];
