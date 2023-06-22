@@ -194,19 +194,19 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
     }
     console.log(temp);
     // await axiosCall
-    //   .post('/api-v1/guest/flight/search', temp)
-    //   .then((resp) => {
-    //     console.log(resp.data);
-    //     localStorage.setItem('paxQty', JSON.stringify(paxQty));
-    //     console.log(JSON.parse(localStorage.getItem('paxQty')));
-    //   })
-    //   .catch((errSubmit) => {
-    //     console.log(errSubmit);
-    //   });
+    //     .post('/api-v1/guest/flight/search', temp)
+    //     .then((resp) => {
+    //       console.log(resp.data);
+    //       localStorage.removeItem('paxQty');
+    //       localStorage.setItem('paxQty', JSON.stringify(paxQty));
+    //       console.log(JSON.parse(localStorage.getItem('paxQty')));
+    //     })
+    //     .catch((errSubmit) => {
+    //       console.log(errSubmit);
+    //     });
 
     dispatch(sendSearchDtoStart(temp));
     navigate("/booking");
-
   };
   const total = Object.values(paxQty).reduce((a, b) => a + b);
 

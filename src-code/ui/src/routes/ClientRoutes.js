@@ -1,20 +1,14 @@
-// import { lazy } from 'react';
+import { lazy } from 'react';
 
 // project imports
 import MainLayout from 'layout/client/MainLayout';
-import HomePage from 'views/client/home/index';
-import Booking from "../views/client/booking";
-// import Loadable from 'ui-component/Loadable';
+// import HomePage from 'views/client/home/index';
+import Loadable from 'ui-component/Loadable';
 
-// dashboard routing
-// const HomePage = Loadable(lazy(() => import('views/client/home')));
-
-// utilities routing
-// const UtilsTypography = Loadable(lazy(() => import('views/admin/utilities/Typography')));
+// routing
+const HomePage = Loadable(lazy(() => import('views/client/home')));
+const ManageBooking = Loadable(lazy(() => import('views/client/manage-booking')));
 // const UtilsColor = Loadable(lazy(() => import('views/admin/utilities/Color')));
-// const UtilsShadow = Loadable(lazy(() => import('views/admin/utilities/Shadow')));
-// const UtilsMaterialIcons = Loadable(lazy(() => import('views/admin/utilities/MaterialIcons')));
-// const UtilsTablerIcons = Loadable(lazy(() => import('views/admin/utilities/TablerIcons')));
 
 // sample page routing
 // const SamplePage = Loadable(lazy(() => import('views/admin/sample-page')));
@@ -46,25 +40,25 @@ const ClientRoutes = {
           element: <Booking />
         }
       ]
+    },
+    {
+      path: 'manage-booking',
+      children: [
+        {
+          path: '',
+          element: <ManageBooking />
+        }
+      ]
     }
+    // {
+    //   path: '',
+    //   children: [
     //     {
-    //         path: 'utils',
-    //         children: [
-    //             {
-    //                 path: 'util-typography',
-    //                 element: <UtilsTypography />
-    //             }
-    //         ]
-    //     },
-    //     {
-    //         path: 'utils',
-    //         children: [
-    //             {
-    //                 path: 'util-color',
-    //                 element: <UtilsColor />
-    //             }
-    //         ]
-    //     },
+    //       path: 'util-color',
+    //       element: <UtilsColor />
+    //     }
+    //   ]
+    // }
     //     {
     //         path: 'utils',
     //         children: [

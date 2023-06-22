@@ -35,7 +35,6 @@ public class FlightServiceImpl implements FlightService {
         }
         SearchResponseDto responseDto = new SearchResponseDto();
         LocalDateTime departDate = searchDto.getDepartDate().atStartOfDay();
-        LocalDateTime returnDate = searchDto.getReturnDate().atStartOfDay();
 
         List<Flight> outboundFlights = flightRepository
                 .findAllByOriginAndDestinationAndSTDBetween(
@@ -46,6 +45,7 @@ public class FlightServiceImpl implements FlightService {
         responseDto.setOutboundFlights(outboundFlights);
 
         if (searchDto.getTripType().equalsIgnoreCase("roundtrip")) {
+            LocalDateTime returnDate = searchDto.getReturnDate().atStartOfDay();
             List<Flight> inboundFlights = flightRepository
                     .findAllByOriginAndDestinationAndSTDBetween(
                             destination.get(),
