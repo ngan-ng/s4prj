@@ -10,7 +10,7 @@ const getAccessToken = async () => {
   const account = msalInstance.getAllAccounts()[0];
   const accessTokenRequest = { ...loginRequest, account };
   const token = await msalInstance.acquireTokenSilent(accessTokenRequest).then((resp) => resp);
-  console.log(token);
+  console.log('getAccessToken in callApiWithAzureAuth: ' + token);
   return token.accessToken;
 };
 

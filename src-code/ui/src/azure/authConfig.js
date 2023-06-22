@@ -30,9 +30,8 @@ const msalConfig = {
     clientId: '83c799f9-dfff-4e4d-9c7f-ee758c3a9496',
     authority: b2cPolicies.authorities.signUpSignIn.authority,
     knownAuthorities: [b2cPolicies.authorityDomain],
-    redirectUri: '/',
-    postLogoutRedirectUri: '/',
-    navigateToLoginRequestUrl: true
+    redirectUri: '',
+    postLogoutRedirectUri: '/'
   },
   cache: {
     cacheLocation: 'localStorage', // This configures where your cache will be stored
