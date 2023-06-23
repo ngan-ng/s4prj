@@ -7,7 +7,6 @@ const BOOKING_INITIAL_STATE = {
 
 export const bookingReducer = (state = BOOKING_INITIAL_STATE, action = {}) => {
   const { type, payload } = action;
-  console.log('INSIDE bookingReducer: ' + payload);
   switch (type) {
     case BOOKING_ACTION_TYPES.FETCH_BOOKING_BY_PNR_START:
       return {

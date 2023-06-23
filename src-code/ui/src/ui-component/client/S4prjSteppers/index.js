@@ -15,21 +15,33 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage: 'linear-gradient( 95deg,rgb(147,133,216) 10%,rgb(172,160,224) 50%,rgb(138,35,135) 90%)',
-      transition: theme.transitions.create(['backgroundImage', 'transform'], {
-        duration: theme.transitions.duration.standard
-      })
+      // vertical padding + font size from searchIcon
+      paddingLeft: (1, 1, 1, 1),
+      transition: theme.transitions.create('backgroundImage'),
+      marginLeft: '10px',
+      marginRight: '10px'
     }
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
-      backgroundImage: 'linear-gradient( 95deg,rgb(147,133,216) 10%,rgb(172,160,224)  50%,rgb(138,35,135) 90%)'
+      backgroundImage: 'linear-gradient( 95deg,rgb(147,133,216) 10%,rgb(172,160,224)  50%,rgb(138,35,135) 90%)',
+      // vertical padding + font size from searchIcon
+      paddingLeft: (1, 1, 1, 1),
+      transition: theme.transitions.create('backgroundImage'),
+      marginLeft: '10px',
+      marginRight: '10px'
     }
   },
   [`& .${stepConnectorClasses.line}`]: {
     height: 2,
     border: 0,
     backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[600] : '#eaeaf0',
-    borderRadius: 5
+    borderRadius: 5,
+    paddingLeft: (1, 1, 1, 1),
+    transition: theme.transitions.create('backgroundImage'),
+    backgroundImage: 'linear-gradient( 95deg,rgb(147,133,216)',
+    marginLeft: '10px',
+    marginRight: '10px'
   }
 }));
 

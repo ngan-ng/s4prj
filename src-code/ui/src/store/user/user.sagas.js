@@ -5,9 +5,17 @@ import userActionTypes from './user.types';
 
 export function* login() {
   try {
-    const res = yield call(signIn);
+    const resp = yield call(signIn);
     // console.log('Saga Login: ... ' + res.account.idTokenClaims.emails[0]);
-    yield put(signinSuccess(res));
+    if (resp.account !== null) {
+      let id_token_claim = resp.account.idTokenClaims;
+      let email = id_token_claim.emails[0];
+      let givenName = id_token_claim.given_name;
+      let surName = id_token_claim.family_name;
+      let user = { givenName: givenName, surName: surName, email: email, loyaltyPoint: 0 };
+
+      yield put(signinSuccess(user));
+    }
   } catch (error) {
     yield put(signinFailure(error));
   }
