@@ -35,7 +35,7 @@ public class PromotionsPolicyServiceImpl implements PromotionsPolicyService {
                 case POINTS -> {
                     User member = booking.getMember();
                     if(member != null){
-                        long currentPoints = member.getPoints();
+                        long currentPoints = member.getLoyaltyPoints();
                         if(currentPoints >= p.getPointCondition()){
                             rate = rate + p.getApplyRate();
                         }

@@ -1,33 +1,38 @@
-import { USER_ACTION_TYPES } from './user.types';
+import userActionTypes from './user.types';
 
 const INITIAL_STATE = {
   currentUser: null,
-  isLoading: false,
   error: null
 };
 
-export const userReducer = (state = INITIAL_STATE, action) => {
-  const { type, payload } = action;
-
-  switch (type) {
-    case USER_ACTION_TYPES.SIGN_IN_SUCCESS:
+const userReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case userActionTypes.SIGN_IN_SUCCESS:
+    case userActionTypes.RENEW_TOKEN_SUCCESS:
+    case userActionTypes.CHECK_SESSION_SUCCESS:
       return {
         ...state,
-        currentUser: payload
+        currentUser: action.payload,
+        error: null
       };
-    case USER_ACTION_TYPES.SIGN_OUT_SUCCESS:
+    case userActionTypes.SIGN_OUT_SUCCESS:
       return {
         ...state,
-        currentUser: null
+        currentUser: null,
+        error: null
       };
-    case USER_ACTION_TYPES.SIGN_OUT_FAILED:
-    case USER_ACTION_TYPES.SIGN_IN_FAILED:
-    case USER_ACTION_TYPES.SIGN_UP_FAILED:
+    case userActionTypes.SIGN_IN_FAILURE:
+    case userActionTypes.SIGN_OUT_FAILURE:
+    case userActionTypes.SIGN_UP_FAILURE:
+    case userActionTypes.CHECK_SESSION_FAILURE:
       return {
         ...state,
-        error: payload
+        currentUser: null,
+        error: action.payload
       };
     default:
       return state;
   }
 };
+
+export default userReducer;

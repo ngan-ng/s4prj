@@ -4,16 +4,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectAirports } from '../../../store/airport/airport.selector';
 import { fetchAirportStart } from '../../../store/airport/airport.action';
 import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select } from '@mui/material';
-import { FlightLand, FlightTakeoff } from '@mui/icons-material';
+import { AirportLocation } from 'ui-component/icons/SharedIconComponents';
 
 const Airports = ({ origin, destination, airportChange, onHasError, validation }) => {
   const dispatch = useDispatch();
   const airports = useSelector(selectAirports) ?? {};
   const isAirportsEmpty = Object.keys(airports).length === 0;
   useEffect(() => {
-    if (isAirportsEmpty) {
-      dispatch(fetchAirportStart());
-    }
+    const timeout = setTimeout(() => {
+      if (isAirportsEmpty) {
+        dispatch(fetchAirportStart());
+      }
+    }, 200);
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [dispatch, isAirportsEmpty]);
 
   return (
@@ -31,9 +36,10 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
               onChange={airportChange}
               required={true}
               error={onHasError('origin')}
-              IconComponent={() => <FlightTakeoff sx={{ m: 1.5 }} color="secondary" />}
-              variant="outlined"
+              IconComponent={() => <AirportLocation sx={{ mx: 1.5 }} color="secondary" />}
+              variant="filled"
               color="secondary"
+              sx={{ backgroundColor: 'whitesmoke' }}
             >
               <MenuItem value={''}>None</MenuItem>
               {!isAirportsEmpty ? (
@@ -64,9 +70,10 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
               name="destination"
               onChange={airportChange}
               error={onHasError('destination') ? true : false}
-              IconComponent={() => <FlightLand sx={{ m: 1.5 }} color="secondary" />}
-              variant="outlined"
+              IconComponent={() => <AirportLocation sx={{ mx: 1.5 }} color="secondary" />}
+              variant="filled"
               color="secondary"
+              sx={{ backgroundColor: 'whitesmoke' }}
             >
               <MenuItem key={0} value={''}>
                 None

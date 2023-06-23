@@ -14,13 +14,10 @@ function BaByIcon(props) {
   );
 }
 
-const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => {
-  return (
-    <Fragment>
-      <Grid item xs={12}>
-        <Typography>Passenger</Typography>
-      </Grid>
-      <Grid item sm={3}>
+const PaxQty = ({ maxPax, paxQty, onPaxChange, isQtyValid }) => (
+  <Fragment>
+    <Grid container spacing={2}>
+      <Grid item sm={4}>
         <TextField
           type="number"
           label="Adult"
@@ -28,6 +25,7 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => {
           inputProps={{ min: 1, max: maxPax - paxQty.chd, step: 1 }}
           value={paxQty.adl}
           InputProps={{
+            style: { textAlign: 'end' },
             endAdornment: (
               <InputAdornment position="start">
                 <Person color="secondary" />
@@ -35,14 +33,13 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => {
             )
           }}
           onChangeCapture={onPaxChange}
-          helperText={paxQtyErr.adl}
           fullWidth
-          sx={{ display: { sm: 'block' } }}
-          variant="outlined"
+          sx={{ backgroundColor: 'white', display: { sm: 'block' } }}
+          variant="filled"
           color="secondary"
         />
       </Grid>
-      <Grid item sm={3}>
+      <Grid item sm={4}>
         <TextField
           type="number"
           label="Children"
@@ -57,14 +54,13 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => {
             )
           }}
           onChangeCapture={onPaxChange}
-          helperText={paxQtyErr.chd}
           fullWidth
-          variant="outlined"
+          variant="filled"
           color="secondary"
-          sx={{ display: { sm: 'block' } }}
+          sx={{ backgroundColor: 'white', display: { sm: 'block' } }}
         />
       </Grid>
-      <Grid item sm={3}>
+      <Grid item sm={4}>
         <TextField
           type="number"
           label="Infant"
@@ -79,15 +75,24 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, paxQtyErr }) => {
             )
           }}
           onChangeCapture={onPaxChange}
-          helperText={paxQtyErr.inf}
           fullWidth
-          variant="outlined"
+          variant="filled"
           color="secondary"
-          sx={{ display: { sm: 'block' } }}
+          sx={{ backgroundColor: 'white', display: { sm: 'block' } }}
         />
       </Grid>
-    </Fragment>
-  );
-};
+      {!isQtyValid && (
+        <Grid item xs={12}>
+          <Typography variant="body1" color="#d50000">
+            Maximum <b style={{ fontSize: 18 }}>06</b> passengers of adults and children per booking
+          </Typography>
+          <Typography variant="body2" color="#d50000">
+            Maximum <b style={{ fontSize: 18 }}>01</b> infant per accompanying adult
+          </Typography>
+        </Grid>
+      )}
+    </Grid>
+  </Fragment>
+);
 
 export default PaxQty;
