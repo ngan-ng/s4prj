@@ -1,19 +1,15 @@
 package com.aptech.apiv1.model.user;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.aptech.apiv1.model.Booking;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Accessors(chain = true)
 @NoArgsConstructor
@@ -26,25 +22,15 @@ public class User implements Serializable {
     private long id;
     @Email
     private String email;
-    private String password;
-
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
         joinColumns = { @JoinColumn(name = "user_id") },
         inverseJoinColumns = { @JoinColumn(name = "role_id") })
-//    @JsonManagedReference
+    @JsonManagedReference
     private List<Role> roles = new ArrayList<>();
 
     ///////////////////////////////////
     // Member
-    private String title;
-    private String firstName;
-    private String lastName;
-    private LocalDateTime dob;
-    private long points;
-    private String mobile;
-    @OneToMany(mappedBy = "member")
-    @JsonIgnore
-    @JsonManagedReference
-    private List<Booking> bookings = new ArrayList<>();
+    private long loyaltyPoints;
+
 }
