@@ -1,48 +1,33 @@
 import {FLIGHT_ACTION_TYPES} from "./flight.types";
-import {takeLatest, put, all, call} from 'redux-saga/effects';
-import {sendSearchDtoFailed, sendSearchDtoSuccess} from "./flight.action";
+import {all, call, put, takeLatest} from 'redux-saga/effects';
 import axiosCall from "../../api/callAxios";
+import {searchFlightFailed, searchFlightSuccess} from "./flight.action";
 
 const searchFlight = async (searchDto) => {
-    const resp = await axiosCall.post("/api-v1/guest/flight/search", searchDto)
-        .then((resp) => {
-            console.log(resp);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    return resp;
-}
-
-function* sendSearchDtoStart({payload}) {
     try {
-        yield call(searchFlight, payload);
-        const resp = yield call(searchFlight);
-        yield put(sendSearchDtoSuccess({data: resp.data}));
+        return await axiosCall.post("/api-v1/guest/flight/search", searchDto);
     } catch (error) {
-        yield put(sendSearchDtoFailed(error));
+        console.log(error);
     }
 }
 
-// function* navigateToBooking({payload}) {
-//     try {
-//
-//     } catch (error) {
-//
-//     }
-// }
-
-export function* onSendSearchDtoStart() {
-    yield takeLatest(FLIGHT_ACTION_TYPES.SEND_SEARCHDTO_START, sendSearchDtoStart);
+function* searchFlightStart({payload}) {
+    try {
+        const resp = yield call(searchFlight, payload);
+        const data = resp.data;
+        yield put(searchFlightSuccess(data));
+    } catch (error) {
+        yield put(searchFlightFailed(error));
+    }
 }
 
-// export function* onSendSearchDtoSuccess() {
-//     yield takeLatest(FLIGHT_ACTION_TYPES.SEND_SEARCHDTO_START, navigateToBooking);
-// }
+export function* onSearchFlightStart() {
+    yield takeLatest(FLIGHT_ACTION_TYPES.SEARCH_FLIGHT_START, searchFlightStart);
+}
 
 export function* flightSagas() {
     yield all([
-        call(onSendSearchDtoStart),
+        call(onSearchFlightStart),
         //call(onSendSearchDtoSuccess),
     ]);
 }

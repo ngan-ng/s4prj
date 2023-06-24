@@ -4,6 +4,7 @@ import { lazy } from 'react';
 import MainLayout from 'layout/client/MainLayout';
 // import HomePage from 'views/client/home/index';
 import Loadable from 'ui-component/Loadable';
+import Booking from "../views/client/booking";
 
 // routing
 const HomePage = Loadable(lazy(() => import('views/client/home')));

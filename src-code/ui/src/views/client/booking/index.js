@@ -1,5 +1,6 @@
-import { Fragment } from 'react';
+import {Fragment, useState} from 'react';
 import S4prjSteppers from 'ui-component/client/S4prjSteppers';
+import pageType from "../../../ui-component/client/S4prjSteppers/stepper.type";
 
 const Booking = () => {
   const [activeStep, setActiveStep] = useState(0);

@@ -6,12 +6,12 @@ import dayjs from 'dayjs';
 import Airports from './Airports';
 import { Fragment } from 'react';
 import PaxQty from './PaxQty';
-import axiosCall from 'api/callAxios';
+//import axiosCall from 'api/callAxios';
 import SubmitButton from './SubmitButton';
 import TotalPax from './TotalPax';
 import TripTypeButton from './TripTypeButton';
 import { useDispatch } from "react-redux";
-import { sendSearchDtoStart } from "../../../store/flight/flight.action";
+import { searchFlightStart } from "../../../store/flight/flight.action";
 import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
@@ -193,6 +193,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
       temp.returnDate = searchDto.returnDate.set('hour', 0).set('minute', 0).format('YYYY-MM-DDTHH:mm');
     }
     console.log(temp);
+
     // await axiosCall
     //     .post('/api-v1/guest/flight/search', temp)
     //     .then((resp) => {
@@ -205,7 +206,10 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
     //       console.log(errSubmit);
     //     });
 
-    dispatch(sendSearchDtoStart(temp));
+    localStorage.removeItem('paxQty');
+    localStorage.setItem('paxQty', JSON.stringify(paxQty));
+
+    dispatch(searchFlightStart(temp));
     navigate("/booking");
   };
   const total = Object.values(paxQty).reduce((a, b) => a + b);
