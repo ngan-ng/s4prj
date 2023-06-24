@@ -5,11 +5,13 @@ import com.aptech.apiv1.enums.Gender;
 import com.aptech.apiv1.model.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,13 +28,13 @@ public class Booking implements Serializable {
     private long id;
     @Column(name = "pnr", nullable = false)
     private String pnr;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "flightId", nullable = false)
     private Flight flight;
     @Column(name = "bookDate", columnDefinition = "datetime", nullable = false)
     private LocalDateTime bookDate = LocalDateTime.now();
-    @Column(name = "dob", columnDefinition = "datetime")
-    private LocalDateTime dob;
+    @Column(name = "dob", columnDefinition = "date")
+    private LocalDate dob;
     @Column(name = "status")
     private String status = String.valueOf(BookingStatus.UNPAID);
     @Column(name = "seq", updatable = false)
@@ -45,7 +47,7 @@ public class Booking implements Serializable {
     @Column(name = "lastName", columnDefinition = "varchar(50)", nullable = false)
     @NotBlank(message = "Lastname is required")
     private String lastName;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(referencedColumnName = "id", name = "infantId")
     private Infant infant;
     @Column(name = "gender", columnDefinition = "varchar(3)", nullable = false)
@@ -55,7 +57,7 @@ public class Booking implements Serializable {
     private String mobile;
     @Email(message = "Invalid email format")
     private String email;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     @JsonBackReference
     private User member;

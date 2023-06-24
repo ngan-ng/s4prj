@@ -19,7 +19,7 @@ public class Payment implements Serializable {
     private String category;
     private String status;
     private long bookingId;
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(referencedColumnName = "id", name = "payerDetailsId")
     private PayerDetails payerDetailsId;
