@@ -1,14 +1,14 @@
-import React from 'react';
 import { Container } from '@mui/material';
-import SearchFlightForm from 'ui-component/client/SearchFlightForm/SearchFlightForm.jsx';
-import HomeCarousel from 'ui-component/client/HomeCarousel';
+import Group1 from './Group1';
+import News from './News';
 
 const HomePage = () => {
   return (
-    <Container sx={{ mx: 0, px: 0, width: '100%' }}>
-      <HomeCarousel sx={{ mx: 0, px: 0, width: '100%' }} />
-      <SearchFlightForm />
-      {/*  News */}
+    <Container maxWidth={false} disableGutters>
+      {/* Group 1: Banner and Search Flight Form */}
+      <Group1 />
+      {/* Group 2: News */}
+      <News />
     </Container>
   );
 };

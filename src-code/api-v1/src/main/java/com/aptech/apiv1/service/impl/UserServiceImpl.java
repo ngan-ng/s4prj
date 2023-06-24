@@ -1,92 +1,57 @@
 package com.aptech.apiv1.service.impl;
 
-import com.aptech.apiv1.dto.UserDto;
-import com.aptech.apiv1.dto.LoginRequest;
-import com.aptech.apiv1.dto.RoleDto;
+import com.aptech.apiv1.dto.UserResponseDto;
+import com.aptech.apiv1.model.user.Role;
 import com.aptech.apiv1.model.user.User;
 import com.aptech.apiv1.model.user.UserRole;
-import com.aptech.apiv1.model.user.Role;
-import com.aptech.apiv1.repository.UserRepository;
 import com.aptech.apiv1.repository.RoleRepository;
+import com.aptech.apiv1.repository.UserRepository;
 import com.aptech.apiv1.service.UserService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     @Autowired
-    UserRepository userRepository;
-
+    private UserRepository userRepository;
     @Autowired
-    RoleRepository roleRepository;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private ModelMapper modelMapper;
+    private RoleRepository roleRepository;
 
     @Override
-    public UserDto signup(UserDto userDto) throws Exception {
-        Optional<User> admin = userRepository.findByEmail(userDto.getEmail());
-        if (admin.isEmpty()) {
-
-            List<Role> roles = new ArrayList<>();
-            UserRole userRole = UserRole.valueOf(userDto.getRoles().get(0).getRole());
-            Role role = roleRepository.findByRole(userRole);
-            roles.add(role);
-            User newUser = new User()
-                    .setEmail(userDto.getEmail())
-                    .setPassword(passwordEncoder.encode(userDto.getPassword()))
-                    .setRoles(roles);
-
-            userRepository.save(newUser);
-            userDto.setPassword("");
-        }else{
-            throw new Exception("Account existed!");
+    public UserResponseDto findByEmail(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+        User member;
+        if (user.isEmpty()) {
+            Role userRole = roleRepository.findByRole(UserRole.MEMBER);
+             member = new User().setEmail(email)
+                    .setRoles(Arrays.asList(userRole))
+                    .setLoyaltyPoints(0);
+            userRepository.save(member);
+        }else {
+            member = user.get();
         }
-        return userDto;
+        UserResponseDto response = new UserResponseDto();
+        response.setEmail(member.getEmail());
+        response.setLoyaltyPoint(member.getLoyaltyPoints());
+        return response;
     }
 
     @Override
-    public UserDto findUserByEmail(String email) {
-        Optional<User> admin = Optional.ofNullable(userRepository.findByEmail(email).get());
-        if (admin.isPresent()) {
-            return modelMapper.map((admin.get()), UserDto.class);
+    public User addAdmin(String email) {
+        Role userRole;
+        Optional<User> user = userRepository.findByEmail(email);
+        if (user.isEmpty()) {
+            userRole = roleRepository.findByRole(UserRole.ADMIN);
+
+            User admin = new User().setEmail(email)
+                    .setRoles(Arrays.asList(userRole))
+                    .setLoyaltyPoints(0);
+
+            return userRepository.save(admin);
         }
         return null;
-    }
-
-    @Override
-    public UserDto login(LoginRequest loginRequest) {
-        User user = userRepository.findByEmail(loginRequest.getUsername()).get();
-        UserDto userDto = new UserDto();
-        if(user != null){
-            Boolean checkPass = passwordEncoder.matches(loginRequest.getPassword(), user.getPassword());
-            if(checkPass) {
-                List<RoleDto> roles = new ArrayList<>();
-                user.getRoles().forEach(role -> {
-                    RoleDto roleDto = new RoleDto().setRole(role.getRole().toString());
-                    roles.add(roleDto);
-                });
-                userDto.setEmail(user.getEmail())
-                        .setRoles(roles);
-
-                return userDto;
-            }
-        }
-        return userDto;
-    }
-
-    @Override
-    public List<User> getAllUsers() {
-        return (List<User>) userRepository.findAll();
     }
 }

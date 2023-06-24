@@ -2,15 +2,17 @@ import { combineReducers } from 'redux';
 
 // rootReducer import
 import customizationReducer from './customizationReducer';
-import { userReducer } from './user/user.reducer';
 import { airportReducer } from './airport/airport.reducer';
+import userReducer from './user/user.reducer';
+import { bookingReducer } from './booking/booking.reducer';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
 const rootReducer = combineReducers({
   customization: customizationReducer,
   airports: airportReducer,
-  user: userReducer
+  user: userReducer,
+  bookings: bookingReducer
 });
 
 export default rootReducer;

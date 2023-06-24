@@ -1,26 +1,38 @@
 [
     {
         "id": 1,
-        "image": "../../../assets/images/carousel/slide-1.png",
-        "title": "Title 1",
-        "url": ""
+        "image": "../../../assets/images/carousel/carousel1-sgn.jpg",
+        "title": "Ho Chi Minh City - The Pearl of The Far East",
+        "url": "https://www.bambooairways.com/vn-en/our-destinations/travel-guide/ho-chi-minh/"
     },
     {
         "id": 2,
-        "image": "../../../assets/images/carousel/slide-2.jpg",
-        "title": "Title 2",
-        "url": ""
+        "image": "../../../assets/images/carousel/carousel2-cxr.jpg",
+        "title": "Nha Trang",
+        "url": "https://www.bambooairways.com/vn-en/our-destinations/travel-guide/nha-trang/"
     },
     {
         "id":3,
-        "image": "../../../assets/images/carousel/slide-3.jpg",
-        "title": "Title 3",
+        "image": "../../../assets/images/carousel/carousel3-topdeals.jpg",
+        "title": "Top Deals",
         "url": ""
     },
     {
         "id": 4,
-        "image": "../../../assets/images/carousel/slide-4.png",
-        "title": "Title 4",
-        "url": ""
+        "image": "../../../assets/images/carousel/carousel-dad.jpg",
+        "title": "Da Nang",
+        "url": "https://www.bambooairways.com/vn-en/our-destinations/travel-guide/da-nang/"
+    },
+    {
+        "id": 5,
+        "image": "../../../assets/images/carousel/carousel5-pqc.jpg",
+        "title": "Step into serenity",
+        "url": "https://phuquoc.regenthotels.com/gallery"
+    },
+    {
+        "id": 6,
+        "image": "../../../assets/images/carousel/carousel6-han.jpg",
+        "title": "Hanoi - The capital of Vietnam",
+        "url": "https://www.bambooairways.com/vn-en/our-destinations/travel-guide/hanoi/"
     }
 ]
