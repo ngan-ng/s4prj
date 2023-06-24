@@ -1,5 +1,7 @@
 package com.aptech.apiv1.enums;
 
+import java.util.stream.Stream;
+
 public enum IataCode {
     SGN, // Saigon
     THD, // Thanh Hoa
@@ -8,5 +10,8 @@ public enum IataCode {
     PQC, // Phu Quoc
     HPH, // Hai Phong
     TBB, // Tuy Hoa
-    UIH // Qui Nhon
+    UIH; // Qui Nhon
+    public static Stream<IataCode> stream() {
+        return Stream.of(IataCode.values());
+    }
 }
