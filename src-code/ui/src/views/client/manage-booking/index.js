@@ -1,31 +1,53 @@
-// import { LinearProgress, Typography } from '@mui/material';
 import { Box, Button, Container } from '@mui/material';
-import { useEffect } from 'react';
-import { useState } from 'react';
-// import { useSelector } from 'react-redux';
-// import { isFetchingPnr, selectPnr } from 'store/booking/booking.selector';
+import { useEffect, useState, Fragment } from 'react';
 import S4prjSteppers from 'ui-component/client/S4prjSteppers';
 import { StepperType } from 'ui-component/client/S4prjSteppers/stepper.type';
 import SelectFlight from './SelectFlight';
-import { Fragment } from 'react';
 import SelectPax from './SelectPax';
 import SeatAssignment from './SeatAssignment';
 import ImportantNotices from './ImportantNotices';
 import BoardingPass from './BoardingPass';
+import { useSelector } from 'react-redux';
+import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
 
 const ManageBooking = () => {
-  const [activeStep, setActiveStep] = useState(0);
   const manageStepper = StepperType.MANAGE_BOOKING;
-  // const yourBookings = useSelector(selectPnr);
-  // const isFetching = useSelector(isFetchingPnr);
+  const [activeStep, setActiveStep] = useState(0);
+  const [validActiveStep, setValidActiveStep] = useState(false);
 
-  useEffect(() => {
-    // console.log('Effect: ' + yourBookings[0].pnr);
-  }, []);
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  let selectMBObj = useSelector(selectManageBookingObj);
+  const MB_INITIAL_OBJ = {
+    flightId: 0,
+    pax: [],
+    seats: []
   };
+  selectMBObj = selectMBObj ?? MB_INITIAL_OBJ;
+  const [mbObj] = useState(selectMBObj);
+  useEffect(() => {
+    console.log('MB index: FlightId: ' + mbObj.flightId);
+    switch (activeStep) {
+      case 0:
+        setValidActiveStep(mbObj.flightId !== 0);
+        console.log(mbObj);
+        break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
+      case 4:
+        break;
+      default:
+        break;
+    }
+  }, [activeStep, mbObj]);
 
+  const handleNext = () => {
+    if (validActiveStep) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
+  };
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
@@ -80,7 +102,7 @@ const ManageBooking = () => {
                   Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
-                <Button size="large" variant="contained" onClick={handleNext} color="secondary" sx={{ opacity: 0.9 }}>
+                <Button disabled={!validActiveStep} size="large" variant="contained" onClick={handleNext} color="secondary">
                   {activeStep === manageStepper.steppers.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </Box>

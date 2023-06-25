@@ -9,43 +9,42 @@ import '@fontsource/public-sans';
 import { List, ListItem, ListItemDecorator, Radio, RadioGroup, Typography } from '@mui/joy';
 import { Fragment } from 'react';
 import { InputAdornment, TextField } from '@mui/material';
-import { ReactComponent as ReturnFlightIcon } from 'assets/images/icons/animate-flight-return.svg';
-import { ReactComponent as DepartFlightIcon } from 'assets/images/icons/animate-flight-depart.svg';
+import { Flight } from '@mui/icons-material';
 const materialTheme = materialExtendTheme();
 
-export default function RadioFlightGroup({ flights, onBtnChange }) {
+export default function RadioFlightGroup({ flights, onFlightChange }) {
   // let { item, ibFlight } = props;
   return (
     <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
       <JoyCssVarsProvider>
-        <RadioGroup aria-label="Your plan" name="people" defaultValue="Individual">
+        <RadioGroup aria-label="Your plan" name="flightId" defaultValue="Individual">
           <List
             sx={{
               minWidth: 200,
               '--List-gap': '1.5rem',
               '--ListItem-paddingY': '1.5rem',
               '--ListItem-radius': '8px',
-              '--ListItemDecorator-size': '30px'
+              '--ListItemDecorator-size': '3px'
             }}
           >
             {flights.map((item, index) => (
-              <Fragment key={item.id}>
-                <ListItem variant="outlined" key={item.id} sx={{ boxShadow: 'sm', bgcolor: 'background.body' }}>
+              <Fragment key={item?.id}>
+                <ListItem variant="outlined" key={item?.id} sx={{ boxShadow: 'sm', bgcolor: 'background.body' }}>
                   <ListItemDecorator>
                     {
                       [
-                        <DepartFlightIcon style={{ fontSize: 8 }} key={item.id} />,
-                        // <Flight key={item.id} size="large" sx={{ marginX: 1 }} />
-                        <ReturnFlightIcon style={{ fontSize: 8 }} key={item.id} />
+                        // <DepartFlightIcon style={{ fontSize: 8 }} key={item?.id} />,
+                        <Flight key={item?.id} size="large" sx={{ marginX: 1, rotate: '90deg' }} />,
+                        <Flight key={item?.id} size="large" sx={{ marginX: 1, rotate: '-90deg' }} />
                       ][index]
                     }
                   </ListItemDecorator>
                   <Radio
-                    key={item.id}
+                    key={item?.id}
                     color="info"
-                    onChange={onBtnChange}
                     overlay
-                    value={item.id}
+                    value={item?.id}
+                    onChange={onFlightChange}
                     label={
                       <TextField
                         fullWidth
@@ -56,7 +55,9 @@ export default function RadioFlightGroup({ flights, onBtnChange }) {
                           startAdornment: (
                             <InputAdornment position="start">
                               <Typography sx={{ ml: 'auto' }}>
-                                <b>FS{item.flightNumber}</b>{' '}
+                                <b>FS{item?.flightNumber}</b>
+                                {' - '}
+                                <small>{item?.std.split('T' || ' ')[1]}</small>
                               </Typography>
                             </InputAdornment>
                           ),
@@ -64,21 +65,21 @@ export default function RadioFlightGroup({ flights, onBtnChange }) {
                             <InputAdornment position="start" sx={{ pr: 1 }}>
                               <Typography sx={{ marginX: 2 }}>
                                 <b>
-                                  {item.origin.iata_code} - {item.destination.iata_code}
+                                  {item?.origin.iata_code} - {item?.destination.iata_code}
                                 </b>{' '}
                               </Typography>
-                              <small>{item.std.split('T' || ' ')[0]}</small>
+                              <small>{item?.std.split('T' || ' ')[0]}</small>
                             </InputAdornment>
                           )
                         }}
                         helperText={
                           <Typography>
-                            {item.origin.name} - {item.destination.name}
+                            {item?.origin.name} - {item?.destination.name}
                           </Typography>
                         }
                       />
                     }
-                    sx={{ flexGrow: 1, flexDirection: 'row-reverse' }}
+                    sx={{ zIndex: 5, flexGrow: 1, flexDirection: 'row-reverse' }}
                     slotProps={{
                       action: ({ checked }) => ({
                         sx: () => ({

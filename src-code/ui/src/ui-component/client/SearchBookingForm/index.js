@@ -21,7 +21,7 @@ const SearchBookingForm = ({ backgroundOpacity }) => {
   const handleManageBooking = async (e) => {
     try {
       dispatch(fetchBookingByPnrStart(pnr));
-      navigate('/manage-booking');
+      navigate('/manage-booking', { state: { searchingPnr: pnr } });
     } catch (error) {
       console.log(error);
       e.preventDefault();
