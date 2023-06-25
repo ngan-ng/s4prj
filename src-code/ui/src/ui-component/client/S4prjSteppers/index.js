@@ -1,19 +1,10 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 import Stack from '@mui/material/Stack';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
-import { Box, Button, StepIcon, Typography, LinearProgress } from '@mui/material';
-import StepperType from './stepper.type';
-import { useSelector } from 'react-redux';
-import { selectFlights, selectFlightsIsFetching } from '../../../store/flight/flight.selector';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-// import { StepIcon } from '@mui/material';
-// import {StepperType, ManageBookingStepIcon } from './stepper.type';
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -52,56 +43,6 @@ const S4prjSteppers = ({ innerType, activeStep }) => {
   let steps = innerType.steppers;
   let stepIconComponent = innerType.getStepIconComponent;
 
-  const initialFlight = {
-    id: '',
-    aircraft: '',
-    basePrice: '',
-    destination: {},
-    duration: '',
-    etd: '',
-    flightNumber: '',
-    flightStatus: '',
-    gate: '',
-    origin: {},
-    std: ''
-  };
-
-  const [flight, setFlight] = useState(initialFlight);
-
-  const selectFlight = useSelector(selectFlights);
-  const isFetching = useSelector(selectFlightsIsFetching);
-  console.log('selector flights: ', selectFlight);
-  const inbound = selectFlight.inboundFlights;
-  //console.log(inbound);
-
-  // const inbound = selectFlight[Object.keys(selectFlight)[0]];
-  // const outbound = selectFlight[Object.keys(selectFlight)[1]];
-  // console.log('inbound: ', inbound);
-  // console.log('outbound: ', outbound);
-
-  const handleFlight = (e) => {
-    console.log(e.target.value);
-    const id = parseInt(e.target.value);
-    var ib = inbound.filter((s) => s.id === id);
-    console.log(ibflight[0].std);
-    console.log(inbound.filter((s) => s.id === id));
-
-    setFlight((prev) => ({
-      ...prev,
-      id: ib[0].id,
-      aircraft: ib[0].aircraft,
-      basePrice: ib[0].basePrice,
-      destination: ib[0].destination,
-      duration: ib[0].duration,
-      etd: ib[0].etd,
-      flightNumber: ib[0].flightNumber,
-      flightStatus: ib[0].flightStatus,
-      gate: ib[0].gate,
-      origin: ib[0].origin,
-      std: ib[0].std
-    }));
-  };
-
   return (
     <Stack sx={{ width: '100%' }} spacing={4}>
       <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
@@ -111,67 +52,6 @@ const S4prjSteppers = ({ innerType, activeStep }) => {
           </Step>
         ))}
       </Stepper>
-      {activeStep === steps.length ? (
-        <Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={onFinished}>Finish</Button>
-          </Box>
-        </Fragment>
-      ) : (
-        <>
-          {isFetching ? (
-            <LinearProgress />
-          ) : (
-            <Fragment>
-              <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  '& > *': {
-                    m: 1
-                  }
-                }}
-              >
-                <ButtonGroup size="large" aria-label="large button group">
-                  {selectFlight.inboundFlights.map((item) => (
-                    <Button key={item.id} onClick={handleFlight} value={item.id}>
-                      {item.std} {item.basePrice}
-                    </Button>
-                  ))}
-                </ButtonGroup>
-              </Box>
-              <Typography>{flight.id}</Typography>
-
-              <Box sx={{ minWidth: 275 }}>
-                <Card variant="outlined">
-                  <CardContent>
-                    <Typography>{flight.origin.location}</Typography>
-                    <Typography>{flight.origin.iata_code}</Typography>
-
-                    <Typography>{flight.destination.location}</Typography>
-                    <Typography>{flight.destination.iata_code}</Typography>
-
-                    <Typography>{flight.std}</Typography>
-                  </CardContent>
-                </Card>
-              </Box>
-
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
-                  Back
-                </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                <Button onClick={handleNext}>{activeStep === steps.length - 1 ? 'Finish' : 'Next'}</Button>
-              </Box>
-            </Fragment>
-          )}
-        </>
-      )}
     </Stack>
   );
 };
