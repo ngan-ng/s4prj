@@ -1,5 +1,5 @@
 // import { LinearProgress, Typography } from '@mui/material';
-import { Box, Button, Container, Typography } from '@mui/material';
+import { Box, Button, Container } from '@mui/material';
 import { useEffect } from 'react';
 import { useState } from 'react';
 // import { useSelector } from 'react-redux';
@@ -8,6 +8,10 @@ import S4prjSteppers from 'ui-component/client/S4prjSteppers';
 import { StepperType } from 'ui-component/client/S4prjSteppers/stepper.type';
 import SelectFlight from './SelectFlight';
 import { Fragment } from 'react';
+import SelectPax from './SelectPax';
+import SeatAssignment from './SeatAssignment';
+import ImportantNotices from './ImportantNotices';
+import BoardingPass from './BoardingPass';
 
 const ManageBooking = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -25,7 +29,24 @@ const ManageBooking = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  const handleFinished = () => { };
+  const handleFinished = () => {};
+
+  const ManageBookingContent = () => {
+    switch (activeStep) {
+      case 0:
+        return <SelectFlight />;
+      case 1:
+        return <SelectPax />;
+      case 2:
+        return <SeatAssignment />;
+      case 3:
+        return <ImportantNotices />;
+      case 4:
+        return <BoardingPass />;
+      default:
+        return <></>;
+    }
+  };
 
   return (
     <>
@@ -34,30 +55,34 @@ const ManageBooking = () => {
       {/* {isFetching && (
         <Typography>
           FETCHING... <LinearProgress />
-        </Typography>
+        </Typography>-
       )} */}
       {/* {yourBookings && yourBookings?.map((item) => item.email+ ' ')} */}
       <Container>
-        <SelectFlight />
-
-        <Box sx={{ zIndex: '2' }}>
+        <Box minHeight={600} sx={{ zIndex: '2', mx: 4 }}>
           {activeStep === manageStepper.steppers.length ? (
             <Fragment>
-              <Typography sx={{ mt: 2, mb: 1 }}>All steps completed - you&apos;re finished</Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+              <Box>
+                <ManageBookingContent />
+              </Box>
+              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, m: 5 }}>
                 <Box sx={{ flex: '1 1 auto' }} />
                 <Button onClick={handleFinished}>Finish</Button>
               </Box>
             </Fragment>
           ) : (
             <Fragment>
-              <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+              <Box>
+                <ManageBookingContent />
+              </Box>
+              <Box position="relative" sx={{ display: 'flex', flexDirection: 'row', pt: 2, marginY: 10, marginX: 15 }}>
+                <Button size="large" variant="outlined" color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
                   Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
-                <Button onClick={handleNext}>{activeStep === manageStepper.steppers.length - 1 ? 'Finish' : 'Next'}</Button>
+                <Button size="large" variant="contained" onClick={handleNext} color="secondary" sx={{ opacity: 0.9 }}>
+                  {activeStep === manageStepper.steppers.length - 1 ? 'Finish' : 'Next'}
+                </Button>
               </Box>
             </Fragment>
           )}

@@ -28,9 +28,9 @@ export function BookingHomeIcon(props) {
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="#5B5859">
         <g id="Flight_informastion" data-name="Flight informastion">
           <path className="cls-1" d="M10.89 0H21v10H10.89zM43 0h10.11v10H43z" />
-          <path d="M2 26h60v32a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V26z" fill="#fff" />
+          <path d="M2 26h60v32a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V26z" fill="#fff" opacity={0.6} />
           <path d="M6 10h40v16H2V14a4 4 0 0 1 4-4z" fill="#cfcfcf" />
-          <path d="M46 10h12a4 4 0 0 1 4 4v12H46V10z" fill="#fff" />
+          <path d="M46 10h12a4 4 0 0 1 4 4v12H46V10z" fill="#fff" opacity={0.5} />
           <path
             className="cls-5"
             d="M58 8h-3V2a2 2 0 0 0-4 0v6h-6V2a2 2 0 0 0-4 0v6H23V2a2 2 0 0 0-4 0v6h-6V2a2 2 0 0 0-4 0v6H6a6 6 0 0 0-6 6v44a6 6 0 0 0 6 6h52a6 6 0 0 0 6-6V14a6 6 0 0 0-6-6zm0 4a2 2 0 0 1 2 2v10H48V12zM4 14a2 2 0 0 1 2-2h38v12H4zm56 44a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V28h56z"
