@@ -15,7 +15,7 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
       if (isAirportsEmpty) {
         dispatch(fetchAirportStart());
       }
-    }, 200);
+    }, 10);
     return () => {
       clearTimeout(timeout);
     };
