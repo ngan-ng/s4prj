@@ -1,9 +1,7 @@
 package com.aptech.apiv1.model;
 
 import com.aptech.apiv1.enums.FlightStatus;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -11,12 +9,8 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -41,10 +35,10 @@ public class Flight implements Serializable {
     @Column(name = "gate")
     @PositiveOrZero(message = "Must be positive")
     private int gate;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "origin", referencedColumnName = "iata_code", nullable = false)
     private Airport origin;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "destination", referencedColumnName = "iata_code", nullable = false)
     private Airport destination;
     @Column(name = "flightStatus", columnDefinition = "varchar(20)", nullable = false)

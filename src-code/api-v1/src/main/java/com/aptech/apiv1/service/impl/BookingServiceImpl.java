@@ -21,7 +21,9 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> findBookingByPnr(String pnr) {
-        return bookingRepository.findBookingByPnr(pnr);
+        List<Booking> bookings = bookingRepository.findBookingByPnr(pnr);
+
+        return bookings;
     }
 
     @Override
