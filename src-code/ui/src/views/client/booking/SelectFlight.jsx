@@ -4,11 +4,14 @@ import { Box, Button, Grid, LinearProgress, Paper, Typography } from '@mui/mater
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+// import Tabs from '@mui/material/Tabs';
+// import Tab from '@mui/material/Tab';
 import { useSelector } from 'react-redux';
 import { selectFlights, selectFlightsIsFetching } from '../../../store/flight/flight.selector';
+import dayjs from 'dayjs';
 
 const SelectFlight = () => {
-  const initialFlight = {
+  const initialOutboundFlight = {
     id: '',
     aircraft: '',
     basePrice: '',
@@ -22,11 +25,27 @@ const SelectFlight = () => {
     std: ''
   };
 
-  const [flight, setFlight] = useState(initialFlight);
+  const initialInboundFlight = {
+    id: '',
+    aircraft: '',
+    basePrice: '',
+    destination: {},
+    duration: '',
+    etd: '',
+    flightNumber: '',
+    flightStatus: '',
+    gate: '',
+    origin: {},
+    std: ''
+  };
+
+  const [outboundFlight, setOutboundFlight] = useState(initialOutboundFlight);
+  const [inboundFlight, setInboundFlight] = useState(initialInboundFlight);
 
   const selectFlight = useSelector(selectFlights);
   const isFetching = useSelector(selectFlightsIsFetching);
   console.log('selector flights: ', selectFlight);
+  const outbound = selectFlight.outboundFlights;
   const inbound = selectFlight.inboundFlights;
   //console.log(inbound);
 
@@ -35,14 +54,39 @@ const SelectFlight = () => {
   // console.log('inbound: ', inbound);
   // console.log('outbound: ', outbound);
 
-  const handleFlight = (e) => {
+  const handleOutboundFlight = (e) => {
+    console.log(e.target.value);
+    const id = parseInt(e.target.value);
+    var ob = outbound.filter((s) => s.id === id);
+    const date = new Date(ob[0].std);
+    const formatDate = date.toDateString();
+    console.log(formatDate);
+
+    setOutboundFlight((prev) => ({
+      ...prev,
+      id: ob[0].id,
+      aircraft: ob[0].aircraft,
+      basePrice: ob[0].basePrice,
+      destination: ob[0].destination,
+      duration: ob[0].duration,
+      etd: ob[0].etd,
+      flightNumber: ob[0].flightNumber,
+      flightStatus: ob[0].flightStatus,
+      gate: ob[0].gate,
+      origin: ob[0].origin,
+      std: ob[0].std
+    }));
+  };
+
+  const handleInboundFlight = (e) => {
     console.log(e.target.value);
     const id = parseInt(e.target.value);
     var ib = inbound.filter((s) => s.id === id);
-    console.log(ib[0].std);
-    console.log(inbound.filter((s) => s.id === id));
+    const date = new Date(ib[0].std);
+    const formatDate = date.toDateString();
+    console.log(formatDate);
 
-    setFlight((prev) => ({
+    setInboundFlight((prev) => ({
       ...prev,
       id: ib[0].id,
       aircraft: ib[0].aircraft,
@@ -58,6 +102,34 @@ const SelectFlight = () => {
     }));
   };
 
+  function getDate(std) {
+    const date = new Date(std);
+    return date.toDateString();
+  }
+
+  function getTime(std) {
+    const date = new Date(std);
+    const [hour, minutes] = [date.getHours(), date.getMinutes()];
+    const getLength = minutes.toString().length;
+    console.log('getLength', getLength);
+    console.log(hour, minutes);
+    const time = getLength === 1 ? `${hour}:${minutes}0` : `${hour}:${minutes}`;
+    return time;
+  }
+
+  function arrivalTime(std, duration) {
+    const departure = dayjs(std);
+    const arrivalTime = departure.add(duration, 'minute').format('HH:mm');
+    console.log('arrivalTime', arrivalTime);
+    return arrivalTime;
+  }
+
+  // const [value, setValue] = React.useState();
+  //
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
+
   return (
     <Fragment>
       {isFetching ? (
@@ -65,14 +137,81 @@ const SelectFlight = () => {
       ) : (
         <Grid marginY={2} container spacing={3} component={'div'} height={500}>
           <Grid item xs={4}>
-            <Paper elevation={4} sx={{ height: 500, p: 3, borderRadius: 1 }}>
+            <Paper elevation={4} sx={{ height: 550, p: 3, borderRadius: 1 }}>
               Booking Details
             </Paper>
           </Grid>
           <Grid item xs={8}>
-            <Paper elevation={4} sx={{ height: 500, p: 3, borderRadius: 1 }}>
+            <Paper elevation={4} sx={{ height: 550, p: 3, borderRadius: 1 }}>
               <Typography variant="h3" sx={{ mb: 1 }}>
-                Choose your flight
+                Outbound flights
+              </Typography>
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  '& > *': {
+                    m: 1
+                  }
+                }}
+              >
+                <ButtonGroup size="large" aria-label="large button group">
+                  {selectFlight.outboundFlights.map((item) => (
+                    <Button key={item.id} onClick={handleOutboundFlight} value={item.id}>
+                      {getDate(item.std)}
+                      {' - $'}
+                      {item.basePrice}
+                    </Button>
+                  ))}
+                </ButtonGroup>
+              </Box>
+
+              {/*<Box sx={{ width: '100%' }}>*/}
+              {/*  {selectFlight.outboundFlights.map((item) => (*/}
+              {/*    <Tabs key={item.id} value={value} onChange={handleChange} aria-label="wrapped label tabs example">*/}
+              {/*      <Tab value={item.id} wrapped onClick={handleOutboundFlight}>*/}
+              {/*        {getDate(item.std)}*/}
+              {/*        {' - $'}*/}
+              {/*        {item.basePrice}*/}
+              {/*      </Tab>*/}
+              {/*    </Tabs>*/}
+              {/*  ))}*/}
+              {/*</Box>*/}
+
+              <Box sx={{ minWidth: 275 }}>
+                <Card variant="outlined">
+                  <CardContent>
+                    <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                      <Grid item>
+                        <Typography>{outboundFlight.origin.location}</Typography>
+                        <Typography>{outboundFlight.origin.iata_code}</Typography>
+                        <Typography>{getDate(outboundFlight.std)}</Typography>
+                        <Typography>{getTime(outboundFlight.std)}</Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography>{outboundFlight.destination.location}</Typography>
+                        <Typography>{outboundFlight.destination.iata_code}</Typography>
+                        <Typography>{getDate(outboundFlight.std)}</Typography>
+                        <Typography>{arrivalTime(outboundFlight.std, outboundFlight.duration)}</Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography variant="subtitle1" component="div">
+                          {'$'}
+                          {outboundFlight.basePrice}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid container direction="row" alignItems="center" justifyContent="center">
+                      <Typography>{outboundFlight.duration}</Typography>
+                    </Grid>
+                  </CardContent>
+                </Card>
+              </Box>
+
+              <Typography variant="h3" sx={{ mb: 1 }}>
+                Inbound flights
               </Typography>
 
               <Box
@@ -87,24 +226,41 @@ const SelectFlight = () => {
               >
                 <ButtonGroup size="large" aria-label="large button group">
                   {selectFlight.inboundFlights.map((item) => (
-                    <Button key={item.id} onClick={handleFlight} value={item.id}>
-                      {item.std} {item.basePrice}
+                    <Button key={item.id} onClick={handleInboundFlight} value={item.id}>
+                      {getDate(item.std)}
+                      {' - $'}
+                      {item.basePrice}
                     </Button>
                   ))}
                 </ButtonGroup>
               </Box>
-              <Typography>{flight.id}</Typography>
 
               <Box sx={{ minWidth: 275 }}>
                 <Card variant="outlined">
                   <CardContent>
-                    <Typography>{flight.origin.location}</Typography>
-                    <Typography>{flight.origin.iata_code}</Typography>
-
-                    <Typography>{flight.destination.location}</Typography>
-                    <Typography>{flight.destination.iata_code}</Typography>
-
-                    <Typography>{flight.std}</Typography>
+                    <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                      <Grid item>
+                        <Typography>{inboundFlight.origin.location}</Typography>
+                        <Typography>{inboundFlight.origin.iata_code}</Typography>
+                        <Typography>{getDate(inboundFlight.std)}</Typography>
+                        <Typography>{getTime(inboundFlight.std)}</Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography>{inboundFlight.destination.location}</Typography>
+                        <Typography>{inboundFlight.destination.iata_code}</Typography>
+                        <Typography>{getDate(inboundFlight.std)}</Typography>
+                        <Typography>{arrivalTime(inboundFlight.std, inboundFlight.duration)}</Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography variant="subtitle1" component="div">
+                          {'$'}
+                          {inboundFlight.basePrice}
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                    <Grid container direction="row" alignItems="center" justifyContent="center">
+                      <Typography>{inboundFlight.duration}</Typography>
+                    </Grid>
                   </CardContent>
                 </Card>
               </Box>
