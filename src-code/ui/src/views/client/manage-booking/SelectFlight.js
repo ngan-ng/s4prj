@@ -1,50 +1,22 @@
 /* eslint-disable no-unused-vars */
-import {
-  Box,
-  Button,
-  Card,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  FormControl,
-  FormLabel,
-  Grid,
-  LinearProgress,
-  Paper,
-  Typography
-} from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Paper, Typography } from '@mui/material';
 
 import * as React from 'react';
 import { useState } from 'react';
 import { Fragment } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { isFetchingPnr, selectBookingByPnr } from 'store/booking/booking.selector';
 import RadioFlightGroup from './RadioFlightGroup';
-import { useEffect } from 'react';
 // Icon
-import { ReactComponent as LoadingFlightIcon } from 'assets/images/icons/animate-loading-flight.svg';
 import SearchBookingForm from 'ui-component/client/SearchBookingForm';
 import { useLocation } from 'react-router-dom';
 import { Search } from '@mui/icons-material';
-import { mb_selectFlightSuccess } from 'store/manage-booking/mb.action';
-import { useCallback } from 'react';
-import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
+import LoadingProgress from 'ui-component/client/LoadingProgress';
 
-const SelectFlight = () => {
+const SelectFlight = ({ val, onSelectFlight }) => {
   const location = useLocation();
-  const dispatch = useDispatch();
   const bookings = useSelector(selectBookingByPnr);
   const isFetching = useSelector(isFetchingPnr);
-  let selectMBObj = useSelector(selectManageBookingObj);
-  const MB_INITIAL_OBJ = {
-    flightId: 0,
-    pax: [],
-    seats: []
-  };
-  selectMBObj = selectMBObj ?? MB_INITIAL_OBJ;
-  const [mbObj, setMBObj] = useState(selectMBObj);
 
   let searchingPnr = location.state?.searchingPnr;
   let obFlight;
@@ -57,29 +29,6 @@ const SelectFlight = () => {
     flightProps = ibFlight !== undefined ? [obFlight, ibFlight] : [obFlight];
   }
 
-  const chooseFlight = useCallback(async () => {
-    try {
-      dispatch(mb_selectFlightSuccess(mbObj));
-    } catch (error) {
-      console.log(error);
-    }
-  }, [dispatch, mbObj]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      chooseFlight();
-    }, 100);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [chooseFlight, mbObj]);
-  const handleSelectFlight = (e) => {
-    setMBObj((prev) => ({
-      ...prev,
-      flightId: e.target.value
-    }));
-  };
-
   /////// UI
   const [openDialog, setOpenDialog] = useState(false);
   const handleDialogOpen = () => {
@@ -90,23 +39,6 @@ const SelectFlight = () => {
     setOpenDialog(false);
   };
 
-  const [progress, setProgress] = useState(0);
-  useEffect(() => {
-    console.log(searchingPnr);
-    const timer = setInterval(() => {
-      setProgress((oldProgress) => {
-        if (oldProgress === 100) {
-          return 0;
-        }
-        const diff = Math.random() * 10;
-        return Math.min(oldProgress + diff, 100);
-      });
-    }, 2000);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, [searchingPnr]);
   return (
     <Fragment>
       <Grid marginY={2} container spacing={3} component={'div'} height={500}>
@@ -131,14 +63,9 @@ const SelectFlight = () => {
             >
               <Typography variant="h3">Choose your flight</Typography>
               {isFetching ? (
-                <>
-                  <LinearProgress color="secondary" value={progress} />
-                  <Box boxSizing={3} sx={{ display: 'flex', justifyContent: 'center' }}>
-                    <LoadingFlightIcon />
-                  </Box>
-                </>
+                <LoadingProgress props={isFetching} />
               ) : bookings && bookings.length > 0 ? (
-                <RadioFlightGroup flights={flightProps} onFlightChange={handleSelectFlight} />
+                <RadioFlightGroup flights={flightProps} selectedFlight={val} onFlightChange={onSelectFlight} />
               ) : (
                 <div>
                   <Typography sx={{ fontSize: 20 }}>Sorry, we cannot find any booking with your PNR: {'"' + searchingPnr + '"'}</Typography>

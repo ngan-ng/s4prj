@@ -8,10 +8,11 @@ import { AirportLocation } from 'ui-component/icons/SharedIconComponents';
 
 const Airports = ({ origin, destination, airportChange, onHasError, validation }) => {
   const dispatch = useDispatch();
-  const airports = useSelector(selectAirports) ?? {};
+  const airports = useSelector(selectAirports) ?? [];
   const isAirportsEmpty = Object.keys(airports).length === 0;
   useEffect(() => {
     const timeout = setTimeout(() => {
+      console.log(isAirportsEmpty);
       if (isAirportsEmpty) {
         dispatch(fetchAirportStart());
       }
@@ -43,7 +44,7 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
             >
               <MenuItem value={''}>None</MenuItem>
               {!isAirportsEmpty ? (
-                airports
+                airports.data
                   .filter((item) => item.iata_code !== destination)
                   .map((item) => (
                     <MenuItem key={item.iata_code} value={`${item.iata_code}`}>
@@ -79,7 +80,7 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
                 None
               </MenuItem>
               {!isAirportsEmpty ? (
-                airports
+                airports.data
                   .filter((item) => item.iata_code !== origin)
                   ?.map((item) => (
                     <MenuItem key={item.iata_code} value={`${item.iata_code}`}>

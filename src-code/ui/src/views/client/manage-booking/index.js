@@ -7,45 +7,34 @@ import SelectPax from './SelectPax';
 import SeatAssignment from './SeatAssignment';
 import ImportantNotices from './ImportantNotices';
 import BoardingPass from './BoardingPass';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
+import { mb_selectFlightSuccess } from 'store/manage-booking/mb.action';
 
 const ManageBooking = () => {
   const manageStepper = StepperType.MANAGE_BOOKING;
   const [activeStep, setActiveStep] = useState(0);
   const [validActiveStep, setValidActiveStep] = useState(false);
-
-  let selectMBObj = useSelector(selectManageBookingObj);
+  const dispatch = useDispatch();
+  const selectMBObj = useSelector(selectManageBookingObj);
   const MB_INITIAL_OBJ = {
     flightId: 0,
     pax: [],
     seats: []
   };
-  selectMBObj = selectMBObj ?? MB_INITIAL_OBJ;
-  const [mbObj] = useState(selectMBObj);
-  useEffect(() => {
-    console.log('MB index: FlightId: ' + mbObj.flightId);
-    switch (activeStep) {
-      case 0:
-        setValidActiveStep(mbObj.flightId !== 0);
-        console.log(mbObj);
-        break;
-      case 1:
-        break;
-      case 2:
-        break;
-      case 3:
-        break;
-      case 4:
-        break;
-      default:
-        break;
-    }
-  }, [activeStep, mbObj]);
+  const [mbObj, setMBObj] = useState(selectMBObj ?? MB_INITIAL_OBJ);
+  const handleSelectFlight = (e) => {
+    setMBObj((prev) => ({
+      ...prev,
+      flightId: e.target.value
+    }));
+  };
 
   const handleNext = () => {
     if (validActiveStep) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    } else {
+      alert('');
     }
   };
   const handleBack = () => {
@@ -56,7 +45,7 @@ const ManageBooking = () => {
   const ManageBookingContent = () => {
     switch (activeStep) {
       case 0:
-        return <SelectFlight />;
+        return <SelectFlight val={mbObj.flightId} onSelectFlight={handleSelectFlight} />;
       case 1:
         return <SelectPax />;
       case 2:
@@ -69,7 +58,30 @@ const ManageBooking = () => {
         return <></>;
     }
   };
-
+  useEffect(() => {
+    try {
+      switch (activeStep) {
+        case 0:
+          if (mbObj.flightId !== 0) {
+            dispatch(mb_selectFlightSuccess(mbObj));
+            setValidActiveStep(true);
+          }
+          break;
+        case 1:
+          break;
+        case 2:
+          break;
+        case 3:
+          break;
+        case 4:
+          break;
+        default:
+          break;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [activeStep, dispatch, mbObj]);
   return (
     <>
       BOOKING MANAGEMENT

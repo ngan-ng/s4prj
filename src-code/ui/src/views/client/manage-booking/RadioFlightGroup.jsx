@@ -12,12 +12,11 @@ import { InputAdornment, TextField } from '@mui/material';
 import { Flight } from '@mui/icons-material';
 const materialTheme = materialExtendTheme();
 
-export default function RadioFlightGroup({ flights, onFlightChange }) {
-  // let { item, ibFlight } = props;
+export default function RadioFlightGroup({ flights, selectedFlight, onFlightChange }) {
   return (
     <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
       <JoyCssVarsProvider>
-        <RadioGroup aria-label="Your plan" name="flightId" defaultValue="Individual">
+        <RadioGroup aria-label="Your plan" name="flightId" onChange={onFlightChange}>
           <List
             sx={{
               minWidth: 200,
@@ -44,7 +43,7 @@ export default function RadioFlightGroup({ flights, onFlightChange }) {
                     color="info"
                     overlay
                     value={item?.id}
-                    onChange={onFlightChange}
+                    checked={selectedFlight == item.id}
                     label={
                       <TextField
                         fullWidth
