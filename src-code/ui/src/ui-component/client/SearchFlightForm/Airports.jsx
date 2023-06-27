@@ -8,7 +8,7 @@ import { AirportLocation } from 'ui-component/icons/SharedIconComponents';
 
 const Airports = ({ origin, destination, airportChange, onHasError, validation }) => {
   const dispatch = useDispatch();
-  const airports = useSelector(selectAirports) ?? {};
+  const airports = useSelector(selectAirports) ?? [];
   const isAirportsEmpty = Object.keys(airports).length === 0;
   useEffect(() => {
     const timeout = setTimeout(() => {

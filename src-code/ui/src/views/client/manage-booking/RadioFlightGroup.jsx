@@ -5,80 +5,87 @@ import {
 } from '@mui/material/styles';
 import { CssVarsProvider as JoyCssVarsProvider } from '@mui/joy/styles';
 import '@fontsource/public-sans';
+import { mb_selectFlight } from 'store/manage-booking/mb.action';
 // component
-import { List, ListItem, ListItemDecorator, Radio, RadioGroup, Typography } from '@mui/joy';
+import { List, ListItem, Radio, RadioGroup } from '@mui/joy';
 import { Fragment } from 'react';
-import { InputAdornment, TextField } from '@mui/material';
-import { ReactComponent as ReturnFlightIcon } from 'assets/images/icons/animate-flight-return.svg';
-import { ReactComponent as DepartFlightIcon } from 'assets/images/icons/animate-flight-depart.svg';
+import { Box, Divider, Grid, Paper, Typography } from '@mui/material';
+import { Flight } from '@mui/icons-material';
+import { AirportLocation } from 'ui-component/icons/SharedIconComponents';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
 const materialTheme = materialExtendTheme();
+export default function RadioFlightGroup({ flights }) {
+  const selectMBObj = useSelector(selectManageBookingObj);
+  const dispatch = useDispatch();
 
-export default function RadioFlightGroup({ flights, onBtnChange }) {
-  // let { item, ibFlight } = props;
+  const handleChange = (e) => {
+    dispatch(mb_selectFlight(e.target.value));
+  };
   return (
     <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
       <JoyCssVarsProvider>
-        <RadioGroup aria-label="Your plan" name="people" defaultValue="Individual">
+        <RadioGroup aria-label="Your plan" name="flightId" onChange={handleChange}>
           <List
             sx={{
               minWidth: 200,
               '--List-gap': '1.5rem',
               '--ListItem-paddingY': '1.5rem',
               '--ListItem-radius': '8px',
-              '--ListItemDecorator-size': '30px'
+              '--ListItemDecorator-size': '3px'
             }}
           >
             {flights.map((item, index) => (
-              <Fragment key={item.id}>
-                <ListItem variant="outlined" key={item.id} sx={{ boxShadow: 'sm', bgcolor: 'background.body' }}>
-                  <ListItemDecorator>
-                    {
-                      [
-                        <DepartFlightIcon style={{ fontSize: 8 }} key={item.id} />,
-                        // <Flight key={item.id} size="large" sx={{ marginX: 1 }} />
-                        <ReturnFlightIcon style={{ fontSize: 8 }} key={item.id} />
-                      ][index]
-                    }
-                  </ListItemDecorator>
+              <Fragment key={item?.id}>
+                <ListItem variant="outlined" key={item?.id} sx={{ boxShadow: 'sm', bgcolor: 'background.body' }}>
                   <Radio
-                    key={item.id}
+                    key={item?.id}
                     color="info"
-                    onChange={onBtnChange}
                     overlay
-                    value={item.id}
+                    value={item?.id}
+                    checked={selectMBObj.flightId == item.id}
                     label={
-                      <TextField
-                        fullWidth
-                        variant="outlined"
-                        label={index === 0 ? 'Departure' : 'Return'}
-                        sx={{ border: 'none', '& fieldset': { border: 'none' } }}
-                        InputProps={{
-                          startAdornment: (
-                            <InputAdornment position="start">
-                              <Typography sx={{ ml: 'auto' }}>
-                                <b>FS{item.flightNumber}</b>{' '}
-                              </Typography>
-                            </InputAdornment>
-                          ),
-                          endAdornment: (
-                            <InputAdornment position="start" sx={{ pr: 1 }}>
-                              <Typography sx={{ marginX: 2 }}>
-                                <b>
-                                  {item.origin.iata_code} - {item.destination.iata_code}
-                                </b>{' '}
-                              </Typography>
-                              <small>{item.std.split('T' || ' ')[0]}</small>
-                            </InputAdornment>
-                          )
-                        }}
-                        helperText={
-                          <Typography>
-                            {item.origin.name} - {item.destination.name}
-                          </Typography>
-                        }
-                      />
+                      <Grid container spacing={3} sx={{ pr: { md: 2, xs: 0 } }}>
+                        <Grid item xs={12}>
+                          {index === 0 ? (
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                              <Flight key={item?.id} size="large" sx={{ mr: 1, rotate: '90deg' }} />
+                              Departure
+                            </Box>
+                          ) : (
+                            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                              <Flight key={item?.id} size="large" sx={{ mr: 1, rotate: '-90deg' }} />
+                              Return
+                            </Box>
+                          )}
+                          <Divider variant="middle" sx={{ p: 1 }} />
+                        </Grid>
+                        <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                          Flight: <b>FS{item?.flightNumber}</b>
+                        </Grid>
+                        <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <small>
+                            <b>STD: </b>
+                            {item?.std.split('T' || ' ')[1]}
+                          </small>{' '}
+                          <small>{item?.std.split('T' || ' ')[0]}</small>
+                        </Grid>
+                        <Grid item xs={12} md={12} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                          <Typography sx={{ fontWeight: 'bold', mr: 'auto' }}>{item?.origin.iata_code}</Typography>
+                          <AirportLocation sx={{ mx: { md: 2, xs: 0 } }} />
+                          <Paper elevation={1} sx={{ maxHeight: '2px', mt: 1, flexGrow: 1 }}></Paper>
+                          <AirportLocation sx={{ mx: { md: 2, xs: 0 } }} />
+                          <Typography sx={{ fontWeight: 'bold', ml: 'auto' }}>{item?.destination.iata_code}</Typography>
+                        </Grid>
+                        <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: { md: 'start', xs: 'space-between' } }}>
+                          <small>{item?.origin.name}</small>
+                        </Grid>
+                        <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: { md: 'end', xs: 'space-between' } }}>
+                          <small>{item?.destination.name}</small>
+                        </Grid>
+                      </Grid>
                     }
-                    sx={{ flexGrow: 1, flexDirection: 'row-reverse' }}
+                    sx={{ zIndex: 5, flexGrow: 1, flexDirection: 'row-reverse' }}
                     slotProps={{
                       action: ({ checked }) => ({
                         sx: () => ({
@@ -99,4 +106,40 @@ export default function RadioFlightGroup({ flights, onBtnChange }) {
       </JoyCssVarsProvider>
     </MaterialCssVarsProvider>
   );
+}
+
+{
+  /* <TextField
+fullWidth
+variant="outlined"
+label={index === 0 ? 'Departure' : 'Return'}
+sx={{ border: 'none', '& fieldset': { border: 'none' } }}
+InputProps={{
+  startAdornment: (
+    <InputAdornment position="start">
+      <Typography sx={{ ml: 'auto' }}>
+        <b>FS{item?.flightNumber}</b>
+        {' - '}
+        <small>{item?.std.split('T' || ' ')[1]}</small>
+      </Typography>
+    </InputAdornment>
+  ),
+  endAdornment: (
+    <InputAdornment position="start" sx={{ pr: 1 }}>
+      <Typography sx={{ marginX: 2 }}>
+        <b>
+          {item?.origin.iata_code} - {item?.destination.iata_code}
+        </b>{' '}
+      </Typography>
+      <small>{item?.std.split('T' || ' ')[0]}</small>
+    </InputAdornment>
+  )
+}}
+helperText={
+  <Typography>
+    {item?.origin.name} - {item?.destination.name}
+  </Typography>
+  
+                          />
+} */
 }
