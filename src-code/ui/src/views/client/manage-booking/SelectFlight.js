@@ -41,14 +41,14 @@ const SelectFlight = ({ val, onSelectFlight }) => {
 
   return (
     <Fragment>
-      <Grid marginY={2} container spacing={3} component={'div'} height={500}>
-        <Grid item xs={4}>
-          <Paper elevation={4} sx={{ height: 500, p: 4, borderRadius: 1 }}>
+      <Grid marginY={2} container spacing={3} component={'div'} height="stretch">
+        <Grid item xs={12} md={4}>
+          <Paper elevation={4} sx={{ height: { xs: 'stretch', md: 500 }, p: 4, borderRadius: 1 }}>
             Booking Details
           </Paper>
         </Grid>
-        <Grid item xs={8}>
-          <Paper elevation={4} sx={{ height: 500, p: 4, borderRadius: 1 }}>
+        <Grid item xs={12} md={8}>
+          <Paper elevation={4} sx={{ height: 'stretch', p: 4, borderRadius: 1 }}>
             <Box
               sx={{
                 width: '100%',
@@ -84,9 +84,7 @@ const SelectFlight = ({ val, onSelectFlight }) => {
               >
                 <DialogTitle id="alert-dialog-title"></DialogTitle>
                 <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    <SearchBookingForm />
-                  </DialogContentText>
+                  <SearchBookingForm />
                 </DialogContent>
                 <DialogActions>
                   <Button color="error" onClick={handleDialogClose}>

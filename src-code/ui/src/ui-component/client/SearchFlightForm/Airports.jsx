@@ -12,7 +12,6 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
   const isAirportsEmpty = Object.keys(airports).length === 0;
   useEffect(() => {
     const timeout = setTimeout(() => {
-      console.log(isAirportsEmpty);
       if (isAirportsEmpty) {
         dispatch(fetchAirportStart());
       }
@@ -44,7 +43,7 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
             >
               <MenuItem value={''}>None</MenuItem>
               {!isAirportsEmpty ? (
-                airports.data
+                airports
                   .filter((item) => item.iata_code !== destination)
                   .map((item) => (
                     <MenuItem key={item.iata_code} value={`${item.iata_code}`}>
@@ -80,7 +79,7 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
                 None
               </MenuItem>
               {!isAirportsEmpty ? (
-                airports.data
+                airports
                   .filter((item) => item.iata_code !== origin)
                   ?.map((item) => (
                     <MenuItem key={item.iata_code} value={`${item.iata_code}`}>

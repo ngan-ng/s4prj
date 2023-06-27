@@ -1,4 +1,4 @@
-import { Box, Button, Container } from '@mui/material';
+import { Box, Button, Container, Grid } from '@mui/material';
 import { useEffect, useState, Fragment } from 'react';
 import S4prjSteppers from 'ui-component/client/S4prjSteppers';
 import { StepperType } from 'ui-component/client/S4prjSteppers/stepper.type';
@@ -7,28 +7,14 @@ import SelectPax from './SelectPax';
 import SeatAssignment from './SeatAssignment';
 import ImportantNotices from './ImportantNotices';
 import BoardingPass from './BoardingPass';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
-import { mb_selectFlightSuccess } from 'store/manage-booking/mb.action';
 
 const ManageBooking = () => {
   const manageStepper = StepperType.MANAGE_BOOKING;
   const [activeStep, setActiveStep] = useState(0);
   const [validActiveStep, setValidActiveStep] = useState(false);
-  const dispatch = useDispatch();
   const selectMBObj = useSelector(selectManageBookingObj);
-  const MB_INITIAL_OBJ = {
-    flightId: 0,
-    pax: [],
-    seats: []
-  };
-  const [mbObj, setMBObj] = useState(selectMBObj ?? MB_INITIAL_OBJ);
-  const handleSelectFlight = (e) => {
-    setMBObj((prev) => ({
-      ...prev,
-      flightId: e.target.value
-    }));
-  };
 
   const handleNext = () => {
     if (validActiveStep) {
@@ -45,7 +31,7 @@ const ManageBooking = () => {
   const ManageBookingContent = () => {
     switch (activeStep) {
       case 0:
-        return <SelectFlight val={mbObj.flightId} onSelectFlight={handleSelectFlight} />;
+        return <SelectFlight />;
       case 1:
         return <SelectPax />;
       case 2:
@@ -62,12 +48,12 @@ const ManageBooking = () => {
     try {
       switch (activeStep) {
         case 0:
-          if (mbObj.flightId !== 0) {
-            dispatch(mb_selectFlightSuccess(mbObj));
+          if (selectMBObj.flightId !== 0) {
             setValidActiveStep(true);
           }
           break;
         case 1:
+          setValidActiveStep(Object.keys(selectMBObj.pax).length > 0);
           break;
         case 2:
           break;
@@ -81,10 +67,9 @@ const ManageBooking = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [activeStep, dispatch, mbObj]);
+  }, [activeStep, selectMBObj]);
   return (
     <>
-      BOOKING MANAGEMENT
       <S4prjSteppers innerType={manageStepper} activeStep={activeStep} />
       {/* {isFetching && (
         <Typography>
@@ -93,7 +78,7 @@ const ManageBooking = () => {
       )} */}
       {/* {yourBookings && yourBookings?.map((item) => item.email+ ' ')} */}
       <Container>
-        <Box minHeight={600} sx={{ zIndex: '2', mx: 4 }}>
+        <Box minHeight={680} sx={{ zIndex: '2', mx: 4 }}>
           {activeStep === manageStepper.steppers.length ? (
             <Fragment>
               <Box>
@@ -106,18 +91,21 @@ const ManageBooking = () => {
             </Fragment>
           ) : (
             <Fragment>
-              <Box>
-                <ManageBookingContent />
-              </Box>
-              <Box position="relative" sx={{ display: 'flex', flexDirection: 'row', pt: 2, marginY: 10, marginX: 15 }}>
-                <Button size="large" variant="outlined" color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
-                  Back
-                </Button>
-                <Box sx={{ flex: '1 1 auto' }} />
-                <Button disabled={!validActiveStep} size="large" variant="contained" onClick={handleNext} color="secondary">
-                  {activeStep === manageStepper.steppers.length - 1 ? 'Finish' : 'Next'}
-                </Button>
-              </Box>
+              <Grid container sx={{ display: 'flex', justifyContent: 'space-around' }}>
+                <Grid item xs={12}>
+                  <ManageBookingContent />
+                </Grid>
+                <Grid item>
+                  <Button size="large" variant="outlined" color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+                    Back
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button disabled={!validActiveStep} size="large" variant="contained" onClick={handleNext} color="secondary">
+                    {activeStep === manageStepper.steppers.length - 1 ? 'Finish' : 'Next'}
+                  </Button>
+                </Grid>
+              </Grid>
             </Fragment>
           )}
         </Box>
