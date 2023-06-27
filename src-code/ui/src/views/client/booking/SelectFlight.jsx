@@ -6,9 +6,22 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 // import Tabs from '@mui/material/Tabs';
 // import Tab from '@mui/material/Tab';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
 import { useSelector } from 'react-redux';
 import { selectFlights, selectFlightsIsFetching } from '../../../store/flight/flight.selector';
 import dayjs from 'dayjs';
+
+// const schema = {
+//   radioButton: {
+//     presence: {
+//       allowEmpty: false,
+//       message: '^Blog id is not blank'
+//     }
+//   }
+// };
 
 const SelectFlight = () => {
   const initialOutboundFlight = {
@@ -39,6 +52,40 @@ const SelectFlight = () => {
     std: ''
   };
 
+  const initialIsSelect = {
+    isSelectOutbound: false,
+    isSelectInbound: false
+  };
+
+  const [isSelect, setIsSelect] = useState(initialIsSelect);
+
+  // const [validation, setValidation] = useState({
+  //   touched: {},
+  //   errors: {},
+  //   isValid: false
+  // });
+
+  // useEffect(() => {
+  //   const valid = setTimeout(() => {
+  //     const errors = validate([initialOutboundFlight, initialInboundFlight], schema);
+  //     console.log(errors);
+  //
+  //     setValidation((prev) => ({
+  //       ...prev,
+  //       errors: errors || {},
+  //       isValid: errors ? false : true
+  //     }));
+  //   }, 1000);
+  //
+  //   return () => {
+  //     clearTimeout(valid);
+  //   };
+  // }, [initialOutboundFlight, initialInboundFlight]);
+
+  // const hasError = (field) => {
+  //   return validation.touched[field] && validation.errors[field] ? true : false;
+  // };
+
   const [outboundFlight, setOutboundFlight] = useState(initialOutboundFlight);
   const [inboundFlight, setInboundFlight] = useState(initialInboundFlight);
 
@@ -55,12 +102,10 @@ const SelectFlight = () => {
   // console.log('outbound: ', outbound);
 
   const handleOutboundFlight = (e) => {
-    console.log(e.target.value);
     const id = parseInt(e.target.value);
     var ob = outbound.filter((s) => s.id === id);
-    const date = new Date(ob[0].std);
-    const formatDate = date.toDateString();
-    console.log(formatDate);
+    // const date = new Date(ob[0].std);
+    // const formatDate = date.toDateString();
 
     setOutboundFlight((prev) => ({
       ...prev,
@@ -75,6 +120,11 @@ const SelectFlight = () => {
       gate: ob[0].gate,
       origin: ob[0].origin,
       std: ob[0].std
+    }));
+
+    setIsSelect((prev) => ({
+      ...prev,
+      isSelectOutbound: true
     }));
   };
 
@@ -100,6 +150,11 @@ const SelectFlight = () => {
       origin: ib[0].origin,
       std: ib[0].std
     }));
+
+    setIsSelect((prev) => ({
+      ...prev,
+      isSelectInbound: true
+    }));
   };
 
   function getDate(std) {
@@ -111,8 +166,7 @@ const SelectFlight = () => {
     const date = new Date(std);
     const [hour, minutes] = [date.getHours(), date.getMinutes()];
     const getLength = minutes.toString().length;
-    console.log('getLength', getLength);
-    console.log(hour, minutes);
+    //console.log('getLength', getLength);
     const time = getLength === 1 ? `${hour}:${minutes}0` : `${hour}:${minutes}`;
     return time;
   }
@@ -120,7 +174,7 @@ const SelectFlight = () => {
   function arrivalTime(std, duration) {
     const departure = dayjs(std);
     const arrivalTime = departure.add(duration, 'minute').format('HH:mm');
-    console.log('arrivalTime', arrivalTime);
+    //console.log('arrivalTime', arrivalTime);
     return arrivalTime;
   }
 
@@ -130,19 +184,62 @@ const SelectFlight = () => {
   //   setValue(newValue);
   // };
 
+  // const [selectedValue, setSelectedValue] = React.useState('a');
+  //
+  // const handleChange = (event) => {
+  //   setSelectedValue(event.target.value);
+  // };
+
+  function getBasePrice(basePrice) {
+    return '$' + basePrice;
+  }
+
+  var tempIdOB;
+  var tempIdIB;
+
+  function getFlightIdOutbound(id) {
+    console.log('getFlightIdOutbound', id);
+    tempIdOB = id;
+  }
+
+  function getFlightIdInbound(id) {
+    console.log('getFlightIdInbound', id);
+    tempIdIB = id;
+  }
+
+  function compareOBIdAndRadio() {
+    const idOutbound = outboundFlight.id;
+
+    if (tempIdOB === idOutbound) {
+      return idOutbound;
+    }
+    //console.log('getFlightIdOutbound', idOutbound);
+    //console.log('getId', tempIdOB);
+  }
+
+  function compareIBIdAndRadio() {
+    const idInbound = inboundFlight.id;
+
+    if (tempIdIB === idInbound) {
+      return idInbound;
+    }
+    //console.log('getFlightIdOutbound', idInbound);
+    //console.log('getId', tempIdIB);
+  }
+
   return (
     <Fragment>
       {isFetching ? (
         <LinearProgress />
       ) : (
-        <Grid marginY={2} container spacing={3} component={'div'} height={500}>
-          <Grid item xs={4}>
-            <Paper elevation={4} sx={{ height: 550, p: 3, borderRadius: 1 }}>
+        <Grid marginY={2} container spacing={3} component={'div'} height={550}>
+          <Grid item xs={12} md={4}>
+            <Paper elevation={4} sx={{ height: { xs: 'stretch', md: 550 }, p: 3, borderRadius: 1 }}>
               Booking Details
             </Paper>
           </Grid>
-          <Grid item xs={8}>
-            <Paper elevation={4} sx={{ height: 550, p: 3, borderRadius: 1 }}>
+          <Grid item xs={12} md={8}>
+            <Paper elevation={4} sx={{ height: { xs: 'stretch', md: 550 }, p: 3, borderRadius: 1 }}>
               <Typography variant="h3" sx={{ mb: 1 }}>
                 Outbound flights
               </Typography>
@@ -181,33 +278,48 @@ const SelectFlight = () => {
               {/*</Box>*/}
 
               <Box sx={{ minWidth: 275 }}>
-                <Card variant="outlined">
-                  <CardContent>
-                    <Grid container direction="row" justifyContent="space-between" alignItems="center">
-                      <Grid item>
-                        <Typography>{outboundFlight.origin.location}</Typography>
-                        <Typography>{outboundFlight.origin.iata_code}</Typography>
-                        <Typography>{getDate(outboundFlight.std)}</Typography>
-                        <Typography>{getTime(outboundFlight.std)}</Typography>
+                {isSelect.isSelectOutbound ? (
+                  <Card variant="outlined">
+                    <CardContent>
+                      <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                        <Grid item>
+                          <Typography>{outboundFlight.origin.location}</Typography>
+                          <Typography>{outboundFlight.origin.iata_code}</Typography>
+                          <Typography>{getDate(outboundFlight.std)}</Typography>
+                          <Typography>{getTime(outboundFlight.std)}</Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography>{outboundFlight.destination.location}</Typography>
+                          <Typography>{outboundFlight.destination.iata_code}</Typography>
+                          <Typography>{getDate(outboundFlight.std)}</Typography>
+                          <Typography>{arrivalTime(outboundFlight.std, outboundFlight.duration)}</Typography>
+                        </Grid>
+                        <Grid item>
+                          <FormControl>
+                            <RadioGroup
+                              row
+                              aria-labelledby="demo-row-radio-buttons-group-label"
+                              name="row-radio-buttons-group"
+                              defaultValue={compareOBIdAndRadio}
+                            >
+                              <FormControlLabel
+                                value={outboundFlight.id}
+                                control={<Radio />}
+                                label={getBasePrice(outboundFlight.basePrice)}
+                                onChange={getFlightIdOutbound(outboundFlight.id)}
+                              />
+                            </RadioGroup>
+                          </FormControl>
+                        </Grid>
                       </Grid>
-                      <Grid item>
-                        <Typography>{outboundFlight.destination.location}</Typography>
-                        <Typography>{outboundFlight.destination.iata_code}</Typography>
-                        <Typography>{getDate(outboundFlight.std)}</Typography>
-                        <Typography>{arrivalTime(outboundFlight.std, outboundFlight.duration)}</Typography>
+                      <Grid container direction="row" alignItems="center" justifyContent="center">
+                        <Typography>{outboundFlight.duration}</Typography>
                       </Grid>
-                      <Grid item>
-                        <Typography variant="subtitle1" component="div">
-                          {'$'}
-                          {outboundFlight.basePrice}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                    <Grid container direction="row" alignItems="center" justifyContent="center">
-                      <Typography>{outboundFlight.duration}</Typography>
-                    </Grid>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <Typography>Please select outbound flight</Typography>
+                )}
               </Box>
 
               <Typography variant="h3" sx={{ mb: 1 }}>
@@ -236,33 +348,49 @@ const SelectFlight = () => {
               </Box>
 
               <Box sx={{ minWidth: 275 }}>
-                <Card variant="outlined">
-                  <CardContent>
-                    <Grid container direction="row" justifyContent="space-between" alignItems="center">
-                      <Grid item>
-                        <Typography>{inboundFlight.origin.location}</Typography>
-                        <Typography>{inboundFlight.origin.iata_code}</Typography>
-                        <Typography>{getDate(inboundFlight.std)}</Typography>
-                        <Typography>{getTime(inboundFlight.std)}</Typography>
+                {isSelect.isSelectInbound ? (
+                  <Card variant="outlined">
+                    <CardContent>
+                      <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                        <Grid item>
+                          <Typography>{inboundFlight.origin.location}</Typography>
+                          <Typography>{inboundFlight.origin.iata_code}</Typography>
+                          <Typography>{getDate(inboundFlight.std)}</Typography>
+                          <Typography>{getTime(inboundFlight.std)}</Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography>{inboundFlight.destination.location}</Typography>
+                          <Typography>{inboundFlight.destination.iata_code}</Typography>
+                          <Typography>{getDate(inboundFlight.std)}</Typography>
+                          <Typography>{arrivalTime(inboundFlight.std, inboundFlight.duration)}</Typography>
+                        </Grid>
+
+                        <Grid item>
+                          <FormControl>
+                            <RadioGroup
+                              row
+                              aria-labelledby="demo-row-radio-buttons-group-label"
+                              name="row-radio-buttons-group"
+                              defaultValue={compareIBIdAndRadio()}
+                            >
+                              <FormControlLabel
+                                value={inboundFlight.id}
+                                control={<Radio />}
+                                label={getBasePrice(inboundFlight.basePrice)}
+                                onChange={getFlightIdInbound(inboundFlight.id)}
+                              />
+                            </RadioGroup>
+                          </FormControl>
+                        </Grid>
                       </Grid>
-                      <Grid item>
-                        <Typography>{inboundFlight.destination.location}</Typography>
-                        <Typography>{inboundFlight.destination.iata_code}</Typography>
-                        <Typography>{getDate(inboundFlight.std)}</Typography>
-                        <Typography>{arrivalTime(inboundFlight.std, inboundFlight.duration)}</Typography>
+                      <Grid container direction="row" alignItems="center" justifyContent="center">
+                        <Typography>{inboundFlight.duration}</Typography>
                       </Grid>
-                      <Grid item>
-                        <Typography variant="subtitle1" component="div">
-                          {'$'}
-                          {inboundFlight.basePrice}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                    <Grid container direction="row" alignItems="center" justifyContent="center">
-                      <Typography>{inboundFlight.duration}</Typography>
-                    </Grid>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                ) : (
+                  <Typography>Please select inbound flight</Typography>
+                )}
               </Box>
             </Paper>
           </Grid>
