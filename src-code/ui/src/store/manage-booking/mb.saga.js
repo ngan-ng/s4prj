@@ -1,9 +1,13 @@
-import { all, call, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 import MB_ACTION_TYPE from './mb.type';
 import { mb_clear, mb_selectFlight, mb_selectPax } from './mb.action';
+import { clearSeats } from 'store/seat/seat.action';
 
 function* selectFlight({ payload }) {
   try {
+    // Clear seats of the previous flight
+    yield put(clearSeats());
+    // then select the new one
     yield call(mb_selectFlight, payload);
   } catch (error) {
     console.log(error);
@@ -13,7 +17,7 @@ function* selectPax({ payload }) {
   try {
     console.log('Select Pax SAGA: ');
     console.log(payload);
-    yield call(mb_selectPax, payload);
+    yield mb_selectPax(payload);
   } catch (error) {
     console.log(error);
   }

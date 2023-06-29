@@ -3,7 +3,8 @@ import { airportSaga } from './airport/airport.saga';
 import { userSagas } from './user/user.sagas';
 import { bookingSaga } from './booking/booking.saga';
 import { manage_bookingSaga } from './manage-booking/mb.saga';
+import { seatSaga } from './seat/seat.saga';
 
 export function* rootSaga() {
-  yield all([call(airportSaga), call(userSagas), call(bookingSaga), call(manage_bookingSaga)]);
+  yield all([call(airportSaga), call(userSagas), call(bookingSaga), call(manage_bookingSaga), call(seatSaga)]);
 }

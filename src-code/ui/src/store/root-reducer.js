@@ -6,6 +6,7 @@ import { airportReducer } from './airport/airport.reducer';
 import userReducer from './user/user.reducer';
 import { bookingReducer } from './booking/booking.reducer';
 import { manageBookingReducer } from './manage-booking/mb.reducer';
+import { seatReducer } from './seat/seat.reducer';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   airports: airportReducer,
   user: userReducer,
   bookings: bookingReducer,
-  manageBookingObj: manageBookingReducer
+  manageBookingObj: manageBookingReducer,
+  seats: seatReducer
 });
 
 export default rootReducer;

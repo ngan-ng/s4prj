@@ -45,7 +45,7 @@ export default function RadioFlightGroup({ flights }) {
                     value={item?.id}
                     checked={selectMBObj.flightId == item.id}
                     label={
-                      <Grid container spacing={3} sx={{ pr: { md: 2, xs: 0 } }}>
+                      <Grid container spacing={2} sx={{ pr: { md: 2, xs: 0 } }}>
                         <Grid item xs={12}>
                           {index === 0 ? (
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>

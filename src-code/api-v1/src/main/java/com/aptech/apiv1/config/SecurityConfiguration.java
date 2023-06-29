@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
@@ -43,7 +42,7 @@ public class SecurityConfiguration {
         JwtAuthenticationConverter authenticationConverter = new JwtAuthenticationConverter();
         authenticationConverter.setJwtGrantedAuthoritiesConverter(new AadJwtGrantedAuthoritiesConverter());
         // by default uses a Bean by the name of corsConfigurationSource
-        http.cors(withDefaults()).csrf(AbstractHttpConfigurer::disable)
+        http.cors(withDefaults()).csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> {
                     try {
                         authorize.requestMatchers(ENDPOINTS_WHITELIST).permitAll()

@@ -2,18 +2,18 @@ package com.aptech.apiv1.controller;
 
 import com.aptech.apiv1.dto.SelectSeatDto;
 import com.aptech.apiv1.service.SeatService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.HandlerMapping;
 
 import static com.aptech.apiv1.utils.business.MessageSeatStatus.selectSeatStatus;
 
 @RestController
 @RequestMapping(path = "/api-v1/guest/seat")
+@CrossOrigin(origins = "${security.cors.origin}", methods = {
+        RequestMethod.GET, RequestMethod.POST
+})
 public class SeatController {
     private final SeatService seatService;
     @Autowired

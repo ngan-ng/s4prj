@@ -13,6 +13,7 @@ public class LoadSeatDto implements Serializable {
     private String seatNumber;
     private String seatType;
     private String classType;
+    private String status;
     private String description;
     private double price;
     private long booking;
