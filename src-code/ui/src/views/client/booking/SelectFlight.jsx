@@ -21,7 +21,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 
-import { selectInboundIdStart, selectOutboundIdStart } from '../../../store/flight/flight.action';
+import { selectDepartIdStart, selectReturnIdStart } from '../../../store/flight/flight.action';
 
 const materialTheme = materialExtendTheme();
 
@@ -34,15 +34,19 @@ const SelectFlight = ({ departId, returnId }) => {
   const obFlights = selectFlight.outboundFlights;
   const ibFlights = selectFlight.inboundFlights;
 
+  var arrivalDay = [];
+  if (ibFlights.length != 0) {
+    arrivalDay = ibFlights[0].std;
+  }
+
   const departDay = obFlights[0].std;
-  const arrivalDay = ibFlights[0].std;
 
   const handleRadioDepart = (event) => {
-    dispatch(selectOutboundIdStart(event.target.value));
+    dispatch(selectDepartIdStart(event.target.value));
   };
 
   const handleRadioArrival = (event) => {
-    dispatch(selectInboundIdStart(event.target.value));
+    dispatch(selectReturnIdStart(event.target.value));
   };
 
   // function getDate(std) {
@@ -87,7 +91,7 @@ const SelectFlight = ({ departId, returnId }) => {
                 <Grid item xs={12}>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <Flight size="large" sx={{ mr: 1, rotate: '90deg' }} />
-                    Outbound flights
+                    Departure
                   </Box>
                 </Grid>
                 <Grid item xs={12}>
@@ -150,71 +154,74 @@ const SelectFlight = ({ departId, returnId }) => {
                   </FormControl>
                 </Box>
 
-                <Grid item xs={12}>
-                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Flight size="large" sx={{ mr: 1, rotate: '-90deg' }} />
-                    Inbound flights
-                  </Box>
-                  <Divider variant="middle" sx={{ p: 1 }} />
-                </Grid>
-
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    '& > *': {
-                      m: 1
-                    }
-                  }}
-                >
-                  <ButtonGroup size="large">
-                    <Button>{arrivalDay}</Button>
-                  </ButtonGroup>
-                </Box>
-
-                <Box sx={{ minWidth: 275 }}>
-                  <FormControl>
-                    <RadioGroup
-                      aria-labelledby="demo-controlled-radio-buttons-group"
-                      name="controlled-radio-buttons-group"
-                      value={returnId}
-                      onChange={handleRadioArrival}
+                {ibFlights.length != 0 ? (
+                  <Fragment>
+                    <Grid item xs={12}>
+                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <Flight size="large" sx={{ mr: 1, rotate: '-90deg' }} />
+                        Return
+                      </Box>
+                    </Grid>
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        '& > *': {
+                          m: 1
+                        }
+                      }}
                     >
-                      {ibFlights.map((item, index) => (
-                        <Card key={item.id} variant="outlined">
-                          <CardContent>
-                            <Grid container direction="row" justifyContent="space-between" alignItems="center">
-                              <Grid item>
-                                <Typography>{item.origin.location}</Typography>
-                                <Typography>{item.origin.iata_code}</Typography>
-                                <Typography>{item.std}</Typography>
-                                <Typography>{item.std}</Typography>
-                              </Grid>
-                              <Grid item>
-                                <Typography>{item.destination.location}</Typography>
-                                <Typography>{item.destination.iata_code}</Typography>
-                                <Typography>{item.std}</Typography>
-                                <Typography>{item.duration}</Typography>
-                              </Grid>
-                              <Grid item>
-                                <FormControlLabel
-                                  key={item.id}
-                                  value={item.id}
-                                  control={<Radio />}
-                                  label={<Typography>${item.basePrice}</Typography>}
-                                />
-                              </Grid>
-                            </Grid>
-                            <Grid container direction="row" alignItems="center" justifyContent="center">
-                              <Typography>{item.duration}</Typography>
-                            </Grid>
-                          </CardContent>
-                        </Card>
-                      ))}
-                    </RadioGroup>
-                  </FormControl>
-                </Box>
+                      <ButtonGroup size="large">
+                        <Button>{arrivalDay}</Button>
+                      </ButtonGroup>
+                    </Box>
+                    <Box sx={{ minWidth: 275 }}>
+                      <FormControl>
+                        <RadioGroup
+                          aria-labelledby="demo-controlled-radio-buttons-group"
+                          name="controlled-radio-buttons-group"
+                          value={returnId}
+                          onChange={handleRadioArrival}
+                        >
+                          {ibFlights.map((item, index) => (
+                            <Card key={item.id} variant="outlined">
+                              <CardContent>
+                                <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                                  <Grid item>
+                                    <Typography>{item.origin.location}</Typography>
+                                    <Typography>{item.origin.iata_code}</Typography>
+                                    <Typography>{item.std}</Typography>
+                                    <Typography>{item.std}</Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <Typography>{item.destination.location}</Typography>
+                                    <Typography>{item.destination.iata_code}</Typography>
+                                    <Typography>{item.std}</Typography>
+                                    <Typography>{item.duration}</Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <FormControlLabel
+                                      key={item.id}
+                                      value={item.id}
+                                      control={<Radio />}
+                                      label={<Typography>${item.basePrice}</Typography>}
+                                    />
+                                  </Grid>
+                                </Grid>
+                                <Grid container direction="row" alignItems="center" justifyContent="center">
+                                  <Typography>{item.duration}</Typography>
+                                </Grid>
+                              </CardContent>
+                            </Card>
+                          ))}
+                        </RadioGroup>
+                      </FormControl>
+                    </Box>
+                  </Fragment>
+                ) : (
+                  <div></div>
+                )}
               </Paper>
             </Grid>
           </Grid>

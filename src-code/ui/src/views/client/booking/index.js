@@ -70,7 +70,7 @@ const Booking = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [activeStep, outboundId, inboundId]);
+  }, [activeStep, departId, returnId]);
 
   return (
     <Fragment>
