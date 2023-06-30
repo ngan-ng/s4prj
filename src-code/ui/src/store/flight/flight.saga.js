@@ -1,7 +1,7 @@
 import { FLIGHT_ACTION_TYPES } from './flight.types';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import axiosCall from '../../api/callAxios';
-import { searchFlightFailed, searchFlightSuccess } from './flight.action';
+import { searchFlightFailed, searchFlightSuccess, selectDepartIdSuccess, selectReturnIdSuccess } from './flight.action';
 
 const searchFlight = async (searchDto) => {
   try {
@@ -21,10 +21,36 @@ function* searchFlightStart({ payload }) {
   }
 }
 
+function* selectDepartIdStart({ payload }) {
+  try {
+    console.log('selectOutboundId', { payload });
+    yield put(selectDepartIdSuccess(payload));
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
+function* selectReturnIdStart({ payload }) {
+  try {
+    console.log('selectInboundId', { payload });
+    yield put(selectReturnIdSuccess(payload));
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
 export function* onSearchFlightStart() {
   yield takeLatest(FLIGHT_ACTION_TYPES.SEARCH_FLIGHT_START, searchFlightStart);
 }
 
+export function* onSelectDepartId() {
+  yield takeLatest(FLIGHT_ACTION_TYPES.SELECT_DEPART_ID_START, selectDepartIdStart);
+}
+
+export function* onSelectReturnId() {
+  yield takeLatest(FLIGHT_ACTION_TYPES.SELECT_RETURN_ID_START, selectReturnIdStart);
+}
+
 export function* flightSagas() {
-  yield all([call(onSearchFlightStart)]);
+  yield all([call(onSearchFlightStart), call(onSelectDepartId), call(onSelectReturnId)]);
 }
