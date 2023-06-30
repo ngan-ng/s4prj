@@ -3,7 +3,12 @@ import { signIn, signOut } from './../../azure/authPopup';
 import { signinFailure, signinSuccess, signOutSuccess } from './user.action';
 import userActionTypes from './user.types';
 import axiosCall from 'api/callAxios';
-
+const findUser = async (email, headers) => {
+  const resp = await axiosCall
+    // .post('/api-v1/user/addAdmin', { email }, { headers })
+    .post('/api-v1/user/findUser', { email }, { headers });
+  return resp;
+};
 export function* login() {
   try {
     const resp = yield call(signIn);
@@ -16,20 +21,11 @@ export function* login() {
       let user = { givenName: givenName, surName: surName, email: email, loyaltyPoint: 0 };
 
       const headers = { Authorization: `Bearer ${resp.accessToken}` };
-      axiosCall
-        // .post('/api-v1/user/addAdmin', { email }, { headers })
-        .post('/api-v1/user/findUser', { email }, { headers })
-        .then(function (res) {
-          console.log(res);
-          if (res.status === 200) {
-            let member = res.data;
-            user.loyaltyPoint = member.loyaltyPoint;
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-
+      const res = yield call(findUser, email, headers);
+      if (res.status === 200) {
+        let member = res.data;
+        user.loyaltyPoint = member.loyaltyPoint;
+      }
       yield put(signinSuccess(user));
 
       // const product = { name: 'Axios POST with Bearer Token' }; // request JSON body

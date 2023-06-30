@@ -22,7 +22,7 @@ const MainLayout = () => {
       {/* Main body */}
       <Outlet />
       {/* Footer */}
-      <AppBar color="secondary" position="fixed" elevation={3} sx={{ opacity: 0.93, top: 'auto', bottom: 0, mt: 3 }}>
+      <AppBar color="secondary" position="static" elevation={3} sx={{ opacity: 0.93, top: 'auto', bottom: 0, mt: 3 }}>
         <Container>
           <Toolbar>
             <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>

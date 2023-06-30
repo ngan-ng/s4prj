@@ -4,9 +4,6 @@ import com.aptech.apiv1.dto.GroupBookingPaymentDto;
 import com.aptech.apiv1.dto.paypal.PayPalExecuteDto;
 import com.aptech.apiv1.dto.paypal.ReviewPaypalResponseDto;
 import com.aptech.apiv1.service.impl.PaymentServiceImpl;
-import com.paypal.api.payments.PayerInfo;
-import com.paypal.api.payments.Payment;
-import com.paypal.api.payments.Transaction;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +14,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api-v1/guest/payment")
+@CrossOrigin(origins = "${security.cors.origin}", methods = {
+        RequestMethod.GET, RequestMethod.POST
+})
 public class PaymentController {
     private final PaymentServiceImpl paymentService;
 

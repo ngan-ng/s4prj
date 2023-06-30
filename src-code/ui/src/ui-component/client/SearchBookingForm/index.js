@@ -3,6 +3,7 @@ import { useState, Fragment } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { fetchBookingByPnrStart } from 'store/booking/booking.action';
+import { mb_clear } from 'store/manage-booking/mb.action';
 
 const SearchBookingForm = ({ backgroundOpacity }) => {
   const dispatch = useDispatch();
@@ -18,10 +19,11 @@ const SearchBookingForm = ({ backgroundOpacity }) => {
       setErr('');
     }
   };
-  const handleManageBooking = async (e) => {
+  const handleManageBooking = (e) => {
     try {
+      dispatch(mb_clear());
       dispatch(fetchBookingByPnrStart(pnr));
-      navigate('/manage-booking');
+      navigate('/manage-booking', { state: { searchingPnr: pnr } });
     } catch (error) {
       console.log(error);
       e.preventDefault();

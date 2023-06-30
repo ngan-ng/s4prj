@@ -1,10 +1,8 @@
 package com.aptech.apiv1.controller;
 
 import com.aptech.apiv1.dto.GroupBooking;
-import com.aptech.apiv1.model.Booking;
 import com.aptech.apiv1.service.BookingService;
 import jakarta.validation.Valid;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/api-v1/guest/booking")
+@CrossOrigin(origins = "${security.cors.origin}", methods = {
+        RequestMethod.GET, RequestMethod.POST
+})
 public class BookingController {
     private final BookingService bookingService;
 

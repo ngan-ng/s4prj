@@ -23,6 +23,7 @@ export const bookingReducer = (state = BOOKING_INITIAL_STATE, action = {}) => {
       return {
         ...state,
         isFetching: false,
+        bookings: null,
         error: payload
       };
     default:
