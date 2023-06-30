@@ -78,7 +78,7 @@ const ManageBooking = () => {
       )} */}
       {/* {yourBookings && yourBookings?.map((item) => item.email+ ' ')} */}
       <Container>
-        <Box minHeight={680} sx={{ zIndex: '2', mx: 4 }}>
+        <Box minHeight={680} sx={{ zIndex: '2', mx: { md: 4, xs: 0 } }}>
           {activeStep === manageStepper.steppers.length ? (
             <Fragment>
               <Box>

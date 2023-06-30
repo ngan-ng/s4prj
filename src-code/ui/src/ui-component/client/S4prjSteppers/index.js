@@ -44,7 +44,7 @@ const S4prjSteppers = ({ innerType, activeStep }) => {
   let stepIconComponent = innerType.getStepIconComponent;
 
   return (
-    <Stack sx={{ width: '100%' }} spacing={4}>
+    <Stack sx={{ width: '100%', mt: 2 }} spacing={4}>
       <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
         {steps.map((label) => (
           <Step key={label}>

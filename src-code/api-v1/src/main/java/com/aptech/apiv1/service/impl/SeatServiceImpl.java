@@ -2,8 +2,10 @@ package com.aptech.apiv1.service.impl;
 
 import com.aptech.apiv1.dto.LoadSeatDto;
 import com.aptech.apiv1.dto.SelectSeatDto;
+import com.aptech.apiv1.enums.SeatStatus;
 import com.aptech.apiv1.model.Booking;
 import com.aptech.apiv1.model.Seat;
+import com.aptech.apiv1.repository.BookingRepository;
 import com.aptech.apiv1.repository.SeatRepository;
 import com.aptech.apiv1.service.SeatService;
 import org.modelmapper.ModelMapper;
@@ -12,50 +14,89 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class SeatServiceImpl implements SeatService {
     private final SeatRepository seatRepository;
+    private final BookingRepository bookingRepository;
+
     @Autowired
-    public SeatServiceImpl(SeatRepository seatRepository) {
+    public SeatServiceImpl(SeatRepository seatRepository, BookingRepository bookingRepository) {
         this.seatRepository = seatRepository;
+        this.bookingRepository = bookingRepository;
     }
 
     @Override
     public HttpStatus handleSeat(SelectSeatDto dto) {
-        Optional<Seat> seat = seatRepository.findById(dto.getId());
+        Optional<Seat> seatOpt = seatRepository.findById(dto.getId());
         // SEAT NOT FOUND
-        if (seat.isEmpty()){
+        if (seatOpt.isEmpty()) {
             return HttpStatus.NOT_FOUND;
         }
-        String action = dto.getAction();
-        if(action.equalsIgnoreCase("select")){
-            // ACTION SELECT SEAT
-            if (seat.get().getBooking() != null) {
-                if (seat.get().getBooking().getId() != dto.getBookingId()) {
-                    return HttpStatus.SERVICE_UNAVAILABLE; // SOMEONE RESERVED SEAT just before
-                } else {
-                    return HttpStatus.ACCEPTED; // ALREADY RESERVED for this Booking
+        Optional<Booking> bookingOpt = bookingRepository.findById(dto.getBookingId());
+        if (bookingOpt.isEmpty()) {
+            return HttpStatus.METHOD_NOT_ALLOWED;
+        }
+        Seat seat = seatOpt.get();
+        Booking booking = bookingOpt.get();
+
+        String action = dto.getAction().toLowerCase();
+        switch (action) {
+            case "select" -> {
+                // ACTION SELECT SEAT
+                String seatStatus = seat.getStatus();
+                if (!seatStatus.equalsIgnoreCase(String.valueOf(SeatStatus.AVAILABLE))) {
+                    // SEAT NOT AVAILABLE NOW due to BLOCK or RESERVED or just NOT-AVAILABLE
+                    if (seatStatus.equalsIgnoreCase(String.valueOf(SeatStatus.TEMP))) {
+                        if (seat.getSelectedAt() != null &&
+                                Duration.between(seat.getSelectedAt(), LocalDateTime.now()).toMinutes() < 10) {
+                            return HttpStatus.SERVICE_UNAVAILABLE;
+                        }
+                    } else {
+                        // SELECTED || BLOCKED ||
+                        return HttpStatus.SERVICE_UNAVAILABLE;
+                    }
                 }
+                if (seat.getBooking() != null && seat.getBooking().getId() != 0) {
+                    if (seat.getBooking().getId() == dto.getBookingId()) {
+                        return HttpStatus.ACCEPTED; // ALREADY RESERVED for this Booking
+                    }
+                }
+                seat.setStatus(String.valueOf(SeatStatus.TEMP));
+                seat.setBooking(booking);
+                seat.setSelectedAt(LocalDateTime.now());
+                seatRepository.save(seat);
+                return HttpStatus.OK;
             }
-            seat.get().setBooking(new Booking().setId(dto.getBookingId()));
-            return seatRepository.save(seat.get()).getBooking().getId() == dto.getBookingId()
-                    ? HttpStatus.OK : HttpStatus.EXPECTATION_FAILED;
-        } else if (action.equalsIgnoreCase("unselect")) {
-            // ACTION UNSELECT SEAT
-            if (seat.get().getBooking() == null) { // ALREADY UNSELECT
-                return HttpStatus.ACCEPTED;
+            case "unselect" -> {
+                // ACTION UNSELECT SEAT
+                if (!seat.getStatus().equalsIgnoreCase(String.valueOf(SeatStatus.TEMP))) { // ALREADY UNSELECT
+                    return HttpStatus.METHOD_NOT_ALLOWED;
+                }
+                if (seat.getBooking().getId() != dto.getBookingId()) {
+                    return HttpStatus.METHOD_NOT_ALLOWED; // NOT THE SEAT OWNER, CANNOT UNSELECT
+                }
+                seat.setBooking(null)
+                        .setSelectedAt(null)
+                        .setStatus(String.valueOf(SeatStatus.AVAILABLE));
+                seatRepository.save(seat);
+                return HttpStatus.OK;
             }
-            if (seat.get().getBooking().getId() != dto.getBookingId()) {
-                return HttpStatus.METHOD_NOT_ALLOWED; // NOT THE SEAT OWNER, CANNOT UNSELECT
+            case "complete" -> {
+                if (seat.getBooking() == null || seat.getBooking().getId() == 0 || seat.getBooking().getId() != dto.getBookingId()) {
+                    return HttpStatus.METHOD_NOT_ALLOWED;
+                }
+                seat.setStatus(String.valueOf(SeatStatus.SELECTED));
+                seatRepository.save(seat);
+                return HttpStatus.OK;
             }
-            seat.get().setBooking(null);
-            seatRepository.save(seat.get());
-            return HttpStatus.OK;
-        }else {
-            return HttpStatus.BAD_REQUEST; // ACTION INVALID
+            default -> {
+                return HttpStatus.BAD_REQUEST; // ACTION INVALID
+            }
         }
     }
 
@@ -67,7 +108,7 @@ public class SeatServiceImpl implements SeatService {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         modelMapper.typeMap(Seat.class, LoadSeatDto.class).addMappings(mapper ->
-                        mapper.map(src -> src.getBooking().getId(), LoadSeatDto::setBooking));
+                mapper.map(src -> src.getBooking().getId(), LoadSeatDto::setBooking));
         return seats.stream().map((seat -> modelMapper.map(seat, LoadSeatDto.class))).toList();
     }
 

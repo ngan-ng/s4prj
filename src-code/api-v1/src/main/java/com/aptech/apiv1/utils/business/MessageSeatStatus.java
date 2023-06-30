@@ -7,7 +7,7 @@ public class MessageSeatStatus {
         return switch (code) {
             case NOT_FOUND -> "Seat not found";
             case SERVICE_UNAVAILABLE -> "Reserved";
-            case METHOD_NOT_ALLOWED -> "Cannot unselect this seat";
+            case METHOD_NOT_ALLOWED -> "The seat is reserved";
             case EXPECTATION_FAILED -> "Cannot select this seat";
             case ACCEPTED -> "Already done";
             case OK -> "Successful";

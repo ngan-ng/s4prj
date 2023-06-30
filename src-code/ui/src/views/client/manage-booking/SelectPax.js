@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormHelperText, FormLabel, Grid, Paper, Typography } from '@mui/material';
-import React, { useEffect, Fragment, useState } from 'react';
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Paper, Typography } from '@mui/material';
+import React, { useRef, useEffect, Fragment, useState, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectBookingByPnr } from 'store/booking/booking.selector';
 import { mb_selectPax } from 'store/manage-booking/mb.action';
@@ -16,8 +16,8 @@ const SelectPax = () => {
   const [intermediate, setIntermediate] = useState(false);
 
   useEffect(() => {
+    // Code logic display checked boxes
     let numOfSelectedPax = Object.keys(selectMBObj.pax).length;
-    // console.log(numOfSelectedPax);
     if (numOfSelectedPax === paxOfFlight.length) {
       setAllSelect(true);
       setIntermediate(false);
@@ -29,6 +29,9 @@ const SelectPax = () => {
     }
   }, [allSelect, paxOfFlight, selectMBObj]);
 
+  /// Every change in selecting pax
+  /// dispatch to change pax value
+  /// of managaBookingObj
   const handleChange = (e) => {
     let newPax = selectMBObj.pax;
     if (e.target.checked) {
@@ -48,16 +51,22 @@ const SelectPax = () => {
     }
     dispatch(mb_selectPax(newPax));
   };
+
+  const ref = useRef(null);
+  const [heightRef, setHeightRef] = useState(0);
+  useLayoutEffect(() => {
+    setHeightRef(ref.current.offsetHeight);
+  }, []);
   return (
     <Fragment>
       <Grid marginY={2} container spacing={3} component={'div'} height="stretch">
         <Grid item xs={12} md={4}>
-          <Paper elevation={4} sx={{ height: { xs: 'stretch', md: 500 }, p: 4, borderRadius: 1 }}>
+          <Paper elevation={4} sx={{ height: { xs: 'stretch', md: heightRef }, p: 4, borderRadius: 1 }}>
             Booking Details
           </Paper>
         </Grid>
         <Grid item xs={12} md={8}>
-          <Paper elevation={4} sx={{ height: 500, p: 4, borderRadius: 1 }}>
+          <Paper ref={ref} elevation={4} sx={{ height: 'stretch', p: 4, borderRadius: 1 }}>
             <Box
               sx={{
                 width: '100%',

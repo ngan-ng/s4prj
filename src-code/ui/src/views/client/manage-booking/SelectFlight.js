@@ -12,8 +12,11 @@ import SearchBookingForm from 'ui-component/client/SearchBookingForm';
 import { useLocation } from 'react-router-dom';
 import { Search } from '@mui/icons-material';
 import LoadingProgress from 'ui-component/client/LoadingProgress';
+import { useRef } from 'react';
+import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
-const SelectFlight = ({ val, onSelectFlight }) => {
+const SelectFlight = () => {
   const location = useLocation();
   const bookings = useSelector(selectBookingByPnr);
   const isFetching = useSelector(isFetchingPnr);
@@ -39,16 +42,22 @@ const SelectFlight = ({ val, onSelectFlight }) => {
     setOpenDialog(false);
   };
 
+  // Set 2 columns with the same height
+  const ref = useRef(null);
+  const [heightRef, setHeightRef] = useState(0);
+  useLayoutEffect(() => {
+    setHeightRef(ref.current.offsetHeight);
+  }, []);
   return (
     <Fragment>
       <Grid marginY={2} container spacing={3} component={'div'} height="stretch">
         <Grid item xs={12} md={4}>
-          <Paper elevation={4} sx={{ height: { xs: 'stretch', md: 500 }, p: 4, borderRadius: 1 }}>
+          <Paper elevation={4} sx={{ height: { xs: 'stretch', md: heightRef }, p: 4, borderRadius: 1 }}>
             Booking Details
           </Paper>
         </Grid>
         <Grid item xs={12} md={8}>
-          <Paper elevation={4} sx={{ height: 'stretch', p: 4, borderRadius: 1 }}>
+          <Paper ref={ref} elevation={4} sx={{ height: 'stretch', p: 4, borderRadius: 1 }}>
             <Box
               sx={{
                 width: '100%',
@@ -65,7 +74,7 @@ const SelectFlight = ({ val, onSelectFlight }) => {
               {isFetching ? (
                 <LoadingProgress props={isFetching} />
               ) : bookings && bookings.length > 0 ? (
-                <RadioFlightGroup flights={flightProps} selectedFlight={val} onFlightChange={onSelectFlight} />
+                <RadioFlightGroup flights={flightProps} />
               ) : (
                 <div>
                   <Typography sx={{ fontSize: 20 }}>Sorry, we cannot find any booking with your PNR: {'"' + searchingPnr + '"'}</Typography>
