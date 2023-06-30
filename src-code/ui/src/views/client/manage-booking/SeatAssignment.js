@@ -1,8 +1,5 @@
-import { Box, Grid, Paper, Typography } from '@mui/material';
-import React from 'react';
-import { useLayoutEffect } from 'react';
-import { useEffect } from 'react';
-import { Fragment, useState, useRef } from 'react';
+import { Box, FormControl, FormControlLabel, FormLabel, Grid, Paper, Radio, RadioGroup } from '@mui/material';
+import React, { Fragment, useState, useRef, useEffect, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectBookingByPnr } from 'store/booking/booking.selector';
 import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
@@ -16,16 +13,28 @@ const SeatAssignment = () => {
   const isFetching = useSelector(isFetchingSeats);
   const selectMBObj = useSelector(selectManageBookingObj);
   const bookings = useSelector(selectBookingByPnr);
+  const [paxInAction, setPaxInAction] = useState(Object.keys(selectMBObj.pax)[0]);
+  function handleChooseSeat(seat) {
+    let selectSeatDto = {
+      id: seat.id,
+      bookingId: paxInAction,
+      action: 'select'
+    };
+    console.log(selectSeatDto);
+  }
 
   useEffect(() => {
-    async function getSeats() {
-      dispatch(fetchSeatsStart(selectMBObj.flightId));
-    }
-    if (seats === null || seats.length === 0) {
-      if (!isFetching) {
-        getSeats();
+    const timeout = setTimeout(() => {
+      async function getSeats() {
+        dispatch(fetchSeatsStart(selectMBObj.flightId));
       }
-    }
+      if (seats === null || seats.length === 0) {
+        if (!isFetching) {
+          getSeats();
+        }
+      }
+    });
+    return () => clearTimeout(timeout);
   }, [dispatch, isFetching, seats, selectMBObj.flightId]);
 
   const ref = useRef(null);
@@ -38,20 +47,27 @@ const SeatAssignment = () => {
       <Grid direction={{ xs: 'column-reverse', md: 'row' }} marginY={2} container spacing={2} component={'div'} height="stretch">
         <Grid item xs={12} md={4}>
           <Paper elevation={4} sx={{ height: { xs: 'stretch', md: heightRef > 200 ? heightRef : 'stretch' }, p: 4, borderRadius: 1 }}>
-            Passengers
-            <ul>
-              {bookings
-                .filter((b) => Object.hasOwn(selectMBObj.pax, b.id.toString()))
-                .map((p) => (
-                  <Typography key={p.id.toString()}>{p.firstName}</Typography>
-                ))}
-            </ul>
+            <FormControl>
+              <FormLabel id="paxInAction">Passengers</FormLabel>
+              <RadioGroup
+                defaultValue={paxInAction}
+                name="paxInAction"
+                value={paxInAction}
+                onChange={(e) => setPaxInAction(e.target.value)}
+              >
+                {bookings
+                  .filter((b) => Object.hasOwn(selectMBObj.pax, b.id))
+                  .map((p) => (
+                    <FormControlLabel control={<Radio />} value={p.id} key={p.id.toString()} label={p.firstName} />
+                  ))}
+              </RadioGroup>
+            </FormControl>
           </Paper>
         </Grid>
         <Grid item xs={12} md={8} sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Paper ref={ref} elevation={4} sx={{ height: 'stretch', p: 5, borderRadius: 1 }}>
-            <Box height={580}>
-              <Seatmap seats={seats} />
+          <Paper ref={ref} elevation={4} sx={{ height: 'stretch', p: 2, borderRadius: 1 }}>
+            <Box height={600}>
+              <Seatmap seats={seats} onHandleSeat={handleChooseSeat} />
             </Box>
           </Paper>
         </Grid>
