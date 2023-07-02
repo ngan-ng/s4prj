@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +16,8 @@ public class LoadSeatDto implements Serializable {
     private String seatType;
     private String classType;
     private String status;
+    private LocalDateTime selectedAt;
     private String description;
     private double price;
-    private long booking;
+    private long bookingId;
 }

@@ -9,9 +9,11 @@ import ImportantNotices from './ImportantNotices';
 import BoardingPass from './BoardingPass';
 import { useSelector } from 'react-redux';
 import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
+import { selectSeats } from 'store/seat/seat.selector';
 
 const ManageBooking = () => {
   const manageStepper = StepperType.MANAGE_BOOKING;
+  const seats = useSelector(selectSeats);
   const [activeStep, setActiveStep] = useState(0);
   const [validActiveStep, setValidActiveStep] = useState(false);
   const selectMBObj = useSelector(selectManageBookingObj);
@@ -26,7 +28,7 @@ const ManageBooking = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  const handleFinished = () => {};
+  const handleFinished = () => { };
 
   const ManageBookingContent = () => {
     switch (activeStep) {
@@ -55,8 +57,13 @@ const ManageBooking = () => {
         case 1:
           setValidActiveStep(Object.keys(selectMBObj.pax).length > 0);
           break;
-        case 2:
+        case 2: {
+          const mySeats = seats.filter(
+            (s) => Object.hasOwn(selectMBObj.pax, s.bookingId) && (Date.now() - new Date(s.selectedAt)) / (60 * 1000) < 10
+          );
+          setValidActiveStep(mySeats.length == Object.keys(selectMBObj.pax).length);
           break;
+        }
         case 3:
           break;
         case 4:
@@ -67,7 +74,7 @@ const ManageBooking = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [activeStep, selectMBObj]);
+  }, [activeStep, seats, selectMBObj]);
   return (
     <>
       <S4prjSteppers innerType={manageStepper} activeStep={activeStep} />

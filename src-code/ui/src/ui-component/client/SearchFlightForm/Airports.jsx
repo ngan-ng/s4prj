@@ -23,7 +23,7 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
 
   return (
     <Fragment>
-      <Grid container direction={'row'} spacing={2}>
+      <Grid container direction={'row'} spacing={{ xs: 1, sm: 2 }}>
         <Grid item xs={12} md={6}>
           <FormControl fullWidth>
             <InputLabel id="airport-select-origin-label">Origin</InputLabel>

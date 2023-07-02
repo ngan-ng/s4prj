@@ -14,14 +14,14 @@ const TripTypeButton = ({ isOneway, onTypeChange }) => {
       >
         <FormControlLabel
           value="roundtrip"
-          control={<Radio color="secondary" />}
+          control={<Radio size="small" color="secondary" />}
           label={<Typography color={isOneway ? '' : 'secondary'}>Roundtrip</Typography>}
           labelPlacement="top"
           color="secondary"
         />
         <FormControlLabel
           value="oneway"
-          control={<Radio color="secondary" />}
+          control={<Radio size="small" color="secondary" />}
           label={<Typography color={isOneway ? 'secondary' : ''}>Oneway</Typography>}
           labelPlacement="top"
         />
