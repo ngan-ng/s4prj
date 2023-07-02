@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Box, Grid, Typography } from '@mui/material';
 import Seat from './Seat';
 import React from 'react';
@@ -20,6 +21,7 @@ const Seatmap = ({ seats, onHandleSeat }) => {
       block = [];
     }
   });
+  console.log('REREDNER');
   return (
     <Box
       xs={12}
@@ -37,7 +39,8 @@ const Seatmap = ({ seats, onHandleSeat }) => {
         position: 'relative'
       }}
     >
-      <Grid container spacing={2} direction="row" sx={{ ml: 3, mt: 1, mb: 3 }}>
+      {/* /// COCKPIT DECORATION /// */}
+      <Grid container spacing={2} direction="row" sx={{ pl: { md: 2, xs: 0 }, ml: 3, mt: 1, mb: 3 }}>
         <Grid item xs={1}></Grid>
         <Grid
           xs={5}
@@ -67,15 +70,7 @@ const Seatmap = ({ seats, onHandleSeat }) => {
         ></Grid>
         <Grid item xs={1}></Grid>
       </Grid>
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        sx={{
-          ml: 3,
-          mb: 5
-        }}
-      >
+      <Grid container spacing={2} direction="row" sx={{ pl: { md: 2, xs: 0 }, ml: 3, mb: 5 }}>
         <Grid item xs={1}></Grid>
         <Grid
           xs={5}
@@ -101,6 +96,8 @@ const Seatmap = ({ seats, onHandleSeat }) => {
         ></Grid>
         <Grid item xs={1}></Grid>
       </Grid>
+      {/* /// END COCKPIT DECORATION /// */}
+      {/* /// ROW LABEL DECORATION /// */}
       <Grid container direction="row" sx={{ pr: 1 }} spacing={1}>
         <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center', mx: 0, pr: 0 }}>
           <Typography color="grey" fontWeight="bold" fontSize={10}></Typography>
@@ -127,6 +124,7 @@ const Seatmap = ({ seats, onHandleSeat }) => {
       </Grid>
       {rows.map((singleRow, index) => (
         <Grid container key={index} sx={{ pr: 1 }} spacing={1}>
+          {/* /// WINGS DECORATION /// */}
           <Grid item xs={1} sx={{ pr: { xs: 0, md: 2 }, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {index === 11 && (
               <>
@@ -162,7 +160,7 @@ const Seatmap = ({ seats, onHandleSeat }) => {
           <Grid item xs={5}>
             <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
               {singleRow[0].map((seat, i) => (
-                <Seat key={i} s={seat} onClickEvent={onHandleSeat} />
+                <Seat s={seat} onClickEvent={onHandleSeat} key={i} />
               ))}
             </Box>
           </Grid>
@@ -174,7 +172,7 @@ const Seatmap = ({ seats, onHandleSeat }) => {
           <Grid item xs={5}>
             <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
               {singleRow[1].map((seat, i) => (
-                <Seat key={i} s={seat} onClickEvent={onHandleSeat} />
+                <Seat s={seat} onClickEvent={onHandleSeat} key={i} />
               ))}
             </Box>
           </Grid>

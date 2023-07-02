@@ -33,23 +33,22 @@ const SelectPax = () => {
   /// dispatch to change pax value
   /// of managaBookingObj
   const handleChange = (e) => {
-    let newPax = selectMBObj.pax;
+    let mbPaxTemp = selectMBObj.pax;
     if (e.target.checked) {
-      newPax[e.target.name] = null;
+      mbPaxTemp[e.target.name] = null;
     } else {
-      delete newPax[e.target.name];
+      delete mbPaxTemp[e.target.name];
     }
-    dispatch(mb_selectPax(newPax));
+    dispatch(mb_selectPax(mbPaxTemp));
   };
   const handleChangeAll = (e) => {
-    console.log(e.target.checked);
-    let newPax = {};
+    let mbPaxTemp = {};
     if (e.target.checked) {
       paxOfFlight.map((p) => {
-        newPax[p.id] = null;
+        mbPaxTemp[p.id] = null;
       });
     }
-    dispatch(mb_selectPax(newPax));
+    dispatch(mb_selectPax(mbPaxTemp));
   };
 
   const ref = useRef(null);

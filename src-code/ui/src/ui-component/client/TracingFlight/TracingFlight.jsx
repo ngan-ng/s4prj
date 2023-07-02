@@ -33,11 +33,11 @@ const TracingFlight = ({ backgroundOpacity }) => {
           <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Typography>Enter your flight number:</Typography>
           </Grid>
-          <Grid item xs={5} sx={{mx: 2}}>
+          <Grid item xs={5} sx={{ mx: 2 }}>
             <TextField fullWidth name="flt" value={flt} onChange={handleChange} helperText={err} color="secondary" />
           </Grid>
           <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Button fullWidth color="secondary" variant="contained" sx={{ height: 'stretch'}}>
+            <Button fullWidth color="secondary" variant="contained" sx={{ height: 'stretch' }}>
               Search
             </Button>
           </Grid>
