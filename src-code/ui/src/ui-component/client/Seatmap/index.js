@@ -4,7 +4,6 @@ import Seat from './Seat';
 import React from 'react';
 
 const Seatmap = ({ seats, onHandleSeat }) => {
-  // console.log(seats);
   let rows = [];
   let singleRow = [];
   let block = [];

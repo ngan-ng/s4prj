@@ -20,15 +20,6 @@ function* selectPax({ payload }) {
     console.log(error);
   }
 }
-// function* selectSeat({ payload }) {
-//   try {
-//     console.log('select seat saga: ');
-//     console.log(payload);
-//     // yield
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
 function* clear() {
   try {
     yield call(mb_clear);
@@ -42,12 +33,9 @@ export function* manageBookingSelectFlight() {
 export function* manageBookingSelectPax() {
   yield takeLatest(MB_ACTION_TYPE.SELECT_PAX, selectPax);
 }
-export function* manageBookingSelectSeatStart() {
-  // yield takeLatest(MB_ACTION_TYPE.SELECT_SEAT, selectSeat);
-}
 export function* manageBookingClear() {
   yield takeLatest(MB_ACTION_TYPE.MB_CLEAR, clear);
 }
 export function* manage_bookingSaga() {
-  yield all([call(manageBookingSelectSeatStart), call(manageBookingClear), call(manageBookingSelectFlight), call(manageBookingSelectPax)]);
+  yield all([call(manageBookingClear), call(manageBookingSelectFlight), call(manageBookingSelectPax)]);
 }

@@ -1,5 +1,4 @@
-/* eslint-disable no-unused-vars */
-import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Paper, Typography } from '@mui/material';
+import { Box, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, Paper } from '@mui/material';
 import React, { useRef, useEffect, Fragment, useState, useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectBookingByPnr } from 'store/booking/booking.selector';
@@ -33,19 +32,21 @@ const SelectPax = () => {
   /// dispatch to change pax value
   /// of managaBookingObj
   const handleChange = (e) => {
-    let mbPaxTemp = selectMBObj.pax;
+    let pid = parseInt(e.target.name);
+    let mbPaxTemp;
     if (e.target.checked) {
-      mbPaxTemp[e.target.name] = null;
+      mbPaxTemp = [...selectMBObj.pax, pid];
     } else {
-      delete mbPaxTemp[e.target.name];
+      // delete mbPaxTemp[e.target.name];
+      mbPaxTemp = selectMBObj.pax.filter((pId) => pId != pid);
     }
     dispatch(mb_selectPax(mbPaxTemp));
   };
   const handleChangeAll = (e) => {
-    let mbPaxTemp = {};
+    let mbPaxTemp = [];
     if (e.target.checked) {
       paxOfFlight.map((p) => {
-        mbPaxTemp[p.id] = null;
+        mbPaxTemp = [...mbPaxTemp, p.id];
       });
     }
     dispatch(mb_selectPax(mbPaxTemp));
@@ -94,7 +95,7 @@ const SelectPax = () => {
                         control={
                           <Checkbox
                             style={{ color: allSelect ? '#724aba' : 'hotpink' }}
-                            checked={selectMBObj?.pax[b.id] !== undefined}
+                            checked={selectMBObj?.pax.includes(b.id)}
                             name={b.id.toString()}
                             onChange={handleChange}
                           />

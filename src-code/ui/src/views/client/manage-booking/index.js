@@ -28,7 +28,7 @@ const ManageBooking = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  const handleFinished = () => { };
+  const handleFinished = () => {};
 
   const ManageBookingContent = () => {
     switch (activeStep) {
@@ -59,9 +59,9 @@ const ManageBooking = () => {
           break;
         case 2: {
           const mySeats = seats.filter(
-            (s) => Object.hasOwn(selectMBObj.pax, s.bookingId) && (Date.now() - new Date(s.selectedAt)) / (60 * 1000) < 10
+            (s) => selectMBObj.pax.includes(s.bookingId) && (Date.now() - new Date(s.selectedAt)) / (60 * 1000) < 10
           );
-          setValidActiveStep(mySeats.length == Object.keys(selectMBObj.pax).length);
+          setValidActiveStep(mySeats.length == selectMBObj.pax.length);
           break;
         }
         case 3:

@@ -9,7 +9,6 @@ import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
 const Seat = ({ s, onClickEvent }) => {
   const seatRef = useRef(null);
   const selectMBObj = useSelector(selectManageBookingObj);
-  const paxIdsInAction = Object.keys(selectMBObj.pax);
   const [isOnHover, setIsOnHover] = useState(false);
   let frontColor = '#fff';
   let bgColor;
@@ -40,7 +39,7 @@ const Seat = ({ s, onClickEvent }) => {
     case 'TEMP': {
       let selectedPeriod = (Date.now() - new Date(s.selectedAt)) / (60 * 1000);
       if (selectedPeriod < 10) {
-        if (paxIdsInAction?.includes(s.bookingId.toString())) {
+        if (selectMBObj.pax?.includes(parseInt(s.bookingId))) {
           frontColor = 'yellow';
           bgColor = '#1769aa';
           iconType = 'person';
