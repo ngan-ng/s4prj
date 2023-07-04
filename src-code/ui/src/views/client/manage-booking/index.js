@@ -81,7 +81,7 @@ const ManageBooking = () => {
           setValidActiveStep(Object.keys(selectMBObj.pax).length > 0);
           break;
         case 2: {
-          const mySeatsLength = seats.filter((s) => selectMBObj.pax.includes(s.bookingId)).length;
+          const mySeatsLength = seats.filter((s) => selectMBObj.pax.includes(parseInt(s.bookingId))).length;
           setValidActiveStep(mySeatsLength == selectMBObj.pax.length);
           break;
         }
@@ -104,12 +104,6 @@ const ManageBooking = () => {
   return (
     <>
       <S4prjSteppers innerType={manageStepper} activeStep={activeStep} />
-      {/* {isFetching && (
-        <Typography>
-          FETCHING... <LinearProgress />
-        </Typography>-
-      )} */}
-      {/* {yourBookings && yourBookings?.map((item) => item.email+ ' ')} */}
       <Container>
         <Box minHeight={680} sx={{ zIndex: '2', mx: { md: 4, xs: 0 } }}>
           {activeStep === manageStepper.steppers.length ? (

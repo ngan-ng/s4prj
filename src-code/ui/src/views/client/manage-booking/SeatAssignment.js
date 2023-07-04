@@ -134,7 +134,6 @@ const SeatAssignment = () => {
               <RadioGroup
                 direction="column"
                 defaultValue={currentPaxId}
-                name="currentPaxId"
                 value={currentPaxId}
                 onChange={(e) => setCurrentPaxId(e.target.value)}
               >
