@@ -34,8 +34,8 @@ public class ApiV1Application {
 
     public static void main(String[] args) {
         var context = SpringApplication.run(ApiV1Application.class, args);
-//        initialize(context);
-//        addPromotions(context);
+        initialize(context);
+        addPromotions(context);
     }
 
     static void addPromotions(ConfigurableApplicationContext context) {

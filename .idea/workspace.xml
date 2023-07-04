@@ -4,122 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="commit changes from main">
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-dark-rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-dark-rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-dark.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-dark.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-dark.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app-rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/app.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-dark-rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-dark-rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-dark.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-dark.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-dark.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap-rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/bootstrap.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/icons-rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/icons-rtl.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/icons.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/icons.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/css/icons.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/dripicons-v2.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/dripicons-v2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/dripicons-v2.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/dripicons-v2.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-brands-400.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-brands-400.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-brands-400.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-brands-400.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-brands-400.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-regular-400.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-regular-400.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-regular-400.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-regular-400.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-regular-400.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-solid-900.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-solid-900.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-solid-900.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-solid-900.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/fa-solid-900.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-bold.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-bold.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-light.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-light.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-medium.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-medium.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/inter-regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/materialdesignicons-webfont.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/materialdesignicons-webfont.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/materialdesignicons-webfont.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/materialdesignicons-webfont.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.symbol.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/fonts/remixicon.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/js/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-grid.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-grid.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-reboot.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-reboot.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-utilities.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap-utilities.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/css/bootstrap.rtl.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/js/bootstrap.esm.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/bootstrap/js/bootstrap.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/jquery/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/jquery/jquery.slim.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/metismenu/cjs/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/metismenu/metisMenu.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/metismenu/metisMenu.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/metismenu/modules/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/node-waves/waves.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/node-waves/waves.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/simplebar/simplebar.esm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/simplebar/simplebar.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/public/assets/libs/simplebar/simplebar.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/hooks/useCurrentPath.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/hooks/useScript.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/hooks/useStyle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/Dashboard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/components/layout/footer-admin.component.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/components/layout/header-admin.component.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/components/layout/main-content-admin.component.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/components/layout/sidebar-admin.component.jsx" afterDir="false" />
+    <list default="true" id="99220fa4-1b4d-411b-b035-a96bcf77680a" name="Changes" comment="updated manage-booking">
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_26_2023_3_10_PM_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_26_2023_3_10_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/About.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/About.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/Admin.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/admin/Booking.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/DateForTrip.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/DateForTrip.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/MyAccount.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/MyAccount.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/authentication/authentication.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/authentication/authentication.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/authentication/authentication.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/authentication/authentication.styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/footer/footer.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/footer/footer.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/footer/footer.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/footer/footer.styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/navigation/navigation.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/navigation/navigation.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/navigation/navigation.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/navigation/navigation.styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/search-flights-form/SearchFlightForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/search-flights-form/SearchFlightForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/sign-in/sign-in.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/sign-in/sign-in.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/sign-in/sign-in.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/sign-in/sign-in.styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/sign-up/sign-up.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/sign-up/sign-up.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/src/page/components/sign-up/sign-up.styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/page/client/components/sign-up/sign-up.styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src-code/ui/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/java/com/aptech/apiv1/ApiV1Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/api-v1/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/azure/authConfig.js" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/azure/authConfig.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src-code/ui/src/views/client/booking/Passengers.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src-code/ui/src/views/client/booking/Passengers.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,8 +22,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -140,6 +36,19 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="f1d8faee-aa50-493e-bea5-d2180ed1cb27" />
+        <option name="url" value="https://github.com/mindullness/s4prj.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -156,31 +65,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "NganBranch",
-    "last_opened_file_path": "E:/Code/sem-4/Project/src/s4prj/src-code/ui/public/assets",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "inlay.hints",
-    "show.migrate.to.gradle.popup": "false",
-    "spring.configuration.checksum": "0283fd2aec49fb0567bce964c2e58809",
-    "ts.external.directory.path": "C:\\Users\\DELL\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\231.9011.34\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;booking&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Code/sem-4/Project/src/s4prj/src-code/ui/public/assets&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;E:\\Code\\sem-4\\Project\\src\\s4prj\\src-code\\ui\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;0283fd2aec49fb0567bce964c2e58809&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\DELL\\AppData\\Local\\JetBrains\\Toolbox\\apps\\IDEA-U\\ch-0\\231.9161.38\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\public\assets" />
@@ -190,18 +103,46 @@
       <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\component\sign-in" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\views\client\booking" />
+      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\ui-component\client\Booking\SelectFlight" />
       <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\admin\components\layout" />
       <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\admin" />
       <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\admin\components" />
-      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\src\page\client" />
-      <recent name="E:\Code\sem-4\Project\src\s4prj\src-code\ui\public" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+    <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
+      <option name="appName" />
+      <option name="appServicePlanName" />
+      <option name="appServicePlanResourceGroup" />
+      <option name="appSettingsKey" value="d10b6a39-b175-46ee-89fa-19720d164781" />
+      <option name="artifact" />
+      <option name="debugOptions" />
+      <option name="deployment" />
+      <option name="deploymentStagingDirectoryPath" />
+      <option name="funcPath" />
+      <option name="functionHostArguments" />
+      <option name="hostJsonPath" />
+      <option name="insightsName" />
+      <option name="instrumentationKey" />
+      <option name="javaVersion" />
+      <option name="localSettingsJsonPath" />
+      <option name="moduleName" />
+      <option name="os" />
+      <option name="pricingTier" />
+      <option name="providerMap">
+        <map />
+      </option>
+      <option name="region" />
+      <option name="resourceGroup" />
+      <option name="stagingFolder" />
+      <option name="subscription" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -239,6 +180,43 @@
       <workItem from="1685536960867" duration="2609000" />
       <workItem from="1685628505394" duration="9526000" />
       <workItem from="1685763538809" duration="11497000" />
+      <workItem from="1686815165960" duration="135000" />
+      <workItem from="1686815354635" duration="5619000" />
+      <workItem from="1686829328000" duration="23000" />
+      <workItem from="1686829389751" duration="4286000" />
+      <workItem from="1686892514301" duration="1885000" />
+      <workItem from="1687076403242" duration="546000" />
+      <workItem from="1687077011905" duration="7321000" />
+      <workItem from="1687143851779" duration="19870000" />
+      <workItem from="1687174461630" duration="10213000" />
+      <workItem from="1687231429163" duration="31444000" />
+      <workItem from="1687321019170" duration="614000" />
+      <workItem from="1687433726603" duration="5102000" />
+      <workItem from="1687483943846" duration="19102000" />
+      <workItem from="1687526930611" duration="12713000" />
+      <workItem from="1687571124984" duration="26139000" />
+      <workItem from="1687661559885" duration="12701000" />
+      <workItem from="1687746769310" duration="14376000" />
+      <workItem from="1687777730810" duration="11834000" />
+      <workItem from="1687854287862" duration="14576000" />
+      <workItem from="1687916191232" duration="3200000" />
+      <workItem from="1687933433899" duration="2801000" />
+      <workItem from="1687960554054" duration="3136000" />
+      <workItem from="1688009938980" duration="12383000" />
+      <workItem from="1688051793955" duration="5000" />
+      <workItem from="1688052251189" duration="5361000" />
+      <workItem from="1688093128627" duration="15981000" />
+      <workItem from="1688123194811" duration="7863000" />
+      <workItem from="1688142213173" duration="3496000" />
+      <workItem from="1688204061787" duration="1493000" />
+      <workItem from="1688271315765" duration="612000" />
+      <workItem from="1688293481899" duration="587000" />
+      <workItem from="1688294109153" duration="1843000" />
+      <workItem from="1688310302596" duration="1192000" />
+      <workItem from="1688346942361" duration="641000" />
+      <workItem from="1688393358946" duration="1187000" />
+      <workItem from="1688436291015" duration="628000" />
+      <workItem from="1688459926142" duration="2608000" />
     </task>
     <task id="LOCAL-00001" summary="added firebase for sign-in, sign-up member">
       <created>1685073169102</created>
@@ -254,15 +232,137 @@
       <option name="project" value="LOCAL" />
       <updated>1685505215517</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="added stepper booking form">
+      <created>1687248770668</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1687248770668</updated>
+    </task>
+    <task id="LOCAL-00004" summary="updated from homepage branch">
+      <created>1687249431857</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1687249431857</updated>
+    </task>
+    <task id="LOCAL-00005" summary="send searchDto get flights using axios">
+      <created>1687263566701</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1687263566701</updated>
+    </task>
+    <task id="LOCAL-00006" summary="updated from azureb2c branch">
+      <created>1687273456386</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1687273456386</updated>
+    </task>
+    <task id="LOCAL-00007" summary="updated flight redux">
+      <created>1687447416165</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1687447416165</updated>
+    </task>
+    <task id="LOCAL-00008" summary="updated booking stepper">
+      <created>1687448435486</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1687448435486</updated>
+    </task>
+    <task id="LOCAL-00009" summary="changed action's name, display details flight base on id">
+      <created>1687625254813</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1687625254813</updated>
+    </task>
+    <task id="LOCAL-00010" summary="updated from steppers branch">
+      <created>1687628402389</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1687628402389</updated>
+    </task>
+    <task id="LOCAL-00011" summary="updated steppers">
+      <option name="closed" value="true" />
+      <created>1687686345285</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1687686345285</updated>
+    </task>
+    <task id="LOCAL-00012" summary="refactor select flight">
+      <option name="closed" value="true" />
+      <created>1687690618932</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1687690618932</updated>
+    </task>
+    <task id="LOCAL-00013" summary="display details base on id of inbound and outbound flights">
+      <option name="closed" value="true" />
+      <created>1687772354586</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1687772354587</updated>
+    </task>
+    <task id="LOCAL-00014" summary="keep selected flight when user clicks to view another flight">
+      <option name="closed" value="true" />
+      <created>1687879865815</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1687879865815</updated>
+    </task>
+    <task id="LOCAL-00015" summary="updated manage-booking">
+      <option name="closed" value="true" />
+      <created>1687880980017</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1687880980017</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix display flights available in a day">
+      <option name="closed" value="true" />
+      <created>1688144091039</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1688144091039</updated>
+    </task>
+    <task id="LOCAL-00017" summary="updated manage-booking">
+      <option name="closed" value="true" />
+      <created>1688144939606</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1688144939606</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="40f31e31-3a2b-47d0-9841-8a0afec9b76b" value="TOOL_WINDOW" />
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
+        <entry key="40f31e31-3a2b-47d0-9841-8a0afec9b76b">
+          <value>
+            <State />
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State>
@@ -271,7 +371,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/NganBranch" />
+                        <option value="NganBranch" />
                       </list>
                     </value>
                   </entry>
@@ -286,13 +386,32 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added firebase for sign-in, sign-up member" />
     <MESSAGE value="commit changes from main" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit changes from main" />
+    <MESSAGE value="added stepper booking form" />
+    <MESSAGE value="updated from homepage branch" />
+    <MESSAGE value="send searchDto get flights using axios" />
+    <MESSAGE value="updated from azureb2c branch" />
+    <MESSAGE value="updated flight redux" />
+    <MESSAGE value="updated booking stepper" />
+    <MESSAGE value="changed action's name, display details flight base on id" />
+    <MESSAGE value="updated from steppers branch" />
+    <MESSAGE value="updated steppers" />
+    <MESSAGE value="refactor select flight" />
+    <MESSAGE value="display details base on id of inbound and outbound flights" />
+    <MESSAGE value="keep selected flight when user clicks to view another flight" />
+    <MESSAGE value="fix display flights available in a day" />
+    <MESSAGE value="updated manage-booking" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated manage-booking" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.apache.catalina.connector.RequestFacade" memberName="request" />
+        <PinnedItemInfo parentTag="com.aptech.apiv1.dto.GroupBooking" memberName="bookings" />
       </pinned-members>
     </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

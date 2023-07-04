@@ -1,0 +1,43 @@
+Index: src-code/ui/src/azure/policies.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/**\r\n * Enter here the user flows and custom policies for your B2C application\r\n * To learn more about user flows, visit: https://docs.microsoft.com/en-us/azure/active-directory-b2c/user-flow-overview\r\n * To learn more about custom policies, visit: https://docs.microsoft.com/en-us/azure/active-directory-b2c/custom-policy-overview\r\n */\r\nexport const b2cPolicies = {\r\n  names: {\r\n    signUpSignIn: 'B2C_1_signin_or_signup',\r\n    // forgotPassword: 'B2C_1_reset_v3',\r\n    editProfile: 'B2C_1_editprofile1'\r\n  },\r\n  authorities: {\r\n    signUpSignIn: {\r\n      authority: 'https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/B2C_1_signin_or_signup'\r\n    },\r\n    // forgotPassword: {\r\n    //     authority: 'https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/B2C_1_reset_v3',\r\n    // },\r\n    editProfile: {\r\n      authority: 'https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/B2C_1_editprofile1'\r\n    }\r\n  },\r\n  authorityDomain: 's4prj.b2clogin.com'\r\n};\r\n
+===================================================================
+diff --git a/src-code/ui/src/azure/policies.js b/src-code/ui/src/azure/policies.js
+--- a/src-code/ui/src/azure/policies.js	
++++ b/src-code/ui/src/azure/policies.js	
+@@ -11,14 +11,14 @@
+   },
+   authorities: {
+     signUpSignIn: {
+-      authority: 'https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/B2C_1_signin_or_signup'
++      authority: 'https://s4project.b2clogin.com/s4prj.onmicrosoft.com/B2C_1_signin_or_signup'
+     },
+     // forgotPassword: {
+     //     authority: 'https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/B2C_1_reset_v3',
+     // },
+     editProfile: {
+-      authority: 'https://s4prj.b2clogin.com/s4prj.onmicrosoft.com/B2C_1_editprofile1'
++      authority: 'https://s4project.b2clogin.com/s4prj.onmicrosoft.com/B2C_1_editprofile1'
+     }
+   },
+-  authorityDomain: 's4prj.b2clogin.com'
++  authorityDomain: 's4project.b2clogin.com'
+ };
+Index: src-code/ui/src/azure/apiConfig.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>// The current application coordinates were pre-registered in a B2C tenant.\r\nconst apiConfig = {\r\n  //\r\n  // b2cScopes: ['https://s4prj.onmicrosoft.com/api-v1/React'],\r\n  b2cScopes: ['https://login.microsoftonline.com/0ad81327-6a42-41fa-b79d-bb6aea2c17d9/oauth2/v2.0/token'],\r\n  webApi: 'https://s4prj.onmicrosoft.com/api-v1'\r\n  // webApi: 'http://localhost:8080/api-v1/guest/airport/getAll'\r\n};\r\n\r\nexport default apiConfig;\r\n
+===================================================================
+diff --git a/src-code/ui/src/azure/apiConfig.js b/src-code/ui/src/azure/apiConfig.js
+--- a/src-code/ui/src/azure/apiConfig.js	
++++ b/src-code/ui/src/azure/apiConfig.js	
+@@ -3,7 +3,7 @@
+   //
+   // b2cScopes: ['https://s4prj.onmicrosoft.com/api-v1/React'],
+   b2cScopes: ['https://login.microsoftonline.com/0ad81327-6a42-41fa-b79d-bb6aea2c17d9/oauth2/v2.0/token'],
+-  webApi: 'https://s4prj.onmicrosoft.com/api-v1'
++  webApi: 'https://s4project.onmicrosoft.com/api'
+   // webApi: 'http://localhost:8080/api-v1/guest/airport/getAll'
+ };
+ 
