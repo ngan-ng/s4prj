@@ -1,11 +1,8 @@
-/* eslint-disable no-unused-vars */
-import { Box, FormControl, FormControlLabel, FormLabel, Grid, Paper, Radio, RadioGroup, Snackbar, Typography } from '@mui/material';
+import { Box, FormControl, FormControlLabel, FormLabel, Grid, Paper, Radio, RadioGroup, Typography } from '@mui/material';
 import axiosCall from 'api/callAxios';
 import dayjs from 'dayjs';
 import React, { Fragment, useState, useRef, useEffect, useLayoutEffect } from 'react';
-import { forwardRef } from 'react';
 import { useCallback } from 'react';
-import MuiAlert from '@mui/material/Alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectBookingByPnr } from 'store/booking/booking.selector';
 import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
@@ -13,9 +10,6 @@ import { fetchSeatsStart, updateSeatSuccess } from 'store/seat/seat.action';
 import { isFetchingSeats, selectSeats } from 'store/seat/seat.selector';
 import Seatmap from 'ui-component/client/Seatmap';
 
-const Alert = forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
 const SeatAssignment = () => {
   const dispatch = useDispatch();
   const seats = useSelector(selectSeats);
@@ -23,10 +17,8 @@ const SeatAssignment = () => {
   const selectMBObj = useSelector(selectManageBookingObj);
   const managingPax = selectMBObj.pax;
   const bookings = useSelector(selectBookingByPnr);
-  const mySeats = seats.filter(
-    (s) => managingPax.includes(parseInt(s.bookingId)) && (Date.now() - new Date(s.selectedAt)) / (60 * 1000) < 10
-  );
-
+  const mySeats = seats.filter((s) => managingPax.includes(parseInt(s.bookingId)));
+  console.log(mySeats);
   // get the first None-Seat pax (pax have null seat-assignment)
   let initial_paxInAaction = managingPax.filter((pId) => mySeats.filter((s) => s.bookingId == pId)[0]?.bookingId != pId)[0];
   const [currentPaxId, setCurrentPaxId] = useState(initial_paxInAaction === undefined ? 0 : initial_paxInAaction);
@@ -40,7 +32,10 @@ const SeatAssignment = () => {
   }, []);
   const handleChooseSeat = async (seat) => {
     const start = Date.now();
-    handleOpenSnackbar();
+    if (currentPaxId === 0) {
+      alert('Please select passenger you want to assign a seat to');
+      return;
+    }
     try {
       let txtAction = '';
       let txtSeatId = seat.id;
@@ -98,6 +93,7 @@ const SeatAssignment = () => {
           break;
         }
         default:
+          getSeats();
           console.log(resp.data);
           break;
       }
@@ -107,11 +103,6 @@ const SeatAssignment = () => {
       console.log(error);
     }
   };
-
-  const handleSeatApi = useCallback(async (selectSeatDto) => {
-    console.log('inside handleSeatApi');
-    return await axiosCall.post('/api-v1/guest/seat/handle', selectSeatDto);
-  }, []);
 
   const getSeats = useCallback(async () => {
     dispatch(fetchSeatsStart(selectMBObj.flightId));
@@ -133,26 +124,15 @@ const SeatAssignment = () => {
     setHeightRef(ref.current.offsetHeight);
   }, []);
 
-  const [openSnackbar, setOpenSnackbar] = React.useState(false);
-
-  const handleOpenSnackbar = () => {
-    setOpenSnackbar(true);
-  };
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
   return (
     <Fragment>
-      <Grid direction={{ xs: 'column-reverse', md: 'row' }} marginY={2} container spacing={2} component={'div'} height="stretch">
+      <Grid direction={{ xs: 'column', md: 'row' }} marginY={2} container spacing={2} component={'div'} height="stretch">
         <Grid item xs={12} md={4}>
           <Paper elevation={4} sx={{ height: { xs: 'stretch', md: heightRef > 200 ? heightRef : 'stretch' }, p: 4, borderRadius: 1 }}>
             <FormControl fullWidth>
               <FormLabel id="currentPaxId">Passengers</FormLabel>
               <RadioGroup
+                direction="column"
                 defaultValue={currentPaxId}
                 name="currentPaxId"
                 value={currentPaxId}
@@ -169,16 +149,20 @@ const SeatAssignment = () => {
                         key={b.id}
                         label={b.firstName + ', ' + b.lastName}
                       />
-                      <Typography>{mySeats.find((seat) => seat.bookingId == b.id)?.seatNumber}</Typography>
+                      <Typography>
+                        {
+                          mySeats.find(
+                            (seat) =>
+                              seat.bookingId == b.id &&
+                              (seat.status === 'OCCUPIED' ||
+                                (seat.status === 'TEMP' && (Date.now() - new Date(seat.selectedAt)) / (60 * 1000) < 10))
+                          )?.seatNumber
+                        }
+                      </Typography>
                     </Box>
                   ))}
               </RadioGroup>
             </FormControl>
-            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-              <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
-                This is a success message!
-              </Alert>
-            </Snackbar>
           </Paper>
         </Grid>
         <Grid item xs={12} md={8} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -191,6 +175,11 @@ const SeatAssignment = () => {
       </Grid>
     </Fragment>
   );
+};
+
+export const handleSeatApi = async (selectSeatDto) => {
+  console.log('inside handleSeatApi');
+  return await axiosCall.post('/api-v1/guest/seat/handle', selectSeatDto);
 };
 
 export default SeatAssignment;

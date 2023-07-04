@@ -2,6 +2,7 @@
 import { Box, Grid, Typography } from '@mui/material';
 import Seat from './Seat';
 import React from 'react';
+import cockpit from 'assets/images/cockpit.jpg';
 
 const Seatmap = ({ seats, onHandleSeat }) => {
   let rows = [];
@@ -39,61 +40,10 @@ const Seatmap = ({ seats, onHandleSeat }) => {
       }}
     >
       {/* /// COCKPIT DECORATION /// */}
-      <Grid container spacing={2} direction="row" sx={{ pl: { md: 2, xs: 0 }, ml: 3, mt: 1, mb: 3 }}>
-        <Grid item xs={1}></Grid>
-        <Grid
-          xs={5}
-          item
-          sx={{
-            borderTop: 1,
-            pt: 5,
-            transform: 'skewY(-10deg)',
-            color: 'gray',
-            height: 20,
-            borderTopLeftRadius: '120%',
-            borderTopRightRadius: 0
-          }}
-        ></Grid>
-        <Grid
-          xs={5}
-          item
-          sx={{
-            borderTop: 1,
-            pt: 5,
-            transform: 'skewY(10deg)',
-            color: 'gray',
-            height: 20,
-            borderTopRightRadius: '120%',
-            borderTopLeftRadius: 0
-          }}
-        ></Grid>
-        <Grid item xs={1}></Grid>
-      </Grid>
-      <Grid container spacing={2} direction="row" sx={{ pl: { md: 2, xs: 0 }, ml: 3, mb: 5 }}>
-        <Grid item xs={1}></Grid>
-        <Grid
-          xs={5}
-          item
-          sx={{
-            transform: 'skewY(-10deg)',
-            bgcolor: 'gray',
-            height: 40,
-            borderTopLeftRadius: '120%',
-            borderTopRightRadius: 0
-          }}
-        ></Grid>
-        <Grid
-          xs={5}
-          item
-          sx={{
-            transform: 'skewY(10deg)',
-            bgcolor: 'gray',
-            height: 40,
-            borderTopRightRadius: '120%',
-            borderTopLeftRadius: 0
-          }}
-        ></Grid>
-        <Grid item xs={1}></Grid>
+      <Grid container direction="row" sx={{ pl: { sm: 3, xs: 1 }, ml: 1, mb: 3 }}>
+        <Grid item xs={12}>
+          <img src={cockpit} alt="cockpit" height={128} width="100%" />
+        </Grid>
       </Grid>
       {/* /// END COCKPIT DECORATION /// */}
       {/* /// ROW LABEL DECORATION /// */}
