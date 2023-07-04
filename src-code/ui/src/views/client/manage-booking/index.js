@@ -1,15 +1,19 @@
+/* eslint-disable no-unused-vars */
 import { Box, Button, Container, Grid } from '@mui/material';
 import { useEffect, useState, Fragment } from 'react';
 import S4prjSteppers from 'ui-component/client/S4prjSteppers';
 import { StepperType } from 'ui-component/client/S4prjSteppers/stepper.type';
 import SelectFlight from './SelectFlight';
 import SelectPax from './SelectPax';
-import SeatAssignment from './SeatAssignment';
+import SeatAssignment, { handleSeatApi } from './SeatAssignment';
 import ImportantNotices from './ImportantNotices';
 import BoardingPass from './BoardingPass';
 import { useSelector } from 'react-redux';
 import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
 import { selectSeats } from 'store/seat/seat.selector';
+import { ReactComponent as NextBtnFlightIcon } from 'assets/images/icons/animate-flight-depart.svg';
+import { useRef } from 'react';
+import { useLayoutEffect } from 'react';
 
 const ManageBooking = () => {
   const manageStepper = StepperType.MANAGE_BOOKING;
@@ -17,9 +21,28 @@ const ManageBooking = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [validActiveStep, setValidActiveStep] = useState(false);
   const selectMBObj = useSelector(selectManageBookingObj);
+  const heightBtnRef = useRef(null);
 
   const handleNext = () => {
     if (validActiveStep) {
+      if (activeStep === 2) {
+        const mySeats = seats.filter(
+          (s) => selectMBObj.pax.includes(s.bookingId) && s.status === 'TEMP' && (Date.now() - new Date(s.selectedAt)) / (60 * 1000) < 10
+        );
+        let selectSeatDto = {
+          id: 0,
+          bookingId: 0,
+          action: 'complete'
+        };
+        try {
+          mySeats.map((mySeat) => {
+            handleSeatApi({ ...selectSeatDto, id: mySeat.id, bookingId: mySeat.bookingId });
+          });
+        } catch (error) {
+          alert('Seats assignment not completed, please try again!');
+          return;
+        }
+      }
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else {
       alert('');
@@ -28,7 +51,7 @@ const ManageBooking = () => {
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
-  const handleFinished = () => { };
+  const handleFinished = () => {};
 
   const ManageBookingContent = () => {
     switch (activeStep) {
@@ -58,10 +81,8 @@ const ManageBooking = () => {
           setValidActiveStep(Object.keys(selectMBObj.pax).length > 0);
           break;
         case 2: {
-          const mySeats = seats.filter(
-            (s) => Object.hasOwn(selectMBObj.pax, s.bookingId) && (Date.now() - new Date(s.selectedAt)) / (60 * 1000) < 10
-          );
-          setValidActiveStep(mySeats.length == Object.keys(selectMBObj.pax).length);
+          const mySeatsLength = seats.filter((s) => selectMBObj.pax.includes(s.bookingId)).length;
+          setValidActiveStep(mySeatsLength == selectMBObj.pax.length);
           break;
         }
         case 3:
@@ -75,6 +96,11 @@ const ManageBooking = () => {
       console.log(error);
     }
   }, [activeStep, seats, selectMBObj]);
+
+  const [heightBtn, setHeightBtn] = useState(0);
+  useLayoutEffect(() => {
+    setHeightBtn(heightBtnRef.current.offsetHeight);
+  }, []);
   return (
     <>
       <S4prjSteppers innerType={manageStepper} activeStep={activeStep} />
@@ -102,15 +128,16 @@ const ManageBooking = () => {
                 <Grid item xs={12}>
                   <ManageBookingContent />
                 </Grid>
-                <Grid item>
+                <Grid item ref={heightBtnRef}>
                   <Button size="large" variant="outlined" color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
                     Back
                   </Button>
                 </Grid>
-                <Grid item>
+                <Grid item sx={{ display: 'flex', alignItems: 'center', height: heightBtn }}>
                   <Button disabled={!validActiveStep} size="large" variant="contained" onClick={handleNext} color="secondary">
                     {activeStep === manageStepper.steppers.length - 1 ? 'Finish' : 'Next'}
                   </Button>
+                  {validActiveStep && <NextBtnFlightIcon fontSize="small" style={{ color: 'white', m: 0, p: 0 }} />}
                 </Grid>
               </Grid>
             </Fragment>
@@ -120,4 +147,5 @@ const ManageBooking = () => {
     </>
   );
 };
+
 export default ManageBooking;

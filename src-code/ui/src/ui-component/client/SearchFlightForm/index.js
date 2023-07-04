@@ -127,7 +127,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
         isValid: isValid,
         errors: errors || {}
       }));
-    }, 200);
+    }, 50);
 
     return () => {
       clearTimeout(timeout);
