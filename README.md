@@ -14,8 +14,6 @@ Project title: Unknown
 
              Nguyen Ngoc Kim Ngan (Ngannkts2106023@fpt.edu.vn) Student1317115
              
-             Trinh Gia Bao (...@fpt.edu.vn) Student1275081
-             
 ============================
 
 github report link: 
