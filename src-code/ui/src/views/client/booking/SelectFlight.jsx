@@ -101,7 +101,7 @@ const SelectFlight = ({ departId, returnId }) => {
                       flexDirection: 'column',
                       alignItems: 'center',
                       '& > *': {
-                        m: 1
+                        m: 3
                       }
                     }}
                   >
@@ -111,8 +111,8 @@ const SelectFlight = ({ departId, returnId }) => {
                   </Box>
                 </Grid>
 
-                <Box sx={{ minWidth: 275 }}>
-                  <FormControl>
+                <Grid item xs={12} md={12}>
+                  <FormControl fullWidth>
                     <RadioGroup
                       aria-labelledby="demo-controlled-radio-buttons-group"
                       name="controlled-radio-buttons-group"
@@ -120,22 +120,22 @@ const SelectFlight = ({ departId, returnId }) => {
                       onChange={handleRadioDepart}
                     >
                       {obFlights.map((item, index) => (
-                        <Card key={item.id} variant="outlined">
+                        <Card key={item.id} variant="outlined" sx={{ mb: 3 }}>
                           <CardContent>
-                            <Grid container direction="row" justifyContent="space-between" alignItems="center">
-                              <Grid item>
+                            <Grid container xs={12} md={12} direction="row" justifyContent="space-between" alignItems="center">
+                              <Grid item md={4}>
                                 <Typography>{item.origin.location}</Typography>
                                 <Typography>{item.origin.iata_code}</Typography>
                                 <Typography>{item.std}</Typography>
                                 <Typography>{item.std}</Typography>
                               </Grid>
-                              <Grid item>
+                              <Grid item md={4}>
                                 <Typography>{item.destination.location}</Typography>
                                 <Typography>{item.destination.iata_code}</Typography>
                                 <Typography>{item.std}</Typography>
                                 <Typography>{item.duration}</Typography>
                               </Grid>
-                              <Grid item>
+                              <Grid item md={2}>
                                 <FormControlLabel
                                   key={item.id}
                                   value={item.id}
@@ -152,7 +152,7 @@ const SelectFlight = ({ departId, returnId }) => {
                       ))}
                     </RadioGroup>
                   </FormControl>
-                </Box>
+                </Grid>
 
                 {ibFlights.length != 0 ? (
                   <Fragment>
@@ -168,7 +168,7 @@ const SelectFlight = ({ departId, returnId }) => {
                         flexDirection: 'column',
                         alignItems: 'center',
                         '& > *': {
-                          m: 1
+                          m: 3
                         }
                       }}
                     >
@@ -176,8 +176,8 @@ const SelectFlight = ({ departId, returnId }) => {
                         <Button>{arrivalDay}</Button>
                       </ButtonGroup>
                     </Box>
-                    <Box sx={{ minWidth: 275 }}>
-                      <FormControl>
+                    <Grid item xs={12} md={12}>
+                      <FormControl fullWidth>
                         <RadioGroup
                           aria-labelledby="demo-controlled-radio-buttons-group"
                           name="controlled-radio-buttons-group"
@@ -185,7 +185,7 @@ const SelectFlight = ({ departId, returnId }) => {
                           onChange={handleRadioArrival}
                         >
                           {ibFlights.map((item, index) => (
-                            <Card key={item.id} variant="outlined">
+                            <Card key={item.id} variant="outlined" sx={{ mb: 3 }}>
                               <CardContent>
                                 <Grid container direction="row" justifyContent="space-between" alignItems="center">
                                   <Grid item>
@@ -217,7 +217,7 @@ const SelectFlight = ({ departId, returnId }) => {
                           ))}
                         </RadioGroup>
                       </FormControl>
-                    </Box>
+                    </Grid>
                   </Fragment>
                 ) : (
                   <div></div>

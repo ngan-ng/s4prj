@@ -13,15 +13,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import {
-  experimental_extendTheme as materialExtendTheme,
-  Experimental_CssVarsProvider as MaterialCssVarsProvider,
-  THEME_ID as MATERIAL_THEME_ID
-} from '@mui/material/styles';
-
 import validate from 'validate.js';
-
-const materialTheme = materialExtendTheme();
+import { Fragment } from 'react';
 
 const schema = {
   title: {
@@ -79,59 +72,13 @@ const Passengers = () => {
     title: '',
     firstName: '',
     lastName: '',
-    dob: '',
-    mobile: '',
-    email: ''
+    dob: ''
   };
 
-  const [validation, setValidation] = useState({
+  const initialValidation = {
     touched: {},
     errors: {},
     isValid: false
-  });
-
-  const [passenger, setPassenger] = useState(initialPassenger);
-
-  const [title, setTitle] = useState('');
-
-  useEffect(() => {
-    const valid = setTimeout(() => {
-      const errors = validate(passenger, schema);
-      //console.log(errors);
-
-      setValidation((prev) => ({
-        ...prev,
-        errors: errors || {},
-        isValid: errors ? false : true
-      }));
-    }, 1000);
-
-    return () => {
-      clearTimeout(valid);
-    };
-  }, [passenger]);
-
-  const handleTitleChange = (event) => {
-    setTitle(event.target.value);
-  };
-
-  const handleChange = (event) => {
-    setPassenger((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.type === 'checkbox' ? event.target.checked : event.target.value
-    }));
-
-    setValidation((prev) => ({
-      ...prev,
-      touched: {
-        ...prev.touched,
-        [event.target.name]: true
-      }
-    }));
-  };
-
-  const hasError = (field) => {
-    return validation.touched[field] && validation.errors[field] ? true : false;
   };
 
   const paxQty = JSON.parse(localStorage.getItem('paxQty'));
@@ -139,21 +86,125 @@ const Passengers = () => {
   const chd = Object.values(paxQty)[1];
   const inf = Object.values(paxQty)[2];
 
-  var formChd = [];
-  var formAdl = [];
+  let initialBookings = [];
+  let initialValidations = [];
 
-  const renderAdlComponent = () => {
-    for (let i = 1; i <= adl; i++) {
-      formAdl.push(
-        <Grid container>
+  for (let i = 0; i < adl; i++) {
+    // if (i === 0) {
+    //   initialBookings = [...initialBookings, { ...initialPassenger, gender: 'ADL', email: '', mobile: '' }];
+    // } else {
+    initialBookings = [...initialBookings, { ...initialPassenger, gender: 'ADL' }];
+    // }
+    initialValidations = [...initialValidations, { ...initialValidation }];
+  }
+  for (let i = 0; i < chd; i++) {
+    initialBookings = [...initialBookings, { ...initialPassenger, gender: 'CHD' }];
+    initialValidations = [...initialValidations, { ...initialValidation }];
+  }
+  for (let i = 0; i < inf; i++) {
+    initialBookings = [...initialBookings, { ...initialPassenger, gender: 'INF' }];
+    initialValidations = [...initialValidations, { ...initialValidation }];
+  }
+
+  const [bookings, setBookings] = useState(initialBookings);
+
+  const [validations, setValidations] = useState(initialValidations);
+
+  const handleChange = (event, index, type) => {
+    let dataBooking = [...bookings];
+    console.log('dataBooking', dataBooking);
+    let dataValidate = [...validations];
+
+    console.log('dataValidate', dataValidate);
+
+    let fieldName;
+
+    if (type === 'dob') {
+      //fieldName = type;
+      dataBooking[index][type] = event;
+      setBookings(dataBooking);
+
+      setValidations((prev) => ({
+        ...prev,
+        touched: {
+          ...prev.touched,
+          [type]: true
+        }
+      }));
+    } else {
+      fieldName = event.target.name;
+      dataBooking[index][event.target.name] = event.target.value;
+      setBookings(dataBooking);
+
+      setValidations((prev) => ({
+        ...prev,
+        touched: {
+          ...prev.touched,
+          [event.target.name]: true
+        }
+      }));
+      console.log('validations', validations);
+    }
+  };
+
+  console.log('bookings', bookings);
+  console.log('validations', validations);
+
+  useEffect(() => {
+    const valid = setTimeout(() => {
+      var err = [];
+      bookings.map((b, index) => {
+        console.log('b', b);
+        const errors = validate(b, schema);
+        err = errors;
+        validations.map((v, index) => {
+          console.log('v', v);
+          console.log('err', err);
+
+          setValidations((prev) => ({
+            ...prev[index],
+            errors: err || {},
+            isValid: err ? false : true
+          }));
+
+          // index
+        });
+      });
+    }, 0);
+
+    return () => {
+      clearTimeout(valid);
+    };
+  }, [bookings, validations]);
+
+  const hasError = (field, index) => {
+    console.log(index);
+    return validations[index].touched[field] && validations[index].errors[field] ? true : false;
+  };
+
+  return (
+    <Fragment>
+      {bookings.map((pax, index) => (
+        <Grid key={index} container sx={{ marginBottom: 3 }}>
           <Grid item md={12}>
             <Paper elevation={4} sx={{ p: 3, borderRadius: 1 }}>
-              <Typography sx={{ fontSize: 24 }}>Passenger</Typography>
+              <Typography sx={{ fontSize: 24 }}>Passenger {index + 1}</Typography>
               <Grid container spacing={2} sx={{ py: 3 }}>
                 <Grid item xs={12} md={4}>
-                  <FormControl sx={{ minWidth: 240 }}>
+                  <FormControl
+                    fullWidth
+                    error={hasError('title', index)}
+                    helpertext={hasError('title', index) ? validations[index].errors.title[0] : null}
+                  >
                     <InputLabel id="title-label">Title</InputLabel>
-                    <Select labelId="title-label" id="title" value={title} label="Title" onChange={handleTitleChange}>
+                    <Select
+                      variant="filled"
+                      labelId="title-label"
+                      value={pax.title}
+                      label="Title"
+                      onChange={(event) => handleChange(event, index)}
+                      name="title"
+                    >
                       <MenuItem value="MR">MR</MenuItem>
                       <MenuItem value="MS">MS</MenuItem>
                       <MenuItem value="MISS">MISS</MenuItem>
@@ -164,14 +215,13 @@ const Passengers = () => {
                 <Grid item xs={12} md={8}>
                   <TextField
                     fullWidth
-                    id="firstName"
-                    name={'firstName' + i}
+                    name="firstName"
                     label="First Name"
-                    variant="outlined"
-                    value={passenger.firstName}
-                    onChange={handleChange}
-                    error={hasError('firstName')}
-                    helperText={hasError('firstName') ? validation.errors.firstName[0] : null}
+                    variant="filled"
+                    value={pax.firstName}
+                    onChange={(event) => handleChange(event, index)}
+                    error={hasError('firstName', index)}
+                    helperText={hasError('firstName', index) ? validations[index].errors.firstName[0] : null}
                   />
                 </Grid>
               </Grid>
@@ -179,126 +229,63 @@ const Passengers = () => {
                 <Grid item xs={12} md={4}>
                   <TextField
                     fullWidth
-                    id="lastName"
-                    name={'lastName' + i}
+                    name="lastName"
                     label="Last Name"
-                    variant="outlined"
-                    value={passenger.lastName}
-                    onChange={handleChange}
-                    error={hasError('lastName')}
-                    helperText={hasError('lastName') ? validation.errors.lastName[0] : null}
+                    variant="filled"
+                    value={pax.lastName}
+                    onChange={(event) => handleChange(event, index)}
+                    error={hasError('lastName', index)}
+                    helperText={hasError('lastName', index) ? validations[index].errors.lastName[0] : null}
                   />
                 </Grid>
                 <Grid item xs={12} md={8}>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker defaultValue={dayjs(new Date())} value={passenger.dob} name={'dob' + i} onChange={handleChange} />
+                    <DatePicker
+                      variant="filled"
+                      defaultValue={dayjs(new Date())}
+                      value={pax.dob}
+                      name="dob"
+                      onChange={(event) => handleChange(event, index, 'dob')}
+                    />
                   </LocalizationProvider>
                 </Grid>
               </Grid>
-              <Typography sx={{ fontSize: 24, paddingTop: 3 }}>Contact Information</Typography>
-              <Grid container spacing={2} sx={{ py: 3 }}>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    fullWidth
-                    id="mobile"
-                    name={'mobile' + i}
-                    label="Mobile"
-                    variant="outlined"
-                    value={passenger.mobile}
-                    onChange={handleChange}
-                    error={hasError('mobile')}
-                    helperText={hasError('mobile') ? validation.errors.mobile[0] : null}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <TextField
-                    fullWidth
-                    id="email"
-                    name={'email' + i}
-                    label="Email"
-                    variant="outlined"
-                    value={passenger.email}
-                    onChange={handleChange}
-                    error={hasError('email')}
-                    helperText={hasError('email') ? validation.errors.email[0] : null}
-                  />
-                </Grid>
-              </Grid>
+              {index == 0 && (
+                <Fragment>
+                  <Typography sx={{ fontSize: 24, paddingTop: 3 }}>Contact Information</Typography>
+                  <Grid container spacing={2} sx={{ py: 3 }}>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        fullWidth
+                        name="mobile"
+                        label="Mobile"
+                        variant="filled"
+                        value={pax.mobile}
+                        onChange={(event) => handleChange(event, index)}
+                        error={hasError('mobile', index)}
+                        helperText={hasError('mobile', index) ? validations[index].errors.mobile[0] : null}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        fullWidth
+                        name="email"
+                        label="Email"
+                        variant="filled"
+                        value={pax.email}
+                        onChange={(event) => handleChange(event, index)}
+                        error={hasError('email', index)}
+                        helperText={hasError('email', index) ? validations[index].errors.email[0] : null}
+                      />
+                    </Grid>
+                  </Grid>
+                </Fragment>
+              )}
             </Paper>
           </Grid>
         </Grid>
-      );
-    }
-
-    formAdl.map((item, index) => (
-      <Box key={index} sx={{ marginBottom: 3 }}>
-        {item}
-      </Box>
-    ));
-
-    return formAdl;
-  };
-
-  // const renderChdComponent = () => {
-  //   for (let i = 1; i <= chd; i++) {
-  //     formChd.push(
-  //       <Box>
-  //         <Grid container>
-  //           <Grid item md={12}>
-  //             <Paper elevation={4} sx={{ p: 3, borderRadius: 1 }}>
-  //               <Typography sx={{ fontSize: 24 }}>Child</Typography>
-  //               <Grid container spacing={2} sx={{ py: 3 }}>
-  //                 <Grid item xs={12} md={4}>
-  //                   <FormControl sx={{ minWidth: 240 }}>
-  //                     <InputLabel id="title-label">Title</InputLabel>
-  //                     <Select labelId="title-label" id="title" value={title} label="Title" onChange={handleTitleChange}>
-  //                       <MenuItem value="MR">MR</MenuItem>
-  //                       <MenuItem value="MS">MS</MenuItem>
-  //                       <MenuItem value="MISS">MISS</MenuItem>
-  //                       <MenuItem value="MSTR">MSTR</MenuItem>
-  //                     </Select>
-  //                   </FormControl>
-  //                 </Grid>
-  //                 <Grid item xs={12} md={8}>
-  //                   <TextField fullWidth id="firstName" label="First Name" variant="outlined" />
-  //                 </Grid>
-  //               </Grid>
-  //               <Grid container spacing={2}>
-  //                 <Grid item xs={12} md={4}>
-  //                   <TextField fullWidth id="lastName" label="Last Name" variant="outlined" />
-  //                 </Grid>
-  //                 <Grid item xs={12} md={8}>
-  //                   <LocalizationProvider dateAdapter={AdapterDayjs}>
-  //                     <DatePicker defaultValue={dayjs(new Date())} />
-  //                   </LocalizationProvider>
-  //                 </Grid>
-  //               </Grid>
-  //               <Typography sx={{ fontSize: 24, paddingTop: 3 }}>Contact Information</Typography>
-  //               <Grid container spacing={2} sx={{ py: 3 }}>
-  //                 <Grid item xs={12} md={6}>
-  //                   <TextField fullWidth id="mobile" label="Mobile" variant="outlined" />
-  //                 </Grid>
-  //                 <Grid item xs={12} md={6}>
-  //                   <TextField fullWidth id="email" label="Email" variant="outlined" />
-  //                 </Grid>
-  //               </Grid>
-  //             </Paper>
-  //           </Grid>
-  //         </Grid>
-  //       </Box>
-  //     );
-  //   }
-
-  //   formChd.map((item, index) => <div key={index}>{item}</div>);
-
-  //   return formChd;
-  // };
-
-  return (
-    <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
-      <div>{renderAdlComponent()}</div>
-      {/**{formChd != null && <div>{renderChdComponent()}</div>} */}
-    </MaterialCssVarsProvider>
+      ))}
+    </Fragment>
   );
 
   ///////////////////////////////////////////////////////////////////////
