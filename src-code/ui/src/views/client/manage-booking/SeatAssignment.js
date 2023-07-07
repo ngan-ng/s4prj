@@ -18,7 +18,7 @@ const SeatAssignment = () => {
   const managingPax = selectMBObj.pax;
   const bookings = useSelector(selectBookingByPnr);
   const mySeats = seats.filter((s) => managingPax.includes(parseInt(s.bookingId)));
-  console.log(mySeats);
+
   // get the first None-Seat pax (pax have null seat-assignment)
   let initial_paxInAaction = managingPax.filter((pId) => mySeats.filter((s) => s.bookingId == pId)[0]?.bookingId != pId)[0];
   const [currentPaxId, setCurrentPaxId] = useState(initial_paxInAaction === undefined ? 0 : initial_paxInAaction);
@@ -38,7 +38,7 @@ const SeatAssignment = () => {
     }
     try {
       let txtAction = '';
-      let txtSeatId = seat.id;
+      const txtSeatId = seat.id;
       let prevSeat = seats.find((s) => s.bookingId == currentPaxId);
       if (prevSeat?.bookingId == seat.bookingId) {
         // THIS SEAT IS BEING OWNED BY THIS BOOKING (PAX)
@@ -61,7 +61,6 @@ const SeatAssignment = () => {
           // ALREADY OWNING A SEAT
           // CALL API unselect the previous Seat before select the new one
           handleSeatApi({ id: prevSeat.id, bookingId: currentPaxId, action: 'unselect' });
-          console.log('Outside handleAPI');
           const preIndex = seats.findIndex((s) => s.id == prevSeat.id);
           seats[preIndex] = { ...prevSeat, selectedAt: null, status: 'AVAILABLE', bookingId: 0 };
           txtAction = 'select';
@@ -77,7 +76,6 @@ const SeatAssignment = () => {
       switch (resp.status) {
         case 200:
         case 201: {
-          console.log(resp.data);
           if (txtAction === 'unselect') {
             let index = seats.findIndex((s) => s.id == txtSeatId);
             seats[index] = { ...seats[index], selectedAt: null, status: 'AVAILABLE', bookingId: 0 };
@@ -86,7 +84,6 @@ const SeatAssignment = () => {
             let index = seats.findIndex((s) => s.id == txtSeatId);
             seats[index] = { ...seats[index], selectedAt: selectedAt, status: 'TEMP', bookingId: currentPaxId };
           }
-          // console.log(seats);
           dispatch(updateSeatSuccess(seats));
           console.log('END IN: ');
           console.log(Date.now() - start);
@@ -177,7 +174,7 @@ const SeatAssignment = () => {
 };
 
 export const handleSeatApi = async (selectSeatDto) => {
-  console.log('inside handleSeatApi');
+  // console.log('inside handleSeatApi');
   return await axiosCall.post('/api-v1/guest/seat/handle', selectSeatDto);
 };
 
