@@ -42,7 +42,7 @@ public class CreateSeatsOnFlight {
             for (int j = colStart; j <= colEnd; j++) {
                 SeatStatus status = SeatStatus.AVAILABLE;
                 if(isSelected(i, j, arrI, arrJ)){
-                    status = SeatStatus.SELECTED;
+                    status = SeatStatus.OCCUPIED;
                 }
                 String r = i < 10 ? "0" + i : String.valueOf(i);
                 if ((j == 65 || j == 70) && i == 11) {

@@ -27,6 +27,12 @@ export const seatReducer = (state = SEAT_INITIAL_STATE, action = {}) => {
         seats: [],
         error: payload
       };
+    case SEAT_ACTION_TYPES.UPDATE_SEATS:
+      return {
+        ...state,
+        isFetching: false,
+        seats: payload
+      };
     case SEAT_ACTION_TYPES.CLEAR_SEATS:
       return SEAT_INITIAL_STATE;
     default:

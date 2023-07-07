@@ -132,7 +132,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
         isValid: isValid,
         errors: errors || {}
       }));
-    }, 200);
+    }, 50);
 
     return () => {
       clearTimeout(timeout);
@@ -230,7 +230,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
       >
         {/* Row 1: Select destinations for traveling */}
         <Grid container spacing={2}>
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={8}>
             <Airports
               origin={searchDto.origin}
               destination={searchDto.destination}
@@ -239,14 +239,14 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
               validation={validation}
             />
           </Grid>
-          <Grid item xs={12} sm={4} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <TripTypeButton isOneway={isOneway} onTypeChange={handleChange} />
           </Grid>
           {/* Row 2: Select date for traveling */}
-          <Grid item xs={12} sm={8}>
+          <Grid item xs={8}>
             <TripDate searchDto={searchDto} onChange={handleChange} validation={validation} />
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={4}>
             <SubmitButton validation={validation} onSubmit={handleSubmit} />
           </Grid>
           {/* Row 3: Select number of passengers for traveling */}

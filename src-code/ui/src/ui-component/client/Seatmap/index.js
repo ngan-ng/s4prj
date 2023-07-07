@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { Box, Grid, Typography } from '@mui/material';
 import Seat from './Seat';
 import React from 'react';
+import cockpit from 'assets/images/cockpit.jpg';
 
 const Seatmap = ({ seats, onHandleSeat }) => {
-  // console.log(seats);
   let rows = [];
   let singleRow = [];
   let block = [];
@@ -20,6 +21,7 @@ const Seatmap = ({ seats, onHandleSeat }) => {
       block = [];
     }
   });
+  console.log('REREDNER');
   return (
     <Box
       xs={12}
@@ -37,70 +39,14 @@ const Seatmap = ({ seats, onHandleSeat }) => {
         position: 'relative'
       }}
     >
-      <Grid container spacing={2} direction="row" sx={{ ml: 3, mt: 1, mb: 3 }}>
-        <Grid item xs={1}></Grid>
-        <Grid
-          xs={5}
-          item
-          sx={{
-            borderTop: 1,
-            pt: 5,
-            transform: 'skewY(-10deg)',
-            color: 'gray',
-            height: 20,
-            borderTopLeftRadius: '120%',
-            borderTopRightRadius: 0
-          }}
-        ></Grid>
-        <Grid
-          xs={5}
-          item
-          sx={{
-            borderTop: 1,
-            pt: 5,
-            transform: 'skewY(10deg)',
-            color: 'gray',
-            height: 20,
-            borderTopRightRadius: '120%',
-            borderTopLeftRadius: 0
-          }}
-        ></Grid>
-        <Grid item xs={1}></Grid>
+      {/* /// COCKPIT DECORATION /// */}
+      <Grid container direction="row" sx={{ pl: { sm: 3, xs: 1 }, ml: 1, mb: 3 }}>
+        <Grid item xs={12}>
+          <img src={cockpit} alt="cockpit" height={128} width="100%" />
+        </Grid>
       </Grid>
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        sx={{
-          ml: 3,
-          mb: 5
-        }}
-      >
-        <Grid item xs={1}></Grid>
-        <Grid
-          xs={5}
-          item
-          sx={{
-            transform: 'skewY(-10deg)',
-            bgcolor: 'gray',
-            height: 40,
-            borderTopLeftRadius: '120%',
-            borderTopRightRadius: 0
-          }}
-        ></Grid>
-        <Grid
-          xs={5}
-          item
-          sx={{
-            transform: 'skewY(10deg)',
-            bgcolor: 'gray',
-            height: 40,
-            borderTopRightRadius: '120%',
-            borderTopLeftRadius: 0
-          }}
-        ></Grid>
-        <Grid item xs={1}></Grid>
-      </Grid>
+      {/* /// END COCKPIT DECORATION /// */}
+      {/* /// ROW LABEL DECORATION /// */}
       <Grid container direction="row" sx={{ pr: 1 }} spacing={1}>
         <Grid item xs={1} sx={{ display: 'flex', alignItems: 'center', mx: 0, pr: 0 }}>
           <Typography color="grey" fontWeight="bold" fontSize={10}></Typography>
@@ -127,6 +73,7 @@ const Seatmap = ({ seats, onHandleSeat }) => {
       </Grid>
       {rows.map((singleRow, index) => (
         <Grid container key={index} sx={{ pr: 1 }} spacing={1}>
+          {/* /// WINGS DECORATION /// */}
           <Grid item xs={1} sx={{ pr: { xs: 0, md: 2 }, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             {index === 11 && (
               <>
@@ -162,7 +109,7 @@ const Seatmap = ({ seats, onHandleSeat }) => {
           <Grid item xs={5}>
             <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
               {singleRow[0].map((seat, i) => (
-                <Seat key={i} s={seat} onClickEvent={onHandleSeat} />
+                <Seat s={seat} onClickEvent={onHandleSeat} key={i} />
               ))}
             </Box>
           </Grid>
@@ -174,7 +121,7 @@ const Seatmap = ({ seats, onHandleSeat }) => {
           <Grid item xs={5}>
             <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
               {singleRow[1].map((seat, i) => (
-                <Seat key={i} s={seat} onClickEvent={onHandleSeat} />
+                <Seat s={seat} onClickEvent={onHandleSeat} key={i} />
               ))}
             </Box>
           </Grid>

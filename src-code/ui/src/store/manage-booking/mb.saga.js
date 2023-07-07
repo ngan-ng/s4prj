@@ -15,8 +15,6 @@ function* selectFlight({ payload }) {
 }
 function* selectPax({ payload }) {
   try {
-    console.log('Select Pax SAGA: ');
-    console.log(payload);
     yield mb_selectPax(payload);
   } catch (error) {
     console.log(error);

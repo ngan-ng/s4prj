@@ -33,17 +33,18 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public HttpStatus handleSeat(SelectSeatDto dto) {
         Optional<Seat> seatOpt = seatRepository.findById(dto.getId());
-        // SEAT NOT FOUND
-        if (seatOpt.isEmpty()) {
+        Optional<Booking> bookingOpt = bookingRepository.findById(dto.getBookingId());
+        // SEAT or BOOKING NOT FOUND
+        if (seatOpt.isEmpty() || bookingOpt.isEmpty()) {
             return HttpStatus.NOT_FOUND;
         }
-        Optional<Booking> bookingOpt = bookingRepository.findById(dto.getBookingId());
-        if (bookingOpt.isEmpty()) {
-            return HttpStatus.METHOD_NOT_ALLOWED;
-        }
+
         Seat seat = seatOpt.get();
         Booking booking = bookingOpt.get();
-
+        if (seat.getFlight() != booking.getFlight()) {
+            // SEAT AND BOOKING NOT THE SAME FLIGHT
+            return HttpStatus.CONFLICT;
+        }
         String action = dto.getAction().toLowerCase();
         switch (action) {
             case "select" -> {
@@ -54,18 +55,20 @@ public class SeatServiceImpl implements SeatService {
                     if (seatStatus.equalsIgnoreCase(String.valueOf(SeatStatus.TEMP))) {
                         if (seat.getSelectedAt() != null &&
                                 Duration.between(seat.getSelectedAt(), LocalDateTime.now()).toMinutes() < 10) {
+                            if(seat.getBooking().getId() != dto.getBookingId()){
                             return HttpStatus.SERVICE_UNAVAILABLE;
+                            }
                         }
                     } else {
                         // SELECTED || BLOCKED ||
                         return HttpStatus.SERVICE_UNAVAILABLE;
                     }
                 }
-                if (seat.getBooking() != null && seat.getBooking().getId() != 0) {
-                    if (seat.getBooking().getId() == dto.getBookingId()) {
-                        return HttpStatus.ACCEPTED; // ALREADY RESERVED for this Booking
-                    }
-                }
+//                if (seat.getBooking() != null && seat.getBooking().getId() != 0) {
+//                    if (seat.getBooking().getId() == dto.getBookingId()) {
+//                        return HttpStatus.ACCEPTED; // ALREADY RESERVED for this Booking
+//                    }
+//                }
                 seat.setStatus(String.valueOf(SeatStatus.TEMP));
                 seat.setBooking(booking);
                 seat.setSelectedAt(LocalDateTime.now());
@@ -90,7 +93,7 @@ public class SeatServiceImpl implements SeatService {
                 if (seat.getBooking() == null || seat.getBooking().getId() == 0 || seat.getBooking().getId() != dto.getBookingId()) {
                     return HttpStatus.METHOD_NOT_ALLOWED;
                 }
-                seat.setStatus(String.valueOf(SeatStatus.SELECTED));
+                seat.setStatus(String.valueOf(SeatStatus.OCCUPIED));
                 seatRepository.save(seat);
                 return HttpStatus.OK;
             }
@@ -108,7 +111,7 @@ public class SeatServiceImpl implements SeatService {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         modelMapper.typeMap(Seat.class, LoadSeatDto.class).addMappings(mapper ->
-                mapper.map(src -> src.getBooking().getId(), LoadSeatDto::setBooking));
+                mapper.map(src -> src.getBooking().getId(), LoadSeatDto::setBookingId));
         return seats.stream().map((seat -> modelMapper.map(seat, LoadSeatDto.class))).toList();
     }
 
