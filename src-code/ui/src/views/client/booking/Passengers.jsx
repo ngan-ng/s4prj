@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
-import { TextField } from '@mui/material';
+import { FormHelperText, TextField } from '@mui/material';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -112,10 +112,10 @@ const Passengers = () => {
 
   const handleChange = (event, index, type) => {
     let dataBooking = [...bookings];
-    console.log('dataBooking', dataBooking);
+    // console.log('dataBooking', dataBooking);
     let dataValidate = [...validations];
 
-    console.log('dataValidate', dataValidate);
+    // console.log('dataValidate', dataValidate);
 
     let fieldName;
 
@@ -124,61 +124,32 @@ const Passengers = () => {
       dataBooking[index][type] = event;
       setBookings(dataBooking);
 
-      setValidations((prev) => ({
-        ...prev,
-        touched: {
-          ...prev.touched,
-          [type]: true
-        }
-      }));
+      dataValidate[index] = { ...validations[index], touched: { [type]: true } };
+      // console.log(dataValidate);
+      setValidations(dataValidate);
     } else {
-      fieldName = event.target.name;
-      dataBooking[index][event.target.name] = event.target.value;
+      fieldName = event.target.name.split('_')[0];
+      dataBooking[index][fieldName] = event.target.value;
       setBookings(dataBooking);
 
-      setValidations((prev) => ({
-        ...prev,
-        touched: {
-          ...prev.touched,
-          [event.target.name]: true
-        }
-      }));
-      console.log('validations', validations);
+      dataValidate[index] = { ...validations[index], touched: { ...validations[index].touched, [fieldName]: true } };
+      setValidations(dataValidate);
     }
   };
 
-  console.log('bookings', bookings);
-  console.log('validations', validations);
-
   useEffect(() => {
-    const valid = setTimeout(() => {
-      var err = [];
-      bookings.map((b, index) => {
-        console.log('b', b);
-        const errors = validate(b, schema);
-        err = errors;
-        validations.map((v, index) => {
-          console.log('v', v);
-          console.log('err', err);
+    let dataValidate = [...validations];
 
-          setValidations((prev) => ({
-            ...prev[index],
-            errors: err || {},
-            isValid: err ? false : true
-          }));
-
-          // index
-        });
-      });
-    }, 0);
-
-    return () => {
-      clearTimeout(valid);
-    };
-  }, [bookings, validations]);
+    bookings.map((b, index) => {
+      const err = validate(b, schema);
+      dataValidate[index] = { ...validations[index], isValid: err ? false : true, errors: err || {} };
+      setValidations(dataValidate);
+    });
+    console.log(dataValidate);
+  }, [bookings]);
 
   const hasError = (field, index) => {
-    console.log(index);
+    // console.log(index);
     return validations[index].touched[field] && validations[index].errors[field] ? true : false;
   };
 
@@ -191,11 +162,7 @@ const Passengers = () => {
               <Typography sx={{ fontSize: 24 }}>Passenger {index + 1}</Typography>
               <Grid container spacing={2} sx={{ py: 3 }}>
                 <Grid item xs={12} md={4}>
-                  <FormControl
-                    fullWidth
-                    error={hasError('title', index)}
-                    helpertext={hasError('title', index) ? validations[index].errors.title[0] : null}
-                  >
+                  <FormControl fullWidth error={hasError('title', index)}>
                     <InputLabel id="title-label">Title</InputLabel>
                     <Select
                       variant="filled"
@@ -203,13 +170,16 @@ const Passengers = () => {
                       value={pax.title}
                       label="Title"
                       onChange={(event) => handleChange(event, index)}
-                      name="title"
+                      name={'title_' + index}
                     >
                       <MenuItem value="MR">MR</MenuItem>
                       <MenuItem value="MS">MS</MenuItem>
                       <MenuItem value="MISS">MISS</MenuItem>
                       <MenuItem value="MSTR">MSTR</MenuItem>
                     </Select>
+                    {hasError(`title_${index}`, index) && (
+                      <FormHelperText>{validations[index].errors !== undefined ? validations[index].errors.title[0] : ''}</FormHelperText>
+                    )}
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} md={8}>
@@ -287,174 +257,6 @@ const Passengers = () => {
       ))}
     </Fragment>
   );
-
-  ///////////////////////////////////////////////////////////////////////
-
-  // const initialPassenger = {
-  //   title: '',
-  //   firstName: '',
-  //   lastName: '',
-  //   dob: '',
-  //   mobile: '',
-  //   email: ''
-  // };
-
-  // const [formFields, setFormFields] = useState([initialPassenger]);
-
-  // const handleFormChange = (event, index, type) => {
-  //   let data = [...formFields];
-  //   console.log(event);
-  //   let fieldName;
-
-  //   if (type === 'dob') {
-  //     //fieldName = type;
-  //     data[index][type] = event;
-  //     setFormFields(data);
-  //   } else {
-  //     fieldName = event.target.name;
-  //     data[index][event.target.name] = event.target.value;
-  //     setFormFields(data);
-  //   }
-
-  //   setFormFields(data);
-  // };
-
-  // const submit = (e) => {
-  //   e.preventDefault();
-  //   console.log(formFields);
-  // };
-
-  // const addFields = () => {
-  //   let object = {
-  //     title: '',
-  //     firstName: '',
-  //     lastName: '',
-  //     dob: '',
-  //     mobile: '',
-  //     email: ''
-  //   };
-
-  //   setFormFields([...formFields, object]);
-  // };
-
-  // return (
-  //   <div>
-  //     <form onSubmit={submit}>
-  //       <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
-  //         {formFields.map((item, index) => {
-  //           return (
-  //             <Box key={index} sx={{ marginBottom: 3 }}>
-  //               <Grid container>
-  //                 <Grid item md={12}>
-  //                   <Paper elevation={4} sx={{ p: 3, borderRadius: 1 }}>
-  //                     <Typography sx={{ fontSize: 24 }}>Passenger</Typography>
-  //                     <Grid container spacing={2} sx={{ py: 3 }}>
-  //                       <Grid item xs={12} md={4}>
-  //                         <FormControl fullWidth>
-  //                           <InputLabel id="title-label">Title</InputLabel>
-  //                           <Select
-  //                             defaultValue=""
-  //                             labelId="title-label"
-  //                             id="title"
-  //                             label="Title"
-  //                             value={formFields.title}
-  //                             onChange={(event) => handleFormChange(event, index)}
-  //                           >
-  //                             <MenuItem name="MR" value="MR">
-  //                               MR
-  //                             </MenuItem>
-  //                             <MenuItem name="MS" value="MS">
-  //                               MS
-  //                             </MenuItem>
-  //                             <MenuItem name="MISS" value="MISS">
-  //                               MISS
-  //                             </MenuItem>
-  //                             <MenuItem name="MSTR" value="MSTR">
-  //                               MSTR
-  //                             </MenuItem>
-  //                           </Select>
-  //                         </FormControl>
-  //                       </Grid>
-  //                       <Grid item xs={12} md={8}>
-  //                         <TextField
-  //                           id="firstName"
-  //                           name="firstName"
-  //                           label="First Name"
-  //                           variant="outlined"
-  //                           value={item.firstName}
-  //                           onChange={(event) => handleFormChange(event, index)}
-  //                           // error={hasError('firstName')}
-  //                           // helperText={hasError('firstName') ? validation.errors.firstName[0] : null}
-  //                         />
-  //                       </Grid>
-  //                     </Grid>
-  //                     <Grid container spacing={2}>
-  //                       <Grid item xs={12} md={4}>
-  //                         <TextField
-  //                           fullWidth
-  //                           id="lastName"
-  //                           name="lastName"
-  //                           label="Last Name"
-  //                           variant="outlined"
-  //                           value={item.lastName}
-  //                           onChange={(event) => handleFormChange(event, index)}
-  //                           // error={hasError('lastName')}
-  //                           // helperText={hasError('lastName') ? validation.errors.lastName[0] : null}
-  //                         />
-  //                       </Grid>
-  //                       <Grid item xs={12} md={8}>
-  //                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-  //                           <DatePicker
-  //                             renderInPut={(params) => <TextField {...params} />}
-  //                             value={item.dob}
-  //                             name="dob"
-  //                             onChange={(event) => handleFormChange(event, index, 'dob')}
-  //                           />
-  //                         </LocalizationProvider>
-  //                       </Grid>
-  //                     </Grid>
-  //                     <Typography sx={{ fontSize: 24, paddingTop: 3 }}>Contact Information</Typography>
-  //                     <Grid container spacing={2} sx={{ py: 3 }}>
-  //                       <Grid item xs={12} md={6}>
-  //                         <TextField
-  //                           fullWidth
-  //                           id="mobile"
-  //                           name="mobile"
-  //                           label="Mobile"
-  //                           variant="outlined"
-  //                           value={item.mobile}
-  //                           onChange={(event) => handleFormChange(event, index)}
-  //                           // error={hasError('mobile')}
-  //                           // helperText={hasError('mobile') ? validation.errors.mobile[0] : null}
-  //                         />
-  //                       </Grid>
-  //                       <Grid item xs={12} md={6}>
-  //                         <TextField
-  //                           fullWidth
-  //                           id="email"
-  //                           name="email"
-  //                           label="Email"
-  //                           variant="outlined"
-  //                           value={item.email}
-  //                           onChange={(event) => handleFormChange(event, index)}
-  //                           // error={hasError('email')}
-  //                           // helperText={hasError('email') ? validation.errors.email[0] : null}
-  //                         />
-  //                       </Grid>
-  //                     </Grid>
-  //                   </Paper>
-  //                 </Grid>
-  //               </Grid>
-  //             </Box>
-  //           );
-  //         })}
-  //       </MaterialCssVarsProvider>
-  //     </form>
-  //     <button onClick={addFields}>Add More..</button>
-  //     <br />
-  //     <button onClick={submit}>Submit</button>
-  //   </div>
-  // );
 };
 
 export default Passengers;
