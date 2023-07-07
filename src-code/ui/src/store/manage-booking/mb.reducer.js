@@ -5,8 +5,6 @@ const MB_INITIAL_STATE = {
 };
 export const manageBookingReducer = (state = MB_INITIAL_STATE, action = {}) => {
   const { type, payload } = action;
-  // console.log('Reducer payload: ');
-  // console.log(payload);
   switch (type) {
     case MB_ACTION_TYPE.SELECT_FLIGHT:
       return {

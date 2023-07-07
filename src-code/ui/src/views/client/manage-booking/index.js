@@ -22,12 +22,18 @@ const ManageBooking = () => {
   const [validActiveStep, setValidActiveStep] = useState(false);
   const selectMBObj = useSelector(selectManageBookingObj);
   const heightBtnRef = useRef(null);
-
+  const [agree, setAgree] = useState(false);
+  const handleAgree = (e) => {
+    setAgree(e.target.checked);
+  };
   const handleNext = () => {
     if (validActiveStep) {
       if (activeStep === 2) {
         const mySeats = seats.filter(
-          (s) => selectMBObj.pax.includes(s.bookingId) && s.status === 'TEMP' && (Date.now() - new Date(s.selectedAt)) / (60 * 1000) < 10
+          (s) =>
+            selectMBObj.pax.includes(parseInt(s.bookingId)) &&
+            s.status === 'TEMP' &&
+            (Date.now() - new Date(s.selectedAt)) / (60 * 1000) < 10
         );
         let selectSeatDto = {
           id: 0,
@@ -62,7 +68,7 @@ const ManageBooking = () => {
       case 2:
         return <SeatAssignment />;
       case 3:
-        return <ImportantNotices />;
+        return <ImportantNotices onAgree={handleAgree} isAgree={agree} />;
       case 4:
         return <BoardingPass />;
       default:
@@ -81,11 +87,16 @@ const ManageBooking = () => {
           setValidActiveStep(Object.keys(selectMBObj.pax).length > 0);
           break;
         case 2: {
-          const mySeatsLength = seats.filter((s) => selectMBObj.pax.includes(parseInt(s.bookingId))).length;
-          setValidActiveStep(mySeatsLength == selectMBObj.pax.length);
+          const mySeatsLength = seats.filter(
+            (s) =>
+              selectMBObj.pax.includes(parseInt(s.bookingId)) &&
+              (s.status === 'OCCUPIED' || (s.status === 'TEMP' && (Date.now() - new Date(s.selectedAt)) / (60 * 1000) < 10))
+          ).length;
+          setValidActiveStep(mySeatsLength === selectMBObj.pax.length);
           break;
         }
         case 3:
+          setValidActiveStep(agree);
           break;
         case 4:
           break;
@@ -95,7 +106,7 @@ const ManageBooking = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [activeStep, seats, selectMBObj]);
+  }, [activeStep, agree, seats, selectMBObj]);
 
   const [heightBtn, setHeightBtn] = useState(0);
   useLayoutEffect(() => {
@@ -104,9 +115,9 @@ const ManageBooking = () => {
   return (
     <>
       <S4prjSteppers innerType={manageStepper} activeStep={activeStep} />
-      <Container>
+      <Container minHeight="90vh">
         <Box minHeight={680} sx={{ zIndex: '2', mx: { md: 4, xs: 0 } }}>
-          {activeStep === manageStepper.steppers.length ? (
+          {activeStep === manageStepper.steppers.length - 1 ? (
             <Fragment>
               <Box>
                 <ManageBookingContent />
@@ -129,7 +140,7 @@ const ManageBooking = () => {
                 </Grid>
                 <Grid item sx={{ display: 'flex', alignItems: 'center', height: heightBtn }}>
                   <Button disabled={!validActiveStep} size="large" variant="contained" onClick={handleNext} color="secondary">
-                    {activeStep === manageStepper.steppers.length - 1 ? 'Finish' : 'Next'}
+                    {activeStep === manageStepper.steppers.length - 2 ? 'Check In' : 'Next'}
                   </Button>
                   {validActiveStep && <NextBtnFlightIcon fontSize="small" style={{ color: 'white', m: 0, p: 0 }} />}
                 </Grid>
