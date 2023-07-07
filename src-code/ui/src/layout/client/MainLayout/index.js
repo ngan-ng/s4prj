@@ -35,17 +35,5 @@ const MainLayout = () => {
     </Box>
   );
 };
-// const mapStateToProps = createStructuredSelector({
-//   user: selectCurrentUser
-// });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   signInStart: () => dispatch(signinStart()),
-//   signInSuccess: (user) => dispatch(signinSuccess(user)),
-//   signInFail: (error) => dispatch(signinFailure(error)),
-
-//   signOutStart: () => dispatch(signOutStart()),
-//   signOutSuccess: () => dispatch(signOutSuccess()),
-//   signOutFail: (error) => dispatch(signOutFailure(error)),
-// });
 export default MainLayout;
