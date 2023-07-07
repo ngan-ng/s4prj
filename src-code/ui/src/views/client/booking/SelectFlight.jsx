@@ -7,23 +7,15 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFlights, selectFlightsIsFetching } from '../../../store/flight/flight.selector';
-//import dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import { Flight } from '@mui/icons-material';
-import {
-  experimental_extendTheme as materialExtendTheme,
-  Experimental_CssVarsProvider as MaterialCssVarsProvider,
-  THEME_ID as MATERIAL_THEME_ID
-} from '@mui/material/styles';
 import '@fontsource/public-sans';
-import { CssVarsProvider as JoyCssVarsProvider } from '@mui/joy/styles';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-
+import Stack from '@mui/material/Stack';
 import { selectDepartIdStart, selectReturnIdStart } from '../../../store/flight/flight.action';
-
-const materialTheme = materialExtendTheme();
 
 const SelectFlight = ({ departId, returnId }) => {
   const dispatch = useDispatch();
@@ -34,39 +26,22 @@ const SelectFlight = ({ departId, returnId }) => {
   const obFlights = selectFlight.outboundFlights;
   const ibFlights = selectFlight.inboundFlights;
 
-  var arrivalDay = [];
+  var returnDay = [];
+  const priceReturnDay = ibFlights[0].basePrice;
   if (ibFlights.length != 0) {
-    arrivalDay = ibFlights[0].std;
+    returnDay = ibFlights[0].std;
   }
 
   const departDay = obFlights[0].std;
+  const priceDepartDay = obFlights[0].basePrice;
 
   const handleRadioDepart = (event) => {
     dispatch(selectDepartIdStart(event.target.value));
   };
 
-  const handleRadioArrival = (event) => {
+  const handleRadioReturn = (event) => {
     dispatch(selectReturnIdStart(event.target.value));
   };
-
-  // function getDate(std) {
-  //   const date = new Date(std);
-  //   return date.toDateString();
-  // }
-
-  // function getTime(std) {
-  //   const date = new Date(std);
-  //   const [hour, minutes] = [date.getHours(), date.getMinutes()];
-  //   const getLength = minutes.toString().length;
-  //   //console.log('getLength', getLength);
-  //   return getLength === 1 ? `${hour}:${minutes}0` : `${hour}:${minutes}`;
-  // }
-
-  // function arrivalTime(std, duration) {
-  //   const departure = dayjs(std);
-  //   //console.log('arrivalTime', arrivalTime);
-  //   return departure.add(duration, 'minute').format('HH:mm');
-  // }
 
   const slRef = useRef(null);
   const [slHeight, setSLHeight] = useState(0);
@@ -74,27 +49,127 @@ const SelectFlight = ({ departId, returnId }) => {
     setSLHeight(slRef?.current.offsetHeight);
   }, []);
   return (
-    <MaterialCssVarsProvider theme={{ [MATERIAL_THEME_ID]: materialTheme }}>
-      <JoyCssVarsProvider>
-        <Fragment>
-          {/*{isFetching ? (*/}
-          {/*  <LinearProgress />*/}
-          {/*) : (*/}
-          <Grid marginY={2} container spacing={3} component={'div'} height="stretch">
-            <Grid item xs={12} md={4}>
-              <Paper elevation={4} sx={{ height: { xs: 'stretch', md: slHeight }, p: 3, borderRadius: 1 }}>
-                Booking Details
-              </Paper>
+    <Fragment>
+      {/*{isFetching ? (*/}
+      {/*  <LinearProgress />*/}
+      {/*) : (*/}
+      <Grid marginY={2} container spacing={3} component={'div'} height="stretch">
+        <Grid item xs={12} md={4}>
+          <Paper elevation={4} sx={{ height: { xs: 'stretch', md: slHeight }, p: 3, borderRadius: 1 }}>
+            Booking Details
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={8}>
+          <Paper ref={slRef} elevation={4} sx={{ height: 'stretch', p: 3, borderRadius: 1 }}>
+            <Grid item xs={12} md={12}>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Flight size="large" sx={{ mr: 1, rotate: '90deg' }} />
+                Departure
+              </Box>
             </Grid>
-            <Grid item xs={12} md={8}>
-              <Paper ref={slRef} elevation={4} sx={{ height: 'stretch', p: 3, borderRadius: 1 }}>
-                <Grid item xs={12}>
+            <Grid item xs={12} md={12}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  '& > *': {
+                    m: 3
+                  }
+                }}
+              >
+                <ButtonGroup size="large">
+                  <Button>
+                    {dayjs(departDay).format('ddd D MMM')}
+                    {'  - $'}
+                    {priceDepartDay}
+                  </Button>
+                </ButtonGroup>
+              </Box>
+            </Grid>
+
+            <Grid item xs={12} md={12}>
+              <FormControl fullWidth>
+                <RadioGroup
+                  aria-labelledby="demo-controlled-radio-buttons-group"
+                  name="controlled-radio-buttons-group"
+                  value={departId}
+                  onChange={handleRadioDepart}
+                >
+                  {obFlights.map((item, index) => (
+                    <Card key={index} variant="outlined" sx={{ mb: 3, p: 2 }}>
+                      <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                        <Grid item xs={4} md={4}>
+                          <Typography sx={{ pt: 1 }}>{item.origin.location}</Typography>
+                          <Typography sx={{ pb: 1 }}>({item.origin.iata_code})</Typography>
+                          <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
+                        </Grid>
+                        <Grid container item xs={4} md={4} direction="column" justifyContent="flex-end" alignItems="flex-end">
+                          <Typography sx={{ pt: 1 }}>{item.destination.location}</Typography>
+                          <Typography sx={{ pb: 1 }}>({item.destination.iata_code})</Typography>
+                          <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
+                        </Grid>
+                        <Grid item xs={2} md={2}>
+                          <FormControlLabel
+                            key={item.id}
+                            value={item.id}
+                            control={<Radio />}
+                            label={<Typography>${item.basePrice}</Typography>}
+                          />
+                        </Grid>
+                      </Grid>
+
+                      <Grid container direction="row" justifyContent="center" alignItems="center">
+                        <Grid item xs={1} md={1}>
+                          <Typography sx={{ py: 1 }}>{dayjs(item.std).format('HH:mm')}</Typography>
+                        </Grid>
+                        <Grid item xs={7} md={7}>
+                          <Divider textAlign="left">
+                            <Flight size="large" sx={{ m: '0', rotate: '90deg' }} />
+                          </Divider>
+                        </Grid>
+                        <Grid item xs={1} md={1} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                          <Typography sx={{ py: 1 }}>{dayjs(item.std).add(item.duration, 'minute').format('HH:mm')}</Typography>
+                        </Grid>
+                        <Grid item xs={3} md={3}>
+                          <Fragment />
+                        </Grid>
+                      </Grid>
+
+                      <Grid container direction="row" alignItems="center" justifyContent="center">
+                        <Grid item xs={1} md={1}>
+                          <Typography sx={{ py: 1 }} variant="overline">
+                            Direct
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={7} md={7} container direction="row" justifyContent="center" alignItems="center">
+                          <Typography>{item.duration}m</Typography>
+                        </Grid>
+                        <Grid item xs={1} md={1} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                          <Typography sx={{ py: 1 }} variant="overline">
+                            FS{item.flightNumber}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={3} md={3}>
+                          <Fragment />
+                        </Grid>
+                      </Grid>
+                    </Card>
+                  ))}
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+
+            {ibFlights.length != 0 ? (
+              <Fragment>
+                <Grid item xs={12} md={12}>
                   <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Flight size="large" sx={{ mr: 1, rotate: '90deg' }} />
-                    Departure
+                    <Flight size="large" sx={{ mr: 1, rotate: '-90deg' }} />
+                    Return
                   </Box>
                 </Grid>
-                <Grid item xs={12}>
+
+                <Grid item xs={12} md={12}>
                   <Box
                     sx={{
                       display: 'flex',
@@ -105,8 +180,12 @@ const SelectFlight = ({ departId, returnId }) => {
                       }
                     }}
                   >
-                    <ButtonGroup size="large" aria-label="large button group">
-                      <Button>{departDay}</Button>
+                    <ButtonGroup size="large">
+                      <Button>
+                        {dayjs(returnDay).format('ddd D MMM')}
+                        {'  - $'}
+                        {priceReturnDay}
+                      </Button>
                     </ButtonGroup>
                   </Box>
                 </Grid>
@@ -116,119 +195,81 @@ const SelectFlight = ({ departId, returnId }) => {
                     <RadioGroup
                       aria-labelledby="demo-controlled-radio-buttons-group"
                       name="controlled-radio-buttons-group"
-                      value={departId}
-                      onChange={handleRadioDepart}
+                      value={returnId}
+                      onChange={handleRadioReturn}
                     >
-                      {obFlights.map((item, index) => (
-                        <Card key={item.id} variant="outlined" sx={{ mb: 3 }}>
-                          <CardContent>
-                            <Grid container xs={12} md={12} direction="row" justifyContent="space-between" alignItems="center">
-                              <Grid item md={4}>
-                                <Typography>{item.origin.location}</Typography>
-                                <Typography>{item.origin.iata_code}</Typography>
-                                <Typography>{item.std}</Typography>
-                                <Typography>{item.std}</Typography>
-                              </Grid>
-                              <Grid item md={4}>
-                                <Typography>{item.destination.location}</Typography>
-                                <Typography>{item.destination.iata_code}</Typography>
-                                <Typography>{item.std}</Typography>
-                                <Typography>{item.duration}</Typography>
-                              </Grid>
-                              <Grid item md={2}>
-                                <FormControlLabel
-                                  key={item.id}
-                                  value={item.id}
-                                  control={<Radio />}
-                                  label={<Typography>${item.basePrice}</Typography>}
-                                />
-                              </Grid>
+                      {ibFlights.map((item, index) => (
+                        <Card key={index} variant="outlined" sx={{ mb: 3, p: 2 }}>
+                          <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                            <Grid item xs={4} md={4}>
+                              <Typography sx={{ pt: 1 }}>{item.origin.location}</Typography>
+                              <Typography sx={{ pb: 1 }}>({item.origin.iata_code})</Typography>
+                              <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
                             </Grid>
-                            <Grid container direction="row" alignItems="center" justifyContent="center">
-                              <Typography>{item.duration}</Typography>
+                            <Grid container item xs={4} md={4} direction="column" justifyContent="flex-end" alignItems="flex-end">
+                              <Typography sx={{ pt: 1 }}>{item.destination.location}</Typography>
+                              <Typography sx={{ pb: 1 }}>({item.destination.iata_code})</Typography>
+                              <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
                             </Grid>
-                          </CardContent>
+                            <Grid item xs={2} md={2}>
+                              <FormControlLabel
+                                key={item.id}
+                                value={item.id}
+                                control={<Radio />}
+                                label={<Typography>${item.basePrice}</Typography>}
+                              />
+                            </Grid>
+                          </Grid>
+
+                          <Grid container direction="row" justifyContent="center" alignItems="center">
+                            <Grid item xs={1} md={1}>
+                              <Typography sx={{ py: 1 }}>{dayjs(item.std).format('HH:mm')}</Typography>
+                            </Grid>
+                            <Grid item xs={7} md={7}>
+                              <Divider textAlign="left">
+                                <Flight size="large" sx={{ m: '0', rotate: '90deg' }} />
+                              </Divider>
+                            </Grid>
+                            <Grid item xs={1} md={1} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                              <Typography sx={{ py: 1 }}>{dayjs(item.std).add(item.duration, 'minute').format('HH:mm')}</Typography>
+                            </Grid>
+                            <Grid item xs={3} md={3}>
+                              <Fragment />
+                            </Grid>
+                          </Grid>
+
+                          <Grid container direction="row" alignItems="center" justifyContent="center">
+                            <Grid item xs={1} md={1}>
+                              <Typography sx={{ py: 1 }} variant="overline">
+                                Direct
+                              </Typography>
+                            </Grid>
+                            <Grid item xs={7} md={7} container direction="row" justifyContent="center" alignItems="center">
+                              <Typography>{item.duration}m</Typography>
+                            </Grid>
+                            <Grid item xs={1} md={1} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                              <Typography sx={{ py: 1 }} variant="overline">
+                                FS{item.flightNumber}
+                              </Typography>
+                            </Grid>
+                            <Grid item xs={3} md={3}>
+                              <Fragment />
+                            </Grid>
+                          </Grid>
                         </Card>
                       ))}
                     </RadioGroup>
                   </FormControl>
                 </Grid>
-
-                {ibFlights.length != 0 ? (
-                  <Fragment>
-                    <Grid item xs={12}>
-                      <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Flight size="large" sx={{ mr: 1, rotate: '-90deg' }} />
-                        Return
-                      </Box>
-                    </Grid>
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        '& > *': {
-                          m: 3
-                        }
-                      }}
-                    >
-                      <ButtonGroup size="large">
-                        <Button>{arrivalDay}</Button>
-                      </ButtonGroup>
-                    </Box>
-                    <Grid item xs={12} md={12}>
-                      <FormControl fullWidth>
-                        <RadioGroup
-                          aria-labelledby="demo-controlled-radio-buttons-group"
-                          name="controlled-radio-buttons-group"
-                          value={returnId}
-                          onChange={handleRadioArrival}
-                        >
-                          {ibFlights.map((item, index) => (
-                            <Card key={item.id} variant="outlined" sx={{ mb: 3 }}>
-                              <CardContent>
-                                <Grid container direction="row" justifyContent="space-between" alignItems="center">
-                                  <Grid item>
-                                    <Typography>{item.origin.location}</Typography>
-                                    <Typography>{item.origin.iata_code}</Typography>
-                                    <Typography>{item.std}</Typography>
-                                    <Typography>{item.std}</Typography>
-                                  </Grid>
-                                  <Grid item>
-                                    <Typography>{item.destination.location}</Typography>
-                                    <Typography>{item.destination.iata_code}</Typography>
-                                    <Typography>{item.std}</Typography>
-                                    <Typography>{item.duration}</Typography>
-                                  </Grid>
-                                  <Grid item>
-                                    <FormControlLabel
-                                      key={item.id}
-                                      value={item.id}
-                                      control={<Radio />}
-                                      label={<Typography>${item.basePrice}</Typography>}
-                                    />
-                                  </Grid>
-                                </Grid>
-                                <Grid container direction="row" alignItems="center" justifyContent="center">
-                                  <Typography>{item.duration}</Typography>
-                                </Grid>
-                              </CardContent>
-                            </Card>
-                          ))}
-                        </RadioGroup>
-                      </FormControl>
-                    </Grid>
-                  </Fragment>
-                ) : (
-                  <div></div>
-                )}
-              </Paper>
-            </Grid>
-          </Grid>
-          {/*)}*/}
-        </Fragment>
-      </JoyCssVarsProvider>
-    </MaterialCssVarsProvider>
+              </Fragment>
+            ) : (
+              <div></div>
+            )}
+          </Paper>
+        </Grid>
+      </Grid>
+      {/*)}*/}
+    </Fragment>
   );
 };
 export default SelectFlight;
