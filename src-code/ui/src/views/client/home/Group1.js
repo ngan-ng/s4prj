@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import SearchFlightForm from 'ui-component/client/SearchFlightForm';
 import HomeCarousel from 'ui-component/client/HomeCarousel';
 import SwipeableViews from 'react-swipeable-views';
@@ -7,6 +7,7 @@ import { Box, Paper, Tab, Tabs, Typography } from '@mui/material';
 import SearchBookingForm from 'ui-component/client/SearchBookingForm';
 import TracingFlight from 'ui-component/client/TracingFlight/TracingFlight';
 import { BookingHomeIcon, ManageBookingIcon } from 'ui-component/icons/SharedIconComponents';
+
 const Group1 = () => {
   const backgroundOpacity = 'rgba(255,255,255,0.6)';
   const [value, setValue] = React.useState(0);
@@ -40,7 +41,7 @@ const Group1 = () => {
   }
 
   return (
-    <>
+    <Fragment>
       <Typography variant="body1" component="div" sx={{ position: 'relative', mx: 0, px: 0, width: '100%', height: 800 }}>
         <Box sx={{ position: 'absolute', zIndex: '99', top: 0, mx: 0, px: 0, width: '100%' }}>
           <HomeCarousel />
@@ -49,12 +50,12 @@ const Group1 = () => {
           sx={{
             position: 'absolute',
             zIndex: '100',
-            top: 30,
+            top: { xs: 10, md: 30 },
             left: 0,
             right: 0,
             m: '0 auto',
             p: 1,
-            width: '60%'
+            width: { md: '60%', xs: '90%' }
           }}
         >
           <Paper
@@ -89,7 +90,7 @@ const Group1 = () => {
           </SwipeableViews>
         </Box>
       </Typography>
-    </>
+    </Fragment>
   );
 };
 export default Group1;

@@ -1,0 +1,6 @@
+const MB_ACTION_TYPE = {
+  SELECT_FLIGHT: 'mb/SELECT_FLIGHT_SUCCESS',
+  SELECT_PAX: 'mb/SELECT_PAX',
+  MB_CLEAR: 'mb/CLEAR'
+};
+export default MB_ACTION_TYPE;

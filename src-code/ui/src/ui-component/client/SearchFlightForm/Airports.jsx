@@ -8,7 +8,7 @@ import { AirportLocation } from 'ui-component/icons/SharedIconComponents';
 
 const Airports = ({ origin, destination, airportChange, onHasError, validation }) => {
   const dispatch = useDispatch();
-  const airports = useSelector(selectAirports) ?? {};
+  const airports = useSelector(selectAirports) ?? [];
   const isAirportsEmpty = Object.keys(airports).length === 0;
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -23,7 +23,7 @@ const Airports = ({ origin, destination, airportChange, onHasError, validation }
 
   return (
     <Fragment>
-      <Grid container direction={'row'} spacing={2}>
+      <Grid container direction={'row'} spacing={{ xs: 1, sm: 2 }}>
         <Grid item xs={12} md={6}>
           <FormControl fullWidth>
             <InputLabel id="airport-select-origin-label">Origin</InputLabel>

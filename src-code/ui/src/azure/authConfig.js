@@ -30,7 +30,7 @@ const msalConfig = {
     clientId: '83c799f9-dfff-4e4d-9c7f-ee758c3a9496',
     authority: b2cPolicies.authorities.signUpSignIn.authority,
     knownAuthorities: [b2cPolicies.authorityDomain],
-    redirectUri: '',
+    redirectUri: '' || 'http://localhost:3000' || 'http://localhost:3000/booking' || 'http://localhost:3000/manage-booking',
     postLogoutRedirectUri: '/'
   },
   cache: {

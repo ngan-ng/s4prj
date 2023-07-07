@@ -16,8 +16,8 @@ function BaByIcon(props) {
 
 const PaxQty = ({ maxPax, paxQty, onPaxChange, isQtyValid }) => (
   <Fragment>
-    <Grid container spacing={2}>
-      <Grid item sm={4}>
+    <Grid container spacing={{ xs: 1, sm: 2 }}>
+      <Grid item xs={4}>
         <TextField
           type="number"
           label="Adult"
@@ -39,7 +39,7 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, isQtyValid }) => (
           color="secondary"
         />
       </Grid>
-      <Grid item sm={4}>
+      <Grid item xs={4}>
         <TextField
           type="number"
           label="Children"
@@ -60,7 +60,7 @@ const PaxQty = ({ maxPax, paxQty, onPaxChange, isQtyValid }) => (
           sx={{ backgroundColor: 'white', display: { sm: 'block' } }}
         />
       </Grid>
-      <Grid item sm={4}>
+      <Grid item xs={4}>
         <TextField
           type="number"
           label="Infant"

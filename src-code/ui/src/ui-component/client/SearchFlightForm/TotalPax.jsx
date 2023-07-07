@@ -1,4 +1,4 @@
-import { Grid, TextField, Typography } from "@mui/material";
+import { Grid, TextField, Typography } from '@mui/material';
 
 const TotalPax = ({ total }) => {
   return (
