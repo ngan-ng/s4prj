@@ -10,7 +10,7 @@ import { rootSaga } from './root-saga';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['airports', 'flights', 'user', 'bookings', 'manageBookingObj', 'seats']
+  whitelist: ['airports', 'flights', 'user', 'bookings', 'manageBookingObj', 'seats', 'passengers']
 };
 
 const persistenceReducer = persistReducer(persistConfig, rootReducer);

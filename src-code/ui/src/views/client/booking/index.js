@@ -9,6 +9,7 @@ import SeatAssignment from './SeatAssignment';
 import Itinerary from './Itinerary';
 import { useSelector } from 'react-redux';
 import { selectReturnId, selectDepartId } from '../../../store/flight/flight.selector';
+import { selectPassengers } from 'store/passenger/passenger.selector';
 
 const Booking = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -18,6 +19,9 @@ const Booking = () => {
   console.log('departId', departId);
   const returnId = useSelector(selectReturnId);
   console.log('returnId', returnId);
+
+  const havePassengers = useSelector(selectPassengers);
+  console.log(havePassengers);
 
   const handleNext = () => {
     if (validActiveStep) {
@@ -57,6 +61,7 @@ const Booking = () => {
           setValidActiveStep(departId !== null && returnId !== null);
           break;
         case 1:
+          // setValidActiveStep(departId !== null && returnId !== null);
           break;
         case 2:
           break;
