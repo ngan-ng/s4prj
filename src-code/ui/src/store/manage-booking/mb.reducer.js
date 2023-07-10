@@ -1,7 +1,10 @@
 import MB_ACTION_TYPE from './mb.type';
 const MB_INITIAL_STATE = {
+  isManaging: false,
   flightId: 0,
-  pax: []
+  pax: [],
+  boardingPasses: [],
+  errors: ''
 };
 export const manageBookingReducer = (state = MB_INITIAL_STATE, action = {}) => {
   const { type, payload } = action;
@@ -15,6 +18,23 @@ export const manageBookingReducer = (state = MB_INITIAL_STATE, action = {}) => {
       return {
         ...state,
         pax: [...payload]
+      };
+    case MB_ACTION_TYPE.CHECKIN_START:
+      return {
+        ...state,
+        isManaging: true
+      };
+    case MB_ACTION_TYPE.CHECKIN_SUCCESS:
+      return {
+        ...state,
+        isManaging: false,
+        boardingPasses: [...payload]
+      };
+    case MB_ACTION_TYPE.CHECKIN_FAILED:
+      return {
+        ...state,
+        isManaging: false,
+        errros: payload
       };
     case MB_ACTION_TYPE.MB_CLEAR:
       return MB_INITIAL_STATE;

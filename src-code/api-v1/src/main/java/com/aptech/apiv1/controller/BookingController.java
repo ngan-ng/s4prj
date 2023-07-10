@@ -1,5 +1,6 @@
 package com.aptech.apiv1.controller;
 
+import com.aptech.apiv1.dto.CheckinRequestDtos;
 import com.aptech.apiv1.dto.GroupBooking;
 import com.aptech.apiv1.service.BookingService;
 import jakarta.validation.Valid;
@@ -40,6 +41,18 @@ public class BookingController {
                         .map(er -> String.format("Error: %s. ", er.getDefaultMessage())).toList());
             }
             return ResponseEntity.status(HttpStatus.CREATED).body(bookingService.createBookings(groupBooking.getBookings()));
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body(ex.getMessage());
+        }
+    }
+    @PostMapping(value = "/checkin")
+    public ResponseEntity<?> checkin(@RequestBody @Valid CheckinRequestDtos checkinRequestDtos, BindingResult bindingResult) {
+        try {
+            if (bindingResult.hasErrors()) {
+                return ResponseEntity.badRequest().body(bindingResult.getAllErrors().stream()
+                        .map(er -> String.format("Error: %s. ", er.getDefaultMessage())).toList());
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(bookingService.checkin(checkinRequestDtos));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().body(ex.getMessage());
         }

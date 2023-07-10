@@ -7,8 +7,9 @@ const BookingDetails = () => {
   const bookings = useSelector(selectBookingByPnr);
   useEffect(() => {
     const getPaymentsByBookings = async () => {
-    const bookingIds = bookings?.map((b) => b.id);
-    console.log(bookingIds);}
+      const bookingIds = bookings?.map((b) => b.id);
+      console.log(bookingIds);
+    };
 
     getPaymentsByBookings();
   }, []);
