@@ -43,7 +43,7 @@ export default function RadioFlightGroup({ flights }) {
                     color="info"
                     overlay
                     value={item?.id}
-                    checked={selectMBObj.flightId == item.id}
+                    checked={selectMBObj.flightId == item?.id}
                     label={
                       <Grid container spacing={2} sx={{ pr: { md: 2, xs: 0 } }}>
                         <Grid item xs={12}>
@@ -106,40 +106,4 @@ export default function RadioFlightGroup({ flights }) {
       </JoyCssVarsProvider>
     </MaterialCssVarsProvider>
   );
-}
-
-{
-  /* <TextField
-fullWidth
-variant="outlined"
-label={index === 0 ? 'Departure' : 'Return'}
-sx={{ border: 'none', '& fieldset': { border: 'none' } }}
-InputProps={{
-  startAdornment: (
-    <InputAdornment position="start">
-      <Typography sx={{ ml: 'auto' }}>
-        <b>FS{item?.flightNumber}</b>
-        {' - '}
-        <small>{item?.std.split('T' || ' ')[1]}</small>
-      </Typography>
-    </InputAdornment>
-  ),
-  endAdornment: (
-    <InputAdornment position="start" sx={{ pr: 1 }}>
-      <Typography sx={{ marginX: 2 }}>
-        <b>
-          {item?.origin.iata_code} - {item?.destination.iata_code}
-        </b>{' '}
-      </Typography>
-      <small>{item?.std.split('T' || ' ')[0]}</small>
-    </InputAdornment>
-  )
-}}
-helperText={
-  <Typography>
-    {item?.origin.name} - {item?.destination.name}
-  </Typography>
-  
-                          />
-} */
 }
