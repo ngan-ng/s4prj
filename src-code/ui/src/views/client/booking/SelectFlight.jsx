@@ -99,59 +99,65 @@ const SelectFlight = ({ departId, returnId }) => {
                   {obFlights.map((item, index) => (
                     <Card key={index} variant="outlined" sx={{ mb: 3, p: 2 }}>
                       <Grid container direction="row" justifyContent="space-between" alignItems="center">
-                        <Grid item xs={4} md={4}>
-                          <Typography sx={{ pt: 1 }}>{item.origin.location}</Typography>
-                          <Typography sx={{ pb: 1 }}>({item.origin.iata_code})</Typography>
-                          <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
+                        <Grid item xs={12} md={9}>
+                          <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                            <Grid item xs={4} md={4}>
+                              <Typography sx={{ pt: 1 }}>{item.origin.location}</Typography>
+                              <Typography sx={{ pb: 1 }}>({item.origin.iata_code})</Typography>
+                              <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
+                            </Grid>
+                            <Grid
+                              item
+                              xs={4}
+                              md={4}
+                              sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-end' }}
+                            >
+                              <Typography sx={{ pt: 1 }}>{item.destination.location}</Typography>
+                              <Typography sx={{ pb: 1 }}>({item.destination.iata_code})</Typography>
+                              <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
+                            </Grid>
+                          </Grid>
+
+                          <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                            <Grid item xs={1} md={2}>
+                              <Typography sx={{ py: 1 }}>{dayjs(item.std).format('HH:mm')}</Typography>
+                            </Grid>
+                            <Grid item xs={7} md={8}>
+                              <Divider textAlign="left">
+                                <Flight size="large" sx={{ m: '0', rotate: '90deg' }} />
+                              </Divider>
+                            </Grid>
+                            <Grid item xs={1} md={2} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                              <Typography sx={{ py: 1 }}>{dayjs(item.std).add(item.duration, 'minute').format('HH:mm')}</Typography>
+                            </Grid>
+                          </Grid>
+
+                          <Grid container direction="row" alignItems="center" justifyContent="space-between">
+                            <Grid item xs={1} md={2}>
+                              <Typography sx={{ py: 1 }} variant="overline">
+                                Direct
+                              </Typography>
+                            </Grid>
+                            <Grid item xs={7} md={8} container direction="row" justifyContent="center" alignItems="center">
+                              <Typography>{item.duration}m</Typography>
+                            </Grid>
+                            <Grid item xs={1} md={2} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                              <Typography sx={{ py: 1 }} variant="overline">
+                                FS{item.flightNumber}
+                              </Typography>
+                            </Grid>
+                          </Grid>
                         </Grid>
-                        <Grid container item xs={4} md={4} direction="column" justifyContent="flex-end" alignItems="flex-end">
-                          <Typography sx={{ pt: 1 }}>{item.destination.location}</Typography>
-                          <Typography sx={{ pb: 1 }}>({item.destination.iata_code})</Typography>
-                          <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
-                        </Grid>
-                        <Grid item xs={2} md={2}>
+
+                        <Divider orientation="vertical" flexItem></Divider>
+
+                        <Grid item xs={12} md={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                           <FormControlLabel
                             key={item.id}
                             value={item.id}
                             control={<Radio />}
                             label={<Typography>${item.basePrice}</Typography>}
                           />
-                        </Grid>
-                      </Grid>
-
-                      <Grid container direction="row" justifyContent="center" alignItems="center">
-                        <Grid item xs={1} md={1}>
-                          <Typography sx={{ py: 1 }}>{dayjs(item.std).format('HH:mm')}</Typography>
-                        </Grid>
-                        <Grid item xs={7} md={7}>
-                          <Divider textAlign="left">
-                            <Flight size="large" sx={{ m: '0', rotate: '90deg' }} />
-                          </Divider>
-                        </Grid>
-                        <Grid item xs={1} md={1} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                          <Typography sx={{ py: 1 }}>{dayjs(item.std).add(item.duration, 'minute').format('HH:mm')}</Typography>
-                        </Grid>
-                        <Grid item xs={3} md={3}>
-                          <Fragment />
-                        </Grid>
-                      </Grid>
-
-                      <Grid container direction="row" alignItems="center" justifyContent="center">
-                        <Grid item xs={1} md={1}>
-                          <Typography sx={{ py: 1 }} variant="overline">
-                            Direct
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={7} md={7} container direction="row" justifyContent="center" alignItems="center">
-                          <Typography>{item.duration}m</Typography>
-                        </Grid>
-                        <Grid item xs={1} md={1} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                          <Typography sx={{ py: 1 }} variant="overline">
-                            FS{item.flightNumber}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={3} md={3}>
-                          <Fragment />
                         </Grid>
                       </Grid>
                     </Card>
@@ -201,59 +207,65 @@ const SelectFlight = ({ departId, returnId }) => {
                       {ibFlights.map((item, index) => (
                         <Card key={index} variant="outlined" sx={{ mb: 3, p: 2 }}>
                           <Grid container direction="row" justifyContent="space-between" alignItems="center">
-                            <Grid item xs={4} md={4}>
-                              <Typography sx={{ pt: 1 }}>{item.origin.location}</Typography>
-                              <Typography sx={{ pb: 1 }}>({item.origin.iata_code})</Typography>
-                              <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
+                            <Grid item xs={12} md={9}>
+                              <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                                <Grid item xs={4} md={4}>
+                                  <Typography sx={{ pt: 1 }}>{item.origin.location}</Typography>
+                                  <Typography sx={{ pb: 1 }}>({item.origin.iata_code})</Typography>
+                                  <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
+                                </Grid>
+                                <Grid
+                                  item
+                                  xs={4}
+                                  md={4}
+                                  sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-end' }}
+                                >
+                                  <Typography sx={{ pt: 1 }}>{item.destination.location}</Typography>
+                                  <Typography sx={{ pb: 1 }}>({item.destination.iata_code})</Typography>
+                                  <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
+                                </Grid>
+                              </Grid>
+
+                              <Grid container direction="row" justifyContent="space-between" alignItems="center">
+                                <Grid item xs={1} md={2}>
+                                  <Typography sx={{ py: 1 }}>{dayjs(item.std).format('HH:mm')}</Typography>
+                                </Grid>
+                                <Grid item xs={7} md={8}>
+                                  <Divider textAlign="left">
+                                    <Flight size="large" sx={{ m: '0', rotate: '90deg' }} />
+                                  </Divider>
+                                </Grid>
+                                <Grid item xs={1} md={2} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                  <Typography sx={{ py: 1 }}>{dayjs(item.std).add(item.duration, 'minute').format('HH:mm')}</Typography>
+                                </Grid>
+                              </Grid>
+
+                              <Grid container direction="row" alignItems="center" justifyContent="space-between">
+                                <Grid item xs={1} md={2}>
+                                  <Typography sx={{ py: 1 }} variant="overline">
+                                    Direct
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={7} md={8} container direction="row" justifyContent="center" alignItems="center">
+                                  <Typography>{item.duration}m</Typography>
+                                </Grid>
+                                <Grid item xs={1} md={2} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                                  <Typography sx={{ py: 1 }} variant="overline">
+                                    FS{item.flightNumber}
+                                  </Typography>
+                                </Grid>
+                              </Grid>
                             </Grid>
-                            <Grid container item xs={4} md={4} direction="column" justifyContent="flex-end" alignItems="flex-end">
-                              <Typography sx={{ pt: 1 }}>{item.destination.location}</Typography>
-                              <Typography sx={{ pb: 1 }}>({item.destination.iata_code})</Typography>
-                              <Typography sx={{ py: 1 }}>{dayjs(item.std).format('dddd D MMMM YYYY')}</Typography>
-                            </Grid>
-                            <Grid item xs={2} md={2}>
+
+                            <Divider orientation="vertical" flexItem></Divider>
+
+                            <Grid item xs={12} md={2} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                               <FormControlLabel
                                 key={item.id}
                                 value={item.id}
                                 control={<Radio />}
                                 label={<Typography>${item.basePrice}</Typography>}
                               />
-                            </Grid>
-                          </Grid>
-
-                          <Grid container direction="row" justifyContent="center" alignItems="center">
-                            <Grid item xs={1} md={1}>
-                              <Typography sx={{ py: 1 }}>{dayjs(item.std).format('HH:mm')}</Typography>
-                            </Grid>
-                            <Grid item xs={7} md={7}>
-                              <Divider textAlign="left">
-                                <Flight size="large" sx={{ m: '0', rotate: '90deg' }} />
-                              </Divider>
-                            </Grid>
-                            <Grid item xs={1} md={1} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                              <Typography sx={{ py: 1 }}>{dayjs(item.std).add(item.duration, 'minute').format('HH:mm')}</Typography>
-                            </Grid>
-                            <Grid item xs={3} md={3}>
-                              <Fragment />
-                            </Grid>
-                          </Grid>
-
-                          <Grid container direction="row" alignItems="center" justifyContent="center">
-                            <Grid item xs={1} md={1}>
-                              <Typography sx={{ py: 1 }} variant="overline">
-                                Direct
-                              </Typography>
-                            </Grid>
-                            <Grid item xs={7} md={7} container direction="row" justifyContent="center" alignItems="center">
-                              <Typography>{item.duration}m</Typography>
-                            </Grid>
-                            <Grid item xs={1} md={1} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                              <Typography sx={{ py: 1 }} variant="overline">
-                                FS{item.flightNumber}
-                              </Typography>
-                            </Grid>
-                            <Grid item xs={3} md={3}>
-                              <Fragment />
                             </Grid>
                           </Grid>
                         </Card>
