@@ -75,9 +75,9 @@ const schema = {
 };
 
 const paxQty = JSON.parse(localStorage.getItem('paxQty'));
-const adl = Object.values(paxQty)[0];
-const chd = Object.values(paxQty)[1];
-const inf = Object.values(paxQty)[2];
+const adl = Object.values(paxQty ?? 0)[0];
+const chd = Object.values(paxQty ?? 0)[1];
+const inf = Object.values(paxQty ?? 0)[2];
 
 const Passengers = () => {
   const today = dayjs();
