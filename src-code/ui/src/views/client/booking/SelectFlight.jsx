@@ -140,7 +140,9 @@ const SelectFlight = ({ departId, returnId }) => {
                                   </Typography>
                                 </Grid>
                                 <Grid item xs={7} md={8} container direction="row" justifyContent="center" alignItems="center">
-                                  <Typography>{item.duration}m</Typography>
+                                  <Typography>
+                                    {Math.floor(item.duration / 60)}h{item.duration % 60}m
+                                  </Typography>
                                 </Grid>
                                 <Grid item xs={1} md={2} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                                   <Typography sx={{ py: 1 }} variant="overline">
@@ -253,7 +255,9 @@ const SelectFlight = ({ departId, returnId }) => {
                                       </Typography>
                                     </Grid>
                                     <Grid item xs={7} md={8} container direction="row" justifyContent="center" alignItems="center">
-                                      <Typography>{item.duration}m</Typography>
+                                      <Typography>
+                                        {Math.floor(item.duration / 60)}h{item.duration % 60}m
+                                      </Typography>
                                     </Grid>
                                     <Grid item xs={1} md={2} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                                       <Typography sx={{ py: 1 }} variant="overline">

@@ -292,7 +292,7 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
                       <DatePicker
                         label="Date of birth"
                         //defaultValue={dayjs(new Date())}
-                        value={pax?.dob}
+                        value={dayjs(pax?.dob)}
                         name={'dob_' + index}
                         onChange={(event) => handleChange(event, index, 'dob')}
                         defaultCalendarMonth={pax.gender === 'INF' ? maxDobINF : pax.gender === 'CHD' ? maxDobCHD : maxDobADL}
