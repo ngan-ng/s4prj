@@ -10,16 +10,18 @@ export const passengerReducer = (state = INITIAL_STATE, action) => {
 
   switch (type) {
     case PASSENGER_ACTION_TYPES.CREATE_PASSENGER_SUCCESS:
-    case PASSENGER_ACTION_TYPES.HAVE_PASSENGER_SUCCESS:
       return {
         ...state,
-        passengers: payload
+        passengers: [...payload],
+        error: null
       };
     case PASSENGER_ACTION_TYPES.CREATE_PASSENGER_FAILED:
       return {
         ...state,
         error: payload
       };
+    case PASSENGER_ACTION_TYPES.CLEAR_PASSENGERS:
+      return INITIAL_STATE;
     default:
       return state;
   }

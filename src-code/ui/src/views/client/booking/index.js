@@ -7,24 +7,33 @@ import Passengers from './Passengers';
 import Payment from './Payment';
 import SeatAssignment from './SeatAssignment';
 import Itinerary from './Itinerary';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectReturnId, selectDepartId } from '../../../store/flight/flight.selector';
-import { selectPassengers } from 'store/passenger/passenger.selector';
+import { createPassengerStart } from 'store/passenger/passenger.action';
+import { useCallback } from 'react';
 
 const Booking = () => {
+  const dispatch = useDispatch();
   const [activeStep, setActiveStep] = useState(0);
   const [validActiveStep, setValidActiveStep] = useState(false);
   const manageStepper = StepperType.BOOKING;
   const departId = useSelector(selectDepartId);
-  console.log('departId', departId);
   const returnId = useSelector(selectReturnId);
-  console.log('returnId', returnId);
-
-  const havePassengers = useSelector(selectPassengers);
-  console.log(havePassengers);
-
+  const [isFormValid, setIsFormValid] = useState(false);
+  const handleCreatePaxStart = useCallback(
+    (payload) => {
+      dispatch(createPassengerStart(payload));
+    },
+    [dispatch]
+  );
+  const handleFormValid = (val) => {
+    setIsFormValid(val);
+  };
   const handleNext = () => {
     if (validActiveStep) {
+      if (activeStep === 1) {
+        // handleCreatePaxStart();
+      }
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else {
       alert('');
@@ -35,14 +44,14 @@ const Booking = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleFinished = () => {};
+  const handleFinished = () => { };
 
   const BookingContent = () => {
     switch (activeStep) {
       case 0:
         return <SelectFlight departId={departId} returnId={returnId} />;
       case 1:
-        return <Passengers />;
+        return <Passengers onHandleFullfill={handleCreatePaxStart} onFormValid={handleFormValid} />;
       case 2:
         return <SeatAssignment />;
       case 3:
@@ -61,7 +70,7 @@ const Booking = () => {
           setValidActiveStep(departId !== null && returnId !== null);
           break;
         case 1:
-          // setValidActiveStep(departId !== null && returnId !== null);
+          setValidActiveStep(isFormValid);
           break;
         case 2:
           break;
@@ -75,7 +84,7 @@ const Booking = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [activeStep, departId, returnId]);
+  }, [activeStep, departId, isFormValid, returnId]);
 
   return (
     <Fragment>

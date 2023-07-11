@@ -2,6 +2,7 @@ import { FLIGHT_ACTION_TYPES } from './flight.types';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 import axiosCall from '../../api/callAxios';
 import { searchFlightFailed, searchFlightSuccess, selectDepartIdSuccess, selectReturnIdSuccess } from './flight.action';
+import { clearPassengers } from 'store/passenger/passenger.action';
 
 const searchFlight = async (searchDto) => {
   try {
@@ -13,6 +14,7 @@ const searchFlight = async (searchDto) => {
 
 function* searchFlightStart({ payload }) {
   try {
+    yield put(clearPassengers());
     const resp = yield call(searchFlight, payload);
     const data = resp.data;
     yield put(searchFlightSuccess(data));
@@ -23,7 +25,7 @@ function* searchFlightStart({ payload }) {
 
 function* selectDepartIdStart({ payload }) {
   try {
-    console.log('selectOutboundId', { payload });
+    // yield put(clearPassengers());
     yield put(selectDepartIdSuccess(payload));
   } catch (error) {
     console.log('error', error);
@@ -32,7 +34,7 @@ function* selectDepartIdStart({ payload }) {
 
 function* selectReturnIdStart({ payload }) {
   try {
-    console.log('selectInboundId', { payload });
+    // yield put(clearPassengers());
     yield put(selectReturnIdSuccess(payload));
   } catch (error) {
     console.log('error', error);

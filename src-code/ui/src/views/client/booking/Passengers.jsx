@@ -14,8 +14,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Grid from '@mui/material/Grid';
 import validate from 'validate.js';
 import { Fragment } from 'react';
-import { useDispatch } from 'react-redux';
-import { createPassengerStart } from 'store/passenger/passenger.action';
+import { useSelector } from 'react-redux';
+import { selectPassengers } from 'store/passenger/passenger.selector';
+import { useCallback } from 'react';
 
 const schema = {
   title: {
@@ -49,7 +50,9 @@ const schema = {
       allowEmpty: false,
       message: '^Date of birth is not blank'
     }
-  },
+  }
+};
+const adlPrimarySchema = {
   mobile: {
     presence: {
       allowEmpty: false,
@@ -65,7 +68,9 @@ const schema = {
       allowEmpty: false,
       message: '^Email is not blank'
     }
-  },
+  }
+};
+const infExtSchema = {
   associate: {
     presence: {
       allowEmpty: false,
@@ -79,9 +84,9 @@ const adl = Object.values(paxQty ?? 0)[0];
 const chd = Object.values(paxQty ?? 0)[1];
 const inf = Object.values(paxQty ?? 0)[2];
 
-const Passengers = () => {
+const Passengers = ({ onHandleFullfill, onFormValid }) => {
   const today = dayjs();
-  const dispatch = useDispatch();
+  const passengers = useSelector(selectPassengers);
 
   const initialPassenger = {
     title: '',
@@ -98,81 +103,107 @@ const Passengers = () => {
 
   let initialBookings = [];
   let initialValidations = [];
+  const genInitialBookings = useCallback((isBoth) => {
+    for (let i = 0; i < adl; i++) {
+      if (isBoth) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        initialBookings = [...initialBookings, { ...initialPassenger, gender: 'ADL' }];
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      initialValidations = [...initialValidations, { ...initialValidation }];
+    }
+    for (let i = 0; i < chd; i++) {
+      if (isBoth) {
+        initialBookings = [...initialBookings, { ...initialPassenger, gender: 'CHD' }];
+      }
+      initialValidations = [...initialValidations, { ...initialValidation }];
+    }
+    for (let i = 0; i < inf; i++) {
+      if (isBoth) {
+        initialBookings = [...initialBookings, { ...initialPassenger, gender: 'INF' }];
+      }
+      initialValidations = [...initialValidations, { ...initialValidation }];
+    }
+  }, []);
+  genInitialBookings(passengers === undefined || passengers === null);
 
-  for (let i = 0; i < adl; i++) {
-    // if (i === 0) {
-    //   initialBookings = [...initialBookings, { ...initialPassenger, gender: 'ADL', email: '', mobile: '' }];
-    // } else {
-    initialBookings = [...initialBookings, { ...initialPassenger, gender: 'ADL' }];
-    // }
-    initialValidations = [...initialValidations, { ...initialValidation }];
-  }
-  for (let i = 0; i < chd; i++) {
-    initialBookings = [...initialBookings, { ...initialPassenger, gender: 'CHD' }];
-    initialValidations = [...initialValidations, { ...initialValidation }];
-  }
-  for (let i = 0; i < inf; i++) {
-    initialBookings = [...initialBookings, { ...initialPassenger, gender: 'INF' }];
-    initialValidations = [...initialValidations, { ...initialValidation }];
-  }
-
-  const [bookings, setBookings] = useState(initialBookings);
+  const [bookings, setBookings] = useState(passengers ?? initialBookings);
 
   const [validations, setValidations] = useState(initialValidations);
 
-  const [fullName, setFullName] = useState([]);
-
   const handleChange = (event, index, type) => {
     let dataBooking = [...bookings];
-    // console.log('dataBooking', dataBooking);
     let dataValidate = [...validations];
-
-    // console.log('dataValidate', dataValidate);
 
     let fieldName;
 
     if (type === 'dob') {
       //fieldName = type;
+      // console.log(event);
       dataBooking[index][type] = event;
       setBookings(dataBooking);
-
       dataValidate[index] = { ...validations[index], touched: { [type]: true } };
-      // console.log(dataValidate);
       setValidations(dataValidate);
     } else {
       fieldName = event.target.name.split('_')[0];
-      dataBooking[index][fieldName] = event.target.value;
+      if (fieldName === 'associate') {
+        const val = event.target.value.split('_');
+        // console.log(val);
+        dataBooking[index][fieldName] = val[0];
+      } else {
+        dataBooking[index][fieldName] = event.target.value;
+      }
       setBookings(dataBooking);
-
       dataValidate[index] = { ...validations[index], touched: { ...validations[index].touched, [fieldName]: true } };
       setValidations(dataValidate);
     }
   };
+  const handleFormValid = useCallback(() => {
+    if (bookings === undefined || bookings === null) {
+      return false;
+    }
+    return bookings?.filter((element) => Object.values(element)?.filter((val) => val.toString().trim() === '').length > 0).length > 0;
+  }, [bookings]);
 
   useEffect(() => {
-    let dataValidate = [...validations];
+    let invalid = handleFormValid();
+    if (invalid) {
+      onFormValid(false);
+    } else {
+      onFormValid(true);
+      onHandleFullfill(bookings);
+    }
+  }, [bookings]);
 
-    bookings.map((b, index) => {
-      const err = validate(b, schema);
-      dataValidate[index] = { ...validations[index], isValid: err ? false : true, errors: err || {} };
-      setValidations(dataValidate);
-    });
-    console.log(dataValidate);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      let dataValidate = [...validations];
+
+      bookings.map((b, index) => {
+        let err = {};
+        const commonErr = validate(b, schema);
+        err = { ...commonErr };
+        if (b.gender === 'ADL' && index === 0) {
+          const adlPrimaryErr = validate(b, adlPrimarySchema);
+          err = { ...err, ...adlPrimaryErr };
+        }
+        if (b.gender === 'INF') {
+          const infErr = validate(b, infExtSchema);
+          err = { ...err, ...infErr };
+        }
+        dataValidate[index] = {
+          ...validations[index],
+          isValid: Object.keys(err).length !== 0 ? false : true,
+          errors: err || {}
+        };
+        setValidations(dataValidate);
+      });
+    }, 300);
   }, [bookings]);
 
   const hasError = (field, index) => {
-    return validations[index].touched[field] && validations[index].errors[field] ? true : false;
+    return validations[index]?.touched[field] && validations[index]?.errors[field] ? true : false;
   };
-
-  const handleName = (event, index) => {
-    const isGender = ['ADL'];
-    var getNameADL = bookings.filter((b) => isGender.includes(b.gender));
-    setFullName(getNameADL);
-  };
-
-  console.log(bookings);
-
-  dispatch(createPassengerStart(bookings));
 
   let minDobINF = today.subtract(2, 'year');
   let maxDobINF = today.subtract(9, 'day');
@@ -188,43 +219,43 @@ const Passengers = () => {
             <Paper elevation={4} sx={{ p: 3, borderRadius: 1 }}>
               {pax.gender == 'ADL' ? (
                 <Typography key={index} sx={{ fontSize: 24 }}>
-                  ADL
+                  ADULT
                 </Typography>
               ) : (
                 [
                   pax.gender == 'CHD' ? (
                     <Typography key={index} sx={{ fontSize: 24 }}>
-                      CHD
+                      CHILD
                     </Typography>
                   ) : (
                     <Typography key={index} sx={{ fontSize: 24 }}>
-                      INF
+                      INFANT
                     </Typography>
                   )
                 ]
               )}
-
-              {pax.gender == 'INF' ? (
-                <Fragment>
-                  <Grid container spacing={2} sx={{ py: 3 }}>
-                    <Grid item xs={12} md={8}>
-                      <FormControl fullWidth error={hasError('associate', index)}>
-                        <InputLabel id="associate-label">Associate infant to adult passenger</InputLabel>
-
+              <Fragment>
+                <Grid container spacing={2} sx={{ py: 3 }}>
+                  {pax.gender == 'INF' && (
+                    <Grid item xs={12} md={4}>
+                      <FormControl fullWidth>
+                        <InputLabel id="associate-label">Associating passenger</InputLabel>
                         <Select
                           variant="filled"
                           labelId="associate-label"
-                          //value={''}
-                          defaultValue=""
                           label="associate"
                           onChange={(event) => handleChange(event, index)}
                           name={'associate_' + index}
+                          defaultValue={''}
                         >
-                          {fullName.map((item, index) => (
-                            <MenuItem key={index} value={item.firstName}>
-                              {item.firstName}
-                            </MenuItem>
-                          ))}
+                          <MenuItem value={''}>None</MenuItem>
+                          {bookings
+                            .filter((b) => b.gender === 'ADL')
+                            ?.map((item, i) => (
+                              <MenuItem key={i} value={i + '_' + item.firstName}>
+                                {item.firstName}
+                              </MenuItem>
+                            ))}
                         </Select>
                         {hasError(`associate_${index}`, index) && (
                           <FormHelperText>
@@ -233,159 +264,77 @@ const Passengers = () => {
                         )}
                       </FormControl>
                     </Grid>
-                    <Grid item xs={12} md={4}>
-                      <FormControl fullWidth error={hasError('title', index)}>
-                        <InputLabel id="title-label">Title</InputLabel>
-                        <Select
-                          //defaultValue="MR"
-                          variant="filled"
-                          labelId="title-label"
-                          value={pax.title}
-                          label="Title"
-                          onChange={(event) => handleChange(event, index)}
-                          name={'title_' + index}
-                        >
-                          <MenuItem value="MR">MR</MenuItem>
-                          <MenuItem value="MS">MS</MenuItem>
-                          <MenuItem value="MISS">MISS</MenuItem>
-                          <MenuItem value="MSTR">MSTR</MenuItem>
-                        </Select>
-                        {hasError(`title_${index}`, index) && (
-                          <FormHelperText>
-                            {validations[index].errors !== undefined ? validations[index].errors.title[0] : ''}
-                          </FormHelperText>
-                        )}
-                      </FormControl>
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} md={4}>
-                      <TextField
-                        fullWidth
-                        name="firstName"
-                        label="First Name"
+                  )}
+                  <Grid item xs={12} md={4}>
+                    <FormControl fullWidth error={hasError('title', index)}>
+                      <InputLabel id="title-label">Title</InputLabel>
+                      <Select
+                        //defaultValue="MR"
                         variant="filled"
-                        value={pax.firstName}
+                        labelId="title-label"
+                        value={pax.title}
+                        label="Title"
                         onChange={(event) => handleChange(event, index)}
-                        error={hasError('firstName', index)}
-                        helperText={hasError('firstName', index) ? validations[index].errors.firstName[0] : null}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                      <TextField
-                        fullWidth
-                        name="lastName"
-                        label="Last Name"
-                        variant="filled"
-                        value={pax.lastName}
-                        onChange={(event) => handleChange(event, index)}
-                        error={hasError('lastName', index)}
-                        helperText={hasError('lastName', index) ? validations[index].errors.lastName[0] : null}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                          label="Day of birth"
-                          //defaultValue={dayjs(new Date())}
-                          value={pax.dob}
-                          name="dob"
-                          onChange={(event) => handleChange(event, index, 'dob')}
-                          minDate={minDobINF}
-                          maxDate={maxDobINF}
-                          slotProps={{
-                            textField: {
-                              variant: 'filled',
-                              helperText: hasError('dob', index) ? validations[index].errors.dob[0] : null
-                            }
-                          }}
-                        />
-                      </LocalizationProvider>
-                    </Grid>
+                        name={'title_' + index}
+                      >
+                        {pax.gender === 'ADL' && <MenuItem value="MR">MR</MenuItem>}
+                        {pax.gender === 'ADL' && <MenuItem value="MS">MS</MenuItem>}
+                        {pax.gender !== 'ADL' && <MenuItem value="MISS">MISS</MenuItem>}
+                        {pax.gender !== 'ADL' && <MenuItem value="MSTR">MSTR</MenuItem>}
+                      </Select>
+                      {hasError(`title_${index}`, index) && (
+                        <FormHelperText>{validations[index].errors !== undefined ? validations[index].errors.title[0] : ''}</FormHelperText>
+                      )}
+                    </FormControl>
                   </Grid>
-                </Fragment>
-              ) : (
-                <Fragment>
-                  <Grid container spacing={2} sx={{ py: 3 }}>
-                    <Grid item xs={12} md={4}>
-                      <FormControl fullWidth error={hasError('title', index)}>
-                        <InputLabel id="title-label">Title</InputLabel>
-                        <Select
-                          variant="filled"
-                          labelId="title-label"
-                          value={pax.title}
-                          label="Title"
-                          onChange={(event) => handleChange(event, index)}
-                          name={'title_' + index}
-                        >
-                          <MenuItem value="MR">MR</MenuItem>
-                          <MenuItem value="MS">MS</MenuItem>
-                          <MenuItem value="MISS">MISS</MenuItem>
-                          <MenuItem value="MSTR">MSTR</MenuItem>
-                        </Select>
-                        {hasError(`title_${index}`, index) && (
-                          <FormHelperText>
-                            {validations[index].errors !== undefined ? validations[index].errors.title[0] : ''}
-                          </FormHelperText>
-                        )}
-                      </FormControl>
-                    </Grid>
-                    <Grid item xs={12} md={8}>
-                      <TextField
-                        fullWidth
-                        name="firstName"
-                        label="First Name"
-                        variant="filled"
-                        value={pax.firstName}
-                        onChange={(event) => {
-                          handleChange(event, index);
-                          handleName(event, index);
+                  <Grid item xs={12} md={4}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DatePicker
+                        label="Date of birth"
+                        //defaultValue={dayjs(new Date())}
+                        value={pax?.dob}
+                        name={'dob_' + index}
+                        onChange={(event) => handleChange(event, index, 'dob')}
+                        defaultCalendarMonth={pax.gender === 'INF' ? maxDobINF : pax.gender === 'CHD' ? maxDobCHD : maxDobADL}
+                        minDate={pax.gender === 'INF' ? minDobINF : pax.gender === 'CHD' ? minDobCHD : null}
+                        maxDate={pax.gender === 'INF' ? maxDobINF : pax.gender === 'CHD' ? maxDobCHD : maxDobADL}
+                        slotProps={{
+                          textField: {
+                            variant: 'filled',
+                            helperText: hasError('dob', index) ? validations[index].errors.dob[0] : null
+                          }
                         }}
-                        error={hasError('firstName', index)}
-                        helperText={hasError('firstName', index) ? validations[index].errors.firstName[0] : null}
                       />
-                    </Grid>
+                    </LocalizationProvider>
                   </Grid>
-
-                  <Grid container spacing={2}>
-                    <Grid item xs={12} md={4}>
-                      <TextField
-                        fullWidth
-                        name="lastName"
-                        label="Last Name"
-                        variant="filled"
-                        value={pax.lastName}
-                        onChange={(event) => {
-                          handleChange(event, index);
-                          handleName(event, index);
-                        }}
-                        error={hasError('lastName', index)}
-                        helperText={hasError('lastName', index) ? validations[index].errors.lastName[0] : null}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={8}>
-                      <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                          label="Day of birth"
-                          //defaultValue={dayjs(new Date())}
-                          value={pax.dob}
-                          name="dob"
-                          onChange={(event) => handleChange(event, index, 'dob')}
-                          minDate={pax.gender == 'CHD' ? minDobCHD : ''}
-                          maxDate={pax.gender == 'CHD' ? maxDobCHD : maxDobADL}
-                          slotProps={{
-                            textField: {
-                              variant: 'filled',
-                              helperText: hasError('dob', index) ? validations[index].errors.dob[0] : null
-                            }
-                          }}
-                        />
-                      </LocalizationProvider>
-                    </Grid>
+                </Grid>
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      fullWidth
+                      name="firstName"
+                      label="First Name"
+                      variant="filled"
+                      value={pax.firstName}
+                      onChange={(event) => handleChange(event, index)}
+                      error={hasError('firstName', index)}
+                      helperText={hasError('firstName', index) ? validations[index].errors.firstName[0] : null}
+                    />
                   </Grid>
-                </Fragment>
-              )}
-
+                  <Grid item xs={12} md={6}>
+                    <TextField
+                      fullWidth
+                      name="lastName"
+                      label="Last Name"
+                      variant="filled"
+                      value={pax.lastName}
+                      onChange={(event) => handleChange(event, index)}
+                      error={hasError('lastName', index)}
+                      helperText={hasError('lastName', index) ? validations[index].errors.lastName[0] : null}
+                    />
+                  </Grid>
+                </Grid>
+              </Fragment>
               {index == 0 && (
                 <Fragment>
                   <Typography sx={{ fontSize: 24, paddingTop: 3 }}>Contact Information</Typography>
