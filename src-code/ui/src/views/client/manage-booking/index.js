@@ -133,7 +133,7 @@ const ManageBooking = () => {
 
   const [heightBtn, setHeightBtn] = useState(0);
   useLayoutEffect(() => {
-    setHeightBtn(heightBtnRef.current.offsetHeight);
+    setHeightBtn(heightBtnRef?.current?.offsetHeight);
   }, []);
   return (
     <>

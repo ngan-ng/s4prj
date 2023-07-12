@@ -18,21 +18,17 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class BookingPaymentDto implements Serializable {
     private LoadSeatDto loadSeatDto;
-    private long id;
-    private String pnr;
-    private Flight flight;
-    private String dob;
-    private String status = "CONFIRMED";
-    private int seq = 0;
-    private String title = "Mr.";
+    private long id; // Need
+    private String pnr; // Need
+    private Flight flight; // Need
+
     @NotBlank(message = "Firstname is required")
-    private String firstName;
+    private String firstName; // Need
     @NotBlank(message = "Lastname is required")
-    private String lastName;
-    private Infant infant;
+    private String lastName; // Need
+    private Infant infant; // Need
     private String gender = Gender.ADL.toString();
-    private int bagAllowance = 0;
-    private String mobile;
+    private int bagAllowance = 0; // Need
     @Email(message = "Invalid email format")
-    private String email;
+    private String email; // Need
 }
