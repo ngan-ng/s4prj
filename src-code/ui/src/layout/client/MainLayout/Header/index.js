@@ -8,7 +8,7 @@ import { selectCurrentUser } from 'store/user/user.selector';
 const Header = () => {
   const user = useSelector(selectCurrentUser);
   const dispatch = useDispatch();
-  const navigate = useNavigate
+  const navigate = useNavigate();
   const handleLogout = () => {
     dispatch(signOutStart());
   };

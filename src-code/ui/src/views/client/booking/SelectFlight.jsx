@@ -27,7 +27,7 @@ const SelectFlight = ({ departId, returnId }) => {
   const ibFlights = selectFlight?.inboundFlights;
 
   var returnDay = [];
-  const priceReturnDay = ibFlights[0]?.basePrice ?? 0;
+  const priceReturnDay = ibFlights !== undefined || ibFlights !== null ? ibFlights[0]?.basePrice : 0;
   if (ibFlights.length != 0) {
     returnDay = ibFlights[0]?.std;
   }

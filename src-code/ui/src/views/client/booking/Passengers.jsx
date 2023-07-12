@@ -79,12 +79,12 @@ const infExtSchema = {
   }
 };
 
-const paxQty = JSON.parse(localStorage.getItem('paxQty'));
-const adl = Object.values(paxQty ?? 0)[0];
-const chd = Object.values(paxQty ?? 0)[1];
-const inf = Object.values(paxQty ?? 0)[2];
-
 const Passengers = ({ onHandleFullfill, onFormValid }) => {
+  const paxQty = JSON.parse(localStorage.getItem('paxQty'));
+  const adl = paxQty?.adl;
+  const chd = paxQty?.chd;
+  const inf = paxQty?.inf;
+
   const today = dayjs();
   const passengers = useSelector(selectPassengers);
 
@@ -103,9 +103,10 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
 
   let initialBookings = [];
   let initialValidations = [];
-  const genInitialBookings = useCallback((isBoth) => {
+  const paxNotExist = passengers === undefined || passengers === null;
+  const genInitialBookings = useCallback(() => {
     for (let i = 0; i < adl; i++) {
-      if (isBoth) {
+      if (paxNotExist) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         initialBookings = [...initialBookings, { ...initialPassenger, gender: 'ADL' }];
       }
@@ -113,21 +114,20 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
       initialValidations = [...initialValidations, { ...initialValidation }];
     }
     for (let i = 0; i < chd; i++) {
-      if (isBoth) {
+      if (paxNotExist) {
         initialBookings = [...initialBookings, { ...initialPassenger, gender: 'CHD' }];
       }
       initialValidations = [...initialValidations, { ...initialValidation }];
     }
     for (let i = 0; i < inf; i++) {
-      if (isBoth) {
+      if (paxNotExist) {
         initialBookings = [...initialBookings, { ...initialPassenger, gender: 'INF' }];
       }
       initialValidations = [...initialValidations, { ...initialValidation }];
     }
   }, []);
-  genInitialBookings(passengers === undefined || passengers === null);
-
-  const [bookings, setBookings] = useState(passengers ?? initialBookings);
+  genInitialBookings();
+  const [bookings, setBookings] = useState(paxNotExist ? initialBookings : passengers);
 
   const [validations, setValidations] = useState(initialValidations);
 
@@ -167,13 +167,11 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
 
   useEffect(() => {
     let invalid = handleFormValid();
-    if (invalid) {
-      onFormValid(false);
-    } else {
-      onFormValid(true);
+    onFormValid(!invalid);
+    if (!invalid) {
       onHandleFullfill(bookings);
     }
-  }, [bookings]);
+  }, [bookings, handleFormValid, onFormValid, onHandleFullfill]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -199,17 +197,18 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
         setValidations(dataValidate);
       });
     }, 300);
+    return () => clearTimeout(timeout);
   }, [bookings]);
 
   const hasError = (field, index) => {
     return validations[index]?.touched[field] && validations[index]?.errors[field] ? true : false;
   };
 
-  let minDobINF = today.subtract(2, 'year');
-  let maxDobINF = today.subtract(9, 'day');
-  let minDobCHD = today.subtract(12, 'year');
-  let maxDobCHD = today.subtract(2, 'year');
-  let maxDobADL = today.subtract(12, 'year');
+  const minDobINF = today.subtract(2, 'year');
+  const maxDobINF = today.subtract(9, 'day');
+  const minDobCHD = today.subtract(12, 'year');
+  const maxDobCHD = today.subtract(2, 'year');
+  const maxDobADL = today.subtract(12, 'year');
 
   return (
     <Fragment>
