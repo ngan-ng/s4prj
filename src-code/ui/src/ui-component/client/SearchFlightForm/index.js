@@ -10,9 +10,9 @@ import PaxQty from './PaxQty';
 import SubmitButton from './SubmitButton';
 import TotalPax from './TotalPax';
 import TripTypeButton from './TripTypeButton';
-import { useDispatch } from "react-redux";
-import { searchFlightStart } from "../../../store/flight/flight.action";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { searchFlightStart, selectFlightClear } from '../../../store/flight/flight.action';
+import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 const SearchFlightForm = ({ backgroundOpacity }) => {
@@ -210,7 +210,8 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
     localStorage.setItem('paxQty', JSON.stringify(paxQty));
 
     dispatch(searchFlightStart(temp));
-    navigate("/booking");
+    dispatch(selectFlightClear());
+    navigate('/booking');
   };
   const total = Object.values(paxQty).reduce((a, b) => a + b);
 

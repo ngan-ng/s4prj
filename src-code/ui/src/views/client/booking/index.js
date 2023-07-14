@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Fragment, useEffect, useState } from 'react';
 import S4prjSteppers from 'ui-component/client/S4prjSteppers';
 import { StepperType } from '../../../ui-component/client/S4prjSteppers/stepper.type';
@@ -11,6 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectReturnId, selectDepartId } from '../../../store/flight/flight.selector';
 import { createPassengerStart } from 'store/passenger/passenger.action';
 import { useCallback } from 'react';
+import { b_clear, createBookingStart } from 'store/booking/booking.action';
+import { selectPassengers } from 'store/passenger/passenger.selector';
 
 const Booking = () => {
   const dispatch = useDispatch();
@@ -20,6 +23,7 @@ const Booking = () => {
   const departId = useSelector(selectDepartId);
   const returnId = useSelector(selectReturnId);
   const [isFormValid, setIsFormValid] = useState(false);
+  //const passengers = useSelector(selectPassengers);
   const handleCreatePaxStart = useCallback(
     (payload) => {
       dispatch(createPassengerStart(payload));
@@ -27,11 +31,14 @@ const Booking = () => {
     [dispatch]
   );
   const handleFormValid = (val) => {
+    console.log(val);
     setIsFormValid(val);
   };
+
   const handleNext = () => {
     if (validActiveStep) {
       if (activeStep === 1) {
+        //const reqDto = {bookings: []}
         // handleCreatePaxStart();
       }
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -44,7 +51,7 @@ const Booking = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleFinished = () => { };
+  const handleFinished = () => {};
 
   const BookingContent = () => {
     switch (activeStep) {
@@ -67,7 +74,7 @@ const Booking = () => {
     try {
       switch (activeStep) {
         case 0:
-          setValidActiveStep(departId !== null && returnId !== null);
+          setValidActiveStep((departId !== null && returnId !== null) || returnId !== null || departId !== null);
           break;
         case 1:
           setValidActiveStep(isFormValid);
