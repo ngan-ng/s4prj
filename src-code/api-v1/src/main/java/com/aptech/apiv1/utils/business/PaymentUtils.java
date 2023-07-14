@@ -61,12 +61,14 @@ public class PaymentUtils {
                                 .setQuantity("1");
                         totalAmount += ticketPrice;
                         if (b.getInfant() != null) {
-                            double infantPrice = 5; // Infant fee: $5 USD
-                            item.setPrice(String.format("%.2f", infantPrice))
+                            double infantPrice = 0.01; // Infant fee: $5 USD
+                            Item infItem = new Item().setCurrency("USD");
+                            infItem.setPrice(String.format("%.2f", infantPrice))
                                     .setName(bookingId)
                                     .setDescription(PaymentCategory.INFANT_FEE.toString())
                                     .setQuantity("1");
                             totalAmount += infantPrice;
+                            items.add(infItem);
                         }
                     }
                     case 1 -> {

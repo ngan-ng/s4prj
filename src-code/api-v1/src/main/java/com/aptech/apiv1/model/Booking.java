@@ -37,7 +37,7 @@ public class Booking implements Serializable {
     private LocalDate dob;
     @Column(name = "status")
     private String status = String.valueOf(BookingStatus.UNPAID);
-    @Column(name = "seq", updatable = false)
+    @Column(name = "seq")
     private int seq = 0;
     @Column(name = "title", columnDefinition = "varchar(20)", nullable = false)
     private String title = "Mr.";

@@ -20,14 +20,12 @@ const createBooking = async (bookings) => {
 };
 
 const getBookingsByPnr = async ({ pnr }) => {
-  console.log(pnr);
   const resp = await axiosCall.get(`/api-v1/guest/booking/${pnr}`);
   return resp;
 };
 
 function* fetchBookingByPnrAsync({ payload }) {
   try {
-    console.log('Payload: ' + payload);
     yield delay(3000);
     const resp = yield call(getBookingsByPnr, payload);
     yield put(fetchBookingByPnrSuccess(resp.data));

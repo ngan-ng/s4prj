@@ -11,10 +11,20 @@ const MainLayout = () => {
     <Box minHeight="100vh">
       <CssBaseline />
       {/* Header */}
-      <AppBar color="secondary" position="static" elevation={3} sx={{ zIndex: 500, opacity: 0.93, display: 'block', px: 1 }}>
+      <AppBar
+        color="secondary"
+        position="static"
+        elevation={3}
+        sx={{ zIndex: 500, opacity: 0.93, display: 'block', px: 1 }}
+      >
         <Toolbar>
           <IconButton onClick={() => navigate('/')} edge="start" color="inherit" sx={{ ml: 0, p: 0, my: 0, mr: 2 }}>
-            <Avatar variant="square" src={logo} sizes="large" sx={{ height: '60px', width: '60px', backgroundColor: 'transparent' }} />
+            <Avatar
+              variant="square"
+              src={logo}
+              sizes="large"
+              sx={{ height: '60px', width: '60px', backgroundColor: 'transparent' }}
+            />
           </IconButton>
           <Header />
         </Toolbar>
@@ -22,12 +32,14 @@ const MainLayout = () => {
       {/* Main body */}
       <Outlet />
       {/* Footer */}
-      <AppBar color="secondary" position="static" elevation={3} sx={{ display: 'block', opacity: 0.93, top: 'auto', bottom: 0, mt: 3 }}>
+      <AppBar
+        color="secondary"
+        position="static"
+        elevation={3}
+        sx={{ display: 'block', opacity: 0.93, top: 'auto', bottom: 0, mt: 3 }}
+      >
         <Container>
           <Toolbar>
-            <IconButton edge="start" color="inherit" aria-label="menu" sx={{ mr: 2 }}>
-              <Avatar src="assets/images/logo-dark.svg" />
-            </IconButton>
             <Footer />
           </Toolbar>
         </Container>

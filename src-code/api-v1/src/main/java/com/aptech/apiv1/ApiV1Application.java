@@ -86,7 +86,7 @@ public class ApiV1Application {
         // To HA NOI
         // First flight to HAN is at 05:10 AM
         for (int k = 0; k < 3; k += 2) {
-            std = LocalDateTime.of(2023, 7, new Date().getDate(), 5, 10, 0);
+            std = LocalDateTime.of(2023, 8, new Date().getDate(), 5, 10, 0);
             std = std.plusDays(k);
             int durationSgnHan = 130;
             for (int i = 120; i <= 125; i++) {
@@ -103,7 +103,7 @@ public class ApiV1Application {
         // To DA NANG
         // First flight to DAD is at 06:20 AM
         for (int k = 0; k < 3; k += 2) {
-            std = LocalDateTime.of(2023, 7, new Date().getDate(), 6, 20, 0);
+            std = LocalDateTime.of(2023, 8, new Date().getDate(), 6, 20, 0);
             std = std.plusDays(k);
             destination.setIata_code(IataCode.DAD.toString())
                     .setName(getAirport(IataCode.DAD))

@@ -208,7 +208,6 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
         setValidations(dataValidate);
       });
     }, 300);
-    return () => clearTimeout(timeout);
   }, [bookings]);
 
   const hasError = (field, index) => {

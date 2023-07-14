@@ -10,7 +10,7 @@ const SelectPax = () => {
   const bookings = useSelector(selectBookingByPnr);
   const selectMBObj = useSelector(selectManageBookingObj);
   // Filter only passengers on the selected flight for managing booking
-  const paxOfFlight = bookings.filter((b) => b.flight.id == selectMBObj.flightId);
+  const paxOfFlight = bookings.filter((b) => b.flight.id == selectMBObj.flightId && b.status === 'CONFIRMED');
   const [allSelect, setAllSelect] = useState(false);
   const [intermediate, setIntermediate] = useState(false);
 

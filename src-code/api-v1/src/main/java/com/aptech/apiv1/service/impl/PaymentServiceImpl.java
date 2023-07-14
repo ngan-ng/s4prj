@@ -4,6 +4,7 @@ import com.aptech.apiv1.dto.BookingPaymentDto;
 import com.aptech.apiv1.dto.GroupBookingPaymentDto;
 import com.aptech.apiv1.dto.paypal.ReviewPaypalResponseDto;
 import com.aptech.apiv1.dto.paypal.SinglePaypalReviewDto;
+import com.aptech.apiv1.enums.BookingStatus;
 import com.aptech.apiv1.enums.PaymentStatus;
 import com.aptech.apiv1.model.Booking;
 import com.aptech.apiv1.repository.BookingRepository;
@@ -17,8 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.aptech.apiv1.utils.business.PaymentUtils.getTransactionInformation;
 
@@ -100,6 +101,13 @@ public class PaymentServiceImpl implements PaymentService {
         PaymentExecution paymentExecution = new PaymentExecution().setPayerId(payerId);
         Payment executePayment = new Payment().setId(paymentId).execute(apiContext, paymentExecution);
         if(executePayment != null){
+            long bId = payments.get(0).getBookingId();
+            Optional<Booking> b = bookingRepository.findById(bId);
+            if (b.isPresent()){
+              List<Booking> paidBookings = bookingRepository.findBookingByPnr(b.get().getPnr());
+              paidBookings.forEach(item -> item.setStatus(String.valueOf(BookingStatus.CONFIRMED)));
+              bookingRepository.saveAll(paidBookings);
+            }
             return paymentRepository.saveAll(payments);
         }
         return null;
