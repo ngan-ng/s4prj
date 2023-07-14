@@ -39,6 +39,12 @@ export const flightReducer = (state = INITIAL_STATE, action) => {
         ...state,
         ReturnId: payload
       };
+    case FLIGHT_ACTION_TYPES.SELECT_FLIGHT_CLEAR:
+      return {
+        ...state,
+        DepartId: null,
+        ReturnId: null
+      };
     default:
       return state;
   }

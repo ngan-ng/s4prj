@@ -13,3 +13,5 @@ export const selectDepartIdSuccess = (idDepart) => createAction(FLIGHT_ACTION_TY
 
 export const selectReturnIdStart = (idReturn) => createAction(FLIGHT_ACTION_TYPES.SELECT_RETURN_ID_START, idReturn);
 export const selectReturnIdSuccess = (idReturn) => createAction(FLIGHT_ACTION_TYPES.SELECT_RETURN_ID_SUCCESS, idReturn);
+
+export const selectFlightClear = () => createAction(FLIGHT_ACTION_TYPES.SELECT_FLIGHT_CLEAR);
