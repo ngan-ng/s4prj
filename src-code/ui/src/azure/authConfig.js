@@ -27,10 +27,11 @@ const isFirefox = firefox > 0; // Only needed if you need to support the redirec
 
 const msalConfig = {
   auth: {
-    clientId: '83c799f9-dfff-4e4d-9c7f-ee758c3a9496',
+    clientId: '44fb6432-e437-4923-a1c9-84837289e60a',
     authority: b2cPolicies.authorities.signUpSignIn.authority,
     knownAuthorities: [b2cPolicies.authorityDomain],
-    redirectUri: '' || 'http://localhost:3000' || 'http://localhost:3000/booking' || 'http://localhost:3000/manage-booking',
+    redirectUri:
+      '' || 'http://localhost:3000' || 'http://localhost:3000/booking' || 'http://localhost:3000/manage-booking',
     postLogoutRedirectUri: '/'
   },
   cache: {
