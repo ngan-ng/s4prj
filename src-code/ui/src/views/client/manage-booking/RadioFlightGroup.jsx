@@ -37,9 +37,9 @@ export default function RadioFlightGroup({ flights }) {
           >
             {flights.map((item, index) => (
               <Fragment key={item?.id}>
-                <ListItem variant="outlined" key={item?.id} sx={{ boxShadow: 'sm', bgcolor: 'background.body' }}>
+                <ListItem variant="outlined" key={item?.flightNumber} sx={{ boxShadow: 'sm', bgcolor: 'background.body' }}>
                   <Radio
-                    key={item?.id}
+                    key={index}
                     color="info"
                     overlay
                     value={item?.id}

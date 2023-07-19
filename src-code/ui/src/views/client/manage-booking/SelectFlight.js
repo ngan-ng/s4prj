@@ -22,14 +22,14 @@ const SelectFlight = () => {
   let obFlight;
   let ibFlight;
   let flightProps;
-
+  let unpaid = false;
   if (bookings !== undefined && bookings !== null && bookings.length > 0) {
     const minSTD = Math.min(...bookings.map((b) => Date.parse(b.flight.std)));
     obFlight = bookings?.filter((b) => Date.parse(b.flight.std) === minSTD)[0].flight;
     ibFlight = bookings?.filter((b) => Date.parse(b.flight?.std) > minSTD)[0]?.flight ?? null;
     flightProps = ibFlight !== undefined || ibFlight !== null ? [obFlight, ibFlight] : [obFlight];
+    unpaid = bookings?.filter((b) => b?.status === 'UNPAID').length > 0;
   }
-  const unpaid = bookings?.filter((b) => b?.status === 'UNPAID').length > 0;
   /////// UI
   const [openDialog, setOpenDialog] = useState(false);
   const handleDialogOpen = () => {

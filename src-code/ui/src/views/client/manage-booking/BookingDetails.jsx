@@ -18,7 +18,7 @@ const BookingDetails = ({ unpaid }) => {
   }, []);
   const handlePayment = async () => {
     try {
-      if (unpaid) {
+      if (unpaid && bookings?.length > 0) {
         const coreArray = bookings.map((b) => {
           let obj = {
             loadSeatDto: { id: 0, seatNumber: '', price: 0, bookingId: 0 },
@@ -48,7 +48,9 @@ const BookingDetails = ({ unpaid }) => {
   };
   return (
     <Grid container>
-      <Grid item>{unpaid && <Button onClick={handlePayment}>Paynow</Button>}</Grid>
+      <Grid item>{unpaid && <Button onClick={handlePayment}>Paynow</Button>}
+      
+      </Grid>
     </Grid>
   );
 };
