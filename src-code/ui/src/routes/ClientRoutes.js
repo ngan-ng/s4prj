@@ -5,6 +5,8 @@ import MainLayout from 'layout/client/MainLayout';
 // import HomePage from 'views/client/home/index';
 import Loadable from 'ui-component/Loadable';
 import Booking from "../views/client/booking";
+import { ErrorPayPal } from 'views/client/booking/paypal/ErrorPayPal';
+import { ReviewPayPal } from 'views/client/booking/paypal/ReviewPayPal';
 
 // routing
 const HomePage = Loadable(lazy(() => import('views/client/home')));
@@ -48,6 +50,24 @@ const ClientRoutes = {
         {
           path: '',
           element: <ManageBooking />
+        }
+      ]
+    },
+    {
+      path: 'error-paypal',
+      children: [
+        {
+          path: '',
+          element: <ErrorPayPal />
+        }
+      ]
+    },
+    {
+      path: 'review-paypal',
+      children: [
+        {
+          path: '',
+          element: <ReviewPayPal />
         }
       ]
     }

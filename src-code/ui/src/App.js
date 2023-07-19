@@ -12,17 +12,28 @@ import themes from 'themes';
 // project imports
 import NavigationScroll from 'layout/admin/NavigationScroll';
 
+// paypal
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
+
 // ==============================|| APP ||============================== //
 
 const App = () => {
   const customization = useSelector((state) => state.customization);
+
+  const initialOptions = {
+    clientId: 'test',
+    currency: 'USD',
+    intent: 'capture'
+  };
 
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={themes(customization)}>
         <CssBaseline />
         <NavigationScroll>
-          <Routes />
+          <PayPalScriptProvider options={initialOptions}>
+            <Routes />
+          </PayPalScriptProvider>
         </NavigationScroll>
       </ThemeProvider>
     </StyledEngineProvider>

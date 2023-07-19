@@ -14,22 +14,40 @@ import { createPassengerStart } from 'store/passenger/passenger.action';
 import { useCallback } from 'react';
 import { b_clear, createBookingStart } from 'store/booking/booking.action';
 import { selectPassengers } from 'store/passenger/passenger.selector';
+import { selectBookings } from 'store/booking/booking.selector';
+import { useLocation, useNavigate } from 'react-router';
 
 const Booking = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [activeStep, setActiveStep] = useState(0);
   const [validActiveStep, setValidActiveStep] = useState(false);
   const manageStepper = StepperType.BOOKING;
   const departId = useSelector(selectDepartId);
   const returnId = useSelector(selectReturnId);
   const [isFormValid, setIsFormValid] = useState(false);
-  //const passengers = useSelector(selectPassengers);
+  const passengers = useSelector(selectPassengers);
+  console.log('passengers', passengers);
+  const bookings = useSelector(selectBookings);
+  console.log('bookings', bookings);
+
+  const location = useLocation();
+  const [activeStepFromPayment] = useState(location.state?.activeStep);
+  console.log('activeStepFromPayment', activeStepFromPayment);
+
+  useEffect(() => {
+    if (activeStepFromPayment == 4) setActiveStep((prevActiveStep) => prevActiveStep + 4);
+  }, [activeStepFromPayment]);
+
   const handleCreatePaxStart = useCallback(
     (payload) => {
-      dispatch(createPassengerStart(payload));
+      if (passengers == null) {
+        dispatch(createPassengerStart(payload));
+      }
     },
-    [dispatch]
+    [dispatch, passengers]
   );
+  //console.log(passengers);
   const handleFormValid = (val) => {
     console.log(val);
     setIsFormValid(val);
@@ -40,6 +58,28 @@ const Booking = () => {
       if (activeStep === 1) {
         //const reqDto = {bookings: []}
         // handleCreatePaxStart();
+
+        // if (bookings != null) {
+        //   console.log('here');
+        //   for (let i = 0; i < bookings.length; i++) {
+        //     for (let j = 0; j < passengers.length; j++) {
+        //       if (
+        //         bookings[i].email !== passengers[j].email &&
+        //         bookings[i].mobile !== passengers[j].mobile &&
+        //         bookings[i].dob !== passengers[j].dob
+        //       ) {
+        //         alert('You already booked this flight.');
+        //         location.reload();
+        //       }
+        //     }
+        //   }
+        // } else if (bookings == null) {
+        //   console.log('dispatch');
+        dispatch(b_clear());
+        dispatch(createBookingStart(passengers));
+
+        console.log('bookings clear');
+        //}
       }
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else {
@@ -58,7 +98,7 @@ const Booking = () => {
       case 0:
         return <SelectFlight departId={departId} returnId={returnId} />;
       case 1:
-        return <Passengers onHandleFullfill={handleCreatePaxStart} onFormValid={handleFormValid} />;
+        return <Passengers onHandleFulfill={handleCreatePaxStart} onFormValid={handleFormValid} />;
       case 2:
         return <SeatAssignment />;
       case 3:
@@ -115,7 +155,14 @@ const Booking = () => {
                 <BookingContent />
               </Box>
               <Box position="relative" sx={{ display: 'flex', flexDirection: 'row', pt: 2, marginY: 10, marginX: 15 }}>
-                <Button size="large" variant="outlined" color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+                <Button
+                  size="large"
+                  variant="outlined"
+                  color="inherit"
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                >
                   Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
