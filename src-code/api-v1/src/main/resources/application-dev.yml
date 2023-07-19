@@ -6,11 +6,11 @@ spring:
         b2c:
           enabled: true
           profile:
-            tenant-id: 0ad81327-6a42-41fa-b79d-bb6aea2c17d9
+            tenant-id: bdbea02a-d186-4bc4-94d6-efe6ac215410
           credential:
-            client-id: 4360624f-9953-4af2-bd13-509c1b75fb12
-          app-id-uri: https://s4prj.onmicrosoft.com/api-v1/.default
-          base-uri: https://s4prj.b2clogin.com
+            client-id: 54dde2b0-f714-49c3-9eed-c6b9ed708470
+          app-id-uri: https://s4project.onmicrosoft.com/api/.default
+          base-uri: https://s4project.b2clogin.com
           user-flows:
             sign-up-or-sign-in: B2C_1_signin_or_signup
   datasource:
