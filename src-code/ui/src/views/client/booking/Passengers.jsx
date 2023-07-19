@@ -17,8 +17,6 @@ import { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectPassengers } from 'store/passenger/passenger.selector';
 import { useCallback } from 'react';
-import { b_clear, createBookingStart, isBookingCreated } from 'store/booking/booking.action';
-import { selectIsCreated } from 'store/booking/booking.selector';
 
 const schema = {
   title: {
@@ -35,6 +33,10 @@ const schema = {
     length: {
       minimum: 1,
       maximum: 255
+    },
+    format: {
+      pattern: '^[A-Za-z]+$',
+      message: '^First name can not contain number or any special characters'
     }
   },
   lastName: {
@@ -45,6 +47,10 @@ const schema = {
     length: {
       minimum: 1,
       maximum: 255
+    },
+    format: {
+      pattern: '^[A-Za-z]+$',
+      message: '^Last name can not contain number or any special characters'
     }
   },
   dob: {
@@ -61,14 +67,22 @@ const adlPrimarySchema = {
       message: '^Mobile is not blank'
     },
     numericality: {
-      onlyInteger: true,
-      greaterThan: 0
+      onlyInteger: true
+      //equalTo: 10,
+      //message: '^Mobile must contain 10 numbers'
+    },
+    format: {
+      pattern: '^(0[1-9]{1})+([0-9]{8})+$',
+      message: '^Mobile must start with 0 and have 10 numbers'
     }
   },
   email: {
-    presence: {
-      allowEmpty: false,
-      message: '^Email is not blank'
+    // presence: {
+    //   allowEmpty: false,
+    //   message: '^Email is not blank'
+    // },
+    email: {
+      message: "^Doesn't look like a valid email"
     }
   }
 };
@@ -81,7 +95,7 @@ const infExtSchema = {
   }
 };
 
-const Passengers = ({ onHandleFullfill, onFormValid }) => {
+const Passengers = ({ onHandleFulfill, onFormValid }) => {
   const paxQty = JSON.parse(localStorage.getItem('paxQty'));
   const adl = paxQty?.adl;
   const chd = paxQty?.chd;
@@ -90,8 +104,6 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
   const dispatch = useDispatch();
   const today = dayjs();
   const passengers = useSelector(selectPassengers);
-  const isCreated = useSelector(selectIsCreated);
-  console.log('isCreated', isCreated);
 
   const initialPassenger = {
     title: '',
@@ -112,8 +124,12 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
   const genInitialBookings = useCallback(() => {
     for (let i = 0; i < adl; i++) {
       if (paxNotExist) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        initialBookings = [...initialBookings, { ...initialPassenger, gender: 'ADL' }];
+        if (i === 0) {
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+          initialBookings = [...initialBookings, { ...initialPassenger, gender: 'ADL', email: '', mobile: '' }];
+        } else {
+          initialBookings = [...initialBookings, { ...initialPassenger, gender: 'ADL' }];
+        }
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
       initialValidations = [...initialValidations, { ...initialValidation }];
@@ -167,22 +183,26 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
     if (bookings === undefined || bookings === null) {
       return false;
     }
-    return bookings?.filter((element) => Object.values(element)?.filter((val) => val.toString().trim() === '').length > 0).length > 0;
+    const err = validate(bookings[0], adlPrimarySchema) ?? {};
+    console.log(JSON.stringify(err));
+    if (Object.values(err).filter((val) => val !== '').length > 0) {
+      return true;
+    }
+    // if (err !== undefined || err !== null) {
+    // }
+    return (
+      bookings?.filter((element) => Object.values(element)?.filter((val) => val.toString().trim() === '').length > 0)
+        .length > 0
+    );
   }, [bookings]);
 
   useEffect(() => {
     let invalid = handleFormValid();
     onFormValid(!invalid);
     if (!invalid) {
-      onHandleFullfill(bookings);
-      dispatch(isBookingCreated());
-      dispatch(b_clear());
-      if (isCreated == false) {
-        console.log('render');
-        dispatch(createBookingStart(bookings));
-      }
+      onHandleFulfill(bookings);
     }
-  }, [bookings, handleFormValid, onFormValid, onHandleFullfill]);
+  }, [bookings, handleFormValid, onFormValid, onHandleFulfill]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -292,7 +312,9 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
                         {pax.gender !== 'ADL' && <MenuItem value="MSTR">MSTR</MenuItem>}
                       </Select>
                       {hasError(`title_${index}`, index) && (
-                        <FormHelperText>{validations[index].errors !== undefined ? validations[index].errors.title[0] : ''}</FormHelperText>
+                        <FormHelperText>
+                          {validations[index].errors !== undefined ? validations[index].errors.title[0] : ''}
+                        </FormHelperText>
                       )}
                     </FormControl>
                   </Grid>
@@ -304,7 +326,9 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
                         value={dayjs(pax?.dob)}
                         name={'dob_' + index}
                         onChange={(event) => handleChange(event, index, 'dob')}
-                        defaultCalendarMonth={pax.gender === 'INF' ? maxDobINF : pax.gender === 'CHD' ? maxDobCHD : maxDobADL}
+                        defaultCalendarMonth={
+                          pax.gender === 'INF' ? maxDobINF : pax.gender === 'CHD' ? maxDobCHD : maxDobADL
+                        }
                         minDate={pax.gender === 'INF' ? minDobINF : pax.gender === 'CHD' ? minDobCHD : null}
                         maxDate={pax.gender === 'INF' ? maxDobINF : pax.gender === 'CHD' ? maxDobCHD : maxDobADL}
                         slotProps={{
@@ -351,18 +375,6 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
                     <Grid item xs={12} md={6}>
                       <TextField
                         fullWidth
-                        name="mobile"
-                        label="Mobile"
-                        variant="filled"
-                        value={pax.mobile}
-                        onChange={(event) => handleChange(event, index)}
-                        error={hasError('mobile', index)}
-                        helperText={hasError('mobile', index) ? validations[index].errors.mobile[0] : null}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <TextField
-                        fullWidth
                         name="email"
                         label="Email"
                         variant="filled"
@@ -370,6 +382,18 @@ const Passengers = ({ onHandleFullfill, onFormValid }) => {
                         onChange={(event) => handleChange(event, index)}
                         error={hasError('email', index)}
                         helperText={hasError('email', index) ? validations[index].errors.email[0] : null}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <TextField
+                        fullWidth
+                        name="mobile"
+                        label="Mobile"
+                        variant="filled"
+                        value={pax.mobile}
+                        onChange={(event) => handleChange(event, index)}
+                        error={hasError('mobile', index)}
+                        helperText={hasError('mobile', index) ? validations[index].errors.mobile[0] : null}
                       />
                     </Grid>
                   </Grid>
