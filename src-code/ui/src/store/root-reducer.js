@@ -9,6 +9,7 @@ import { bookingReducer } from './booking/booking.reducer';
 import { manageBookingReducer } from './manage-booking/mb.reducer';
 import { seatReducer } from './seat/seat.reducer';
 import { passengerReducer } from './passenger/passenger.reducer';
+import { itineraryReducer } from './itinerary/itinerary.reducer';
 
 // ==============================|| COMBINE REDUCER ||============================== //
 
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   manageBookingObj: manageBookingReducer,
   seats: seatReducer,
   flights: flightReducer,
-  passengers: passengerReducer
+  passengers: passengerReducer,
+  itinerary: itineraryReducer
 });
 
 export default rootReducer;
