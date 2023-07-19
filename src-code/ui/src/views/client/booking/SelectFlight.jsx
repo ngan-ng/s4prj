@@ -1,20 +1,25 @@
 /* eslint-disable no-unused-vars */
-import * as React from 'react';
 import { Fragment, useLayoutEffect, useRef, useState } from 'react';
-import { Box, Button, Divider, Grid, LinearProgress, Paper, Typography } from '@mui/material';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  LinearProgress,
+  Paper,
+  Typography,
+  ButtonGroup,
+  Card,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl
+} from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFlights, selectFlightsIsFetching } from '../../../store/flight/flight.selector';
 import dayjs from 'dayjs';
 import { Flight } from '@mui/icons-material';
 import '@fontsource/public-sans';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import Stack from '@mui/material/Stack';
 import { selectDepartIdStart, selectReturnIdStart } from '../../../store/flight/flight.action';
 
 const SelectFlight = ({ departId, returnId }) => {

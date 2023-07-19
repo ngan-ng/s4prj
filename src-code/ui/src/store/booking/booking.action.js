@@ -29,7 +29,3 @@ export const createBookingFailed = (error) => ({
 export const b_clear = () => ({
   type: booking_types.BOOKING_CLEAR
 });
-
-export const isBookingCreated = () => ({
-  type: booking_types.IS_BOOKING_CREATED
-});
