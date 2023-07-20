@@ -4,8 +4,8 @@ import { fetchCompletedPaypalFailed, fetchCompletedPaypalSuccess, sendEmailFaile
 import { ITINERARY_ACTION_TYPES } from './itinerary.types';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
-const postContent = async (payload) => {
-  const resp = await axiosCall.post('/api-v1/guest/email/send', payload);
+const postContent = async (objEmail) => {
+  const resp = await axiosCall.post('/api-v1/guest/email/send', objEmail);
   console.log('resp api', resp);
   return resp;
 };
@@ -20,7 +20,16 @@ function* fetchCompletedPaypalStart({ payload }) {
 
 function* emailStart({ payload }) {
   try {
-    const resp = yield call(postContent, payload);
+    const objEmail = {
+      firstName: payload.reviewDtos[0].booking.firstName,
+      lastName: payload.reviewDtos[0].booking.lastName,
+      pnr: payload.reviewDtos[0].booking.pnr,
+      email: payload.reviewDtos[0].booking.email,
+      payerEmail: payload.payerEmail,
+      paymentMethod: payload.paymentMethod
+    };
+    
+    const resp = yield call(postContent, objEmail);
     yield put(sendEmailSuccess(payload));
   } catch (error) {
     yield put(sendEmailFailed(error));

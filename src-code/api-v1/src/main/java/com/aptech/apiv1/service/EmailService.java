@@ -1,6 +1,6 @@
 package com.aptech.apiv1.service;
 
-import com.aptech.apiv1.dto.paypal.ReviewPaypalResponseDto;
+import com.aptech.apiv1.dto.EmailDto;
 import jakarta.mail.Message;
 import jakarta.mail.internet.InternetAddress;
 import org.apache.logging.log4j.LogManager;
@@ -23,31 +23,42 @@ public class EmailService {
     @Autowired
     private JavaMailSender emailSender;
 
-    @Value("${spring.mail.username}")
-    private String emailTo;
+    //@Value("${spring.mail.username}")
+    //private String emailTo;
 
     @Async
-    public void send(ReviewPaypalResponseDto reviewPaypalResponseDto) {
+    public void send(EmailDto emailDto) {
 
         // prepare email format
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
 
             @Override
             public void prepare(MimeMessage mimeMessage) throws Exception {
-                mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
-                mimeMessage.setSubject(reviewPaypalResponseDto.getPayerEmail());
+                mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(emailDto.getEmail()));
+                mimeMessage.setSubject("Your booking purchase is confirmed! For PNR: " + emailDto.getPnr());
 
                 MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
                 helper.setText(
                         "<html>"
                                 + "<body>"
-                                + "Email sent by: " + reviewPaypalResponseDto.getStatus() + "<br/>"
-                                + "Email address: " + reviewPaypalResponseDto.getPayerEmail()
+                                + "Hi " + emailDto.getFirstName() + " " + emailDto.getLastName() + ","
                                 + "<br/><br/>"
-                                + reviewPaypalResponseDto.getReviewDtos()
+                                + "We are so excited to welcome you to FS Airlines. Please find your booking information based on the PNR code below and fill in on our website. Please present your booking upon boarding."
+                                + "<br/><br/>"
+                                + "Customer details: " + "<br/>"
+                                + "Email: " + emailDto.getEmail() + "<br/>"
+                                + "PNR: " + "<strong>" + emailDto.getPnr() + "</strong>" + "<br/>"
+                                + "Payment method: " + emailDto.getPaymentMethod() + " with payer email " + emailDto.getPayerEmail()
+                                + "<br/><br/>"
+                                + "Contact us:" + "<br/>"
+                                + "Phone number: 123-456-789" + "<br/>"
+                                + "Email: fsairlines.global@gmail.com" + "<br/>"
+                                + "<br/><br/>"
+                                + "Happy travels!"
                                 + "</body>"
-                                + "</html>", true);
+                                + "</html>", true
+                );
             }
         };
 

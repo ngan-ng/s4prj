@@ -132,7 +132,6 @@ const Booking = () => {
 
   return (
     <Fragment>
-      <div>Booking</div>
       <S4prjSteppers innerType={manageStepper} activeStep={activeStep} />
       <Container>
         <Box minHeight={600} sx={{ zIndex: '2', mx: 4 }}>

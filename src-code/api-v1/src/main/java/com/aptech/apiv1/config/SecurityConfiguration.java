@@ -80,8 +80,8 @@ public class SecurityConfiguration {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername("test.spring.email.911@gmail.com");
-        mailSender.setPassword("mckzprsqnexfxspc");
+        mailSender.setUsername("fsairlines.global@gmail.com");
+        mailSender.setPassword("uwkahtwfqvogrwke");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");

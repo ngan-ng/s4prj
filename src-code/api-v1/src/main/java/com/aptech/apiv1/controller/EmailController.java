@@ -1,6 +1,6 @@
 package com.aptech.apiv1.controller;
 
-import com.aptech.apiv1.dto.paypal.ReviewPaypalResponseDto;
+import com.aptech.apiv1.dto.EmailDto;
 import com.aptech.apiv1.service.EmailService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +18,9 @@ public class EmailController {
     private EmailService emailService;
 
     @PostMapping("/send")
-    public ResponseEntity<?> sendEmail(@RequestBody ReviewPaypalResponseDto reviewPaypalResponseDto) {
+    public ResponseEntity<?> sendEmail(@RequestBody EmailDto emailDto) {
         try {
-            emailService.send(reviewPaypalResponseDto);
+            emailService.send(emailDto);
             return new ResponseEntity<Void>(HttpStatus.CREATED);
         } catch (Exception ex) {
             return ResponseEntity.notFound().build();

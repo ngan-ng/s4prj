@@ -40,8 +40,8 @@ spring:
             enable: 'true'
           auth: 'true'
     host: smtp.gmail.com
-    username: test.spring.email.911@gmail.com
-    password: mckzprsqnexfxspc
+    username: fsairlines.global@gmail.com
+    password: uwkahtwfqvogrwke
     port: '587'
 
 security:
