@@ -48,9 +48,7 @@ const BookingDetails = ({ unpaid }) => {
   };
   return (
     <Grid container>
-      <Grid item>{unpaid && <Button onClick={handlePayment}>Paynow</Button>}
-      
-      </Grid>
+      <Grid item>{unpaid && <Button onClick={handlePayment}>Paynow</Button>}</Grid>
     </Grid>
   );
 };

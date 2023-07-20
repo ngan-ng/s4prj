@@ -2,15 +2,8 @@
 import { all, call, delay, put, select, takeLatest } from 'redux-saga/effects';
 import BOOKING_ACTION_TYPES from './booking.type';
 import axiosCall from 'api/callAxios';
-import {
-  b_clear,
-  createBookingSuccess,
-  createBookingFailed,
-  fetchBookingByPnrFailed,
-  fetchBookingByPnrSuccess
-} from './booking.action';
-import { selectDepartId, selectFlights, selectReturnId } from 'store/flight/flight.selector';
-import { fetchBookingsStart } from 'store/itinerary/itinerary.action';
+import { b_clear, createBookingSuccess, createBookingFailed, fetchBookingByPnrFailed, fetchBookingByPnrSuccess } from './booking.action';
+import { selectDepartId, selectReturnId } from 'store/flight/flight.selector';
 import { selectBookings } from './booking.selector';
 
 const createBooking = async (bookings) => {

@@ -6,18 +6,20 @@ import { Box, Button, Container } from '@mui/material';
 import SelectFlight from './SelectFlight';
 import Passengers from './Passengers';
 import Payment from './Payment';
-import SeatAssignment from './SeatAssignment';
+import SeatAssignmentBooking from './SeatAssignmentBooking';
 import Itinerary from './Itinerary';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectReturnId, selectDepartId } from '../../../store/flight/flight.selector';
 import { createPassengerStart } from 'store/passenger/passenger.action';
-import { useCallback } from 'react';
-import { b_clear, createBookingStart } from 'store/booking/booking.action';
+import { createBookingStart } from 'store/booking/booking.action';
 import { selectPassengers } from 'store/passenger/passenger.selector';
-import { selectBookings } from 'store/booking/booking.selector';
 import { useLocation, useNavigate } from 'react-router';
 import { sendEmailStart } from 'store/itinerary/itinerary.action';
 import { selectCompletedPaypal } from 'store/itinerary/itinerary.selector';
+import { isFetchingSeats, selectSeats } from 'store/seat/seat.selector';
+import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
+import { updateSeatSuccess } from 'store/seat/seat.action';
+import { handleSeatApi } from '../manage-booking/SeatAssignment';
 
 const Booking = () => {
   const dispatch = useDispatch();
@@ -29,8 +31,7 @@ const Booking = () => {
   const returnId = useSelector(selectReturnId);
   const [isFormValid, setIsFormValid] = useState(false);
   const passengers = useSelector(selectPassengers);
-  console.log('passengers', passengers);
-  const bookings = useSelector(selectBookings);
+
   const completedPaypal = useSelector(selectCompletedPaypal);
 
   const location = useLocation();
@@ -52,30 +53,54 @@ const Booking = () => {
     setIsFormValid(val);
   };
 
+  ////
+  // Seat Assignment States
+  const seats = useSelector(selectSeats);
+  const selectMBObj = useSelector(selectManageBookingObj);
+  const isSeatsFetching = useSelector(isFetchingSeats);
+  // End Seat Assignment States
+
   const handleNext = () => {
     if (validActiveStep) {
       if (activeStep === 1) {
-        //const reqDto = {bookings: []}
-        // handleCreatePaxStart();
-
-        // if (Object.keys(bookings).length == 0) {
-        //   console.log('here');
-        //   for (let i = 0; i < bookings.length; i++) {
-        //     for (let j = 0; j < passengers.length; j++) {
-        //       if (
-        //         bookings[i].email !== passengers[j].email &&
-        //         bookings[i].mobile !== passengers[j].mobile &&
-        //         bookings[i].dob !== passengers[j].dob
-        //       ) {
-        //         alert('You already booked this flight.');
-        //         //location.reload();
-        //       }
-        //     }
-        //   }
-        // } else {
         dispatch(createBookingStart(passengers));
-        //}
       }
+
+      //// Seat Assignment
+      // AFTER PAYPAL SUCCESS => SET SEAT STATUS 'OCCUPIED'
+      if (activeStep === 3) {
+        const mySeats = seats.filter(
+          (s) =>
+            selectMBObj?.pax.includes(parseInt(s.bookingId)) &&
+            s.status === 'TEMP' &&
+            (Date.now() - new Date(s.selectedAt)) / (60 * 1000) < 10
+        );
+        if (mySeats.length > 0) {
+          let selectSeatDto = {
+            id: 0,
+            bookingId: 0,
+            action: 'complete'
+          };
+          try {
+            let isSuccess = mySeats.map((mySeat) => {
+              handleSeatApi({ ...selectSeatDto, id: mySeat.id, bookingId: mySeat.bookingId }).then((resp) => {
+                return resp.status === 200 || resp.status === 201;
+              });
+            });
+            if (isSuccess) {
+              mySeats.map((item) => {
+                let index = seats.findIndex((s) => s.id == item.id);
+                seats[index] = { ...seats[index], status: 'OCCUPIED' };
+              });
+              dispatch(updateSeatSuccess(seats));
+            }
+          } catch (error) {
+            alert('Seats assignment not completed, please try again!');
+            return;
+          }
+        }
+      }
+
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
     } else {
       alert('');
@@ -97,7 +122,7 @@ const Booking = () => {
       case 1:
         return <Passengers onHandleFulfill={handleCreatePaxStart} onFormValid={handleFormValid} />;
       case 2:
-        return <SeatAssignment />;
+        return !isSeatsFetching && <SeatAssignmentBooking />;
       case 3:
         return <Payment />;
       case 4:
@@ -132,7 +157,6 @@ const Booking = () => {
 
   return (
     <Fragment>
-      <div>Booking</div>
       <S4prjSteppers innerType={manageStepper} activeStep={activeStep} />
       <Container>
         <Box minHeight={600} sx={{ zIndex: '2', mx: 4 }}>
