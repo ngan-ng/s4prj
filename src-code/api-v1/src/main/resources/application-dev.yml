@@ -32,6 +32,17 @@ spring:
   jackson:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
+  mail:
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    host: smtp.gmail.com
+    username: test.spring.email.911@gmail.com
+    password: mckzprsqnexfxspc
+    port: '587'
 
 security:
   cors:
