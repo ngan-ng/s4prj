@@ -68,7 +68,7 @@ const Booking = () => {
 
       //// Seat Assignment
       // AFTER PAYPAL SUCCESS => SET SEAT STATUS 'OCCUPIED'
-      if (activeStep === 3) {
+      if (activeStep >= 4) {
         const mySeats = seats.filter(
           (s) =>
             selectMBObj?.pax.includes(parseInt(s.bookingId)) &&
