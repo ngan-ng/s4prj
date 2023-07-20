@@ -190,18 +190,19 @@ const Passengers = ({ onHandleFulfill, onFormValid }) => {
     }
     // if (err !== undefined || err !== null) {
     // }
-    return (
-      bookings?.filter((element) => Object.values(element)?.filter((val) => val.toString().trim() === '').length > 0)
-        .length > 0
-    );
+    return bookings?.filter((element) => Object.values(element)?.filter((val) => val.toString().trim() === '').length > 0).length > 0;
   }, [bookings]);
 
   useEffect(() => {
-    let invalid = handleFormValid();
-    onFormValid(!invalid);
-    if (!invalid) {
-      onHandleFulfill(bookings);
-    }
+    const timeout = setTimeout(() => {
+      let invalid = handleFormValid();
+      onFormValid(!invalid);
+      if (!invalid) {
+        onHandleFulfill(bookings);
+      }
+    }, 2000);
+
+    return () => clearTimeout(timeout);
   }, [bookings, handleFormValid, onFormValid, onHandleFulfill]);
 
   useEffect(() => {
@@ -227,7 +228,7 @@ const Passengers = ({ onHandleFulfill, onFormValid }) => {
         };
         setValidations(dataValidate);
       });
-    }, 300);
+    }, 100);
   }, [bookings]);
 
   const hasError = (field, index) => {
@@ -312,9 +313,7 @@ const Passengers = ({ onHandleFulfill, onFormValid }) => {
                         {pax.gender !== 'ADL' && <MenuItem value="MSTR">MSTR</MenuItem>}
                       </Select>
                       {hasError(`title_${index}`, index) && (
-                        <FormHelperText>
-                          {validations[index].errors !== undefined ? validations[index].errors.title[0] : ''}
-                        </FormHelperText>
+                        <FormHelperText>{validations[index].errors !== undefined ? validations[index].errors.title[0] : ''}</FormHelperText>
                       )}
                     </FormControl>
                   </Grid>
@@ -326,9 +325,7 @@ const Passengers = ({ onHandleFulfill, onFormValid }) => {
                         value={dayjs(pax?.dob)}
                         name={'dob_' + index}
                         onChange={(event) => handleChange(event, index, 'dob')}
-                        defaultCalendarMonth={
-                          pax.gender === 'INF' ? maxDobINF : pax.gender === 'CHD' ? maxDobCHD : maxDobADL
-                        }
+                        defaultCalendarMonth={pax.gender === 'INF' ? maxDobINF : pax.gender === 'CHD' ? maxDobCHD : maxDobADL}
                         minDate={pax.gender === 'INF' ? minDobINF : pax.gender === 'CHD' ? minDobCHD : null}
                         maxDate={pax.gender === 'INF' ? maxDobINF : pax.gender === 'CHD' ? maxDobCHD : maxDobADL}
                         slotProps={{

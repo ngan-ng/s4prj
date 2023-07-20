@@ -2,9 +2,16 @@
 import { all, call, delay, put, select, takeLatest } from 'redux-saga/effects';
 import BOOKING_ACTION_TYPES from './booking.type';
 import axiosCall from 'api/callAxios';
-import { b_clear, createBookingSuccess, createBookingFailed, fetchBookingByPnrFailed, fetchBookingByPnrSuccess } from './booking.action';
+import {
+  b_clear,
+  createBookingSuccess,
+  createBookingFailed,
+  fetchBookingByPnrFailed,
+  fetchBookingByPnrSuccess
+} from './booking.action';
 import { selectDepartId, selectFlights, selectReturnId } from 'store/flight/flight.selector';
 import { fetchBookingsStart } from 'store/itinerary/itinerary.action';
+import { selectBookings } from './booking.selector';
 
 const createBooking = async (bookings) => {
   const resp = await axiosCall.post('/api-v1/guest/booking/create', bookings);
@@ -31,13 +38,10 @@ function* createBookingStart({ payload }) {
   try {
     const getDepartId = yield select(selectDepartId);
     const getReturnId = yield select(selectReturnId);
+    const createdBooking = yield select(selectBookings);
 
-    // const ObjFlights = yield select(selectFlights);
-    // const arrObs = ObjFlights.outboundFlights;
-    // const arrIbs = ObjFlights.inboundFlights;
-    // let departDetails = arrObs.filter((ob) => ob.id == getDepartId);
-    // let returnDetails = arrIbs.filter((ib) => ib.id == getReturnId);
-
+    const getPnr = Object.keys(createdBooking).length > 0 ? createdBooking[0].pnr : '';
+    console.log('PNR:: ', getPnr);
     let groupBookings = { bookings: [] };
 
     let arrADL = [];
@@ -50,15 +54,10 @@ function* createBookingStart({ payload }) {
 
     let firstADL = arrADL[0];
 
-    console.log('arrADL', arrADL);
-    console.log('arrINF', arrINF);
-
     let tempINF = {};
 
     arrADL.map((item, index) => {
       arrINF.map((inf, i) => {
-        //console.log('inf.associate', inf.associate);
-        //console.log('index', index);
         if (inf.associate == index.toString()) {
           tempINF = inf;
         }
@@ -66,27 +65,12 @@ function* createBookingStart({ payload }) {
     });
 
     arrADL.map((item, index) => {
-      console.log('ItemADL', item);
       const { dob, email, firstName, gender, lastName, mobile, title } = item;
 
       if (tempINF.associate == index.toString()) {
         let objDepart = {
           loadSeatDto: { id: 0, seatNumber: '', price: 0, bookingId: 0 },
           flight: { ...item.flight, basePrice: 0.01, id: getDepartId },
-          // flight: {
-          //   ...item.flight,
-          //   aircraft: { 
-          //     config: departDetails[0].aircraft.config, 
-          //     reg: departDetails[0].aircraft.reg, 
-          //     type: departDetails[0].aircraft.type 
-          //   },
-          //   basePrice: 0.01,
-          //   destination: { 
-          //     iata_code:  departDetails[0].destination.iata_code,
-          //     location: departDetails[0].destination.location,
-          //   },
-          //   id: getDepartId
-          // },
           firstName: firstName,
           lastName: lastName,
           infant: { firstName: tempINF.firstName, lastName: tempINF.lastName, dob: tempINF.dob },
@@ -95,7 +79,8 @@ function* createBookingStart({ payload }) {
           email: firstADL.email,
           dob: dob,
           mobile: firstADL.mobile,
-          title: title
+          title: title,
+          pnr: getPnr
         };
         groupBookings.bookings.push(objDepart);
       } else {
@@ -110,7 +95,8 @@ function* createBookingStart({ payload }) {
           email: firstADL.email,
           dob: dob,
           mobile: firstADL.mobile,
-          title: title
+          title: title,
+          pnr: getPnr
         };
         groupBookings.bookings.push(objDepart);
       }
@@ -128,7 +114,8 @@ function* createBookingStart({ payload }) {
             email: firstADL.email,
             dob: dob,
             mobile: firstADL.mobile,
-            title: title
+            title: title,
+            pnr: getPnr
           };
           groupBookings.bookings.push(objReturn);
         } else {
@@ -143,7 +130,8 @@ function* createBookingStart({ payload }) {
             email: firstADL.email,
             dob: dob,
             mobile: firstADL.mobile,
-            title: title
+            title: title,
+            pnr: getPnr
           };
           groupBookings.bookings.push(objReturn);
         }
@@ -151,7 +139,6 @@ function* createBookingStart({ payload }) {
     });
 
     arrCHD.map((item) => {
-      console.log('ItemCHD', item);
       const { dob, email, firstName, gender, lastName, mobile, title } = item;
 
       let objDepart = {
@@ -184,35 +171,6 @@ function* createBookingStart({ payload }) {
         groupBookings.bookings.push(objReturn);
       }
     });
-
-    // arrINF.map((item) => {
-    //   console.log('ItemINF', item);
-    //   const { dob, firstName, gender, lastName, title } = item;
-
-    //   let objDepart = {
-    //     loadSeatDto: { id: 0, seatNumber: '', price: 0, bookingId: 0 },
-    //     flight: { ...item.flight, basePrice: 0.01, id: getDepartId },
-    //     firstName: firstName,
-    //     lastName: lastName,
-    //     gender: gender,
-    //     dob: dob,
-    //     title: title
-    //   };
-    //   groupBookings.bookings.push(objDepart);
-
-    //   if (getReturnId != null) {
-    //     let objReturn = {
-    //       loadSeatDto: { id: 0, seatNumber: '', price: 0, bookingId: 0 },
-    //       flight: { ...item.flight, basePrice: 0.01, id: getReturnId },
-    //       firstName: firstName,
-    //       lastName: lastName,
-    //       gender: gender,
-    //       dob: dob,
-    //       title: title
-    //     };
-    //     groupBookings.bookings.push(objReturn);
-    //   }
-    // });
 
     console.log('groupBookings', groupBookings);
 

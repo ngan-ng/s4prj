@@ -16,6 +16,8 @@ import { b_clear, createBookingStart } from 'store/booking/booking.action';
 import { selectPassengers } from 'store/passenger/passenger.selector';
 import { selectBookings } from 'store/booking/booking.selector';
 import { useLocation, useNavigate } from 'react-router';
+import { sendEmailStart } from 'store/itinerary/itinerary.action';
+import { selectCompletedPaypal } from 'store/itinerary/itinerary.selector';
 
 const Booking = () => {
   const dispatch = useDispatch();
@@ -29,7 +31,7 @@ const Booking = () => {
   const passengers = useSelector(selectPassengers);
   console.log('passengers', passengers);
   const bookings = useSelector(selectBookings);
-  console.log('bookings', bookings);
+  const completedPaypal = useSelector(selectCompletedPaypal);
 
   const location = useLocation();
   const [activeStepFromPayment] = useState(location.state?.activeStep);
@@ -39,14 +41,11 @@ const Booking = () => {
     if (activeStepFromPayment == 4) setActiveStep((prevActiveStep) => prevActiveStep + 4);
   }, [activeStepFromPayment]);
 
-  const handleCreatePaxStart = useCallback(
-    (payload) => {
-      if (passengers == null) {
-        dispatch(createPassengerStart(payload));
-      }
-    },
-    [dispatch, passengers]
-  );
+  const handleCreatePaxStart = (payload) => {
+    if (passengers == null) {
+      dispatch(createPassengerStart(payload));
+    }
+  };
   //console.log(passengers);
   const handleFormValid = (val) => {
     console.log(val);
@@ -59,7 +58,7 @@ const Booking = () => {
         //const reqDto = {bookings: []}
         // handleCreatePaxStart();
 
-        // if (bookings != null) {
+        // if (Object.keys(bookings).length == 0) {
         //   console.log('here');
         //   for (let i = 0; i < bookings.length; i++) {
         //     for (let j = 0; j < passengers.length; j++) {
@@ -69,16 +68,12 @@ const Booking = () => {
         //         bookings[i].dob !== passengers[j].dob
         //       ) {
         //         alert('You already booked this flight.');
-        //         location.reload();
+        //         //location.reload();
         //       }
         //     }
         //   }
-        // } else if (bookings == null) {
-        //   console.log('dispatch');
-        dispatch(b_clear());
+        // } else {
         dispatch(createBookingStart(passengers));
-
-        console.log('bookings clear');
         //}
       }
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -91,7 +86,9 @@ const Booking = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleFinished = () => {};
+  const handleFinished = () => {
+    dispatch(sendEmailStart(completedPaypal));
+  };
 
   const BookingContent = () => {
     switch (activeStep) {
@@ -155,14 +152,7 @@ const Booking = () => {
                 <BookingContent />
               </Box>
               <Box position="relative" sx={{ display: 'flex', flexDirection: 'row', pt: 2, marginY: 10, marginX: 15 }}>
-                <Button
-                  size="large"
-                  variant="outlined"
-                  color="inherit"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
+                <Button size="large" variant="outlined" color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
                   Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />

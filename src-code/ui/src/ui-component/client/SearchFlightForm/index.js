@@ -13,6 +13,7 @@ import TripTypeButton from './TripTypeButton';
 import { useDispatch } from 'react-redux';
 import { searchFlightStart, selectFlightClear } from '../../../store/flight/flight.action';
 import { useNavigate } from 'react-router-dom';
+import { b_clear } from 'store/booking/booking.action';
 
 // eslint-disable-next-line react/prop-types
 const SearchFlightForm = ({ backgroundOpacity }) => {
@@ -210,6 +211,7 @@ const SearchFlightForm = ({ backgroundOpacity }) => {
     localStorage.setItem('paxQty', JSON.stringify(paxQty));
 
     dispatch(searchFlightStart(temp));
+    dispatch(b_clear());
     dispatch(selectFlightClear());
     navigate('/booking');
   };

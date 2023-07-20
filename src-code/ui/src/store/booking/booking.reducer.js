@@ -22,7 +22,8 @@ export const bookingReducer = (state = BOOKING_INITIAL_STATE, action = {}) => {
       return {
         ...state,
         isFetching: false,
-        bookings: payload
+        bookings: payload,
+        error: ''
         //isCreated: true
       };
     case BOOKING_ACTION_TYPES.FETCH_BOOKING_BY_PNR_FAILED:

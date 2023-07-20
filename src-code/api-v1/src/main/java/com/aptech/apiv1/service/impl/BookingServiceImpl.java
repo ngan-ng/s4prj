@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -44,8 +45,29 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Iterable<Booking> createBookings(List<Booking> bookings) {
-        PnrGenerator.generateAndSetPnr(bookings);
-        return bookingRepository.saveAll(bookings);
+        String pnr = bookings.get(0).getPnr();
+        if (pnr == null || pnr.isBlank() || pnr.isEmpty()) {
+            PnrGenerator.generateAndSetPnr(bookings);
+            return bookingRepository.saveAll(bookings);
+        } else {
+            List<Booking> temp = bookingRepository.findBookingByPnr(pnr);
+            temp.forEach(t -> {
+                Booking b = bookings.get(temp.indexOf(t));
+                t.setTitle(b.getTitle())
+                        .setEmail(b.getEmail())
+                        .setFirstName(b.getFirstName())
+                        .setLastName(b.getLastName())
+                        .setDob(b.getDob());
+                if (t.getMobile() != null && t.getEmail() != null) {
+                    t.setEmail(b.getEmail())
+                            .setMobile(b.getMobile());
+                }
+                if (t.getInfant() != null) {
+                    t.setInfant(b.getInfant());
+                }
+            });
+            return bookingRepository.saveAll(temp);
+        }
     }
 
     @Override
