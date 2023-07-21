@@ -46,7 +46,7 @@ public class EmailService {
                                 + "<br/><br/>"
                                 + "We are so excited to welcome you to FS Airlines. Please find your booking information based on the PNR code below and fill in on our website. Please present your booking upon boarding."
                                 + "<br/><br/>"
-                                + "Customer details: " + "<br/>"
+                                + "Main passenger: " + "<br/>"
                                 + "Email: " + emailDto.getEmail() + "<br/>"
                                 + "PNR: " + "<strong>" + emailDto.getPnr() + "</strong>" + "<br/>"
                                 + "Payment method: " + emailDto.getPaymentMethod() + " with payer email " + emailDto.getPayerEmail()
