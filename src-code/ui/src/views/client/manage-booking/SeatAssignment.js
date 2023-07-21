@@ -135,7 +135,7 @@ const SeatAssignment = () => {
                 onChange={(e) => setCurrentPaxId(e.target.value)}
               >
                 {bookings
-                  .filter((b) => managingPax.includes(b.id))
+                  ?.filter((b) => managingPax.includes(b.id))
                   .map((b) => (
                     <Box key={b.id} direction="row" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <FormControlLabel
@@ -163,9 +163,7 @@ const SeatAssignment = () => {
         </Grid>
         <Grid item xs={12} md={8} sx={{ display: 'flex', justifyContent: 'center' }}>
           <Paper ref={ref} elevation={4} sx={{ height: 'stretch', p: 2, borderRadius: 1 }}>
-            <Box height={600}>
-              <Seatmap seats={seats} onHandleSeat={handleChooseSeat} />
-            </Box>
+            <Box height={600}>{seats && <Seatmap seats={seats} onHandleSeat={handleChooseSeat} />}</Box>
           </Paper>
         </Grid>
       </Grid>
