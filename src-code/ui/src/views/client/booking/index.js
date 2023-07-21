@@ -20,6 +20,8 @@ import { isFetchingSeats, selectSeats } from 'store/seat/seat.selector';
 import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
 import { updateSeatSuccess } from 'store/seat/seat.action';
 import { handleSeatApi } from '../manage-booking/SeatAssignment';
+import { ReactComponent as NextBtnFlightIcon } from 'assets/images/icons/animate-flight-depart.svg';
+import { selectIsClickPayment } from 'store/booking/booking.selector';
 
 const Booking = () => {
   const dispatch = useDispatch();
@@ -31,6 +33,7 @@ const Booking = () => {
   const returnId = useSelector(selectReturnId);
   const [isFormValid, setIsFormValid] = useState(false);
   const passengers = useSelector(selectPassengers);
+  const isClickPayment = useSelector(selectIsClickPayment);
 
   const completedPaypal = useSelector(selectCompletedPaypal);
 
@@ -144,6 +147,7 @@ const Booking = () => {
         case 2:
           break;
         case 3:
+          setValidActiveStep(isClickPayment);
           break;
         case 4:
           break;
@@ -190,6 +194,7 @@ const Booking = () => {
                 >
                   {activeStep === manageStepper.steppers.length - 1 ? 'Finish' : 'Next'}
                 </Button>
+                {validActiveStep && <NextBtnFlightIcon fontSize="small" style={{ color: 'white', m: 0, p: 0 }} />}
               </Box>
             </Fragment>
           )}

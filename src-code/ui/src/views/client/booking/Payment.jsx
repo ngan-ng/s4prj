@@ -2,12 +2,14 @@
 import { Button, Grid, Paper, Typography } from '@mui/material';
 import { PayPalButtons } from '@paypal/react-paypal-js';
 import axiosCall from 'api/callAxios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectBookings } from 'store/booking/booking.selector';
 import { ReviewPayPal } from './paypal/ReviewPayPal';
 import { Fragment } from 'react';
+import { isClickPayment } from 'store/booking/booking.action';
 
 const Payment = () => {
+  const dispatch = useDispatch();
   const bookings = useSelector(selectBookings);
   console.log(bookings);
 
@@ -34,6 +36,7 @@ const Payment = () => {
 
   const handleCheckout = async () => {
     try {
+      dispatch(isClickPayment());
       const resp = await axiosCall.post('/api-v1/guest/payment/checkout-paypal', objBooking);
       console.log(resp.data);
       if (resp.status === 200) {

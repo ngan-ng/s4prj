@@ -7,3 +7,5 @@ export const selectBookingByPnr = createSelector([bookingReducer], (bookingSlice
 export const isFetchingPnr = createSelector([bookingReducer], (slice) => slice.isFetching);
 
 export const selectBookings = createSelector([bookingReducer], (slice) => slice.bookings);
+
+export const selectIsClickPayment = createSelector([bookingReducer], (slice) => slice.isClickPayment);

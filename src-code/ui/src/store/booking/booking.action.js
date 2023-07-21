@@ -29,3 +29,7 @@ export const createBookingFailed = (error) => ({
 export const b_clear = () => ({
   type: booking_types.BOOKING_CLEAR
 });
+
+export const isClickPayment = () => ({
+  type: booking_types.IS_CLICK_PAYMENT
+});

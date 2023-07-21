@@ -2,7 +2,7 @@
 import { all, call, delay, put, select, takeLatest } from 'redux-saga/effects';
 import BOOKING_ACTION_TYPES from './booking.type';
 import axiosCall from 'api/callAxios';
-import { b_clear, createBookingSuccess, createBookingFailed, fetchBookingByPnrFailed, fetchBookingByPnrSuccess } from './booking.action';
+import { b_clear, createBookingSuccess, createBookingFailed, fetchBookingByPnrFailed, fetchBookingByPnrSuccess, isClickPayment } from './booking.action';
 import { selectDepartId, selectReturnId } from 'store/flight/flight.selector';
 import { selectBookings } from './booking.selector';
 
@@ -182,6 +182,14 @@ function* bookingClear() {
   }
 }
 
+function* clickPayment() {
+  try {
+    yield call(isClickPayment);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export function* onFetchBookingByPnr() {
   yield takeLatest(BOOKING_ACTION_TYPES.FETCH_BOOKING_BY_PNR_START, fetchBookingByPnrAsync);
 }
@@ -194,6 +202,10 @@ export function* onBookingClear() {
   yield takeLatest(BOOKING_ACTION_TYPES.BOOKING_CLEAR, bookingClear);
 }
 
+export function* onClickPayment() {
+  yield takeLatest(BOOKING_ACTION_TYPES.IS_CLICK_PAYMENT, clickPayment);
+}
+
 export function* bookingSaga() {
-  yield all([call(onFetchBookingByPnr), call(onCreateBookingStart), call(onBookingClear)]);
+  yield all([call(onFetchBookingByPnr), call(onCreateBookingStart), call(onBookingClear), call(onClickPayment)]);
 }
