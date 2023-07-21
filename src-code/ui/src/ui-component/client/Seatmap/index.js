@@ -26,10 +26,10 @@ const Seatmap = ({ seats, onHandleSeat }) => {
     <Box
       xs={12}
       sx={{
-        mr: 2,
-        p: 4,
+        mr: 1,
+        p: 3,
         width: '100%',
-        minWidth: 330,
+        minWidth: 306,
         display: 'flex',
         alignItems: 'center',
         textAlign: 'center',
@@ -84,7 +84,7 @@ const Seatmap = ({ seats, onHandleSeat }) => {
                     zIndex: 0,
                     position: 'absolute',
                     bgcolor: 'rgba(254,192,203,0.8)',
-                    width: 25,
+                    width: { xs: 20, md: 25 },
                     height: 200
                   }}
                 ></Box>
@@ -95,13 +95,13 @@ const Seatmap = ({ seats, onHandleSeat }) => {
                     zIndex: 0,
                     position: 'absolute',
                     bgcolor: 'rgba(254,192,203,0.8)',
-                    width: 25,
+                    width: { xs: 20, md: 25 },
                     height: 200
                   }}
                 ></Box>
               </>
             )}
-            <Typography sx={{ zIndex: 1 }} color="gray" fontSize={{ md: 20, xs: 15 }}>
+            <Typography sx={{ zIndex: 1 }} color="gray" fontSize={{ md: 20, xs: 12 }}>
               {index + 1}
             </Typography>
           </Grid>
