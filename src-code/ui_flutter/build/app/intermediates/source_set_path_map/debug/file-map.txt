@@ -1,0 +1,16 @@
+com.mycompany.uimobile.app-debug-0 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\android\app\src\debug\res
+com.mycompany.uimobile.app-main-1 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\android\app\src\main\res
+com.mycompany.uimobile.app-pngs-2 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\build\app\generated\res\pngs\debug
+com.mycompany.uimobile.app-resValues-3 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\build\app\generated\res\resValues\debug
+com.mycompany.uimobile.app-rs-4 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\build\app\generated\res\rs\debug
+com.mycompany.uimobile.app-mergeDebugResources-5 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.mycompany.uimobile.app-mergeDebugResources-6 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.mycompany.uimobile.app-merged_res-7 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\build\app\intermediates\merged_res\debug
+com.mycompany.uimobile.app-packaged_res-8 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\build\path_provider_android\intermediates\packaged_res\debug
+com.mycompany.uimobile.app-packaged_res-9 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\build\shared_preferences_android\intermediates\packaged_res\debug
+com.mycompany.uimobile.app-packaged_res-10 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\build\sqflite\intermediates\packaged_res\debug
+com.mycompany.uimobile.app-packaged_res-11 C:\Myself\FPT-Aptech Course\Semester_4\s4prj\src-code\ui_flutter\build\url_launcher_android\intermediates\packaged_res\debug
+com.mycompany.uimobile.app-jetified-window-1.0.0-beta04-12 C:\Users\tiger\.gradle\caches\transforms-3\25cee5f028ac2a6b79fd6278ff5b59e2\transformed\jetified-window-1.0.0-beta04\res
+com.mycompany.uimobile.app-jetified-annotation-experimental-1.1.0-13 C:\Users\tiger\.gradle\caches\transforms-3\6c0c163cc77ae6c91f9f7dfcd179c29c\transformed\jetified-annotation-experimental-1.1.0\res
+com.mycompany.uimobile.app-core-1.6.0-14 C:\Users\tiger\.gradle\caches\transforms-3\7e9df2ac2213a6bd3cef0f2f27870d79\transformed\core-1.6.0\res
+com.mycompany.uimobile.app-jetified-window-java-1.0.0-beta04-15 C:\Users\tiger\.gradle\caches\transforms-3\ae81e06d24c799147c26814497a2a305\transformed\jetified-window-java-1.0.0-beta04\res

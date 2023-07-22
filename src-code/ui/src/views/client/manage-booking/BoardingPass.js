@@ -4,7 +4,7 @@ import QRCode from 'react-qr-code';
 import ReactToPrint from 'react-to-print';
 
 const BoardingPass = ({ boardingPasses }) => {
-  let boardingPassRef = useRef();
+  const boardingPassRef = useRef(boardingPasses.map((b, index) => index));
 
   return (
     <Fragment>
@@ -12,7 +12,7 @@ const BoardingPass = ({ boardingPasses }) => {
         <Box sx={{ minWidth: 680, flexDirection: 'column', alignItems: 'center', display: 'flex', justifyContent: 'center' }}>
           {boardingPasses.map((bp, index) => (
             <Box key={index}>
-              <Paper sx={{ width: 760, display: 'block' }} ref={(el) => (boardingPassRef = el)} elevation={5}>
+              <Paper sx={{ width: 760, display: 'block' }} ref={(el) => (boardingPassRef[index] = el)} elevation={5}>
                 <Typography
                   variant="h2"
                   fontWeight="bold"
@@ -131,7 +131,7 @@ const BoardingPass = ({ boardingPasses }) => {
                   Now Everyone Can Fly
                 </Typography>
               </Paper>
-              <ReactToPrint trigger={() => <Button>Save boarding pass</Button>} content={() => boardingPassRef} />
+              <ReactToPrint trigger={() => <Button>Save boarding pass</Button>} content={() => boardingPassRef[index]} />
             </Box>
           ))}
         </Box>

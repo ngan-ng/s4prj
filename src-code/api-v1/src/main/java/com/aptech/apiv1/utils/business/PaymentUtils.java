@@ -4,10 +4,15 @@ import com.aptech.apiv1.dto.BookingPaymentDto;
 import com.aptech.apiv1.dto.GroupBookingPaymentDto;
 import com.aptech.apiv1.enums.*;
 import com.aptech.apiv1.enums.Gender;
+import com.aptech.apiv1.model.Seat;
+import com.aptech.apiv1.repository.SeatRepository;
 import com.paypal.api.payments.*;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class PaymentUtils {
     /**
@@ -25,14 +30,14 @@ public class PaymentUtils {
     public static List<com.aptech.apiv1.model.Payment> transactionToPayments(Transaction transaction, PaymentStatus status) {
         return transaction.getItemList().getItems().stream()
                 .map(item -> new com.aptech.apiv1.model.Payment()
-                .setPaymentMethod(PaymentMethod.PAYPAL.toString())
-                .setStatus(String.valueOf(status))
-                .setPrice(Double.parseDouble(item.getPrice()))
-                .setCategory(item.getDescription())
-                .setBookingId(Long.parseLong(item.getName()))).toList();
+                        .setPaymentMethod(PaymentMethod.PAYPAL.toString())
+                        .setStatus(String.valueOf(status))
+                        .setPrice(Double.parseDouble(item.getPrice()))
+                        .setCategory(item.getDescription())
+                        .setBookingId(Long.parseLong(item.getName()))).toList();
     }
 
-    public static List<Transaction> getTransactionInformation(GroupBookingPaymentDto groupBooking) {
+    public static List<Transaction> getTransactionInformation(GroupBookingPaymentDto groupBooking, SeatRepository seatRepository) {
         List<Transaction> transactionList = new ArrayList<>();
         Details details = new Details();
         Amount amount = new Amount();
@@ -49,7 +54,10 @@ public class PaymentUtils {
             Gender gender = Gender.valueOf(b.getGender());
             BagAllowance bagAllowance = BagUtils.fromInt(b.getBagAllowance());
             String bookingId = String.valueOf(b.getId());
-
+            List<Seat> seats = seatRepository.findSeatsByFlightIdAndBookingId(b.getFlight().getId(), b.getId());
+            Optional<Seat> seat = seats.stream().filter(s ->
+                    s.getBooking().getId() == b.getId() &&
+                            Duration.between(s.getSelectedAt(), LocalDateTime.now()).toMinutes() < 10).findFirst();
             for (int i = 0; i < 4; i++) {
                 // Each booking got 4 item payment
                 Item item = new Item().setCurrency("USD");
@@ -88,10 +96,15 @@ public class PaymentUtils {
                         totalAmount += bagAllowanceFee;
                     }
                     case 3 -> {
-                        double seatPrice = b.getLoadSeatDto().getPrice();
+                        double seatPrice = 0;
+                        if (seat.isPresent()) {
+                            seatPrice = seat.get().getPrice();
+                            item.setDescription(PaymentCategory.SEAT + "-" + seat.get().getSeatNumber());
+                        } else {
+                            item.setDescription(PaymentCategory.SEAT + "-");
+                        }
                         item.setPrice(String.format("%.2f", seatPrice))
                                 .setName(bookingId)
-                                .setDescription(PaymentCategory.SEAT + "-" + b.getLoadSeatDto().getSeatNumber())
                                 .setQuantity("1");
                         totalAmount += seatPrice;
                     }
