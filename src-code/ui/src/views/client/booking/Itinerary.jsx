@@ -167,14 +167,20 @@ const Itinerary = () => {
                           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                             <Typography variant="body1">Total Amount:</Typography>
                             <Typography variant="body1">
-                              {`$${completedPaypal?.amount?.total} ${completedPaypal?.amount?.currency}` ?? ' ...loading'}
+                              {`$${completedPaypal?.amount?.total} ${completedPaypal?.amount?.currency}` ??
+                                ' ...loading'}
                             </Typography>
                           </Box>
                           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                             <Typography variant="body1">Tax (inclusive):</Typography>
                             <Typography variant="body1">
-                              {`$${completedPaypal?.amount?.details?.tax} ${completedPaypal?.amount?.currency}` ?? '...loading'}
+                              {`$${completedPaypal?.amount?.details?.tax} ${completedPaypal?.amount?.currency}` ??
+                                '...loading'}
                             </Typography>{' '}
+                          </Box>
+                          <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                            <Typography variant="body1">Summary</Typography>
+                            <Typography variant="body1">{`$${completedPaypal?.amount?.total} ${completedPaypal?.amount?.currency}`}</Typography>
                           </Box>
                         </Paper>
                       </Grid>

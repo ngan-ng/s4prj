@@ -9,6 +9,7 @@ import com.aptech.apiv1.enums.PaymentStatus;
 import com.aptech.apiv1.model.Booking;
 import com.aptech.apiv1.repository.BookingRepository;
 import com.aptech.apiv1.repository.PaymentRepository;
+import com.aptech.apiv1.repository.SeatRepository;
 import com.aptech.apiv1.service.PaymentService;
 import com.aptech.apiv1.utils.business.PaymentUtils;
 import com.paypal.api.payments.*;
@@ -27,6 +28,7 @@ import static com.aptech.apiv1.utils.business.PaymentUtils.getTransactionInforma
 public class PaymentServiceImpl implements PaymentService {
     private final PaymentRepository paymentRepository;
     private final BookingRepository bookingRepository;
+    private final SeatRepository seatRepository;
     //    private static final String CLIENT_ID = "AZtv8J9ajlDoiZflPaFVEwy_ComBYd78xBkYib65BrXSb6PoA4_w6q5MgPSuvmYF_9KyIPibTGYnRP8t";
 //    private static final String SECRET_KEY = "EKQMOr-drhyOL8gQq_a77qsT-bEWoSPfRF-DoQAcE-AyV8DDGfln-5XcyiQDqb33waMgmHBWit29hsHk";
 //    private static final String MODE = "sandbox";
@@ -40,14 +42,15 @@ public class PaymentServiceImpl implements PaymentService {
     String contextPath;
 
     @Autowired
-    public PaymentServiceImpl(PaymentRepository paymentRepository, BookingRepository bookingRepository) {
+    public PaymentServiceImpl(PaymentRepository paymentRepository, BookingRepository bookingRepository, SeatRepository seatRepository) {
         this.paymentRepository = paymentRepository;
         this.bookingRepository = bookingRepository;
+        this.seatRepository = seatRepository;
     }
 
     public String authorizePayment(GroupBookingPaymentDto bookings) throws PayPalRESTException {
         Payer payer = getPayerInformation(bookings.getBookings().get(0));
-        List<Transaction> transactions = getTransactionInformation(bookings);
+        List<Transaction> transactions = getTransactionInformation(bookings, seatRepository);
         Payment requestPayment = new Payment();
         requestPayment.setTransactions(transactions)
                 .setRedirectUrls(getRedirectUrls())
@@ -100,13 +103,13 @@ public class PaymentServiceImpl implements PaymentService {
         APIContext apiContext = new APIContext(CLIENT_ID, SECRET_KEY, MODE);
         PaymentExecution paymentExecution = new PaymentExecution().setPayerId(payerId);
         Payment executePayment = new Payment().setId(paymentId).execute(apiContext, paymentExecution);
-        if(executePayment != null){
+        if (executePayment != null) {
             long bId = payments.get(0).getBookingId();
             Optional<Booking> b = bookingRepository.findById(bId);
-            if (b.isPresent()){
-              List<Booking> paidBookings = bookingRepository.findBookingByPnr(b.get().getPnr());
-              paidBookings.forEach(item -> item.setStatus(String.valueOf(BookingStatus.CONFIRMED)));
-              bookingRepository.saveAll(paidBookings);
+            if (b.isPresent()) {
+                List<Booking> paidBookings = bookingRepository.findBookingByPnr(b.get().getPnr());
+                paidBookings.forEach(item -> item.setStatus(String.valueOf(BookingStatus.CONFIRMED)));
+                bookingRepository.saveAll(paidBookings);
             }
             return paymentRepository.saveAll(payments);
         }

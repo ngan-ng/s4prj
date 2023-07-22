@@ -12,8 +12,7 @@ const SingleReview = ({ props }) => {
         <Grid item md={12} xs={12}>
           <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
             <Typography variant="body1">
-              <strong>Flight: </strong> VJ
-              {booking.flight.flightNumber}
+              <strong>Flight: </strong> FS {booking.flight.flightNumber}
             </Typography>
             <Typography variant="body1">
               {booking.flight.origin.iata_code} - {booking.flight.destination.iata_code}

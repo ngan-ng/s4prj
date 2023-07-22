@@ -35,7 +35,7 @@ const schema = {
       maximum: 255
     },
     format: {
-      pattern: '^[A-Za-z]+$',
+      pattern: '^[A-Za-z ]+$',
       message: '^First name can not contain number or any special characters'
     }
   },
@@ -49,7 +49,7 @@ const schema = {
       maximum: 255
     },
     format: {
-      pattern: '^[A-Za-z]+$',
+      pattern: '^[A-Za-z ]+$',
       message: '^Last name can not contain number or any special characters'
     }
   },

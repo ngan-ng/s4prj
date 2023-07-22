@@ -7,31 +7,59 @@ import { selectBookings } from 'store/booking/booking.selector';
 import { ReviewPayPal } from './paypal/ReviewPayPal';
 import { Fragment } from 'react';
 import { isClickPayment } from 'store/booking/booking.action';
+import { selectManageBookingObj } from 'store/manage-booking/mb.selector';
+import { selectSeats } from 'store/seat/seat.selector';
 
 const Payment = () => {
   const dispatch = useDispatch();
   const bookings = useSelector(selectBookings);
+  const seats = useSelector(selectSeats);
+
   console.log(bookings);
 
   const objBooking = { bookings: [] };
   console.log(objBooking);
 
   bookings.map((item, index) => {
-    let obj = {
-      loadSeatDto: { id: 0, seatNumber: '', price: 0, bookingId: item.id },
-      pnr: item.pnr,
-      flight: { ...item.flight, basePrice: 0.01, id: item.flight.id },
-      id: item.id,
-      dob: item.dob,
-      title: item.title,
-      firstName: item.firstName,
-      lastName: item.lastName,
-      gender: item.gender,
-      mobile: item.mobile,
-      email: item.email,
-      bag_allowance: 0.0
-    };
-    objBooking.bookings.push(obj);
+    if (item.infant !== null) {
+      let objWithINF = {
+        loadSeatDto: { id: 0, seatNumber: '', price: 0, bookingId: item.id },
+        infant: {
+          id: item.infant.id,
+          firstName: item.infant.firstName,
+          lastName: item.infant.lastName,
+          dob: item.infant.dob
+        },
+        pnr: item.pnr,
+        flight: { ...item.flight, basePrice: 0.01, id: item.flight.id },
+        id: item.id,
+        dob: item.dob,
+        title: item.title,
+        firstName: item.firstName,
+        lastName: item.lastName,
+        gender: item.gender,
+        mobile: item.mobile,
+        email: item.email,
+        bag_allowance: 0.0
+      };
+      objBooking.bookings.push(objWithINF);
+    } else {
+      let objWithoutINF = {
+        loadSeatDto: { id: 0, seatNumber: '', price: 0, bookingId: item.id },
+        pnr: item.pnr,
+        flight: { ...item.flight, basePrice: 0.01, id: item.flight.id },
+        id: item.id,
+        dob: item.dob,
+        title: item.title,
+        firstName: item.firstName,
+        lastName: item.lastName,
+        gender: item.gender,
+        mobile: item.mobile,
+        email: item.email,
+        bag_allowance: 0.0
+      };
+      objBooking.bookings.push(objWithoutINF);
+    }
   });
 
   const handleCheckout = async () => {

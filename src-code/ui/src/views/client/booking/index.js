@@ -9,7 +9,7 @@ import Payment from './Payment';
 import SeatAssignmentBooking from './SeatAssignmentBooking';
 import Itinerary from './Itinerary';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectReturnId, selectDepartId } from '../../../store/flight/flight.selector';
+import { selectReturnId, selectDepartId, selectSearchDto } from '../../../store/flight/flight.selector';
 import { createPassengerStart } from 'store/passenger/passenger.action';
 import { createBookingStart } from 'store/booking/booking.action';
 import { selectPassengers } from 'store/passenger/passenger.selector';
@@ -31,6 +31,8 @@ const Booking = () => {
   const manageStepper = StepperType.BOOKING;
   const departId = useSelector(selectDepartId);
   const returnId = useSelector(selectReturnId);
+  const searchDto = useSelector(selectSearchDto);
+
   const [isFormValid, setIsFormValid] = useState(false);
   const passengers = useSelector(selectPassengers);
   const isClickPayment = useSelector(selectIsClickPayment);
@@ -71,7 +73,7 @@ const Booking = () => {
 
       //// Seat Assignment
       // AFTER PAYPAL SUCCESS => SET SEAT STATUS 'OCCUPIED'
-      if (activeStep >= 4) {
+      if (activeStep >= 3) {
         const mySeats = seats.filter(
           (s) =>
             selectMBObj?.pax.includes(parseInt(s.bookingId)) &&
@@ -139,7 +141,13 @@ const Booking = () => {
     try {
       switch (activeStep) {
         case 0:
-          setValidActiveStep((departId !== null && returnId !== null) || returnId !== null || departId !== null);
+          if (searchDto.tripType == 'roundtrip' && departId !== null && returnId !== null) {
+            setValidActiveStep(true);
+          } else if (searchDto.tripType == 'oneway' && departId !== null) {
+            setValidActiveStep(true);
+          } else {
+            setValidActiveStep(false);
+          }
           break;
         case 1:
           setValidActiveStep(isFormValid);
@@ -164,7 +172,7 @@ const Booking = () => {
       <S4prjSteppers innerType={manageStepper} activeStep={activeStep} />
       <Container>
         <Box minHeight={600} sx={{ zIndex: '2', mx: 4 }}>
-          {activeStep === manageStepper.steppers.length ? (
+          {activeStep === manageStepper.steppers.length - 1 ? (
             <Fragment>
               <Box>
                 <BookingContent />
@@ -180,7 +188,14 @@ const Booking = () => {
                 <BookingContent />
               </Box>
               <Box position="relative" sx={{ display: 'flex', flexDirection: 'row', pt: 2, marginY: 10, marginX: 15 }}>
-                <Button size="large" variant="outlined" color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+                <Button
+                  size="large"
+                  variant="outlined"
+                  color="inherit"
+                  disabled={activeStep === 0}
+                  onClick={handleBack}
+                  sx={{ mr: 1 }}
+                >
                   Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
@@ -192,7 +207,7 @@ const Booking = () => {
                   color="secondary"
                   sx={{ opacity: 0.9 }}
                 >
-                  {activeStep === manageStepper.steppers.length - 1 ? 'Finish' : 'Next'}
+                  {activeStep === manageStepper.steppers.length - 2 ? 'Finish' : 'Next'}
                 </Button>
                 {validActiveStep && <NextBtnFlightIcon fontSize="small" style={{ color: 'white', m: 0, p: 0 }} />}
               </Box>

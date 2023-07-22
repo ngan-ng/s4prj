@@ -15,7 +15,7 @@ const SeatAssignment = () => {
   const seats = useSelector(selectSeats);
   const isFetching = useSelector(isFetchingSeats);
   const selectMBObj = useSelector(selectManageBookingObj);
-  const managingPax = selectMBObj.pax;
+  const managingPax = selectMBObj?.pax;
   const bookings = useSelector(selectBookingByPnr);
   const mySeats = seats.filter((s) => managingPax.includes(parseInt(s.bookingId)));
 

@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   error: null,
   isFetching: false,
   DepartId: null,
-  ReturnId: null
+  ReturnId: null,
+  searchDto: null
 };
 
 export const flightReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,7 @@ export const flightReducer = (state = INITIAL_STATE, action) => {
     case FLIGHT_ACTION_TYPES.SEARCH_FLIGHT_START:
       return {
         ...state,
+        searchDto: payload,
         isFetching: true
       };
     case FLIGHT_ACTION_TYPES.SEARCH_FLIGHT_SUCCESS:

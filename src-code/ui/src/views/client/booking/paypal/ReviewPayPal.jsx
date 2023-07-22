@@ -101,7 +101,7 @@ export const ReviewPayPal = () => {
                   <Paper sx={{ p: 2 }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                       <Typography variant="body1">Summary</Typography>
-                      <Typography variant="body1">{`$${reviews?.amount?.details?.tax} ${reviews?.amount?.currency}`}</Typography>
+                      <Typography variant="body1">{`$${reviews?.amount?.total} ${reviews?.amount?.currency}`}</Typography>
                     </Box>
                   </Paper>
                 </Grid>

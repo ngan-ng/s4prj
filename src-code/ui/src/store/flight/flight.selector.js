@@ -9,3 +9,5 @@ export const selectFlightsIsFetching = createSelector([selectFlightReducer], (fl
 export const selectDepartId = createSelector([selectFlightReducer], (flightSlice) => flightSlice.DepartId);
 
 export const selectReturnId = createSelector([selectFlightReducer], (flightSlice) => flightSlice.ReturnId);
+
+export const selectSearchDto = createSelector([selectFlightReducer], (flightSlice) => flightSlice.searchDto);

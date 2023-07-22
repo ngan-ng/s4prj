@@ -41,12 +41,13 @@ const SeatAssignmentBooking = () => {
       </section>
     );
   }
+
   return (
     <Fragment>
       <Grid marginY={2} container spacing={3} component={'div'} height="stretch">
         <Grid item xs={12}>
           <Button onClick={() => handleSelectSeatForFlight('depart')}>Select Seat For Departure</Button>
-          <Button onClick={() => handleSelectSeatForFlight('return')}>Select Seat For Return</Button>
+          {returnId && <Button onClick={() => handleSelectSeatForFlight('return')}>Select Seat For Return</Button>}
         </Grid>
         {!isSeatsFetching && (
           <>
