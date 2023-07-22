@@ -3,11 +3,12 @@ import { Button, Grid } from '@mui/material';
 import axiosCall from 'api/callAxios';
 import React, { memo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { selectBookingByPnr } from 'store/booking/booking.selector';
+import { isFetchingPnr, selectBookingByPnr } from 'store/booking/booking.selector';
 import { selectSeats } from 'store/seat/seat.selector';
 
 const BookingDetails = ({ unpaid }) => {
   // const bookings = useSelector(selectBookingByPnr);
+  // const isfetching = useSelector(isFetchingPnr);
   // const seats = useSelector(selectSeats);
   // useEffect(() => {
   //   const getPaymentsByBookings = async () => {
@@ -19,7 +20,7 @@ const BookingDetails = ({ unpaid }) => {
   // const handlePayment = async () => {
   //   try {
   //     if (unpaid && bookings?.length > 0) {
-  //       const coreArray = bookings.map((b) => {
+  //       const coreArray = bookings?.map((b) => {
   //         let obj = {
   //           loadSeatDto: { id: 0, seatNumber: '', price: 0, bookingId: 0 },
   //           id: b.id,
