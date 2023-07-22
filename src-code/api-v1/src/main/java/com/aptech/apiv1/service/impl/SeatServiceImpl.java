@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,6 +33,8 @@ public class SeatServiceImpl implements SeatService {
 
     @Override
     public HttpStatus handleSeat(SelectSeatDto dto) {
+        ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
+        LocalDateTime now = LocalDateTime.from(LocalDateTime.now().atZone(zoneId));
         Optional<Seat> seatOpt = seatRepository.findById(dto.getId());
         Optional<Booking> bookingOpt = bookingRepository.findById(dto.getBookingId());
         // SEAT or BOOKING NOT FOUND
@@ -54,7 +57,7 @@ public class SeatServiceImpl implements SeatService {
                     // SEAT NOT AVAILABLE NOW due to BLOCK or RESERVED or just NOT-AVAILABLE
                     if (seatStatus.equalsIgnoreCase(String.valueOf(SeatStatus.TEMP))) {
                         if (seat.getSelectedAt() != null &&
-                                Duration.between(seat.getSelectedAt(), LocalDateTime.now()).toMinutes() < 10) {
+                                Duration.between(seat.getSelectedAt(), now).toMinutes() < 10) {
                             if(seat.getBooking().getId() != dto.getBookingId()){
                             return HttpStatus.SERVICE_UNAVAILABLE;
                             }
@@ -71,7 +74,7 @@ public class SeatServiceImpl implements SeatService {
 //                }
                 seat.setStatus(String.valueOf(SeatStatus.TEMP));
                 seat.setBooking(booking);
-                seat.setSelectedAt(LocalDateTime.now());
+                seat.setSelectedAt(now);
                 seatRepository.save(seat);
                 return HttpStatus.OK;
             }
