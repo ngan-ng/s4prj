@@ -1,0 +1,8 @@
+{
+  "name": "api-s4prj",
+  "buildpacks": [
+    {
+      "url": "heroku/maven"
+    }
+  ]
+}

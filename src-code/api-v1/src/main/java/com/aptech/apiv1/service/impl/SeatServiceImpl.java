@@ -34,7 +34,7 @@ public class SeatServiceImpl implements SeatService {
     @Override
     public HttpStatus handleSeat(SelectSeatDto dto) {
         ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
-        LocalDateTime now = LocalDateTime.from(LocalDateTime.now().atZone(zoneId));
+        LocalDateTime now = LocalDateTime.now(zoneId);
         Optional<Seat> seatOpt = seatRepository.findById(dto.getId());
         Optional<Booking> bookingOpt = bookingRepository.findById(dto.getBookingId());
         // SEAT or BOOKING NOT FOUND
