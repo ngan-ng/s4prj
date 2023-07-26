@@ -19,10 +19,11 @@ Project title: Unknown
 github report link: 
 ============================
 
-Project documents link at: https://docs.google.com/document/d/1Vwtw0Owa294rMkK-UWUfHBSrB75OfiD0/edit?usp=sharing&ouid=112414815533264011569&rtpof=true&sd=true
+Project documents link at: https://docs.google.com/document/d/1g0ng0MHWJYoyS1p6dmnQe3x-m8C0VAOrWpwvMhbKUvg/edit?usp=sharing 
 
-Project published at: 
-
+Run: 
+cd src-code/ui: yarn start
+cd src-code/ui: mvn spring-boot:run
 ============================
 
 Most information and pictures are taken from ...
