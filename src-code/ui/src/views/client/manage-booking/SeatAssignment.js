@@ -96,7 +96,7 @@ const SeatAssignment = () => {
       }
     } catch (error) {
       getSeats();
-      alert('Something happens. Please try again later!');
+      alert('This seat is reserved!');
       console.log(error);
     }
   };

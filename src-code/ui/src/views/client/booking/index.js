@@ -188,14 +188,7 @@ const Booking = () => {
                 <BookingContent />
               </Box>
               <Box position="relative" sx={{ display: 'flex', flexDirection: 'row', pt: 2, marginY: 10, marginX: 15 }}>
-                <Button
-                  size="large"
-                  variant="outlined"
-                  color="inherit"
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  sx={{ mr: 1 }}
-                >
+                <Button size="large" variant="outlined" color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
                   Back
                 </Button>
                 <Box sx={{ flex: '1 1 auto' }} />
