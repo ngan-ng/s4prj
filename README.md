@@ -23,7 +23,7 @@ Project documents link at: https://docs.google.com/document/d/1g0ng0MHWJYoyS1p6d
 
 Run: <br>
   cd src-code/ui: yarn start <br>
-  cd src-code/ui: mvn spring-boot:run <br>
+  cd src-code/api: mvn spring-boot:run <br>
 ============================
 
 Most information and pictures are taken from ...
