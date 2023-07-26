@@ -21,9 +21,9 @@ github report link:
 
 Project documents link at: https://docs.google.com/document/d/1g0ng0MHWJYoyS1p6dmnQe3x-m8C0VAOrWpwvMhbKUvg/edit?usp=sharing 
 
-Run: 
-cd src-code/ui: yarn start <br>
-cd src-code/ui: mvn spring-boot:run <br>
+Run: <br>
+  cd src-code/ui: yarn start <br>
+  cd src-code/ui: mvn spring-boot:run <br>
 ============================
 
 Most information and pictures are taken from ...
