@@ -34,13 +34,13 @@ public class ApiV1Application {
 
     public static void main(String[] args) {
         var context = SpringApplication.run(ApiV1Application.class, args);
-//        initialize(context);
-//        addPromotions(context);
+       initialize(context);
+       addPromotions(context);
     }
 
     static void addPromotions(ConfigurableApplicationContext context) {
         PromotionPolicyRepository policyRepository = context.getBean((PromotionPolicyRepository.class));
-        int year = 2023, month = 6, day = 18;
+        int year = 2023, month = 7, day = 18;
         PromotionsPolicy promotionsPolicy = new PromotionsPolicy()
                 .setPromotionCode("PT1399")
                 .setDescription("Promotion by points of member!")
