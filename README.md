@@ -8,13 +8,14 @@ Project title: Unknown
 
 ========> Group 1 <=========
 
-3 collaborators:
+2 collaborators:
 
              Nguyen Toan (ToanNTS2109005@fpt.edu.vn) Student1328430
 
              Nguyen Ngoc Kim Ngan (Ngannkts2106023@fpt.edu.vn) Student1317115
              
 ============================
+<img alt="Awesome GitHub Profile Readme" src="./assets/demo.gif"> </img>
 
 github report link: 
 ============================

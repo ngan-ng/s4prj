@@ -15,9 +15,11 @@ spring:
             sign-up-or-sign-in: B2C_1_signin_or_signup
   datasource:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    username: mydatabase
-    url: jdbc:sqlserver://eu-az-sql-serv1.database.windows.net:1433;databaseName=s4project;encrypt=true;trustServerCertificate=true;
-    password: '5xvzR9XcggkMaEZz@'
+    username: sa
+    url: jdbc:sqlserver://localhost:1433;databaseName=s4prjDB2;encrypt=true;trustServerCertificate=true;
+    password: '123456'
+#    url: jdbc:sqlserver://eu-az-sql-serv1.database.windows.net:1433;databaseName=s4project;encrypt=true;trustServerCertificate=true;
+#    password: '5xvzR9XcggkMaEZz@'
   jpa:
     properties:
       hibernate:
@@ -27,7 +29,7 @@ spring:
             non_contextual_creation: 'true'
         format_sql: 'true'
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: 'true'
   jackson:
     serialization:
